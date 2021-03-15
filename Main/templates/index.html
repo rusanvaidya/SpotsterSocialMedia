@@ -102,16 +102,16 @@
                     <div class="signup">
                         <form>
                             <div class="fullname">
-                                <input type="text" placeholder="First Name" autofocus>
-                                <input type="text" placeholder="Last Name">
+                                <input type="text" placeholder="First Name" name="first_name" autofocus>
+                                <input type="text" placeholder="Last Name" name="last_name">
                             </div>
                             <div class="emailpassword">
-                                <input type="text" placeholder="Email or Phone Number">
-                                <input type="password" placeholder="Password">
+                                <input type="text" placeholder="Email or Phone Number" name="email">
+                                <input type="password" placeholder="Password" name="password">
                             </div>
                             <div class="birthday">
                                 <label for="birthday">Birthday:</label>
-                                <select>
+                                <select name="birthday">
                                     <option>Month</option>
                                     <option>Jan</option>
                                     <option>Feb</option>
@@ -169,13 +169,13 @@
                             <div class="gender">
                                 <label>Gender:</label>
                                 <div class="sex">
-                                    <input type="radio">Male
+                                    <input type="radio" name="gender" value="male">Male
                                 </div>
                                 <div class="sex">
-                                    <input type="radio">Female
+                                    <input type="radio" name="gender" value="male">Female
                                 </div>
                                 <div class="sex">
-                                    <input type="radio">Custom
+                                    <input type="radio" name="gender" value="custom">Custom
                                 </div>
                             </div>
                             <div class="policy">
@@ -190,7 +190,7 @@
             </div>
         </div>
         <!-- footer -->
-        <div class="footer">
+        <div class="footer" style="background: url('{% static 'img/footer.png' %}') no-repeat 100%;">
             &copy All Right Reserved
         </div>
     </body>
