@@ -1,0 +1,387 @@
+/* background */
+body
+{
+    background: rgb(255, 255, 255);
+}
+
+.container
+{
+    -webkit-animation: slidein;
+    -webkit-animation-duration: 0.5s;
+}
+@keyframes slidein
+{
+    from {opacity: 0}
+    to {opacity: 1}; 
+}
+
+/* header */
+.header
+{
+    padding: 20px;
+    top: 6%;
+    left: 50%;
+    width: 900px;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: block;
+    border-bottom: 2px solid rgb(240, 239, 239);
+}
+.headerlink
+{
+    position: relative;
+    display: inline-block;
+    width: 24%;
+}
+.headerlink a
+{
+    color: grey;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
+
+/* container */
+.main_container
+{
+    width: 900px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* image */
+.phone_container
+{
+    display: inline-block;
+    width: 50%;
+    float: left;
+}
+
+.login_container
+{
+    display: inline-block;
+    float: right;
+    width: 50%;
+    position: absolute;
+    top: 45%;
+    transform: translate(0, -50%);
+}
+.player
+{
+    position: absolute;
+    left: 180px;
+    top: 140px;
+    -webkit-animation: playerdiv;
+    -webkit-animation-duration: 3s;
+}
+@keyframes playerdiv
+{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.ground
+{
+    position: absolute;
+    left: 200px;
+    top: 160px;
+    -webkit-animation: grounddiv;
+    -webkit-animation-duration: 3s;
+}
+@keyframes grounddiv
+{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.ball
+{
+    position: absolute;
+    left: 290px;
+    top: 200px;
+    -webkit-animation: balldiv;
+    -webkit-animation-duration: 2s;
+}
+@keyframes balldiv
+{
+    from{opacity: 0; rotate: 0deg; top: 180px; left: 320px;}
+    to{opacity: 1; rotate: 360deg; top: 200px; left: 290px;}
+}
+
+.phonelogo
+{
+    color: #2D7B20;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 30px;
+    position: absolute;
+    left: 210px;
+    top: 300px;
+}
+
+.player img, .ground img
+{
+    width: 160px;
+}
+
+.phone img
+{
+    max-width: 400px;
+}
+
+.ball img
+{
+    max-width: 60px;
+}
+
+/* login div */
+.login
+{
+    width: 400px;
+    padding: 20px;
+    background: #f8fff5;
+    border-radius: 20px;
+    box-shadow: 0 0 3px 3px grey;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+/* logo */
+.logo
+{
+    color: #2D7B20;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 50px;
+    text-align: center;
+}
+
+.login label p
+{
+    margin: 10px;
+    display: block;
+    color: grey;
+}
+
+.login input[type = 'text'], .login input[type='password']
+{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.login input[type = 'submit']
+{
+    width: 100%;
+    margin: 8px 0;
+    height: 40px;
+    border-radius: 5px;
+    margin: 8px 0;
+    display: inline-block;
+    border : none;
+    background: #2D7B20;
+    color: white;
+    margin-bottom: 12px;
+}
+
+/* forgot password link */
+.forgot
+{
+    text-align: center;
+}
+
+.forgot a
+{
+    color: black;
+}
+
+/* android */
+.android
+{
+    text-align: center;
+}
+.android img
+{
+    padding: 10px;
+    width: 120px;
+}
+
+/* create new account */
+.createnew
+{
+    border-top: 2px solid grey ;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.createnew a
+{
+    padding: 12px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 5px;
+    display: inline-block;
+    background-color: teal;
+    color: white;
+    border: none;
+}
+
+/* create account modal */
+#new_acc_modal {
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+  }
+.modal
+{
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px grey;
+    box-sizing: border-box;
+    background: #f8fff5;
+    width: 440px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    box-shadow: 0 0 3px 3px #2D7B20;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    -webkit-animation: slidein_modal;
+    -webkit-animation-duration: 1s;
+}
+@keyframes slidein_modal
+{
+    from {top: 0%; opacity: 0}
+    to {top: 40%; opacity: 1}; 
+}
+.modalheader
+{
+    display: inline-block;
+    float: left;
+}
+.closebutton
+{
+    float: right;
+    display: inline-block;
+}
+
+#new_acc_modal span:hover
+{
+    cursor: pointer;
+}
+
+/* signup form */
+.fullname
+{
+    display: inline-block;
+}
+.fullname input
+{
+    padding: 8px 12px;
+    width: 49.25%;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.emailpassword input
+{
+    width: 100%;
+    padding: 8px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.birthday label, .gender label
+{
+    color: grey;
+    font-size: 12px;
+    display: block;
+    padding: 10px;
+}
+.birthday select
+{
+    padding: 8px 12px;
+    width: 32%;
+    background-color: white;
+}
+.gender .sex
+{
+    padding: 8px 12px;
+    width: 25%;
+    display: inline-block;
+    border: 1px solid grey;
+}
+.policy
+{
+    color: grey;
+    font-size: 12px;
+    padding: 10px;
+}
+.signupto input[type='submit']
+{
+    margin: 10px;
+    padding: 12px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 5px;
+    display: inline-block;
+    background-color: teal;
+    color: white;
+    border: none;
+}
+
+/* footer */
+.footer
+{
+    background: url('../img/footer.png') no-repeat 100%;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    padding: 10px;
+    font-size: large;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    font-weight: bolder;
+}
+.footer a
+{
+    text-decoration: none;
+    color: white;
+    margin :10px;
+}
+
+/* resize window */
+@media only screen and (max-width: 1000px) 
+{
+    .container
+    {
+        width: 100%;
+    }
+    .header
+    {
+        display:none;
+    }
+    .login_container
+    {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .phone_container
+    {
+        display: none;
+    }
+}
