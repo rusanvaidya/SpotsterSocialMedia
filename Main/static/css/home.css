@@ -4,16 +4,6 @@ body
     background: rgb(255, 255, 255);
 }
 
-.container
-{
-    -webkit-animation: slidein;
-    -webkit-animation-duration: 0.5s;
-}
-@keyframes slidein
-{
-    from {opacity: 0}
-    to {opacity: 1}; 
-}
 
 /* header */
 .header
@@ -253,7 +243,7 @@ body
     position: absolute;
     top: 40%;
     left: 50%;
-    box-shadow: 0 0 3px 3px #2D7B20;
+    box-shadow: 0 0 3px 3px #8a8a8a;
     box-sizing: border-box;
     transform: translate(-50%, -50%);
     -webkit-animation: slidein_modal;
@@ -318,7 +308,7 @@ body
 }
 .gender .sex
 {
-    padding: 8px 12px;
+    padding: 12px 12px;
     width: 25%;
     display: inline-block;
     border: 1px solid grey;
@@ -365,7 +355,7 @@ body
 /* resize window */
 @media only screen and (max-width: 1000px) 
 {
-    .container
+    .main_container
     {
         width: 100%;
     }
@@ -373,14 +363,15 @@ body
     {
         display:none;
     }
-    .login_container
-    {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
     .phone_container
     {
         display: none;
+    }
+    .login_container
+    {
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }

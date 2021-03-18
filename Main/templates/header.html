@@ -1,0 +1,80 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+<div class="header_top">
+    <table>
+
+        <!-- logo -->
+        <td class="logo">
+            <a href="/"><img src="{% static 'img/icon2.png' %}"></a>
+        </td>
+
+        <!-- searchbar -->
+        <td class="searchbar">
+            <input type="text" placeholder="Search...">
+        </td>
+        
+        <td class="header_btns_div">
+            <div class="header_btns">
+                <a><img src="{% static 'icon/home.png' %}"></a>
+            </div>
+            <div class="header_btns">
+                <a><img src="{% static 'icon/trending.png' %}"></a>
+            </div>            
+            <div class="header_btns">
+                <a><img src="{% static 'icon/hot.png' %}"></a>
+            </div>
+            <div class="header_btns">
+                <a><img src="{% static 'icon/find.png' %}"></a>
+            </div>
+        </td>
+
+        <!-- buttons -->
+        <td class="bar_buttons">
+            <div style="display: inline-block;">
+                <button class="n_link" onclick="show_not()" title="Notification"><img src="{% static 'icon/notification.png' %}"></button>
+                <div id="n_links" class="nlinks">
+                    <table>
+                        <tr class="user_option">
+                            <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                            {% for i in user %}
+                            <td>
+                                <a href="">{{i.first_name}} {{i.last_name}} posted new event</a>
+                            </td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="display: inline-block;">
+                {% for i in user %}
+                <button class="d_link" onclick="show_pp()" title="{{i.first_name}}">
+                    <img src="{% static 'img/defaultpp.jpg' %}">
+                </button>
+                <div id="d_links" class="dlinks">
+                    <table>
+                        <tr class="user_option">
+                            <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                            <td><a href="">{{i.first_name}} {{i.last_name}}</a></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr class="other_option">
+                            <td><a href=""><img src="{% static 'icon/settings.png' %}"></a></td>
+                            <td><a href="">Settings</a></td>
+                        </tr>
+                        <tr class="other_option">
+                            <td><a href=""><img src="{% static 'icon/help.png' %}"></a></td>
+                            <td><a href="">Help</a></td>
+                        </tr>
+                        <tr class="other_option">
+                            <td><a href="logout"><img src="{% static 'icon/logout.png' %}"></a></td>
+                            <td><a href="logout">Logout</a></td>
+                        </tr>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </td>
+    </table>
+</div>
+<script src="{% static 'js/header.js' %}"></script>

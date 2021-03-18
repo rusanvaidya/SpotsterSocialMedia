@@ -1,0 +1,202 @@
+/* background */
+.homepage
+{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgb(236, 236, 236);
+}
+
+/* total coverage of feed */
+.container_newsfeed
+{
+    padding: 10px;
+    top: 5%;
+    width: 100%;
+    height: 90%;
+    position: fixed;
+}
+
+/* left container */
+div.container1
+{
+    width: 23%;
+    height: 100%;
+    overflow-x: auto;
+    display: inline-block;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+/* middle container */
+div.container2
+{
+    width: 52%;
+    height: 100%;
+    padding: 10px;
+    overflow-x: auto;
+    display: inline-block;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+/* right container */
+div.container3
+{
+    width: 23%;
+    height: 100%;
+    overflow-x: auto;
+    display: inline-block;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.container1 ::-webkit-scrollbar
+{
+    display: none;
+}
+.container2 ::-webkit-scrollbar
+{
+    display: none;
+}
+.container3 ::-webkit-scrollbar
+{
+    display: none;
+}
+
+/* first container extension */
+.c1
+{
+    padding: 10px;
+}
+.c1-img
+{
+    display: inline-block;
+}
+.c1-img img
+{
+    width: 50px;
+}
+.c1-label
+{
+    display: inline-block;
+}
+
+/* new post */
+.c2-new, .c2
+{
+    background-color: white;
+    margin: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    display: block;
+    box-shadow: 0 0 1px 1px #e0e0e0;
+}
+.c2-text textarea
+{
+    width: 100%;
+    resize: none;
+    height: 80px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: large;
+}
+.c2-btns-l
+{
+    color: #ff0000;
+    border: none;
+    margin: 9px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    width: 27%;
+}
+.c2-btns-v
+{
+    color: #4c00ff;
+    border: none;
+    margin: 9px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    width: 27%;
+    text-align: center;
+}
+.c2-btns-e
+{
+    color: #ff7300;
+    border: none;
+    margin: 9px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    width: 27%;
+}
+.c2-btns-l:hover, .c2-btns-e:hover, .c2-btns-v:hover
+{
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.233);
+}
+.c2-btns-l img
+{
+    width: 15px;
+    height: 20px;
+}
+.c2-btns-v img,.c2-btns-e img
+{
+    width: 20px;
+    height: 20px;
+}
+.c2 img
+{
+    width: 30px;
+}
+.location img
+{
+    width: 20px;
+}
+.joinin
+{
+    width: 100%;
+    border-top: 1px solid #8b8b8b;
+    border-bottom: 1px solid #8b8b8b;
+}
+.joinin form
+{
+    display: inline-block;
+    width: 32.8%;
+}
+.joinin form input[type='submit']
+{
+    width: 100%;
+    background-color: inherit;
+    border: none;
+    color: rgb(121, 121, 121);
+    padding: 8px 12px;
+}
+.joinin form input[type='submit']:hover
+{
+    background-color: rgb(204, 204, 204);
+}
+
+
+/* 3rd container */
+.c3
+{
+    padding: 10px;
+}
+.c3-img
+{
+    display: inline-block;
+}
+.c3-img img
+{
+    width: 50px;
+}
+.c3-label
+{
+    display: inline-block;
+}

@@ -1,0 +1,134 @@
+*
+{
+    margin: 0;
+}
+
+.header_top
+{
+    box-shadow: 0 0 3px 3px #2e7b20c7;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+    position: fixed;
+}
+
+.header_top table 
+{
+    width: 100%;
+}
+
+.header_top .logo
+{
+    text-align: center;
+    width: 5%;
+}
+.logo img
+{
+    width: 50px;
+    font-size: 50px;
+}
+.searchbar
+{
+    width: 19%;
+}
+.searchbar input
+{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(168, 168, 168);
+    box-sizing: border-box;
+}
+.header_btns_div
+{
+    width: 52%;   
+}
+.header_btns
+{
+    width: 24%;
+    display: inline-block;
+    text-align: center;
+}
+.header_btns_div .header_btns a img
+{
+    width: 30px;
+}
+.bar_buttons
+{
+    width: 24%;
+    text-align: center;
+}
+.bar_buttons img
+{
+    width: 25px;
+    padding: 12px;
+}
+.profile_picture
+{
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.n_link, .d_link
+{
+    border: none;
+    background-color: inherit;
+    border-radius: 100px;
+}
+
+.n_link:hover, .d_link:hover
+{
+    background-color: rgb(223, 223, 223);
+}
+.nlinks
+{
+    display: none;
+    box-shadow: 0 0 3px 3px grey;
+    box-sizing: border-box;
+    width: 270px;
+    z-index: 1;
+    position: absolute;
+    top: 10%;
+    right: 20%;
+    background-color: white;
+    -webkit-animation: slidein_modal;
+    -webkit-animation-duration: 0.5s;
+}
+.dlinks
+{
+    display: none;
+    box-shadow: 0 0 3px 3px grey;
+    box-sizing: border-box;
+    z-index: 1;
+    width: 230px;
+    position: absolute;
+    top: 10%;
+    right: 15%;
+    background-color: white;
+    -webkit-animation: slidein_modal;
+    -webkit-animation-duration: 0.5s;
+}
+@keyframes slidein_modal
+{
+    from {top: 0%; opacity: 0}
+    to {top: 10%; opacity: 1}; 
+}
+.dlinks .user_option img, .nlinks .user_option img
+{
+    width: 50px;
+}
+.dlinks .other_option img
+{
+    width: 20px;
+}
+.dlinks a, .nlinks a
+{
+    text-decoration: none;
+    color: grey;
+}
+.show
+{
+    display: block;
+}

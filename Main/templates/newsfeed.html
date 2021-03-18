@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <title>Spotser</title>
+        <link rel="icon" href="{% static 'img/icon.png' %}">
+    </head>
+    <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}">
+    <body>
+        <div class="homepage">
+            <!-- header import -->
+            {% include 'header.html' %}
+            
+            <!-- 3 divs -->
+            <div class="container_newsfeed">
+                <div class="container1">
+                    <div class="c1">
+                        <table>
+                        {% for i in user %}
+                        <tr>
+                            <td class="c1-img">
+                                <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
+                            </td>
+                            <td class="c1-label"> 
+                                {{i.first_name}} {{i.last_name}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="container2">
+                    <div class="c2-new">
+                        <form>
+                            <div class="c2-text">
+                                <textarea placeholder="Let's create a new sport event..."></textarea>
+                            </div>
+                            <div class="c2-new-buttons">
+                                <div class="c2-btns-l">
+                                    <table>
+                                        <td><img src="{% static 'icon/location_new.png' %}"></td>
+                                        <td>Set Location</td>
+                                    </table>
+                                </div>
+                                <div class="c2-btns-v">
+                                    <table>
+                                        <td><img src="{% static 'icon/venue.png' %}"></td>
+                                        <td>Select Venue</td>
+                                    </table>
+                                </div>
+                                <div class="c2-btns-e">
+                                    <table>
+                                        <td><img src="{% static 'icon/calender.png' %}"></td>
+                                        <td>Choose Date</td>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {% for i in others %}
+                    <div class="c2">
+                        <table class="c2-post">
+                            <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                            <td style="font-weight: bold;">{{i.first_name}} {{i.last_name}}</td>
+                        </table>
+                        <div class="caption">
+                            Today Futsal anyone?
+                        </div>
+                        <div class="location">
+                            <table>
+                                <td><img src="{% static 'icon/location.png' %}"></td>
+                                <td>Kathmandu</td>
+                            </table>
+                        </div>
+                        <div class="joinin">
+                            <form>
+                                <input type="submit" value="JOIN">
+                            </form>
+                            <form>
+                                <input type="submit" value="INTERESTED">
+                            </form>
+                            <form>
+                                <input type="submit" value="MAYBE">                        
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="container3">
+                    <div class="c3">
+                        <table>
+                        {% for i in others %}
+                        <tr>
+                            <td class="c3-img">
+                                <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
+                            </td>
+                            <td class="c3-label"> 
+                                {{i.first_name}} {{i.last_name}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>

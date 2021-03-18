@@ -19,4 +19,8 @@ from . import views
 
 urlpatterns = [
     path('', views.home),
+    path('login', views.login),
+    path('register', views.register),   
+    path('logout', views.logout), 
+    path('support',views.support_view,name='supportpage')
 ]
