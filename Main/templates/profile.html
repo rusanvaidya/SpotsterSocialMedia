@@ -6,6 +6,7 @@
         <link rel="icon" href="{% static 'img/icon.png' %}">
     </head>
     <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <body>
         <div class="homepage">
             <!-- header import -->
@@ -13,37 +14,37 @@
             
             <!-- 3 divs -->
             <div class="container_newsfeed">
-                
                 <div class="container1">
-                    <div class="c1">
+                    <!-- profile picture -->
+                    <div class="c1-profile">
+                        <img src="{% static 'img/defaultpp.jpg' %}">
+                    </div>
+                    <!-- name -->
+                    <div class="c1-profile">
+                        <b class="name-font">Rusan Vadiya</b>
+                    </div>
+                    <!-- follower/following -->
+                    <div class="c1-profile">
                         <table>
-                        {% for i in user %}
-                        <tr>
-                            <td class="c1-img">
-                                <a href="profile"><img src="{% static 'img/defaultpp.jpg' %}" style="width:50px"></a>
+                            <td>
+                                0 <br><p>Followers</p>
                             </td>
-                            <td class="c1-label"> 
-                                <a href="profile">{{i.first_name}} {{i.last_name}}</a>
+                            <td>
+                                0 <br><p>Following</p>
                             </td>
-                        </tr>
-                        {% endfor %}
                         </table>
                     </div>
-                    <div class="c1">
-                        <div id="googleMap" style="width:100%;height:400px;"></div>
-
-    <script>
-    function myMap() {
-    var mapProp= {
-    center:new google.maps.LatLng(51.508742,-0.120850),
-    zoom:5,
-    };
-    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
-
+                    <!-- bio -->
+                    <div class="c1-profile">
+                        <div class="bio">
+                            football gamer
+                        </div>
+                    </div>
+                    <!-- edit profile -->
+                    <div class="c1-profile">
+                        <div class="edit-p">
+                            <button>Edit Profile</button>
+                        </div>
                     </div>
                 </div>
                 <div class="container2">
@@ -74,7 +75,7 @@
                             </div>
                         </form>
                     </div>
-                    {% for i in others %}
+                    {% for i in user %}
                     <div class="c2">
                         <table class="c2-post">
                             <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
@@ -108,28 +109,6 @@
                     </div>
                     {% endfor %}
                 </div>
-                <div class="container3">
-                    <div class="c3">
-                        <div class="c3-sponser">
-                            <p>Sponsered</p>
-                            <img src="{% static 'img/sponser.png' %}">
-                        </div>
-                    </div>
-                    <div class="c3">
-                        <p>Followers</p>
-                        <table>
-                        {% for i in others %}
-                        <tr class="chatuser">
-                            <td class="c3-img">
-                                <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
-                            </td>
-                            <td class="c3-label"> 
-                                {{i.first_name}} {{i.last_name}}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        </table>
-                    </div>
-                </div>
+                <div class="container3"></div>
             </div>
         </div>

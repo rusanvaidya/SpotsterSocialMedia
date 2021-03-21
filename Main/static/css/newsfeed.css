@@ -72,11 +72,18 @@ div.container3
 }
 .c1-img img
 {
+    border-radius: 50px;
     width: 50px;
 }
 .c1-label
 {
     display: inline-block;
+}
+
+.c1-label a
+{
+    text-decoration: none;
+    color: black;
 }
 
 /* new post */
@@ -85,6 +92,7 @@ div.container3
     background-color: white;
     margin: 20px;
     padding: 15px;
+    height: auto;
     border-radius: 8px;
     display: block;
     box-shadow: 0 0 1px 1px #e0e0e0;
@@ -140,23 +148,34 @@ div.container3
     cursor: pointer;
     background-color: rgba(128, 128, 128, 0.233);
 }
-.c2-btns-l img
-{
-    width: 15px;
-    height: 20px;
-}
-.c2-btns-v img,.c2-btns-e img
+.c2-btns-l img,.c2-btns-v img,.c2-btns-e img
 {
     width: 20px;
     height: 20px;
 }
-.c2 img
+.c2 .c2-post img
 {
+    border-radius: 15px;
     width: 30px;
 }
 .location img
 {
     width: 20px;
+}
+.c2 .postedimg
+{
+    border: 1px solid rgb(165, 165, 165);
+    width: 300px;
+    padding: 5px;
+    margin: 10px;
+}
+.c2 .postedimg img
+{
+    width: 300px;
+}
+.caption
+{
+    word-wrap: break-word 
 }
 .joinin
 {
@@ -188,15 +207,42 @@ div.container3
 {
     padding: 10px;
 }
+.chatuser:hover
+{
+    cursor: pointer;
+    background-color: #e0e0e0;
+}
+.c3-sponser
+{
+    padding: 10px;
+    font-size: 15px;
+    display: block;
+}
+.c3-sponser p
+{
+    display: block;
+}
+.c3-sponser img
+{
+    width: 200px;
+    display: block;
+}
 .c3-img
 {
     display: inline-block;
 }
 .c3-img img
 {
+    border-radius: 50px;
     width: 50px;
 }
 .c3-label
 {
     display: inline-block;
+}
+.light
+{
+    font-weight: lighter;
+    color:rgb(148, 148, 148);
+    font-size: 10px;
 }

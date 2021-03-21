@@ -1,0 +1,32 @@
+.c1-profile
+{
+    text-align: center;
+}
+.c1-profile .name-font
+{
+    font-size: 30px;
+    font-weight: bold;
+}
+.c1-profile img
+{
+    padding: 15px;
+    width: 300px;
+    border-radius: 155px;
+}
+.c1-profile table
+{
+    margin:0 auto;
+    padding: 8px;
+}
+.c1-profile table td
+{
+    padding: 8px;
+}
+.c1-profile table td p
+{
+    font-weight: bold;
+}
+.bio
+{
+    padding: 15px;
+}

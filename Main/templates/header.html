@@ -1,5 +1,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/header.css' %}">
+
 <div class="header_top">
     <table>
 
@@ -15,64 +16,63 @@
         
         <td class="header_btns_div">
             <div class="header_btns">
-                <a><img src="{% static 'icon/home.png' %}"></a>
+                <a href="/"><img src="{% static 'icon/home.png' %}" class="header_m_img"></a>
             </div>
             <div class="header_btns">
-                <a><img src="{% static 'icon/trending.png' %}"></a>
+                <a href=""><img src="{% static 'icon/trending.png' %}" class="header_m_img"></a>
             </div>            
             <div class="header_btns">
-                <a><img src="{% static 'icon/hot.png' %}"></a>
+                <a href=""><img src="{% static 'icon/hot.png' %}" class="header_m_img"></a>
             </div>
             <div class="header_btns">
-                <a><img src="{% static 'icon/find.png' %}"></a>
+                <a href=""><img src="{% static 'icon/find.png' %}" class="header_m_img"></a>
             </div>
         </td>
 
         <!-- buttons -->
         <td class="bar_buttons">
-            <div style="display: inline-block;">
-                <button class="n_link" onclick="show_not()" title="Notification"><img src="{% static 'icon/notification.png' %}"></button>
-                <div id="n_links" class="nlinks">
+            <div class="dd">
+                <img onclick="myMessage()" class="d3btn" src="{% static 'icon/message.png' %}">
+                <div id="mydd3" class="dd3-content">
+                    {% for i in user %}
                     <table>
-                        <tr class="user_option">
-                            <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
-                            {% for i in user %}
-                            <td>
-                                <a href="">{{i.first_name}} {{i.last_name}} posted new event</a>
-                            </td>
-                            {% endfor %}
-                        </tr>
+                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                        <td><a href="">{{i.first_name}} {{i.last_name}}<br>
+                            <p class="light">Are you free tonight?</p>
+                        </a></td>
                     </table>
+                    {% endfor %}
                 </div>
             </div>
-            <div style="display: inline-block;">
-                {% for i in user %}
-                <button class="d_link" onclick="show_pp()" title="{{i.first_name}}">
-                    <img src="{% static 'img/defaultpp.jpg' %}">
-                </button>
-                <div id="d_links" class="dlinks">
+            <div class="dd">
+                <img onclick="myNotification()" class="d2btn" src="{% static 'icon/notification.png' %}">
+                <div id="mydd2" class="dd2-content">
+                    {% for i in user %}
                     <table>
-                        <tr class="user_option">
-                            <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
-                            <td><a href="">{{i.first_name}} {{i.last_name}}</a></td>
-                        </tr>
+                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                        <td><a href="">{{i.first_name}} {{i.last_name}} just posted a event you may like.</a>
                     </table>
-                    <table>
-                        <tr class="other_option">
-                            <td><a href=""><img src="{% static 'icon/settings.png' %}"></a></td>
-                            <td><a href="">Settings</a></td>
-                        </tr>
-                        <tr class="other_option">
-                            <td><a href=""><img src="{% static 'icon/help.png' %}"></a></td>
-                            <td><a href="">Help</a></td>
-                        </tr>
-                        <tr class="other_option">
-                            <td><a href="logout"><img src="{% static 'icon/logout.png' %}"></a></td>
-                            <td><a href="logout">Logout</a></td>
-                        </tr>
-                    </table>
+                    {% endfor %}
                 </div>
-                {% endfor %}
+            </div>
+            <div class="dd">
+                <img onclick="myProfile()" class="d1btn" src="{% static 'img/defaultpp.jpg' %}">
+                <div id="mydd1" class="dd1-content">
+                    {% for i in user %}
+                    <div class="user_option">
+                        <img src="{% static 'img/defaultpp.jpg' %}">
+                        <a href="profile">
+                            {{i.first_name}} {{i.last_name}}<br>
+                            <p class="light">{{email}}</p>
+                        </a>
+                    </div>
+                    {% endfor %}
+                    <!-- <img src="{% static 'icon/logout.png' %}"> -->
+                    <a href="logout">Logout</a>
+                    <div class="light bd">
+                        &copy 2021 Spotster
+                    </div>
+                </div>
             </div>
         </td>
     </table>
