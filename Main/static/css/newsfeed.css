@@ -86,6 +86,7 @@ div.container3
     color: black;
 }
 
+<<<<<<< HEAD
 /* story */
 div.story
 {
@@ -135,6 +136,8 @@ div.story
 {
     display: inline-block;
 }
+=======
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
 /* new post */
 .c2-new, .c2
 {
@@ -146,6 +149,7 @@ div.story
     display: block;
     box-shadow: 0 0 1px 1px #e0e0e0;
 }
+<<<<<<< HEAD
 .c2-text .new_idea
 {
     cursor: pointer;
@@ -162,6 +166,19 @@ div.story
 .new_idea:hover
 {
     background-color: rgb(209, 209, 209);
+=======
+.c2-text textarea
+{
+    width: 100%;
+    resize: none;
+    height: 80px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: large;
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
 }
 .c2-btns-l
 {
@@ -197,11 +214,14 @@ div.story
     display: inline-block;
     width: 27%;
 }
+<<<<<<< HEAD
 .c2-btns-e table, .c2-btns-l table, .c2-btns-v table
 {
     margin-left: auto;
     margin: auto;
 }
+=======
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
 .c2-btns-l:hover, .c2-btns-e:hover, .c2-btns-v:hover
 {
     cursor: pointer;
@@ -212,6 +232,7 @@ div.story
     width: 20px;
     height: 20px;
 }
+<<<<<<< HEAD
 .c2-post
 {
     float: left;
@@ -232,6 +253,9 @@ div.story
     background-color: rgb(209, 209, 209);
 }
 .c2 .c2-post img, .posting-user img
+=======
+.c2 .c2-post img
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
 {
     border-radius: 15px;
     width: 30px;
@@ -251,6 +275,7 @@ div.story
 {
     width: 300px;
 }
+<<<<<<< HEAD
 .posted-name a
 {
     font-weight: bold; 
@@ -262,6 +287,11 @@ div.story
     display: block;
     overflow: hidden;
     word-wrap: break-word ;
+=======
+.caption
+{
+    word-wrap: break-word 
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
 }
 .joinin
 {
@@ -308,6 +338,7 @@ div.story
 {
     display: block;
 }
+<<<<<<< HEAD
 .sponser-img
 {
     display: inline-block;
@@ -320,11 +351,19 @@ div.story
 .c3-sponser .sponser-img img
 {
     width: 100px;
+=======
+.c3-sponser img
+{
+    width: 200px;
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
     display: block;
 }
 .c3-img
 {
+<<<<<<< HEAD
     position: relative;
+=======
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
     display: inline-block;
 }
 .c3-img img
@@ -342,6 +381,7 @@ div.story
     color:rgb(148, 148, 148);
     font-size: 10px;
 }
+<<<<<<< HEAD
 
 .chatuser .c3-img .badge-online 
 {
@@ -429,3 +469,5 @@ div.story
     box-sizing: border-box;
     resize: none;
 }
+=======
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156

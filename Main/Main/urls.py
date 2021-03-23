@@ -20,7 +20,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('',include('userprofile.urls')),
+<<<<<<< HEAD
     path('',include('trending.urls')),
     path('',include('hottopic.urls')),
     path('',include('discover.urls')),
+=======
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
 ]

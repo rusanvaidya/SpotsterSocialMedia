@@ -75,7 +75,11 @@
 }
 .bar_buttons img
 {
+<<<<<<< HEAD
     width: 30px;
+=======
+    width: 25px;
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
     padding: 12px;
 }
 .d1btn, .d2btn , .d3btn
@@ -85,11 +89,17 @@
     border: none;
     border-radius: 50px;
     cursor: pointer;
+<<<<<<< HEAD
 }
+=======
+    }
+
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
 .d1btn:hover, .d1btn:focus, .d2btn:hover, .d2btn:focus, .d3btn:hover, .d3btn:focus 
 {
     background-color: rgb(190, 190, 190);
 }
+<<<<<<< HEAD
 .badge-message, .badge-notification
 {
     position: absolute;
@@ -102,6 +112,8 @@
     background-color: rgb(202, 48, 48);
     color: white;
 }
+=======
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
 
 .dd 
 {
@@ -159,6 +171,7 @@
 .bd
 {
     border-top: 1px solid grey;
+<<<<<<< HEAD
 }
 
 /* preloader */
@@ -184,4 +197,6 @@
 .not-loaded
 {
     display: none;
+=======
+>>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
 }
