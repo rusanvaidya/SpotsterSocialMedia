@@ -66,6 +66,6 @@ var change2 = function()
 }
 function loader()
 {
-    setTimeout(change1, 1500);
-    setTimeout(change2, 1700);
+    setTimeout(change1, 600);
+    setTimeout(change2, 800);
 }

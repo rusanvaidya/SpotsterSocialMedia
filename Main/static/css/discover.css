@@ -26,3 +26,10 @@
     background-color: #1f5216;
     cursor: pointer;
 }
+
+#map 
+{ 
+    position: absolute; 
+    width: 40%; 
+    height:60%;
+}
