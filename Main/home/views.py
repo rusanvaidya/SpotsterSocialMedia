@@ -1,85 +1,90 @@
+from django.contrib.auth import login
 from django.shortcuts import render
-from .models import registration, support
+from .models import User_data
+from django.core.validators import validate_email
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 
-# Create your views here.
+def index(request):
+    if request.session.get('email') is not  None:
+        u_email = request.session.get('email')
+        data1 = User_data.objects.filter(email=u_email)
+        return render(request,'newsfeed.html',{'u_data':data1})
+
+    return render(request,'index.html')
+
 def home(request):
-    try:
-        email = request.session['email']
-        user = registration.objects.filter(email=email)
-        other_user = registration.objects.filter()
-        dict1 = {
-            'email': email, 
-            'user': user,
-            'others': other_user}
-        return render(request, 'newsfeed.html', dict1)
-    except:
-        user = None
-        email = None
-        return render(request, 'index.html',{'email': email, 'user': user})
-
-
-def login(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        user = registration.objects.filter(email=email, password=password)
-        if user.exists():
-            request.session['email'] = email
-            other_user = registration.objects.filter()
-            dict1 = {
-            'email': email, 
-            'user': user,
-            'others': other_user}
-            return render(request, 'newsfeed.html', dict1)
-        else:
-            return render(request, 'index.html',{'email': email, 'user': user})
-
-def register(request):
-    if request.method == 'POST':
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        email = request.POST['email']
-        password = request.POST['password']
-        birth_month = request.POST['birth_month']
-        birth_day = request.POST['birth_day']
-        birth_year = request.POST['birth_year']
+    process= request.POST.get('status')
+    if process == 'signup':
+        firstname = request.POST.get('first_name')
+        lastname = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        repassword = request.POST.get('repassword')
+        birthday = request.POST.get('birthday')
         gender = request.POST.get('sex')
-        
-        # password = base64.encodebytes(password)
-        birthday = birth_day + birth_month + birth_year
 
-        if registration.objects.filter(email=email).exists():
-                messages.info(request, 'This Email is Taken')
-                return redirect('index.html')
+        try:
+            validate_email(email)
+            if User_data.objects.filter(email=email).exists():
+                messages.add_message(request, messages.INFO,
+                                 'Invalid! Email or Email exists already please Enter Correctly !')
+                return render(request, 'index.html')
 
-        else:
-            user = registration(first_name=first_name, last_name=last_name, email=email, password=password, birthday=birthday, gender=gender)
-            user.save()
-            request.session['email'] = email
-            user = registration.objects.filter(email=email, password=password)
-            if user.exists():
-                request.session['email'] = email
-                return render(request, 'newsfeed.html',{'email': email, 'user': user})
+            elif password != repassword:
+                messages.add_message(request, messages.INFO, 'Password donot match please Enter Correctly !')
+                return render(request, 'index.html')
+
             else:
-                return render(request, 'index.html',{'email': email, 'user': user})
+                My_data = User_data(first_name=firstname, last_name=lastname,email=email,password=password,birthday=birthday,gender=gender)
+                My_data.save()
+                request.session['email'] = email
+                check2 = User_data.objects.filter(email=email)
+                return render(request, 'newsfeed.html',{'u_data':check2})
 
-            return render(request, 'newsfeed.html',{'email': email, 'user': user})
+
+
+        except ValidationError:
+
+            messages.add_message(request, messages.INFO,
+                                 'Invalid! Email or Email exists already please Enter Correctly !')
+
+            return render(request, 'index.html')
+
+    elif process == 'login':
+        emails = request.POST.get('email')
+        password = request.POST.get('password')
+
+        try:
+            check = User_data.objects.get(email=emails)
+            pass1 = check.password
+            if pass1 == password:
+                request.session['email'] = emails
+                check1 = User_data.objects.filter(email = emails)
+                return render(request, 'newsfeed.html',{'u_data':check1})
+            else:
+                messages.add_message(request, messages.INFO,
+                                     'Invalid! Email or Password please Enter Correctly !')
+                return render(request, 'index.html')
+
+        except:
+            messages.add_message(request, messages.INFO,
+                                 'Invalid! Email or Email not registered please Enter Correctly !')
+            return render(request, 'index.html')
+
+
+
     else:
-        return render(request, 'index.html', {'email': None, 'user': None})
+        return render(request, 'index.html')
+
+
+
+def profile(request):
+    return render(request,'profile.html')
+
 
 
 def logout(request):
-    return render(request, 'index.html',{'email': None, 'user': None})
-
-def support_view(request):
-    return render(request,'support.html')
-
-def support_action(request):
-    u_name=request.POST.get('uname')
-    u_email=request.POST.get('uemail')
-    u_message=request.POST.get('umessage')
-
-    support_save=support(name=u_name,email=u_email,message=u_message)
-    support_save.save()
-    return redirect('supportpage')
+    if request.session.has_key('email'):
+        del request.session['email']
+    return render(request,'index.html')

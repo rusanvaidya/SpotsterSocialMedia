@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'location_field.apps.DefaultConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -81,11 +85,11 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'spotster',
-        'USER': 'myuser',
-        'PASSWORD': 'rusan@123',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'pradip',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
@@ -125,6 +129,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+# LOCATION_FIELD_PATH = settings.STATIC_URL + 'location_field'
+# LOCATION_FIELD = {
+# 'map.provider': 'google',
+# 'map.zoom': 13,
+# 'search.provider': 'google',
+# 'search.suffix': '',
+# # Google
+# 'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
+# 'provider.google.api_key': '',
+# 'provider.google.api_libraries': '',
+# 'provider.google.map.type': 'ROADMAP',
+# }
 
 STATIC_URL = '/static/'
 
@@ -132,6 +148,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

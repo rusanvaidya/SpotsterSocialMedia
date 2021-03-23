@@ -154,7 +154,7 @@ body
     color: grey;
 }
 
-.login input[type = 'text'], .login input[type='password']
+.login input[type = 'text'],.login input[type = 'email'], .login input[type='password']
 {
     width: 100%;
     padding: 12px 20px;
@@ -296,7 +296,7 @@ body
 .birthday label, .gender label
 {
     color: grey;
-    font-size: 12px;
+    font-size: 16px;
     display: block;
     padding: 10px;
 }

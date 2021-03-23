@@ -7,6 +7,13 @@
         <link rel="icon" href="{% static 'img/icon.png' %}">
     </head>
     <body>
+     {% if messages %}
+<div class="messages" style="background-color:#FF8040">
+    {% for message in messages %}
+	<div class="container message" style="text-align:center;"> <font size="4px">{{ message }}</font></div>
+    {% endfor %}
+</div>
+{% endif %}
         <div class="header">
             <div class="headerlink">
                 <a href="">FAQ</a>
@@ -47,18 +54,19 @@
                 <!-- login div -->
                 <div class="login_container">
                     <div class="login">
-                        <form method="POST" action="login">
+                        <form method="POST" action="Home|Spotster">
                             {% csrf_token %}
+                            <input type="hidden" name="status" value="login">
 
                             <!-- logo -->
                             <div class="logo">
                                 <b>Spotster</b>
                             </div>
                             <label for="email">
-                                    <input type="text" placeholder="Email or Phone Number" name="email" autofocus>
+                                    <input type="email" placeholder="Email" name="email" autofocus required>
                             </label>
                             <label for="password">
-                                    <input type="password" placeholder="Password" name="password">
+                                    <input type="password" placeholder="Password" name="password" required minlength="6" maxlength="15">
                             </label>
                             <div class="forgot">
                                 <label for="forgotpassword">
@@ -100,118 +108,32 @@
                         <span onclick="document.getElementById('new_acc_modal').style.display='none';">&times;</span>
                     </div>
                     <div class="signup">
-                        <form method="POST" action="register">
+                        <form method="POST" action="Home|Spotster">
                             {% csrf_token %}
+                            <input type="hidden" name="status" value="signup">
                             <div class="fullname">
-                                <input type="text" placeholder="First Name" name="first_name" autofocus>
-                                <input type="text" placeholder="Last Name" name="last_name">
+                                <input type="text" placeholder="First Name" name="first_name" autofocus required>
+                                <input type="text" placeholder="Last Name" name="last_name" required>
                             </div>
                             <div class="emailpassword">
-                                <input type="text" placeholder="Email or Phone Number" name="email">
-                                <input type="password" placeholder="Password" name="password">
+                                <input type="email" placeholder="Email" name="email" required>
+                                <input type="password" placeholder="Password" name="password" maxlength="15" minlength="6" required>
+                                <input type="password" placeholder="Re-Password" name="repassword" required minlength="6" maxlength="15">
                             </div>
                             <div class="birthday">
                                 <label for="birthday">Birthday:</label>
-                                <select name="birth_month">
-                                    <option disabled>Month</option>
-                                    <option>Jan</option>
-                                    <option>Feb</option>
-                                    <option>Mar</option>
-                                    <option>Apr</option>
-                                    <option>May</option>
-                                    <option>Jun</option>
-                                    <option>Jul</option>
-                                    <option>Aug</option>
-                                    <option>Sep</option>
-                                    <option>Oct</option>
-                                    <option>Nov</option>
-                                    <option>Dec</option>
-                                </select>
-                                <select name="birth_day">
-                                    <option disabled>Day</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                    <option>11</option>
-                                    <option>12</option>
-                                    <option>13</option>
-                                    <option>14</option>
-                                    <option>15</option>
-                                    <option>16</option>
-                                    <option>17</option>
-                                    <option>18</option>
-                                    <option>19</option>
-                                    <option>20</option>
-                                    <option>21</option>
-                                    <option>22</option>
-                                    <option>23</option>
-                                    <option>24</option>
-                                    <option>25</option>
-                                    <option>26</option>
-                                    <option>27</option>
-                                    <option>28</option>
-                                    <option>29</option>
-                                    <option>30</option>
-                                    <option>31</option>
-                                </select>
-                                <select name="birth_year">
-                                    <option disabled>Year</option>
-                                    <option>2021</option>
-                                    <option>2020</option>
-                                    <option>2019</option>
-                                    <option>2018</option>
-                                    <option>2017</option>
-                                    <option>2016</option>
-                                    <option>2015</option>
-                                    <option>2014</option>
-                                    <option>2013</option>
-                                    <option>2012</option>
-                                    <option>2011</option>
-                                    <option>2010</option>
-                                    <option>2009</option>
-                                    <option>2008</option>
-                                    <option>2007</option>
-                                    <option>2006</option>
-                                    <option>2005</option>
-                                    <option>2004</option>
-                                    <option>2003</option>
-                                    <option>2002</option>
-                                    <option>2001</option>
-                                    <option>2000</option>
-                                    <option>1999</option>
-                                    <option>1998</option>
-                                    <option>1997</option>
-                                    <option>1996</option>
-                                    <option>1995</option>
-                                    <option>1994</option>
-                                    <option>1993</option>
-                                    <option>1992</option>
-                                    <option>1991</option>
-                                    <option>1990</option>
-                                    <option>1989</option>
-                                    <option>1988</option>
-                                    <option>1987</option>
-                                    <option>1986</option>
-                                    </select>
+                                <input type="date" placeholder="Birth Date" name="birthday" required>
                             </div>
                             <div class="gender">
                                 <label>Gender:</label>
                                 <label class="sex" for="male">
-                                    <input type="radio" name="sex" value="male" id="male">Male
+                                    <input type="radio" name="sex" value="male" id="male" required>Male
                                 </label>
                                 <label class="sex" for="female">
-                                    <input type="radio" name="sex" value="male" id="female">Female
+                                    <input type="radio" name="sex" value="female" id="female" required>Female
                                 </label>
                                 <label class="sex" for="custom">
-                                    <input type="radio" name="sex" value="custom" id="custom">Custom
+                                    <input type="radio" name="sex" value="custom" id="custom" required>Custom
                                 </label>
                             </div>
                             <div class="policy">

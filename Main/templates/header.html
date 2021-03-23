@@ -16,7 +16,7 @@
         
         <td class="header_btns_div">
             <div class="header_btns">
-                <a href="/"><img src="{% static 'icon/home.png' %}" class="header_m_img"></a>
+                <a href="#"><img src="{% static 'icon/home.png' %}" class="header_m_img"></a>
             </div>
             <div class="header_btns">
                 <a href=""><img src="{% static 'icon/trending.png' %}" class="header_m_img"></a>
@@ -34,10 +34,10 @@
             <div class="dd">
                 <img onclick="myMessage()" class="d3btn" src="{% static 'icon/message.png' %}">
                 <div id="mydd3" class="dd3-content">
-                    {% for i in user %}
+                    {% for item in u_data %}
                     <table>
                         <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
-                        <td><a href="">{{i.first_name}} {{i.last_name}}<br>
+                        <td><a href="">{{item.first_name}} {{item.last_name}}<br>
                             <p class="light">Are you free tonight?</p>
                         </a></td>
                     </table>
@@ -47,23 +47,23 @@
             <div class="dd">
                 <img onclick="myNotification()" class="d2btn" src="{% static 'icon/notification.png' %}">
                 <div id="mydd2" class="dd2-content">
-                    {% for i in user %}
+
                     <table>
-                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
-                        <td><a href="">{{i.first_name}} {{i.last_name}} just posted a event you may like.</a>
+                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a></td>
+                        <td><a href="">{{first_name}} {{last_name}} just posted a event you may like.</a>
                     </table>
-                    {% endfor %}
+
                 </div>
             </div>
             <div class="dd">
                 <img onclick="myProfile()" class="d1btn" src="{% static 'img/defaultpp.jpg' %}">
                 <div id="mydd1" class="dd1-content">
-                    {% for i in user %}
+                    {% for item in u_data %}
                     <div class="user_option">
                         <img src="{% static 'img/defaultpp.jpg' %}">
                         <a href="profile">
-                            {{i.first_name}} {{i.last_name}}<br>
-                            <p class="light">{{email}}</p>
+                            {{item.first_name}} {{item.last_name}}<br>
+                            <p class="light">{{item.email}}</p>
                         </a>
                     </div>
                     {% endfor %}
