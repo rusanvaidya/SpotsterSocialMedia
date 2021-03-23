@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <head>
+        <title>Spotster</title>
+        <link rel="icon" href="{% static 'img/icon.png' %}">
+    </head>
+    <body>
+        <div class="container">
+            <!-- header -->
+            <div class="header">
+                <div class="headerlink">
+                    <a href="">FAQ</a>
+                </div>
+                <div class="headerlink">
+                    <a href="">Blog</a>
+                </div>
+                <div class="headerlink">
+                    <a href="support">Support</a>
+                </div>
+                <div class="headerlink">
+                    <a href="">Legal</a>
+                </div>
+            </div>
+
+
+            <div class="main_container">
+                
+                
+                    <div class="login">
+                        <form>
+                            {% csrf_token %}
+                            
+                            
+                            <label for="name">
+                                <input type="text" placeholder="Full Name"  name="uname" autofocus>
+                        </label>
+                            <label for="email">
+                                    <input type="text" placeholder="Email" name="uemail" autofocus>
+                            </label>
+                            <label for="message">
+                            <textarea id="message" name="umessage" placeholder="Write something.." style="height:300px; width:350px ;"></textarea>
+                        </label>
+                         
+                            <div>
+                                <label for="submit">
+                                    <input type="submit" value="Submit">
+                                </label>
+                            </div>
+
+                           
+                        </form>
+                    </div>
+
+                   
+               
+            </div>
+            
+            
+        </div>
+        <!-- footer -->
+        <div class="footer" style="background: url('{% static 'img/footer.png' %}') no-repeat 100%;">
+            &copy All Right Reserved
+        </div>
+    </body>
+</html>

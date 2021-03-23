@@ -1,0 +1,187 @@
+*
+{
+    margin: 0;
+}
+
+.header_top
+{
+    box-shadow: 0 0 3px 3px #2e7b20c7;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+    position: fixed;
+}
+
+.header_top table 
+{
+    width: 100%;
+}
+
+.header_top .logo
+{
+    text-align: center;
+    width: 5%;
+}
+.logo img
+{
+    width: 50px;
+    font-size: 50px;
+}
+.searchbar
+{
+    width: 19%;
+}
+.searchbar input
+{
+    border-radius: 12px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(168, 168, 168);
+    box-sizing: border-box;
+}
+.header_btns_div
+{
+    width: 52%;   
+}
+.header_btns
+{
+    width: 24%;
+    display: inline-block;
+    text-align: center;
+}
+.herader_btns a:hover
+{
+    background-color: rgb(190, 190, 190);
+}
+.header_btns_div .header_btns a img
+{
+    width: 30px;
+}
+.header_m_img
+{
+    padding: 12px;
+    border-radius: 30px;
+}
+.header_m_img:hover
+{
+    background-color: rgb(190, 190, 190);
+}
+.bar_buttons
+{
+    width: 24%;
+    text-align: center;
+}
+.bar_buttons img
+{
+    width: 30px;
+    padding: 12px;
+}
+.d1btn, .d2btn , .d3btn
+{
+    background-color: inherit;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.d1btn:hover, .d1btn:focus, .d2btn:hover, .d2btn:focus, .d3btn:hover, .d3btn:focus 
+{
+    background-color: rgb(190, 190, 190);
+}
+.badge-message, .badge-notification
+{
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    padding: 5px 9px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bolder;
+    background-color: rgb(202, 48, 48);
+    color: white;
+}
+
+.dd 
+{
+    position: relative;
+    border-radius: 50px;
+    display: inline-block;
+}
+
+.dd1-content, .dd2-content, .dd3-content
+{
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 300px;
+    overflow: auto;
+    box-shadow: 0px 0 3px 3px rgba(0,0,0,0.2);
+    top: 120%;
+    right: 0;
+    z-index: 1;
+    -webkit-animation: slidein_dropdown;
+    -webkit-animation-duration: 0.5s;
+}
+@keyframes slidein_dropdown
+{
+    from {top: 0%; opacity: 0}
+    to {top: 120%; opacity: 1}; 
+}
+  
+.dd1-content a, .dd2-content a, .dd3-content a 
+{
+    color: black;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: block;
+}
+.dd2-content a, .dd3-content a
+{
+    text-align: left;
+}
+.show 
+{
+    display: block;
+}
+
+.user_option img
+{
+    width: 100px;
+    border-radius: 200px;
+}
+.light
+{
+    color:rgb(148, 148, 148);
+    font-size: 10px;
+}
+.bd
+{
+    border-top: 1px solid grey;
+}
+
+/* preloader */
+.preloader
+{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+}
+.animate-start
+{
+    animation: loading 2s linear infinite;
+}
+@keyframes loading
+{
+    0%{rotate: 0deg;}
+    100%{rotate: 720deg;}
+}
+.preloader img
+{
+    width: 80px;
+}
+.not-loaded
+{
+    display: none;
+}

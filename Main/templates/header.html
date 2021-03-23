@@ -1,0 +1,84 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+
+<div class="header_top">
+    <table>
+
+        <!-- logo -->
+        <td class="logo">
+            <a href="/"><img src="{% static 'img/icon2.png' %}"></a>
+        </td>
+
+        <!-- searchbar -->
+        <td class="searchbar">
+            <input type="text" placeholder="Search...">
+        </td>
+        
+        <td class="header_btns_div">
+            <div class="header_btns">
+                <a href="/"><img src="{% static 'icon/home.png' %}" class="header_m_img"></a>
+            </div>      
+            <div class="header_btns">
+                <a href="hottopic"><img src="{% static 'icon/video.png' %}" class="header_m_img"></a>
+            </div>
+            <div class="header_btns">
+                <a href="trending"><img src="{% static 'icon/trending.png' %}" class="header_m_img"></a>
+            </div>
+            <div class="header_btns">
+                <a href="discover"><img src="{% static 'icon/discover.png' %}" class="header_m_img"></a>
+            </div>
+        </td>
+
+        <!-- buttons -->
+        <td class="bar_buttons">
+            <div class="dd">
+                <img onclick="myMessage()" class="d3btn" src="{% static 'icon/message.png' %}">
+                <span class="badge-message">1</span>
+                <div id="mydd3" class="dd3-content">
+                    {% for i in user %}
+                    <table>
+                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                        <td><a href="">{{i.first_name}} {{i.last_name}}<br>
+                            <p class="light">Are you free tonight?</p>
+                        </a></td>
+                    </table>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="dd">
+                <img onclick="myNotification()" class="d2btn" src="{% static 'icon/notification.png' %}">
+                <span class="badge-notification">1</span>
+                <div id="mydd2" class="dd2-content">
+                    {% for i in user %}
+                    <table>
+                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                        <td><a href="">{{i.first_name}} {{i.last_name}} just posted a event you may like.</a>
+                    </table>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="dd">
+                <img onclick="myProfile()" class="d1btn" src="{% static 'img/defaultpp.jpg' %}">
+                <div id="mydd1" class="dd1-content">
+                    {% for i in user %}
+                    <div class="user_option">
+                        <img src="{% static 'img/defaultpp.jpg' %}">
+                        <a href="profile">
+                            {{i.first_name}} {{i.last_name}}<br>
+                            <p class="light">{{email}}</p>
+                        </a>
+                    </div>
+                    {% endfor %}
+                    <!-- <img src="{% static 'icon/logout.png' %}"> -->
+                    <a href="logout">Logout</a>
+                    <div class="light bd">
+                        &copy 2021 Spotster
+                    </div>
+                </div>
+            </div>
+        </td>
+    </table>
+</div>
+<div class="preloader animate-start" id="pre-loader">
+    <img src="{% static 'img/loader.png' %}">
+</div>
