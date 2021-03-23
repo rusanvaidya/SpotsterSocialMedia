@@ -53,7 +53,6 @@ window.onclick = function(event)
         }
     }
 }
-<<<<<<< HEAD
   
 var loader_icon = document.getElementById('pre-loader');
 var toload_div = document.getElementById('div-loaded');
@@ -67,9 +66,6 @@ var change2 = function()
 }
 function loader()
 {
-    setTimeout(change1, 600);
-    setTimeout(change2, 800);
+    setTimeout(change1, 1500);
+    setTimeout(change2, 1700);
 }
-=======
-  
->>>>>>> f2431ef21d4740077dac21dd546eb9af49d2f156
