@@ -1,0 +1,28 @@
+.c2 .c2-post .suggested-people
+{
+    display: inline-block;
+}
+.c2 .c2-post .suggested-people tr, .c2 .c2-post .suggested-people td
+{
+    text-align: center;
+    overflow-y: hidden;
+    width: 150px;
+}
+.c2 .c2-post .suggested-people img
+{
+    width: 50px;
+    border-radius: 50%;
+}
+.c2 .c2-post .suggested-people button
+{
+    border: none;
+    background-color: #2D7B20;
+    color: white;
+    padding: 8px 8px;
+    border-radius: 3px;
+}
+.c2 .c2-post .suggested-people button:hover
+{
+    background-color: #1f5216;
+    cursor: pointer;
+}

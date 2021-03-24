@@ -6,14 +6,15 @@
         <link rel="icon" href="{% static 'img/icon.png' %}">
     </head>
     <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}">
-    <body>
+    <body onload="loader()">
         <div class="homepage">
             <!-- header import -->
             {% include 'header.html' %}
             
             <!-- 3 divs -->
-            <div class="container_newsfeed">
-                
+            <div class="container_newsfeed not-loaded" id="div-loaded">
+
+                <!-- 1st div -->
                 <div class="container1">
                     <div class="c1">
                         <table>
@@ -27,61 +28,171 @@
                             </td>
                         </tr>
                         {% endfor %}
+                        <tr>
+                            <td class="c1-img">
+                                <a href=""><img src="{% static 'icon/follower.png' %}"></a>
+                            </td>
+                            <td class="c1-label">
+                                <a href="">Follower</a><br>
+                                <p class="light">1 request</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1-img">
+                                <a href=""><img src="{% static 'icon/event.png' %}"></a>
+                            </td>
+                            <td class="c1-label">
+                                <a href="">Events</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1-img">
+                                <a href=""><img src="{% static 'icon/find.png' %}"></a>
+                            </td>
+                            <td class="c1-label">
+                                <a href="">Group</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1-img">
+                                <a href=""><img src="{% static 'icon/saved.png' %}"></a>
+                            </td>
+                            <td class="c1-label">
+                                <a href="">Saved</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="c1-img">
+                                <a href=""><img src="{% static 'icon/message.png' %}"></a>
+                            </td>
+                            <td class="c1-label">
+                                <a href="">Chatbox</a><br>
+                            </td>
+                        </tr>
                         </table>
                     </div>
-                    <div class="c1">
-                        <div id="googleMap" style="width:100%;height:400px;"></div>
-
-    <script>
-    function myMap() {
-    var mapProp= {
-    center:new google.maps.LatLng(51.508742,-0.120850),
-    zoom:5,
-    };
-    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
-
+                    <div class="c1 light">
+                        &copy 2021 All Rights Reserved
                     </div>
                 </div>
+
+                <!-- 2nd div -->
                 <div class="container2">
-                    <div class="c2-new">
-                        <form>
-                            <div class="c2-text">
-                                <textarea placeholder="Let's create a new sport event..."></textarea>
-                            </div>
-                            <div class="c2-new-buttons">
-                                <div class="c2-btns-l">
-                                    <table>
-                                        <td><img src="{% static 'icon/photo.png' %}"></td>
-                                        <td>Photos/Videos</td>
-                                    </table>
-                                </div>
-                                <div class="c2-btns-v">
-                                    <table>
-                                        <td><img src="{% static 'icon/venue.png' %}"></td>
-                                        <td>Select Venue</td>
-                                    </table>
-                                </div>
-                                <div class="c2-btns-e">
-                                    <table>
-                                        <td><img src="{% static 'icon/calender.png' %}"></td>
-                                        <td>Choose Date</td>
-                                    </table>
-                                </div>
-                            </div>
-                        </form>
+                    <!-- story -->
+                    <div class="story">
+                        {% for i in user %}
+                        <div class="story-line">
+                            <table>
+                                <tr>
+                                    <td class="new-story">
+                                        <a><img src="{% static 'img/defaultpp.jpg' %}"></a>
+                                        <span class="badge-new">+</span>
+                                </td></tr>
+                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
+                            </table>
+                        </div>
+                        {% endfor%}
+                        {% for i in others %}
+                        <div class="story-line">
+                            <table>
+                                <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
+                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
+                            </table>
+                        </div>
+                        <div class="story-line">
+                            <table>
+                                <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
+                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
+                            </table>
+                        </div>
+                        <div class="story-line">
+                            <table>
+                                <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
+                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
+                            </table>
+                        </div>
+                        <div class="story-line">
+                            <table>
+                                <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
+                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
+                            </table>
+                        </div>
+                        <div class="story-line">
+                            <table>
+                                <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
+                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
+                            </table>
+                        </div>
+                        {% endfor%}
                     </div>
+
+                    <!-- new post -->
+                    <div class="c2-new">
+                        <div class="c2-text">
+                            <div class="new_idea" onclick="document.getElementById('new_post_modal').style.display='block';">What's your idea today...</div>                          </div>
+                        <div class="c2-new-buttons">
+                            <label class="c2-btns-l" for="new_pov" style="text-align: center;">
+                                <table><td><img src="{% static 'icon/photo.png' %}"></td><td>Photo/Video</td></table>
+                                <input type="file" id="new_pov" style="display: none;">
+                            </label>
+                            <div class="c2-btns-v" onclick="document.getElementById('new_post_modal').style.display='block';">
+                                    <table><td><img src="{% static 'icon/venue.png' %}"></td><td>Activity/Event</td></table>
+                            </div>
+                            <div class="c2-btns-e" onclick="document.getElementById('new_post_modal').style.display='block';">
+                                <table><td><img src="{% static 'icon/feeling.png' %}"></td><td>Feeling</td></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="new_post_modal">
+                        <div class="modal">
+                            <div class="modaltop">
+                                <div class="modalheader">
+                                    Create Post
+                                </div>
+                                <div class="closebutton">
+                                    <span onclick="document.getElementById('new_post_modal').style.display='none';">&times;</span>
+                                </div>
+                            </div>
+                            <div class="new_post">
+                                <div class="posting-user">
+                                    {% for i in user %}
+                                    <table>
+                                        <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                        <td style="font-weight: bold;">{{i.first_name}} {{i.last_name}}<br>
+                                        </td>
+                                    </table>
+                                    {% endfor %}
+                                </div>
+                                <form>
+                                <div class="caption-write">
+                                    <textarea placeholder="What's your idea today..."></textarea>
+                                </div>
+                                </form>
+                                <!-- <div onclick="document.getElementById('setvenue').value='Kathmandu'; document.getElementById('showvenue').value='Kathmandu';">Kathmandu</div> -->
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <!-- posted contents -->
                     {% for i in others %}
                     <div class="c2">
-                        <table class="c2-post">
-                            <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                            <td style="font-weight: bold;">{{i.first_name}} {{i.last_name}}<br>
+                        <div style="overflow: hidden;">
+                            <div class="c2-post">
+                                <table>
+                                    <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                    <td class="posted-name"><a href="">{{i.first_name}} {{i.last_name}}</a>
+                                    </td>
+                                    <td>
+                                        is conducting an event
+                                    </td>
+                                </table>
                                 <p class="light">12:30pm</p>
-                            </td>
-                        </table>
+                            </div>
+                            <div class="c2-r-opt" style="float: right;">
+                                <img src="{% static 'icon/dropdown.png' %}">
+                            </div>
+                        </div>
                         <div class="caption">
                             Today Futsal anyone?dsadmaslkdnasjdkasjncksajnjsandjkasndksabdksabcksabckasbcksajcnascnacnasjcnacnsacnakscnskacnacnaskcasc
                         </div>
@@ -108,20 +219,33 @@
                     </div>
                     {% endfor %}
                 </div>
+
+                <!-- 3rd div -->
                 <div class="container3">
+                    <!-- sponser -->
                     <div class="c3">
                         <div class="c3-sponser">
                             <p>Sponsered</p>
-                            <img src="{% static 'img/sponser.png' %}">
+                            <table>
+                                <td class="sponser-img">
+                                    <img src="{% static 'img/sponser.png' %}">
+                                </td>
+                                <td class="sponser-label">
+                                    Dell Inc. Corporateasda dasdsadas sdas
+                                </td>
+                            </table>
                         </div>
                     </div>
+
+                    <!-- chatheads -->
                     <div class="c3">
-                        <p>Followers</p>
+                        <p>Following</p>
                         <table>
                         {% for i in others %}
                         <tr class="chatuser">
                             <td class="c3-img">
                                 <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
+                                <span class="badge-online"><img src="{% static 'icon/online.png' %}"></span>
                             </td>
                             <td class="c3-label"> 
                                 {{i.first_name}} {{i.last_name}}
@@ -133,3 +257,5 @@
                 </div>
             </div>
         </div>
+
+        <script src="{% static 'js/header.js' %}"></script>

@@ -17,15 +17,15 @@
         <td class="header_btns_div">
             <div class="header_btns">
                 <a href="/"><img src="{% static 'icon/home.png' %}" class="header_m_img"></a>
+            </div>      
+            <div class="header_btns">
+                <a href="hottopic"><img src="{% static 'icon/video.png' %}" class="header_m_img"></a>
             </div>
             <div class="header_btns">
-                <a href=""><img src="{% static 'icon/trending.png' %}" class="header_m_img"></a>
-            </div>            
-            <div class="header_btns">
-                <a href=""><img src="{% static 'icon/hot.png' %}" class="header_m_img"></a>
+                <a href="trending"><img src="{% static 'icon/trending.png' %}" class="header_m_img"></a>
             </div>
             <div class="header_btns">
-                <a href=""><img src="{% static 'icon/find.png' %}" class="header_m_img"></a>
+                <a href="discover"><img src="{% static 'icon/discover.png' %}" class="header_m_img"></a>
             </div>
         </td>
 
@@ -33,6 +33,7 @@
         <td class="bar_buttons">
             <div class="dd">
                 <img onclick="myMessage()" class="d3btn" src="{% static 'icon/message.png' %}">
+                <span class="badge-message">1</span>
                 <div id="mydd3" class="dd3-content">
                     {% for i in user %}
                     <table>
@@ -46,6 +47,7 @@
             </div>
             <div class="dd">
                 <img onclick="myNotification()" class="d2btn" src="{% static 'icon/notification.png' %}">
+                <span class="badge-notification">1</span>
                 <div id="mydd2" class="dd2-content">
                     {% for i in user %}
                     <table>
@@ -77,4 +79,6 @@
         </td>
     </table>
 </div>
-<script src="{% static 'js/header.js' %}"></script>
+<div class="preloader animate-start" id="pre-loader">
+    <img src="{% static 'img/loader.png' %}">
+</div>

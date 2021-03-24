@@ -54,3 +54,18 @@ window.onclick = function(event)
     }
 }
   
+var loader_icon = document.getElementById('pre-loader');
+var toload_div = document.getElementById('div-loaded');
+var change1 =function()
+{
+    loader_icon.classList.toggle('not-loaded');
+}
+var change2 = function()
+{
+    toload_div.classList.remove('not-loaded');
+}
+function loader()
+{
+    setTimeout(change1, 1500);
+    setTimeout(change2, 1700);
+}
