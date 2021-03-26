@@ -7,7 +7,7 @@ def home(request):
     if 'email' in request.session:
         email = request.session['email']
         user = registration.objects.filter(email=email)
-        other_user = registration.objects.filter()
+        other_user = registration.objects.filter().exclude(email=email)
         dict1 = {
             'email': email, 
             'user': user,
@@ -24,14 +24,14 @@ def login(request):
         user = registration.objects.filter(email=email, password=password)
         if user.exists():
             request.session['email'] = email
-            other_user = registration.objects.filter()
+            other_user = registration.objects.filter().exclude(email=email)
             dict1 = {
             'email': email, 
             'user': user,
             'others': other_user}
             return render(request, 'newsfeed.html', dict1)
         else:
-            return render(request, 'index.html',{'email': email, 'user': user})
+            return render(request, 'index.html')
 
 def register(request):
     if request.method == 'POST':
@@ -57,14 +57,16 @@ def register(request):
             request.session['email'] = email
             user = registration.objects.filter(email=email, password=password)
             if user.exists():
-                request.session['email'] = email
-                return render(request, 'newsfeed.html',{'email': email, 'user': user})
+                other_user = registration.objects.filter().exclude(email=email)
+                dict1 = {
+                'email': email, 
+                'user': user,
+                'others': other_user}
+                return render(request, 'newsfeed.html', dict1)
             else:
-                return render(request, 'index.html',{'email': email, 'user': user})
-
-            return render(request, 'newsfeed.html',{'email': email, 'user': user})
+                return render(request, 'index.html')
     else:
-        return render(request, 'index.html', {'email': None, 'user': None})
+        return render(request, 'index.html')
 
 
 def logout(request):

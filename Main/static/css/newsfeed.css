@@ -20,7 +20,7 @@
 /* left container */
 div.container1
 {
-    width: 23%;
+    width: 26%;
     height: 100%;
     overflow-x: auto;
     display: inline-block;
@@ -30,7 +30,7 @@ div.container1
 /* middle container */
 div.container2
 {
-    width: 52%;
+    width: 45%;
     height: 100%;
     padding: 10px;
     overflow-x: auto;
@@ -41,7 +41,7 @@ div.container2
 /* right container */
 div.container3
 {
-    width: 23%;
+    width: 26%;
     height: 100%;
     overflow-x: auto;
     display: inline-block;
@@ -189,7 +189,7 @@ div.story
     border-radius: 20px;
     font-weight: bold;
     display: inline-block;
-    width: 27%;
+    width: 25%;
 }
 .c2-btns-v
 {
@@ -200,7 +200,7 @@ div.story
     border-radius: 20px;
     font-weight: bold;
     display: inline-block;
-    width: 27%;
+    width: 25%;
     text-align: center;
 }
 .c2-btns-e
@@ -212,7 +212,7 @@ div.story
     border-radius: 20px;
     font-weight: bold;
     display: inline-block;
-    width: 27%;
+    width: 25%;
 }
 #title-back button
 {
@@ -276,14 +276,14 @@ div.story
 .c2-r-opt
 {
     float:right;
-    padding: 8px 12px;
-    border-radius: 20px;
 }
 .c2-r-opt img
 {
     width: 15px;
+    border-radius: 50%;
+    padding: 8px 12px;
 }
-.c2-r-opt:hover
+.c2-r-opt img:hover
 {
     cursor: pointer;
     background-color: rgb(209, 209, 209);
@@ -300,19 +300,33 @@ div.story
 .c2 .postedimg
 {
     border: 1px solid rgb(165, 165, 165);
-    width: 300px;
+    width: 95%;
     padding: 5px;
     margin: 10px;
 }
 .c2 .postedimg img
 {
-    width: 300px;
+    width: 100%;
 }
 .posted-name a
 {
     font-weight: bold; 
     color: black; 
     text-decoration: none;
+}
+.post-review
+{
+    width: 100px;
+    display: none;
+    position:static;
+    background-color: #ffffff;
+    overflow: auto;
+    box-shadow: 0px 0 3px 3px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.post-review ul
+{
+    list-style: none;
 }
 .caption
 {
@@ -323,27 +337,40 @@ div.story
 .joinin
 {
     width: 100%;
-    border-top: 1px solid #8b8b8b;
-    border-bottom: 1px solid #8b8b8b;
+    border-top: 2px solid #dbdbdb;
+    padding: 5px;
 }
-.joinin form
+.joinin form label
 {
     display: inline-block;
-    width: 32.8%;
+    width: 14.5%;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
 }
-.joinin form input[type='submit']
+.joinin form label:hover
+{
+    background-color: rgb(226, 226, 226);
+}
+.joinin form label img
+{
+    width: 15px;
+}
+#a-l, #a-d, #a-c, #a-s, #a-sa, #a-f
+{
+    display: none;
+}
+.comment-section
+{
+    max-width: 100%;
+    display: none;
+}
+.comment-section input[type='text']
 {
     width: 100%;
-    background-color: inherit;
-    border: none;
-    color: rgb(121, 121, 121);
-    padding: 8px 12px;
+    padding: 6px 8px;
+    outline: none;
 }
-.joinin form input[type='submit']:hover
-{
-    background-color: rgb(204, 204, 204);
-}
-
 
 /* 3rd container */
 .c3
@@ -562,4 +589,11 @@ div.story
 #feeling-create button table td img, #venue-create button table td img
 {
     width: 20px;
+}
+#map { position: absolute; width: 20%; height:40%;}
+.map-d
+{
+    width: 400px;
+    padding: 10px;
+    height: 300px;
 }

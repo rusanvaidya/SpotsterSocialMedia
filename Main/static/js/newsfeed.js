@@ -336,3 +336,11 @@ fileUpload.onchange = function () {
         alert("This browser does not support HTML5 FileReader.");
     }
 };
+
+function myComment()
+{
+    document.getElementById('i-c').style.display='none';
+    document.getElementById('a-c').style.display='inline-block';
+    document.getElementById('a-c').style.background='rgb(226, 226, 226)';
+    document.getElementById('c-section').style.display='block';
+}
