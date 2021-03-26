@@ -336,14 +336,14 @@ div.story
 }
 .joinin
 {
-    width: 100%;
+    width: 99%;
     border-top: 2px solid #dbdbdb;
     padding: 5px;
 }
 .joinin form label
 {
     display: inline-block;
-    width: 14.5%;
+    width: 14.3%;
     text-align: center;
     padding: 5px;
     border-radius: 4px;
@@ -351,6 +351,12 @@ div.story
 .joinin form label:hover
 {
     background-color: rgb(226, 226, 226);
+}
+.joinin form label span
+{
+    color: rgb(107, 107, 107);
+    font-weight: bold;
+    padding: 2px;
 }
 .joinin form label img
 {
@@ -362,8 +368,13 @@ div.story
 }
 .comment-section
 {
-    max-width: 100%;
+    width: 95%;
     display: none;
+}
+.comment-section a
+{
+    color: green;
+    padding: 10px;
 }
 .comment-section input[type='text']
 {
