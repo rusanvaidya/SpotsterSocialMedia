@@ -29,33 +29,38 @@
 }
 .searchbar
 {
-    width: 19%;
+    width: 20%;
 }
 .searchbar input
 {
-    border-radius: 12px;
-    width: 100%;
+    border-radius: 20px;
+    width: 75%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid rgb(168, 168, 168);
     box-sizing: border-box;
+    outline: none;
 }
 .header_btns_div
 {
     width: 52%;   
 }
-.header_btns
+.header_btns, .header_btns_active
 {
     width: 24%;
     display: inline-block;
     text-align: center;
 }
-.herader_btns a:hover
+.header_btns_active
 {
-    background-color: rgb(190, 190, 190);
+    border-bottom: 2px solid #2D7B20;
 }
-.header_btns_div .header_btns a img
+#h-a, #v-a, #t-a, #d-a
+{
+    display: none;
+}
+.header_btns_div .header_btns a img, .header_btns_active a img
 {
     width: 30px;
 }
@@ -66,7 +71,7 @@
 }
 .header_m_img:hover
 {
-    background-color: rgb(190, 190, 190);
+    opacity: 50%;
 }
 .bar_buttons
 {
@@ -78,7 +83,7 @@
     width: 30px;
     padding: 12px;
 }
-.d1btn, .d2btn , .d3btn
+.d1btn, .d2btn , .d3btn, .d2btn-a, .d3btn-a
 {
     background-color: inherit;
     color: white;
@@ -86,9 +91,13 @@
     border-radius: 50px;
     cursor: pointer;
 }
-.d1btn:hover, .d1btn:focus, .d2btn:hover, .d2btn:focus, .d3btn:hover, .d3btn:focus 
+.d2btn-a, .d3btn-a
 {
-    background-color: rgb(190, 190, 190);
+    display: none;
+}
+.d1btn:hover, .d1btn:focus, .d2btn:hover, .d2btn:focus, .d3btn:hover, .d3btn:focus, .d2btn-a:hover, .d2btn-a:focus, .d3btn-a:hover, .d3btn-a:focus 
+{
+    opacity: 50%;
 }
 .badge-message, .badge-notification
 {
@@ -101,6 +110,21 @@
     font-weight: bolder;
     background-color: rgb(202, 48, 48);
     color: white;
+}
+.pp-show
+{
+    display: inline-block;
+}
+.badge-verified
+{
+    position: absolute;
+    top: 28px;
+    right: -5px;
+    border-radius: 50%;
+}
+.badge-verified img.nv
+{
+    width: 5px;
 }
 
 .dd 

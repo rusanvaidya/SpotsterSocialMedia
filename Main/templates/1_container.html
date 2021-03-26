@@ -1,0 +1,43 @@
+{% load static %}
+<div class="c1">
+    <table class="sidetable">
+    {% for i in user %}
+    <tr class="sidemenu">
+        <td class="c1-img">
+            <a href="profile"><img src="{% static 'img/defaultpp.jpg' %}" style="width:50px"></a>
+        </td>
+        <td class="c1-label"> 
+            <a href="profile" style="width: 100%;">{{i.first_name}} {{i.last_name}}</a>
+        </td>
+    </tr>
+    {% endfor %}
+    <tr class="sidemenu">
+        <td class="c1-img">
+            <a href=""><img src="{% static 'icon/follower.png' %}"></a>
+        </td>
+        <td class="c1-label">
+            <a href="">Follower</a><br>
+            <p class="light">1 request</p>
+        </td>
+    </tr>
+    <tr class="sidemenu">
+        <td class="c1-img">
+            <a href=""><img src="{% static 'icon/saved.png' %}"></a>
+        </td>
+        <td class="c1-label">
+            <a href="">Saved</a>
+        </td>
+    </tr>
+    <tr class="sidemenu">
+        <td class="c1-img">
+            <a href=""><img src="{% static 'icon/message-active.png' %}"></a>
+        </td>
+        <td class="c1-label">
+            <a href="">Chatbox</a><br>
+        </td>
+    </tr>
+    </table>
+</div>
+<div class="c1 light">
+    &copy 2021 All Rights Reserved
+</div>

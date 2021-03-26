@@ -159,6 +159,23 @@ div.story
     box-sizing: border-box;
     font-size: 18px;
 }
+.c2-text table
+{
+    width: 100%;
+}
+.new-poster
+{
+    width: 5%;
+}
+.new-poster img
+{
+    width: 50px;
+    border-radius: 50%;
+}
+.poster-div
+{
+    width: 95%;
+}
 .new_idea:hover
 {
     background-color: rgb(209, 209, 209);
@@ -197,20 +214,60 @@ div.story
     display: inline-block;
     width: 27%;
 }
+#title-back button
+{
+    color: #2D7B20;
+    border: none;
+    background-color: inherit;
+}
+#title-back button img
+{
+    width: 20px;
+}
+#title-back button:hover
+{
+    cursor: pointer;
+}
+.c2-btns-m
+{margin: 9px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+
 .c2-btns-e table, .c2-btns-l table, .c2-btns-v table
 {
     margin-left: auto;
     margin: auto;
 }
-.c2-btns-l:hover, .c2-btns-e:hover, .c2-btns-v:hover
+.c2-btns-l:hover, .c2-btns-e:hover, .c2-btns-v:hover, .c2-btns-m:hover
 {
     cursor: pointer;
     background-color: rgba(128, 128, 128, 0.233);
 }
-.c2-btns-l img,.c2-btns-v img,.c2-btns-e img
+.c2-btns-l img,.c2-btns-v img,.c2-btns-e img, .c2-btns-m img
 {
     width: 20px;
     height: 20px;
+}
+.c2-btn-modal
+{
+    width: 200px;
+    margin: 0 auto;
+}
+.post-submit
+{
+    width: 60px;
+    margin: 0 auto;
+}
+.post-submit input
+{
+    padding: 8px 12px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    background-color: #2D7B20;
 }
 .c2-post
 {
@@ -293,10 +350,9 @@ div.story
 {
     padding: 10px;
 }
-.chatuser:hover
+.chatuser:hover, .sidemenu:hover
 {
     cursor: pointer;
-    background-color: #e0e0e0;
 }
 .c3-sponser
 {
@@ -350,8 +406,6 @@ div.story
     right: -5px;
     padding: 5px 6px;
     border-radius: 50%;
-    font-size: 10px;
-    font-weight: bolder;
 }
 .c3-img .badge-online img
 {
@@ -378,8 +432,9 @@ div.story
     border-radius: 20px;
     box-shadow: 5px 5px grey;
     box-sizing: border-box;
-    background: #f8fff5;
+    background: white;
     width: 440px;
+    height: 410px;
     position: absolute;
     top: 40%;
     left: 50%;
@@ -422,10 +477,89 @@ div.story
 .caption-write textarea
 {
     width: 100%;
-    padding: 8px 12px;
+    padding: 8px 2px;
+    font-size: 23px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+    border: none;
     resize: none;
+    outline: none;
+    height: 80px;
+}
+#fileupload
+{
+    display: none;
+}
+.img-div
+{
+    height: 80px;
+    width: 100%;
+    padding: 8px 2px;
+    font-size: 23px;
+    overflow-y: auto;
+    margin: 8px 0;
+}
+.img-div img
+{
+    border: 1px solid rgb(204, 203, 203);
+    padding: 10px;
+    margin: 2px;
+}
+.c3 .online-table, .c1 .sidetable
+{
+    width: 100%;
+}
+.c3-btns button
+{
+    font-weight: bold;
+    border:none;
+    color: rgb(187, 19, 19);
+    background-color: inherit;
+    border-radius: 3px;
+}
+.c3-btns button:hover
+
+{
+    color: rgb(75, 9, 9);
+}
+
+#venue-create, #feeling-create, #post-create
+{
+    -webkit-animation: o-post;
+    -webkit-animation-duration: 1s;
+}
+@keyframes o-post
+{
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+#venue-create button
+{
+    width: 100%;
+}
+#feeling-label
+{
+    font-size: 14px;
+}
+#feeling-create button
+{
+    width: 45%;
+}
+#feeling-create button, #venue-create button
+{
+    padding: 7px 12px;
+    border: none;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 0 0 2px 2px rgb(172, 172, 172);
+    margin: 3px;
+}
+#feeling-create button:hover
+{
+    cursor: pointer;
+    background-color: #e0e0e0;
+}
+#feeling-create button table td img, #venue-create button table td img
+{
+    width: 20px;
 }

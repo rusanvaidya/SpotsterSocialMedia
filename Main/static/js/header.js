@@ -4,10 +4,16 @@ function myProfile()
 }
 function myNotification() 
 {
+    document.getElementById("b-n").style.display='none';
+    document.getElementById("b2-i").style.display='none';
+    document.getElementById("b2-a").style.display='inline-block';
     document.getElementById("mydd2").classList.toggle("show");
 }
 function myMessage() 
 {
+    document.getElementById("b-m").style.display='none';
+    document.getElementById("b3-i").style.display='none';
+    document.getElementById("b3-a").style.display='inline-block';
     document.getElementById("mydd3").classList.toggle("show");
 }
   
@@ -35,6 +41,8 @@ window.onclick = function(event)
             var opendd2 = dd2[i];
             if (opendd2.classList.contains('show')) 
             {
+                document.getElementById("b2-i").style.display='inline-block';
+                document.getElementById("b2-a").style.display='none';
                 opendd2.classList.remove('show');
             }
         }
@@ -48,6 +56,8 @@ window.onclick = function(event)
             var opendd3 = dd3[i];
             if (opendd3.classList.contains('show')) 
             {
+                document.getElementById("b3-i").style.display='inline-block';
+                document.getElementById("b3-a").style.display='none';
                 opendd3.classList.remove('show');
             }
         }
@@ -64,8 +74,36 @@ var change2 = function()
 {
     toload_div.classList.remove('not-loaded');
 }
+function loader_feed()
+{
+    document.getElementById('h-i').style.display='none';
+    document.getElementById('h-a').style.display='inline-block';
+    setTimeout(change1, 200);
+    setTimeout(change2, 300);
+}
+function loader_video()
+{
+    document.getElementById('v-i').style.display='none';
+    document.getElementById('v-a').style.display='inline-block';
+    setTimeout(change1, 200);
+    setTimeout(change2, 300);
+}
+function loader_trending()
+{
+    document.getElementById('t-i').style.display='none';
+    document.getElementById('t-a').style.display='inline-block';
+    setTimeout(change1, 200);
+    setTimeout(change2, 300);
+}
+function loader_discover()
+{
+    document.getElementById('d-i').style.display='none';
+    document.getElementById('d-a').style.display='inline-block';
+    setTimeout(change1, 200);
+    setTimeout(change2, 300);
+}
 function loader()
 {
-    setTimeout(change1, 1500);
-    setTimeout(change2, 1700);
+    setTimeout(change1, 200);
+    setTimeout(change2, 300);    
 }

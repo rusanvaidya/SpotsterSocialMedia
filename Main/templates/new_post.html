@@ -1,0 +1,96 @@
+{% load static %}
+<div class="c2-new">
+    <div class="c2-text">
+        <table>
+            <td class="new-poster"><img src="{% static 'img/defaultpp.jpg' %}"></td><td class="poster-div"><div class="new_idea" onclick="post_area()">What's your idea today...</div></td>                          
+        </table>
+    </div>
+    <div class="c2-new-buttons">
+        <label class="c2-btns-l" for="fileupload" style="text-align: center;" onclick="post_area()">
+            <table><td><img src="{% static 'icon/photo.png' %}"></td><td>Photo/Video</td></table>
+        </label>
+        <div class="c2-btns-v" onclick="post_venue()">
+                <table><td><img src="{% static 'icon/venue.png' %}"></td><td>Activity/Event</td></table>
+        </div>
+        <div class="c2-btns-e" onclick="post_feeling()">
+            <table><td><img src="{% static 'icon/feeling.png' %}"></td><td>Feeling</td></table>
+        </div>
+    </div>
+</div>
+<div id="new_post_modal">
+    <div class="modal">
+        <div class="modaltop">
+            <div class="modalheader">
+                <p id="modal-title">Create Post</p>
+                <div id="title-back"><button onclick="post_area()"><table><td><img src="{% static 'icon/back.png' %}"></td><td>Back</td></table></button></div>
+            </div>
+            <div class="closebutton">
+                <span onclick="document.getElementById('new_post_modal').style.display='none';">&times;</span>
+            </div>
+        </div>
+        <div class="new_post">
+            <div id="post-create">
+                <div class="posting-user">
+                    {% for i in user %}
+                    <table>
+                        <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                        <td style="font-weight: bold; font-size: 13px;">{{i.first_name}} {{i.last_name}}</td>
+                        <td id="feeling-label"></td>
+                        <td id="feeling-emoji"></td>
+                    </table>
+                    {% endfor %}
+                </div>
+                <form enctype="multipart/form-data">
+                <div class="caption-write">
+                    <input type="text" id="f-label" style="display: none;">
+                    <input type="text" id="f-img-tag" style="display: none;">
+                    <textarea placeholder="What's your idea today..."></textarea>
+                </div>
+                <div class="img-div" id="preview-img">
+                </div>
+                <div class="c2-btn-modal">
+                    <label class="c2-btns-m" for="fileupload" style="text-align: center;">
+                        <img src="{% static 'icon/photo.png' %}">
+                        <input type="file" id="fileupload" multiple="multiple">
+                    </label>
+                    <div class="c2-btns-m" onclick="post_venue()">
+                            <img src="{% static 'icon/venue.png' %}">
+                    </div>
+                    <div class="c2-btns-m" onclick="post_feeling()">
+                        <img src="{% static 'icon/feeling.png' %}">
+                    </div>
+                </div>
+                <div class="post-submit">
+                    <input type="submit" value="POST">
+                </div>
+                </form>
+                <!-- <div onclick="document.getElementById('setvenue').value='Kathmandu'; document.getElementById('showvenue').value='Kathmandu';">Kathmandu</div> -->
+            </div>
+            <div id="venue-create">
+                <button onclick="a_1()"><table><td><img src="{% static 'activity/event.png' %}"></td><td>Organizing Event</td></table></button>
+                <button onclick="a_2()"><table><td><img src="{% static 'activity/calender.png' %}"></td><td>Going to an Event</td></table></button>
+                <button onclick="a_3()"><table><td><img src="{% static 'activity/birthday.png' %}"></td><td>Celebrating Birthday</td></table></button>
+                <button onclick="a_4()"><table><td><img src="{% static 'activity/celebrating.png' %}"></td><td>Celebrating Occasion</td></table></button>
+                <button onclick="a_5()"><table><td><img src="{% static 'activity/festival.png' %}"></td><td>Celebrating Festival</td></table></button>
+                <button onclick="a_6()"><table><td><img src="{% static 'activity/movie.png' %}"></td><td>Watching Movie</td></table></button>
+                <button onclick="a_7()"><table><td><img src="{% static 'activity/travelling.png' %}"></td><td>Travelling</td></table></button>
+            </div>
+            <div id="feeling-create">
+                <button onclick="feeling_h()"><table><td><img src="{% static 'emoji/043-happy.png' %}"></td><td>Happy</td></table></button>
+                <button onclick="feeling_s()"><table><td><img src="{% static 'emoji/011-bored.png' %}"></td><td>Sad</td></table></button>
+                <button onclick="feeling_e()"><table><td><img src="{% static 'emoji/047-shining.png' %}"></td><td>Excited</td></table></button>
+                <button onclick="feeling_sick()"><table><td><img src="{% static 'emoji/034-sick.png' %}"></td><td>Sick</td></table></button>
+                <button onclick="feeling_w()"><table><td><img src="{% static 'emoji/031-saint.png' %}"></td><td>Wonderful</td></table></button>
+                <button onclick="feeling_crazy()"><table><td><img src="{% static 'emoji/046-crazy.png' %}"></td><td>Crazy</td></table></button>
+                <button onclick="feeling_a()"><table><td><img src="{% static 'emoji/037-angry.png' %}"></td><td>Angry</td></table></button>
+                <button onclick="feeling_t()"><table><td><img src="{% static 'emoji/003-tired.png' %}"></td><td>Tired</td></table></button>
+                <button onclick="feeling_afraid()"><table><td><img src="{% static 'emoji/021-afraid.png' %}"></td><td>Afraid</td></table></button>
+                <button onclick="feeling_d()"><table><td><img src="{% static 'emoji/024-dissapointment.png' %}"></td><td>Dissapointed</td></table></button>
+                <button onclick="feeling_i()"><table><td><img src="{% static 'emoji/039-observing.png' %}"></td><td>Insightful</td></table></button>
+                <button onclick="feeling_c()"><table><td><img src="{% static 'emoji/018-confused.png' %}"></td><td>Confused</td></table></button>
+                <button onclick="feeling_surprised()"><table><td><img src="{% static 'emoji/010-surprised.png' %}"></td><td>Surprised</td></table></button>
+                <button onclick="feeling_n()"><table><td><img src="{% static 'emoji/020-nerd.png' %}"></td><td>Nerd</td></table></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,11 +7,23 @@
     font-size: 30px;
     font-weight: bold;
 }
-.c1-profile img
+.p-img
 {
-    padding: 15px;
+    background-color: black;
+    color: white;
+    height: 300px;
+    top: 15px;
+    display:none;
+}
+.c1-profile img,.p-img
+{
+    margin: 15px;
     width: 300px;
     border-radius: 155px;
+}
+.c1-profile img:hover span.p-img
+{
+    display: block;
 }
 .c1-profile table
 {

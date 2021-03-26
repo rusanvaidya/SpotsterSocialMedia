@@ -17,7 +17,8 @@
                 <div class="container1">
                     <!-- profile picture -->
                     <div class="c1-profile">
-                        <img src="{% static 'img/defaultpp.jpg' %}">
+                            <img src="{% static 'img/defaultpp.jpg' %}">
+                            <span class="p-img">change</span>
                     </div>
                     <!-- name -->
                     <div class="c1-profile">
@@ -47,52 +48,10 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="container2">
-                    <div class="c2-new">
-                        <div class="c2-text">
-                            <div class="new_idea" onclick="document.getElementById('new_post_modal').style.display='block';">What's your idea today...</div>                          </div>
-                        <div class="c2-new-buttons">
-                            <label class="c2-btns-l" for="new_pov" style="text-align: center;">
-                                <table><td><img src="{% static 'icon/photo.png' %}"></td><td>Photo/Video</td></table>
-                                <input type="file" id="new_pov" style="display: none;">
-                            </label>
-                            <div class="c2-btns-v" onclick="document.getElementById('new_post_modal').style.display='block';">
-                                    <table><td><img src="{% static 'icon/venue.png' %}"></td><td>Activity/Event</td></table>
-                            </div>
-                            <div class="c2-btns-e" onclick="document.getElementById('new_post_modal').style.display='block';">
-                                <table><td><img src="{% static 'icon/feeling.png' %}"></td><td>Feeling</td></table>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="new_post_modal">
-                        <div class="modal">
-                            <div class="modaltop">
-                                <div class="modalheader">
-                                    Create Post
-                                </div>
-                                <div class="closebutton">
-                                    <span onclick="document.getElementById('new_post_modal').style.display='none';">&times;</span>
-                                </div>
-                            </div>
-                            <div class="new_post">
-                                <div class="posting-user">
-                                    {% for i in user %}
-                                    <table>
-                                        <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                        <td style="font-weight: bold;">{{i.first_name}} {{i.last_name}}<br>
-                                        </td>
-                                    </table>
-                                    {% endfor %}
-                                </div>
-                                <form>
-                                <div class="caption-write">
-                                    <textarea placeholder="What's your idea today..."></textarea>
-                                </div>
-                                </form>
-                                <!-- <div onclick="document.getElementById('setvenue').value='Kathmandu'; document.getElementById('showvenue').value='Kathmandu';">Kathmandu</div> -->
-                            </div>
-                        </div>
-                    </div>
+                    {% include 'new_post.html' %}
+
                     {% for i in user %}
                     <div class="c2">
                         <div style="overflow: hidden;">
@@ -164,3 +123,4 @@
         </div>
 
         <script src="{% static 'js/header.js' %}"></script>
+        <script src="{% static 'js/newsfeed.js' %}"></script>

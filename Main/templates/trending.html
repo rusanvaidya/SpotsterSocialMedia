@@ -6,7 +6,7 @@
         <link rel="icon" href="{% static 'img/icon.png' %}">
     </head>
     <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}">
-    <body onload="loader()">
+    <body onload="loader_trending()">
         <div class="homepage">
             <!-- header import -->
             {% include 'header.html' %}
@@ -16,64 +16,7 @@
 
                 <!-- 1st div -->
                 <div class="container1">
-                    <div class="c1">
-                        <table>
-                        {% for i in user %}
-                        <tr>
-                            <td class="c1-img">
-                                <a href="profile"><img src="{% static 'img/defaultpp.jpg' %}" style="width:50px"></a>
-                            </td>
-                            <td class="c1-label"> 
-                                <a href="profile">{{i.first_name}} {{i.last_name}}</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        <tr>
-                            <td class="c1-img">
-                                <a href=""><img src="{% static 'icon/follower.png' %}"></a>
-                            </td>
-                            <td class="c1-label">
-                                <a href="">Follower</a><br>
-                                <p class="light">1 follow request</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="c1-img">
-                                <a href=""><img src="{% static 'icon/event.png' %}"></a>
-                            </td>
-                            <td class="c1-label">
-                                <a href="">Events</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="c1-img">
-                                <a href=""><img src="{% static 'icon/find.png' %}"></a>
-                            </td>
-                            <td class="c1-label">
-                                <a href="">Group</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="c1-img">
-                                <a href=""><img src="{% static 'icon/saved.png' %}"></a>
-                            </td>
-                            <td class="c1-label">
-                                <a href="">Saved</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="c1-img">
-                                <a href=""><img src="{% static 'icon/message.png' %}"></a>
-                            </td>
-                            <td class="c1-label">
-                                <a href="">Chatbox</a><br>
-                            </td>
-                        </tr>
-                        </table>
-                    </div>
-                    <div class="c1 light">
-                        &copy 2021 All Rights Reserved
-                    </div>
+                    {% include '1_container.html' %}
                 </div>
 
                 <!-- 2nd div -->
@@ -82,38 +25,10 @@
                 </div>
                 <!-- 3rd div -->
                 <div class="container3">
-                    <!-- sponser -->
-                    <div class="c3">
-                        <div class="c3-sponser">
-                            <p>Sponsered</p>
-                            <table>
-                                <td class="sponser-img">
-                                    <img src="{% static 'img/sponser.png' %}">
-                                </td>
-                                <td class="sponser-label">
-                                    Dell Inc. Corporateasda dasdsadas sdas
-                                </td>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- chatheads -->
-                    <div class="c3">
-                        <p>Following</p>
-                        <table>
-                        {% for i in others %}
-                        <tr class="chatuser">
-                            <td class="c3-img">
-                                <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
-                            </td>
-                            <td class="c3-label"> 
-                                {{i.first_name}} {{i.last_name}}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        </table>
-                    </div>
+                    {% include '2_container.html' %}
                 </div>
+            </div>
         </div>
-
+    </body>
+</html>
         <script src="{% static 'js/header.js' %}"></script>

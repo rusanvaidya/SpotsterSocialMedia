@@ -1,0 +1,36 @@
+{% load static %}
+<!-- sponser -->
+<div class="c3">
+    <div class="c3-sponser">
+        <p>Sponsered</p>
+        <table>
+            <td class="sponser-img">
+                <img src="{% static 'img/sponser.png' %}">
+            </td>
+            <td class="sponser-label">
+                Dell Inc. Corporateasda dasdsadas sdas
+            </td>
+        </table>
+    </div>
+</div>
+
+<!-- chatheads -->
+<div class="c3">
+    <p>Following</p>
+    <table class="online-table">
+    {% for i in others %}
+    <tr class="chatuser">
+        <td class="c3-img">
+            <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
+            <span class="badge-online"><img src="{% static 'icon/online.png' %}"></span>
+        </td>
+        <td class="c3-label"> 
+            {{i.first_name}} {{i.last_name}}
+        </td>
+        <td class="c3-btns">
+            <button>Unfollow</button>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
