@@ -57,41 +57,72 @@
                         <div style="overflow: hidden;">
                             <div class="c2-post">
                                 <table>
-                                    <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                    <td style="font-weight: bold;">{{i.first_name}} {{i.last_name}}
+                                    <td class="posted-img"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                    <td class="posted-name"><a href="">{{i.first_name}} {{i.last_name}}</a>
                                     </td>
                                     <td>
-                                        is conducting an event
+                                        is feeling happy 
+                                    </td>
+                                    <td class="femoji">
+                                        <img src="{% static 'emoji/043-happy.png' %}">
                                     </td>
                                 </table>
-                                <p class="light">12:30pm</p>
                             </div>
-                            <div class="c2-r-opt" style="float: right;">
-                                <img src="{% static 'icon/dropdown.png' %}">
+                            <div class="light" style="float: right; font-size: 15px; padding: 15px;">
+                                Yesterday 12:30pm
                             </div>
                         </div>
                         <div class="caption">
                             Today Futsal anyone?dsadmaslkdnasjdkasjncksajnjsandjkasndksabdksabcksabckasbcksajcnascnacnasjcnacnsacnakscnskacnacnaskcasc
-                        </div>
-                        <div class="location">
-                            <table>
-                                <td><img src="{% static 'icon/venue.png' %}"></td>
-                                <td>ABC Futsal</td>
-                            </table>
                         </div>
                         <div class="postedimg">
                             <img src="{% static 'media/w1.png' %}">
                         </div>
                         <div class="joinin">
                             <form>
-                                <input type="submit" value="JOIN">
+                                <label for="like" id="i-l">
+                                    <span>120</span><img src="{% static 'icon/like-i.png' %}">
+                                </label>
+                                <label for="like" id="a-l">
+                                    <span>120</span><img src="{% static 'icon/like.png' %}">
+                                </label>
+                                <label for="like" id="i-d">
+                                    <span>22</span><img src="{% static 'icon/dislike-i.png' %}">
+                                </label>
+                                <label for="like" id="a-d">
+                                    <span>22</span><img src="{% static 'icon/dislike.png' %}">
+                                </label>
+                                <label for="like" id="i-c" onclick="myComment()">
+                                    <span>40</span><img src="{% static 'icon/comment-i.png' %}">
+                                </label>
+                                <label for="like" id="a-c">
+                                    <span>40</span><img src="{% static 'icon/comment.png' %}">
+                                </label>
+                                <label for="like" id="i-s">
+                                    <img src="{% static 'icon/share-i.png' %}">
+                                </label>
+                                <label for="like" id="a-s">
+                                    <img src="{% static 'icon/share.png' %}">
+                                </label>
+                                <label for="like" id="i-sa">
+                                    <img src="{% static 'icon/saved-i.png' %}">
+                                </label>
+                                <label for="like" id="a-sa">
+                                    <img src="{% static 'icon/saved-a.png' %}">
+                                </label>
+                                <label for="like" id="i-f">
+                                    <img src="{% static 'icon/flag-i.png' %}">
+                                </label>
+                                <label for="like" id="a-f">
+                                    <img src="{% static 'icon/flag.png' %}">
+                                </label>
                             </form>
-                            <form>
-                                <input type="submit" value="INTERESTED">
-                            </form>
-                            <form>
-                                <input type="submit" value="MAYBE">                        
-                            </form>
+                        </div>
+                        <div class="comment-section" id="c-section">
+                            <a href="">View all comments</a>
+                            <label>
+                                <input type="text" placeholder="Write comment...">
+                            </label>
                         </div>
                     </div>
                     {% endfor %}

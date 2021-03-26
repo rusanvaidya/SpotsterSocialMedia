@@ -25,17 +25,19 @@
                         <div style="overflow: hidden;">
                             <div class="c2-post">
                                 <table>
-                                    <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                    <td class="posted-name"><a href="">Peter Griffin</a>
+                                    <td class="posted-img"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                    <td class="posted-name"><a href="">{{i.first_name}} {{i.last_name}}</a>
                                     </td>
                                     <td>
                                         is feeling happy 
                                     </td>
-                                    <td>
+                                    <td class="femoji">
                                         <img src="{% static 'emoji/043-happy.png' %}">
                                     </td>
                                 </table>
-                                <p class="light">12:30pm</p>
+                            </div>
+                            <div class="light" style="float: right; font-size: 15px; padding: 15px;">
+                                Yesterday 12:30pm
                             </div>
                         </div>
                         <div class="caption">
