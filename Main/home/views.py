@@ -4,7 +4,7 @@ from django.contrib import messages
 
 # Create your views here.
 def home(request):
-    try:
+    if 'email' in request.session:
         email = request.session['email']
         user = registration.objects.filter(email=email)
         other_user = registration.objects.filter()
@@ -13,10 +13,8 @@ def home(request):
             'user': user,
             'others': other_user}
         return render(request, 'newsfeed.html', dict1)
-    except:
-        user = None
-        email = None
-        return render(request, 'index.html',{'email': email, 'user': user})
+    else:
+        return render(request, 'index.html')
 
 
 def login(request):
@@ -70,7 +68,8 @@ def register(request):
 
 
 def logout(request):
-    return render(request, 'index.html',{'email': None, 'user': None})
+    del request.session['email']
+    return render(request, 'index.html')
 
 def support_view(request):
     return render(request,'support.html')
