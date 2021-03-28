@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import registration, support
 from django.contrib import messages
-
+from math import sin, cos, sqrt, atan2, radians
 # Create your views here.
 def home(request):
     if 'email' in request.session:
@@ -84,3 +84,15 @@ def support_action(request):
     support_save=support(name=u_name,email=u_email,message=u_message)
     support_save.save()
     return redirect('supportpage')
+
+def get_location(request):
+    lng=float(request.GET.get('lng'))
+    lat=float(request.GET.get('lat'))
+    print(lng)
+    print(lat)
+    return render(request, 'index.html')
+
+# import geopy.distance as geodist
+# def calc_distance(cor1,cor2):
+#     distance=geodist.geodesic(cor1, cor2).km
+#     print(distance)
