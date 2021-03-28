@@ -16,10 +16,34 @@
             <div class="container_newsfeed not-loaded" id="div-loaded">
                 <div class="container1">
                     <!-- profile picture -->
+                    <form enctype="multipart/form-data">
                     <div class="c1-profile">
-                            <img src="{% static 'img/defaultpp.jpg' %}">
-                            <span class="p-img">change</span>
+                        <div class="bg-pp">
+                            <img class="back-op" src="{% static 'img/defaultpp.jpg' %}">
+                            <label class="pp-chg" for="picupload" onclick="show_picture()"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
+                            <input type="file" id="picupload">
+                        </div>
                     </div>
+
+                    <div id="mypic">
+                        <div class="modal">
+                            <div class="modaltop">
+                                <div class="modalheader">
+                                    Profile Picture
+                                </div>
+                                <div class="closebutton">
+                                    <span onclick="document.getElementById('mypic').style.display='none';">&times;</span>
+                                </div>
+                            </div>
+                            <div class="pp-div" id="pp-preview">
+                            </div>
+                            <div class="post-submit">
+                                <input type="submit" value="UPLOAD">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                     <!-- name -->
                     <div class="c1-profile">
                         <b class="name-font">Rusan Vadiya</b>
@@ -44,7 +68,75 @@
                     <!-- edit profile -->
                     <div class="c1-profile">
                         <div class="edit-p">
-                            <button>Edit Profile</button>
+                            <button onclick="show_p_editor()">Edit Profile</button>
+                        </div>
+                    </div>
+                    <div id="p_update_modal">
+                        <div class="modal">
+                            <div class="modaltop">
+                                <div class="modalheader">
+                                   <div id="profile-title">Account Information</div>
+                                   <div id="profile-back"><button onclick="show_p_editor()"><table><td><img src="{% static 'icon/back.png' %}"></td><td>Back</td></table></button></div>
+                                </div>
+                                <div class="closebutton">
+                                    <span onclick="document.getElementById('p_update_modal').style.display='none';">&times;</span>
+                                </div>
+                            </div>
+                            <div class="pro_update">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div id="profile-info">
+                                        <div class="fullname">
+                                            <input type="text" placeholder="First Name" name="first_name" value="Rusan">
+                                            <input type="text" placeholder="Last Name" name="last_name" value="Vaidya">
+                                        </div>
+                                        <div class="emailpassword">
+                                            <input type="text" placeholder="Email or Phone Number" name="email" value="abc@gmail.com">
+                                        </div>
+                                        <div class="bio-area">
+                                            <textarea placeholder="Bio" name="bio">football gamer</textarea>
+                                        </div>
+                                        <div class="i-edit">
+                                            <label class="interest-edit">
+                                                <table><td>Interest</td><td><img src="{% static 'icon/edit.png' %}" onclick="chg_interest()"></td></table>
+                                            </label>
+                                            <div class="interest-list">
+                                                <div><table><td><img src="{% static 'interest/football.png' %}"></td><td>Football</td></table></div>
+                                                <div><table><td><img src="{% static 'interest/gaming.png' %}"></td><td>Gaming</td></table></div>
+                                            </div>
+                                        </div>
+                                    </div>     
+                                    <div id="interest-info">
+                                        <div id="s-interest">
+                                            <input type="search" placeholder="Search interest">
+                                        </div>
+                                        <div id="l-interest">
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                        </div>
+                                    </div>
+                                    <div class="post-submit">
+                                        <input type="submit" value="Save">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -128,30 +220,13 @@
                     {% endfor %}
                 </div>
                 <div class="container3">
-                    <div class="c3">
-                        Your Interest
-                        #football
-                        #games
-                        #programming
-                    </div>
-                    <div class="c3">
-                        <p>Following</p>
-                        <table>
-                        {% for i in others %}
-                        <tr class="chatuser">
-                            <td class="c3-img">
-                                <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
-                            </td>
-                            <td class="c3-label"> 
-                                {{i.first_name}} {{i.last_name}}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        </table>
-                    </div>
+                    {% include '2_container.html' %}
                 </div>
             </div>
         </div>
 
         <script src="{% static 'js/header.js' %}"></script>
         <script src="{% static 'js/newsfeed.js' %}"></script>
+        <script src="{% static 'js/profile.js' %}"></script>
+        </body>
+        </html>

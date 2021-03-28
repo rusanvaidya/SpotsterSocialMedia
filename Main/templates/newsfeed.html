@@ -12,7 +12,7 @@
             {% include 'header.html' %}
             
             <!-- 3 divs -->
-            <div class="container_newsfeed not-loaded" id="div-loaded" onload="document.getElementById('h-i').style.background='red'">
+            <div class="container_newsfeed not-loaded" id="div-loaded">
 
                 <!-- 1st div -->
                 <div class="container1">
@@ -21,52 +21,67 @@
 
                 <!-- 2nd div -->
                 <div class="container2">
-                    <!-- story -->
-                    <div class="story">
-                        {% for i in user %}
-                        <div class="story-line">
-                            <table>
-                                <tr>
-                                    <td class="new-story">
-                                        <a><img src="{% static 'img/defaultpp.jpg' %}"></a>
-                                        <span class="badge-new">+</span>
-                                </td></tr>
-                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
-                            </table>
+                    <!-- interest-story -->
+                    <div class="i-story">
+                        <div class="story">
+                            <figure>
+                                <img src="{% static 'interest/cycle.png' %}">
+                                <img src="{% static 'interest/football.png' %}">
+                                <img src="{% static 'interest/swim.png' %}">
+                                <img src="{% static 'interest/dance.png' %}">
+                                <img src="{% static 'interest/hiking.png' %}">
+                                <img src="{% static 'interest/art.png' %}">
+                                <img src="{% static 'interest/writing.png' %}">
+                                <img src="{% static 'interest/singing.png' %}">
+                                <img src="{% static 'interest/riding.png' %}">
+                                <img src="{% static 'interest/reading.png' %}">
+                                <img src="{% static 'interest/gaming.png' %}">
+                                <img src="{% static 'interest/cycle.png' %}">
+                                <img src="{% static 'interest/football.png' %}">
+                                <img src="{% static 'interest/swim.png' %}">
+                                <img src="{% static 'interest/dance.png' %}">
+                                <img src="{% static 'interest/hiking.png' %}">
+                                <img src="{% static 'interest/art.png' %}">
+                                <img src="{% static 'interest/writing.png' %}">
+                                <img src="{% static 'interest/singing.png' %}">
+                                <img src="{% static 'interest/riding.png' %}">
+                                <img src="{% static 'interest/reading.png' %}">
+                                <img src="{% static 'interest/gaming.png' %}">
+                                <img src="{% static 'interest/cycle.png' %}">
+                                <img src="{% static 'interest/football.png' %}">
+                                <img src="{% static 'interest/swim.png' %}">
+                                <img src="{% static 'interest/dance.png' %}">
+                                <img src="{% static 'interest/hiking.png' %}">
+                                <img src="{% static 'interest/art.png' %}">
+                                <img src="{% static 'interest/writing.png' %}">
+                                <img src="{% static 'interest/singing.png' %}">
+                                <img src="{% static 'interest/riding.png' %}">
+                                <img src="{% static 'interest/reading.png' %}">
+                                <img src="{% static 'interest/gaming.png' %}">
+                                <img src="{% static 'interest/cycle.png' %}">
+                                <img src="{% static 'interest/football.png' %}">
+                                <img src="{% static 'interest/swim.png' %}">
+                                <img src="{% static 'interest/dance.png' %}">
+                                <img src="{% static 'interest/hiking.png' %}">
+                                <img src="{% static 'interest/art.png' %}">
+                                <img src="{% static 'interest/writing.png' %}">
+                                <img src="{% static 'interest/singing.png' %}">
+                                <img src="{% static 'interest/riding.png' %}">
+                                <img src="{% static 'interest/reading.png' %}">
+                                <img src="{% static 'interest/gaming.png' %}">
+                                <img src="{% static 'interest/cycle.png' %}">
+                                <img src="{% static 'interest/football.png' %}">
+                                <img src="{% static 'interest/swim.png' %}">
+                                <img src="{% static 'interest/dance.png' %}">
+                                <img src="{% static 'interest/hiking.png' %}">
+                                <img src="{% static 'interest/art.png' %}">
+                                <img src="{% static 'interest/writing.png' %}">
+                                <img src="{% static 'interest/singing.png' %}">
+                                <img src="{% static 'interest/riding.png' %}">
+                                <img src="{% static 'interest/reading.png' %}">
+                                <img src="{% static 'interest/gaming.png' %}">
+                            </figure>
                         </div>
-                        {% endfor%}
-                        {% for i in others %}
-                        <div class="story-line">
-                            <table>
-                                <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
-                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
-                            </table>
-                        </div>
-                        <div class="story-line">
-                            <table>
-                                <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
-                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
-                            </table>
-                        </div>
-                        <div class="story-line">
-                            <table>
-                                <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
-                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
-                            </table>
-                        </div>
-                        <div class="story-line">
-                            <table>
-                                <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
-                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
-                            </table>
-                        </div>
-                        <div class="story-line">
-                            <table>
-                                <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
-                                <tr><td class="light">{{i.first_name}} {{i.last_name}}</td></tr>
-                            </table>
-                        </div>
-                        {% endfor%}
                     </div>
 
                     <!-- new post -->

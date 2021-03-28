@@ -115,16 +115,20 @@
 {
     display: inline-block;
 }
+.pp-show:hover
+{
+    cursor: pointer;
+}
 .badge-verified
 {
     position: absolute;
-    top: 28px;
-    right: -5px;
+    top: 73px;
+    right: 95px;
     border-radius: 50%;
 }
 .badge-verified img.nv
 {
-    width: 5px;
+    width: 20px;
 }
 
 .dd 

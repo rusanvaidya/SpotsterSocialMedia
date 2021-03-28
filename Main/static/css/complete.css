@@ -1,0 +1,63 @@
+.container-complete
+{
+    width: 45%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 3px 3px grey;
+    border-radius: 10px;
+}
+
+#interest-complete
+{
+    display: none;
+}
+.bio-complete
+{
+    padding: 10px;
+}
+.bio-complete textarea
+{
+    resize:none;
+    width: 100%;
+    padding: 8px 12px;
+    margin: 8px 0;
+    font-size: 16px;
+    outline: none;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+button.back-complete
+{
+    display: none;
+    float: left;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+    background-color: #2D7B20;
+}
+button.next-complete , input.next-complete
+{
+    float: right;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+    background-color: #2D7B20;
+}
+button.next-complete:hover
+{
+    background-color: #1b4713;
+    cursor: pointer;
+}
+#bg-ppp img
+{
+    border-radius: 50%;
+}

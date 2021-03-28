@@ -87,15 +87,36 @@ div.container3
 }
 
 /* story */
-div.story
+.i-story
 {
     margin: 20px;
     padding: 15px;
+}
+.story
+{
+    overflow: hidden;
+}
+.story figure
+{
     position: relative;
-    display: block;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    height: 80px;
+    width: 500%;
+    margin: 0;
+    left: 0;
+    animation: 20s slider infinite;
+}
+@keyframes slider
+{
+    0%{left:0}
+    10%{left:0}
+    20%{left: -50%}
+    30%{left: -50%}
+    40%{left: -100%;}
+    50%{left: -100%}
+    60%{left: -150%}
+    70%{left: -150%}
+    80%{left: -200%}
+    90%{left: -200%}
+    100%{left: 0%;}
 }
 .story img
 {
@@ -106,35 +127,7 @@ div.story
 {
     cursor: pointer;
 }
-.new-story
-{
-  position: relative;
-  display: inline-block;
-}
-.new-story a img:hover
-{
-    background-color: black;
-    opacity: 50%;
-}
-.new-story .badge-new {
-    position: absolute;
-    top: 30px;
-    right: -5px;
-    padding: 5px 6px;
-    border-radius: 50%;
-    font-size: 10px;
-    font-weight: bolder;
-    background-color: rgb(66, 66, 168);
-    color: white;
-}
-.story table
-{   
-    text-align: center;
-}
-.story .story-line
-{
-    display: inline-block;
-}
+
 /* new post */
 .c2-new, .c2
 {
@@ -214,17 +207,17 @@ div.story
     display: inline-block;
     width: 25%;
 }
-#title-back button
+#title-back button, #profile-back button
 {
     color: #2D7B20;
     border: none;
     background-color: inherit;
 }
-#title-back button img
+#title-back button img, #profile-back button img
 {
-    width: 20px;
+    width: 12px;
 }
-#title-back button:hover
+#title-back button:hover, #profile-back button:hover
 {
     cursor: pointer;
 }
@@ -382,6 +375,7 @@ div.story
 .chatuser:hover, .sidemenu:hover
 {
     cursor: pointer;
+    background-color: #dddddd;
 }
 .c3-sponser
 {
@@ -443,7 +437,8 @@ div.story
 
 
 /* new post modal */
-#new_post_modal {
+#new_post_modal, #p_update_modal, #mypic
+{
     display: none; 
     position: fixed;
     z-index: 1; 
@@ -481,6 +476,7 @@ div.story
 .modaltop
 {
     overflow: hidden;
+    padding: 10px;
 }
 .modalheader
 {
@@ -493,11 +489,39 @@ div.story
     float: right;
     display: inline-block;
 }
-#new_post_modal span:hover
+#new_post_modal span:hover, #p-update-modal span:hover
 {
     cursor: pointer;
 }
-
+.fullname
+{
+    width: 100%;
+    display: block;
+}
+.fullname label
+{
+    width: 100%;
+    display: block;
+    padding: 2px;
+}
+.fullname input
+{
+    padding: 8px 12px;
+    width: 49.25%;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.emailpassword input
+{
+    width: 100%;
+    padding: 8px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
 .posting-user
 {
     width: 100%;
@@ -513,7 +537,8 @@ div.story
     border: none;
     resize: none;
     outline: none;
-    height: 80px;
+    height: 50px;
+    overflow-y: auto;
 }
 #fileupload
 {
@@ -521,7 +546,7 @@ div.story
 }
 .img-div
 {
-    height: 80px;
+    height: 70px;
     width: 100%;
     padding: 8px 2px;
     font-size: 23px;
@@ -538,16 +563,19 @@ div.story
 {
     width: 100%;
 }
+.c3-btns
+{
+    text-align: center;
+}
 .c3-btns button
 {
     font-weight: bold;
     border:none;
+    padding: 10px;
     color: rgb(187, 19, 19);
     background-color: inherit;
-    border-radius: 3px;
 }
 .c3-btns button:hover
-
 {
     color: rgb(75, 9, 9);
 }
@@ -579,12 +607,12 @@ div.story
 }
 #feeling-create button, #venue-create button
 {
-    padding: 7px 12px;
+    padding: 5px 10px;
     border: none;
     border-radius: 3px;
     background-color: white;
     box-shadow: 0 0 2px 2px rgb(172, 172, 172);
-    margin: 3px;
+    margin: 2.5px;
 }
 #feeling-create button:hover
 {
