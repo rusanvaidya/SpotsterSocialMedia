@@ -4,7 +4,7 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    background-color: rgb(236, 236, 236);
+    background: rgb(37, 37, 37);
 }
 
 /* total coverage of feed */
@@ -26,6 +26,7 @@ div.container1
     display: inline-block;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    color: white;
 }
 /* middle container */
 div.container2
@@ -47,6 +48,7 @@ div.container3
     display: inline-block;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    color: white;
 }
 .container1 ::-webkit-scrollbar
 {
@@ -389,7 +391,7 @@ div.container3
 .chatuser:hover, .sidemenu:hover
 {
     cursor: pointer;
-    background-color: #dddddd;
+    background-color: rgba(255, 255, 255, 0.205);
 }
 .c3-sponser
 {
@@ -586,12 +588,12 @@ div.container3
     font-weight: bold;
     border:none;
     padding: 10px;
-    color: rgb(187, 19, 19);
+    color: rgb(255, 118, 118);
     background-color: inherit;
 }
 .c3-btns button:hover
 {
-    color: rgb(75, 9, 9);
+    color: rgb(255, 40, 40);
 }
 #feeling-emoji img
 {

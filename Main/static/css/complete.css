@@ -1,17 +1,28 @@
 .container-complete
 {
     width: 45%;
+    height: 600px;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 3px 3px grey;
     border-radius: 10px;
+    background-color: white;
+    -webkit-animation: opa;
+    -webkit-animation-duration: 2s;
 }
-
+#interest-first
+{
+    padding: 3px;
+    -webkit-animation: opa;
+    -webkit-animation-duration: 1s;
+}
 #interest-complete
 {
     display: none;
+    -webkit-animation: opa;
+    -webkit-animation-duration: 1s;
 }
 .bio-complete
 {

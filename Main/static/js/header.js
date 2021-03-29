@@ -62,6 +62,10 @@ window.onclick = function(event)
             }
         }
     }
+    if (!event.target.matches('.emdisp')) 
+    {
+        document.getElementById("emobox").style.display='none';
+    }
 }
   
 var loader_icon = document.getElementById('pre-loader');

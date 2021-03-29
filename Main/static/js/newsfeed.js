@@ -326,7 +326,8 @@ fileUpload.onchange = function () {
                     preview_img.appendChild(img);
                 }
                 reader.readAsDataURL(file);
-            } else {
+            }
+            else {
                 alert(file.name + " is not a valid image file.");
                 preview_img.innerHTML = "";
                 return false;

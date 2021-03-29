@@ -7,7 +7,7 @@
 {
     box-shadow: 0 0 3px 3px #2e7b20c7;
     width: 100%;
-    background-color: white;
+    background: rgb(22, 21, 21);
     z-index: 1;
     position: fixed;
 }

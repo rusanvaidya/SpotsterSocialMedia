@@ -7,7 +7,11 @@
         <link rel="icon" href="{% static 'img/icon.png' %}">
     </head>
     <body>
+        <div class="bodybg" style="background: url('{% static 'img/theme.png' %}') no-repeat; background-size: 95%;"></div>
         <div class="header">
+            <div class="headerlink">
+                <a href="/">Login</a>
+            </div>
             <div class="headerlink">
                 <a href="">FAQ</a>
             </div>
@@ -43,7 +47,7 @@
                                 <b>Spotster</b>
                             </div>
                             <label for="email">
-                                    <input type="email" placeholder="Email or Phone Number" name="email" autofocus>
+                                    <input type="email" placeholder="Email or Phone Number" name="email">
                             </label>
                             <label for="password">
                                     <input type="password" placeholder="Password" name="password">
@@ -215,7 +219,7 @@
         
         <!-- footer -->
         <div class="footer">
-            &copy All Right Reserved
+            All Right Reserved
         </div>
     </body>
 </html>

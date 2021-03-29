@@ -11,24 +11,7 @@ function pick_emoji(em_num)
     var x = document.getElementById(num);
     xx.value += x.innerHTML;
 }
-function em_box_show()
+function smileyshow()
 {
-    document.getElementById("emobox").classList.toggle("show");
+    document.getElementById("emobox").style.display='block';
 }
-
-// window.onclick = function(event) 
-// {
-//     if (!event.target.matches('.em-btn')) 
-//     {
-//         var dd1 = document.getElementsByClassName("emo-box");
-//         var i;
-//         for (i = 0; i < dd1.length; i++) 
-//         {
-//             var opendd1 = dd1[i];
-//             if (opendd1.classList.contains('show')) 
-//             {
-//                 opendd1.classList.remove('show');
-//             }
-//         }
-//     }
-// }
