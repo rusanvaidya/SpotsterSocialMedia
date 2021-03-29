@@ -22,5 +22,6 @@ urlpatterns = [
     path('login', views.login),
     path('register', views.register),   
     path('logout', views.logout), 
-    path('support',views.support_view,name='supportpage')
+    path('support',views.support_view,name='supportpage'),
+    path('get_location', views.get_location, name='get_location'),
 ]
