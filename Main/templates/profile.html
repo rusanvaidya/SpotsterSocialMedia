@@ -16,9 +16,34 @@
             <div class="container_newsfeed not-loaded" id="div-loaded">
                 <div class="container1">
                     <!-- profile picture -->
+                    <form enctype="multipart/form-data">
                     <div class="c1-profile">
-                        <img src="{% static 'img/defaultpp.jpg' %}">
+                        <div class="bg-pp">
+                            <img class="back-op" src="{% static 'img/defaultpp.jpg' %}">
+                            <label class="pp-chg" for="picupload" onclick="show_picture()"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
+                            <input type="file" id="picupload">
+                        </div>
                     </div>
+
+                    <div id="mypic">
+                        <div class="modal">
+                            <div class="modaltop">
+                                <div class="modalheader">
+                                    Profile Picture
+                                </div>
+                                <div class="closebutton">
+                                    <span onclick="document.getElementById('mypic').style.display='none';">&times;</span>
+                                </div>
+                            </div>
+                            <div class="pp-div" id="pp-preview">
+                            </div>
+                            <div class="post-submit">
+                                <input type="submit" value="UPLOAD">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                     <!-- name -->
                     <div class="c1-profile">
                         <b class="name-font">Rusan Vadiya</b>
@@ -43,124 +68,165 @@
                     <!-- edit profile -->
                     <div class="c1-profile">
                         <div class="edit-p">
-                            <button>Edit Profile</button>
+                            <button onclick="show_p_editor()">Edit Profile</button>
                         </div>
                     </div>
-                </div>
-                <div class="container2">
-                    <div class="c2-new">
-                        <div class="c2-text">
-                            <div class="new_idea" onclick="document.getElementById('new_post_modal').style.display='block';">What's your idea today...</div>                          </div>
-                        <div class="c2-new-buttons">
-                            <label class="c2-btns-l" for="new_pov" style="text-align: center;">
-                                <table><td><img src="{% static 'icon/photo.png' %}"></td><td>Photo/Video</td></table>
-                                <input type="file" id="new_pov" style="display: none;">
-                            </label>
-                            <div class="c2-btns-v" onclick="document.getElementById('new_post_modal').style.display='block';">
-                                    <table><td><img src="{% static 'icon/venue.png' %}"></td><td>Activity/Event</td></table>
-                            </div>
-                            <div class="c2-btns-e" onclick="document.getElementById('new_post_modal').style.display='block';">
-                                <table><td><img src="{% static 'icon/feeling.png' %}"></td><td>Feeling</td></table>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="new_post_modal">
+                    <div id="p_update_modal" style="color:black">
                         <div class="modal">
                             <div class="modaltop">
                                 <div class="modalheader">
-                                    Create Post
+                                   <div id="profile-title">Account Information</div>
+                                   <div id="profile-back"><button onclick="show_p_editor()"><table><td><img src="{% static 'icon/back.png' %}"></td><td>Back</td></table></button></div>
                                 </div>
                                 <div class="closebutton">
-                                    <span onclick="document.getElementById('new_post_modal').style.display='none';">&times;</span>
+                                    <span onclick="document.getElementById('p_update_modal').style.display='none';">&times;</span>
                                 </div>
                             </div>
-                            <div class="new_post">
-                                <div class="posting-user">
-                                    {% for i in user %}
-                                    <table>
-                                        <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                        <td style="font-weight: bold;">{{i.first_name}} {{i.last_name}}<br>
-                                        </td>
-                                    </table>
-                                    {% endfor %}
-                                </div>
-                                <form>
-                                <div class="caption-write">
-                                    <textarea placeholder="What's your idea today..."></textarea>
-                                </div>
+                            <div class="pro_update">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div id="profile-info">
+                                        <div class="fullname">
+                                            <input type="text" placeholder="First Name" name="first_name" value="Rusan">
+                                            <input type="text" placeholder="Last Name" name="last_name" value="Vaidya">
+                                        </div>
+                                        <div class="emailpassword">
+                                            <input type="text" placeholder="Email or Phone Number" name="email" value="abc@gmail.com">
+                                        </div>
+                                        <div class="bio-area">
+                                            <textarea placeholder="Bio" name="bio">football gamer</textarea>
+                                        </div>
+                                        <div class="i-edit">
+                                            <label class="interest-edit">
+                                                <table><td>Interest</td><td><img src="{% static 'icon/edit.png' %}" onclick="chg_interest()"></td></table>
+                                            </label>
+                                            <div class="interest-list">
+                                                <div><table><td><img src="{% static 'interest/football.png' %}"></td><td>Football</td></table></div>
+                                                <div><table><td><img src="{% static 'interest/gaming.png' %}"></td><td>Gaming</td></table></div>
+                                            </div>
+                                        </div>
+                                    </div>     
+                                    <div id="interest-info">
+                                        <div id="s-interest">
+                                            <input type="search" placeholder="Search interest">
+                                        </div>
+                                        <div id="l-interest">
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                            <label><input type="checkbox" value="Art">Art</label>
+                                        </div>
+                                    </div>
+                                    <div class="post-submit">
+                                        <input type="submit" value="Save">
+                                    </div>
                                 </form>
-                                <!-- <div onclick="document.getElementById('setvenue').value='Kathmandu'; document.getElementById('showvenue').value='Kathmandu';">Kathmandu</div> -->
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="container2">
+                    {% include 'new_post.html' %}
+
                     {% for i in user %}
                     <div class="c2">
                         <div style="overflow: hidden;">
                             <div class="c2-post">
                                 <table>
-                                    <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                    <td style="font-weight: bold;">{{i.first_name}} {{i.last_name}}
+                                    <td class="posted-img"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                    <td class="posted-name"><a href="">{{i.first_name}} {{i.last_name}}</a>
                                     </td>
                                     <td>
-                                        is conducting an event
+                                        is feeling happy 
+                                    </td>
+                                    <td class="femoji">
+                                        <img src="{% static 'emoji/043-happy.png' %}">
                                     </td>
                                 </table>
-                                <p class="light">12:30pm</p>
                             </div>
-                            <div class="c2-r-opt" style="float: right;">
-                                <img src="{% static 'icon/dropdown.png' %}">
+                            <div class="light" style="float: right; font-size: 15px; padding: 15px;">
+                                Yesterday 12:30pm
                             </div>
                         </div>
                         <div class="caption">
                             Today Futsal anyone?dsadmaslkdnasjdkasjncksajnjsandjkasndksabdksabcksabckasbcksajcnascnacnasjcnacnsacnakscnskacnacnaskcasc
-                        </div>
-                        <div class="location">
-                            <table>
-                                <td><img src="{% static 'icon/venue.png' %}"></td>
-                                <td>ABC Futsal</td>
-                            </table>
                         </div>
                         <div class="postedimg">
                             <img src="{% static 'media/w1.png' %}">
                         </div>
                         <div class="joinin">
                             <form>
-                                <input type="submit" value="JOIN">
+                                <label for="like" id="i-l">
+                                    <span>120</span><img src="{% static 'icon/like-i.png' %}">
+                                </label>
+                                <label for="like" id="a-l">
+                                    <span>120</span><img src="{% static 'icon/like.png' %}">
+                                </label>
+                                <label for="like" id="i-d">
+                                    <span>22</span><img src="{% static 'icon/dislike-i.png' %}">
+                                </label>
+                                <label for="like" id="a-d">
+                                    <span>22</span><img src="{% static 'icon/dislike.png' %}">
+                                </label>
+                                <label for="like" id="i-c" onclick="myComment()">
+                                    <span>40</span><img src="{% static 'icon/comment-i.png' %}">
+                                </label>
+                                <label for="like" id="a-c">
+                                    <span>40</span><img src="{% static 'icon/comment.png' %}">
+                                </label>
+                                <label for="like" id="i-s">
+                                    <img src="{% static 'icon/share-i.png' %}">
+                                </label>
+                                <label for="like" id="a-s">
+                                    <img src="{% static 'icon/share.png' %}">
+                                </label>
+                                <label for="like" id="i-sa">
+                                    <img src="{% static 'icon/saved-i.png' %}">
+                                </label>
+                                <label for="like" id="a-sa">
+                                    <img src="{% static 'icon/saved-a.png' %}">
+                                </label>
+                                <label for="like" id="i-f">
+                                    <img src="{% static 'icon/flag-i.png' %}">
+                                </label>
+                                <label for="like" id="a-f">
+                                    <img src="{% static 'icon/flag.png' %}">
+                                </label>
                             </form>
-                            <form>
-                                <input type="submit" value="INTERESTED">
-                            </form>
-                            <form>
-                                <input type="submit" value="MAYBE">                        
-                            </form>
+                        </div>
+                        <div class="comment-section" id="c-section">
+                            <a href="">View all comments</a>
+                            <label>
+                                <input type="text" placeholder="Write comment...">
+                            </label>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
                 <div class="container3">
-                    <div class="c3">
-                        Your Interest
-                        #football
-                        #games
-                        #programming
-                    </div>
-                    <div class="c3">
-                        <p>Following</p>
-                        <table>
-                        {% for i in others %}
-                        <tr class="chatuser">
-                            <td class="c3-img">
-                                <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
-                            </td>
-                            <td class="c3-label"> 
-                                {{i.first_name}} {{i.last_name}}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        </table>
-                    </div>
+                    {% include '2_container.html' %}
                 </div>
             </div>
         </div>
 
         <script src="{% static 'js/header.js' %}"></script>
+        <script src="{% static 'js/newsfeed.js' %}"></script>
+        <script src="{% static 'js/profile.js' %}"></script>
+        </body>
+        </html>

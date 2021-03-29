@@ -1,9 +1,25 @@
 /* background */
 body
 {
-    background: rgb(255, 255, 255);
+    background: rgb(22, 21, 21);
 }
 
+.bodybg
+{
+    left: 0;
+    top: 0;
+    padding: 10px;
+    position: fixed;
+    width: 1360px;
+    height: 1080px;
+    -webkit-animation: bgslide;
+    -webkit-animation-duration: 1s;
+}
+@keyframes bgslide
+{
+    from{opacity: 0; left: -140px;}
+    to{opacity: 1; left: 0px;}
+}
 
 /* header */
 .header
@@ -22,11 +38,12 @@ body
 {
     position: relative;
     display: inline-block;
-    width: 24%;
+    width: 19%;
 }
 .headerlink a
 {
-    color: grey;
+    color: white;
+    font-weight: bold;    
     text-align: center;
     padding: 10px;
     text-decoration: none;
@@ -40,6 +57,13 @@ body
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    -webkit-animation: opa;
+    -webkit-animation-duration: 2s;
+}
+@keyframes opa
+{
+    from{opacity: 0;}
+    to{opacity: 1;}
 }
 
 /* image */
@@ -59,71 +83,10 @@ body
     top: 45%;
     transform: translate(0, -50%);
 }
-.player
-{
-    position: absolute;
-    left: 180px;
-    top: 140px;
-    -webkit-animation: playerdiv;
-    -webkit-animation-duration: 3s;
-}
-@keyframes playerdiv
-{
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-.ground
-{
-    position: absolute;
-    left: 200px;
-    top: 160px;
-    -webkit-animation: grounddiv;
-    -webkit-animation-duration: 3s;
-}
-@keyframes grounddiv
-{
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-.ball
-{
-    position: absolute;
-    left: 290px;
-    top: 200px;
-    -webkit-animation: balldiv;
-    -webkit-animation-duration: 2s;
-}
-@keyframes balldiv
-{
-    from{opacity: 0; rotate: 0deg; top: 180px; left: 320px;}
-    to{opacity: 1; rotate: 360deg; top: 200px; left: 290px;}
-}
-
-.phonelogo
-{
-    color: #2D7B20;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 30px;
-    position: absolute;
-    left: 210px;
-    top: 300px;
-}
-
-.player img, .ground img
-{
-    width: 160px;
-}
 
 .phone img
 {
     max-width: 400px;
-}
-
-.ball img
-{
-    max-width: 60px;
 }
 
 /* login div */
@@ -154,13 +117,14 @@ body
     color: grey;
 }
 
-.login input[type = 'text'], .login input[type='password']
+.login input[type = 'email'], .login input[type='password']
 {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
+    outline: none;
     box-sizing: border-box;
 }
 
@@ -343,7 +307,7 @@ body
     font-size: large;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: bolder;
-    color: grey;
+    color: rgb(255, 255, 255);
 }
 
 /* resize window */

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/complete.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+    <head>
+        <title>Spotster</title>
+        <link rel="icon" href="{% static 'img/icon.png' %}">
+    </head>
+    <body>
+        <div class="bodybg" style="background: url('{% static 'img/theme.png' %}') no-repeat; background-size: 95%;"></div>
+        
+
+        <!-- 2 div -->
+        <div class="container-complete">
+            <div class="logo">
+                <b>Spotster</b>
+            </div>
+            <form>
+                <div id="interest-first">
+                    Choose Profile Picture:
+                    <div class="c1-profile">
+                        <div class="bg-pp" id="bg-ppp">
+                            <img class="back-op" src="{% static 'img/defaultpp.jpg' %}" id="defpp">
+                            <label class="pp-chg" for="picupload"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
+                            <input type="file" id="picupload">
+                        </div>
+                        <b style="padding: 10px;">Rusan Vaidya</b>
+                    </div>
+                    <div class="bio-complete">
+                        Bio:
+                        <textarea placeholder="Bio"></textarea>
+                    </div>
+                </div>
+                <div id="interest-complete">
+                    What's your interest?
+                    <div id="s-interest">
+                        <input type="search" placeholder="Search interest">
+                    </div>
+                    <div id="l-interest" style="height: 380px;">
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                        <label><input type="checkbox" value="Art">Art</label>
+                    </div>
+                    <input type="submit" value="SAVE" class="next-complete">
+                </div>
+            </form>
+            <button class="back-complete" onclick="complete_back()" id="back-btn">BACK</button>
+            <button class="next-complete" onclick="complete_next()" id="next-btn">Next</button>
+        </div>
+    </body>
+    <!-- footer -->
+    <div class="footer">
+        All Right Reserved
+    </div>
+    <script src="{% static 'js/complete.js' %}"></script>
+</html>

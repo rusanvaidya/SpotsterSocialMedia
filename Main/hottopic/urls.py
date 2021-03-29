@@ -18,5 +18,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('hottopic', views.hottopic),
+    path('video', views.video),
 ]

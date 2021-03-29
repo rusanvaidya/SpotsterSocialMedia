@@ -23,4 +23,7 @@ urlpatterns = [
     path('',include('trending.urls')),
     path('',include('hottopic.urls')),
     path('',include('discover.urls')),
+    path('',include('chatbox.urls')),
+    path('',include('saved.urls')),
+    path('',include('complete.urls')),
 ]

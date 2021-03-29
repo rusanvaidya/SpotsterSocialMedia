@@ -15,28 +15,52 @@
         </td>
         
         <td class="header_btns_div">
-            <div class="header_btns">
+            <div class="header_btns_active" id="h-a">
                 <a href="/"><img src="{% static 'icon/home.png' %}" class="header_m_img"></a>
-            </div>      
-            <div class="header_btns">
-                <a href="hottopic"><img src="{% static 'icon/video.png' %}" class="header_m_img"></a>
             </div>
-            <div class="header_btns">
+            <div class="header_btns" id="h-i">
+                <a href="/"><img src="{% static 'icon/home-inactive.png' %}" class="header_m_img"></a>
+            </div>      
+            <div class="header_btns_active" id="v-a">
+                <a href="video"><img src="{% static 'icon/video.png' %}" class="header_m_img"></a>
+            </div>
+            <div class="header_btns" id="v-i">
+                <a href="video"><img src="{% static 'icon/video-inactive.png' %}" class="header_m_img"></a>
+            </div>
+            <div class="header_btns_active" id="t-a">
                 <a href="trending"><img src="{% static 'icon/trending.png' %}" class="header_m_img"></a>
             </div>
-            <div class="header_btns">
+            <div class="header_btns" id="t-i">
+                <a href="trending"><img src="{% static 'icon/trending-inactive.png' %}" class="header_m_img"></a>
+            </div>
+            <div class="header_btns_active" id="d-a">
                 <a href="discover"><img src="{% static 'icon/discover.png' %}" class="header_m_img"></a>
+            </div>
+            <div class="header_btns" id="d-i">
+                <a href="discover"><img src="{% static 'icon/discover-inactive.png' %}" class="header_m_img"></a>
             </div>
         </td>
 
         <!-- buttons -->
         <td class="bar_buttons">
             <div class="dd">
-                <img onclick="myMessage()" class="d3btn" src="{% static 'icon/message.png' %}">
-                <span class="badge-message">1</span>
+                <img onclick="myMessage()" class="d3btn" id="b3-i" src="{% static 'icon/message.png' %}">
+                <img onclick="myMessage()" class="d3btn-a" id="b3-a" src="{% static 'icon/message-active.png' %}">
+                <span class="badge-message" id="b-m">1</span>
                 <div id="mydd3" class="dd3-content">
                     {% for i in user %}
                     <table>
+                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                        <td><a href="">{{i.first_name}} {{i.last_name}}<br>
+                            <p class="light">Are you free tonight?</p>
+                        </a></td>
+                    </table>
+                    <table>
+                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                        <td><a href="">{{i.first_name}} {{i.last_name}}<br>
+                            <p class="light">Are you free tonight?</p>
+                        </a></td>
+                    </table><table>
                         <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
                         <td><a href="">{{i.first_name}} {{i.last_name}}<br>
                             <p class="light">Are you free tonight?</p>
@@ -46,8 +70,9 @@
                 </div>
             </div>
             <div class="dd">
-                <img onclick="myNotification()" class="d2btn" src="{% static 'icon/notification.png' %}">
-                <span class="badge-notification">1</span>
+                <img onclick="myNotification()" class="d2btn" id="b2-i" src="{% static 'icon/notification.png' %}">
+                <img onclick="myNotification()" class="d2btn-a" id="b2-a" src="{% static 'icon/notification-active.png' %}">
+                <span class="badge-notification" id="b-n">1</span>
                 <div id="mydd2" class="dd2-content">
                     {% for i in user %}
                     <table>
@@ -62,7 +87,8 @@
                 <div id="mydd1" class="dd1-content">
                     {% for i in user %}
                     <div class="user_option">
-                        <img src="{% static 'img/defaultpp.jpg' %}">
+                        <img class="pp-show" src="{% static 'img/defaultpp.jpg' %}">
+                        <span class="badge-verified"><img src="{% static 'img/not-verified.png' %}" class="nv"></span>
                         <a href="profile">
                             {{i.first_name}} {{i.last_name}}<br>
                             <p class="light">{{email}}</p>
@@ -79,6 +105,12 @@
         </td>
     </table>
 </div>
-<div class="preloader animate-start" id="pre-loader">
-    <img src="{% static 'img/loader.png' %}">
+<div class="preloader">
+    <img src="{% static 'img/loader.png' %}" class="animate-start" id="pre-loader">
 </div>
+<script>
+    function home_active()
+    {
+        document.getElementById('h-i').style.display='none';
+    }
+</script>

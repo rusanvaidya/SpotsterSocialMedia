@@ -1,22 +1,20 @@
 from django.shortcuts import render
 from .models import registration, support
 from django.contrib import messages
-
+from math import sin, cos, sqrt, atan2, radians
 # Create your views here.
 def home(request):
-    try:
+    if 'email' in request.session:
         email = request.session['email']
         user = registration.objects.filter(email=email)
-        other_user = registration.objects.filter()
+        other_user = registration.objects.filter().exclude(email=email)
         dict1 = {
             'email': email, 
             'user': user,
             'others': other_user}
         return render(request, 'newsfeed.html', dict1)
-    except:
-        user = None
-        email = None
-        return render(request, 'index.html',{'email': email, 'user': user})
+    else:
+        return render(request, 'index.html')
 
 
 def login(request):
@@ -26,14 +24,14 @@ def login(request):
         user = registration.objects.filter(email=email, password=password)
         if user.exists():
             request.session['email'] = email
-            other_user = registration.objects.filter()
+            other_user = registration.objects.filter().exclude(email=email)
             dict1 = {
             'email': email, 
             'user': user,
             'others': other_user}
             return render(request, 'newsfeed.html', dict1)
         else:
-            return render(request, 'index.html',{'email': email, 'user': user})
+            return render(request, 'index.html')
 
 def register(request):
     if request.method == 'POST':
@@ -59,18 +57,21 @@ def register(request):
             request.session['email'] = email
             user = registration.objects.filter(email=email, password=password)
             if user.exists():
-                request.session['email'] = email
-                return render(request, 'newsfeed.html',{'email': email, 'user': user})
+                other_user = registration.objects.filter().exclude(email=email)
+                dict1 = {
+                'email': email, 
+                'user': user,
+                'others': other_user}
+                return render(request, 'newsfeed.html', dict1)
             else:
-                return render(request, 'index.html',{'email': email, 'user': user})
-
-            return render(request, 'newsfeed.html',{'email': email, 'user': user})
+                return render(request, 'index.html')
     else:
-        return render(request, 'index.html', {'email': None, 'user': None})
+        return render(request, 'index.html')
 
 
 def logout(request):
-    return render(request, 'index.html',{'email': None, 'user': None})
+    del request.session['email']
+    return render(request, 'index.html')
 
 def support_view(request):
     return render(request,'support.html')
@@ -83,3 +84,15 @@ def support_action(request):
     support_save=support(name=u_name,email=u_email,message=u_message)
     support_save.save()
     return redirect('supportpage')
+
+def get_location(request):
+    lng=float(request.GET.get('lng'))
+    lat=float(request.GET.get('lat'))
+    print(lng)
+    print(lat)
+    return render(request, 'index.html')
+
+# import geopy.distance as geodist
+# def calc_distance(cor1,cor2):
+#     distance=geodist.geodesic(cor1, cor2).km
+#     print(distance)

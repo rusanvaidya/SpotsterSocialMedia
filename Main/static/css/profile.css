@@ -1,5 +1,6 @@
 .c1-profile
 {
+    padding: 8px;
     text-align: center;
 }
 .c1-profile .name-font
@@ -7,11 +8,64 @@
     font-size: 30px;
     font-weight: bold;
 }
-.c1-profile img
+
+.c1-profile .bg-pp img
 {
-    padding: 15px;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     border-radius: 155px;
+    display: block;
+}
+.bg-pp
+{
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+    max-width: 300px;
+}
+.bg-pp .pp-chg
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0);
+    display: none;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;  
+}
+.bg-pp .pp-chg .camera
+{
+    width: 50px;
+}
+#picupload
+{
+    display: none;
+}
+.bg-pp:hover .pp-chg {display: block;}
+.bg-pp:hover .back-op {opacity: 50%;}
+.pp-div
+{
+    height: 270px;
+    padding: 10px;
+    margin: 5px;
+    width: 95%;
+    overflow-y: auto;
+    margin: 8px 0;
+    text-align: center;
+}
+.pp-div img
+{
+    border-radius: 50%;
+    border: 1px solid rgb(204, 203, 203);
+    padding: 10px;
 }
 .c1-profile table
 {
@@ -26,7 +80,115 @@
 {
     font-weight: bold;
 }
+.c1-profile .edit-p button
+{
+    background-color: inherit;
+    box-shadow: 0 0 3px 3px #2D7B20;
+    background-color: white;
+    border: none;
+    color: #2D7B20;
+    padding: 5px;
+    width: 45%;
+    border-radius: 10px;
+}
+.c1-profile .edit-p button:hover
+{
+    box-shadow: 0 0 3px 3px #1a4213;
+    color: #1a4213;
+}
 .bio
 {
     padding: 15px;
+}
+.interest-edit img
+{
+    width: 15px;
+    padding: 5px;
+}
+.interest-edit img:hover
+{
+    cursor: pointer;
+}
+.interest-list
+{
+    height: 60px;
+    width: 100%;
+    padding: 8px 2px;
+    font-size: 15px;
+    overflow-y: auto;
+    margin: 8px 0;
+}
+.interest-list a
+{
+    display: block;
+}
+.bio-area textarea
+{
+    resize:none;
+    width: 100%;
+    padding: 8px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+#profile-info
+{
+    -webkit-animation: op;
+    -webkit-animation-duration: 1s;
+}
+@keyframes op
+{
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+
+#interest-info
+{
+    display: none;
+    -webkit-animation: op;
+    -webkit-animation-duration: 1s;
+}
+.interest-list div
+{
+    width: 42%;
+    display: inline-block;
+}
+
+.interest-list div
+{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 0 0 2px 2px rgb(172, 172, 172);
+    margin: 2.5px;
+}
+.interest-list div table td img
+{
+    width: 20px;
+}
+
+#s-interest input[type='search']
+{
+    padding: 8px 12px;
+    width: 100%;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 9px;
+}
+#l-interest
+{
+    height: 180px;
+    width: 100%;
+    padding: 8px 2px;
+    font-size: 15px;
+    overflow-y: auto;
+    margin: 8px 0;
+}
+#l-interest label
+{
+    display: block;
 }
