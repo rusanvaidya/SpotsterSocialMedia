@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <title>Spotser</title>
+        <link rel="icon" href="{% static 'img/icon.png' %}">
+    </head>
+    <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}">
+    <body onload="loader_trending()">
+        <div class="homepage">
+            <!-- header import -->
+            {% include 'header.html' %}
+            
+            <!-- 3 divs -->
+            <div class="container_newsfeed not-loaded" id="div-loaded">
+
+                <!-- 1st div -->
+                <div class="container1">
+                    {% include '1_container.html' %}
+                </div>
+
+                <!-- 2nd div -->
+                <div class="container2">
+                    <div class="c2">
+                        <div style="overflow: hidden;">
+                            <div class="c2-post">
+                                <table>
+                                    <td class="posted-img"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                    <td class="posted-name"><a href="">Peter Griffin</a>
+                                    </td>
+                                    <td>
+                                        is feeling happy 
+                                    </td>
+                                    <td class="femoji">
+                                        <img src="{% static 'emoji/043-happy.png' %}">
+                                    </td>
+                                </table>
+                            </div>
+                            <div class="light" style="float: right; font-size: 15px; padding: 15px;">
+                                Yesterday 12:30pm
+                            </div>
+                        </div>
+                        <div class="caption">
+                            Today Futsal anyone?dsadmaslkdnasjdkasjncksajnjsandjkasndksabdksabcksabckasbcksajcnascnacnasjcnacnsacnakscnskacnacnaskcasc
+                        </div>
+                        <div class="postedimg">
+                            <img src="{% static 'media/w1.png' %}">
+                        </div>
+                        <div class="joinin">
+                            <form>
+                                <label for="like" id="i-l">
+                                    <span>500M</span><img src="{% static 'icon/like-i.png' %}">
+                                </label>
+                                <label for="like" id="a-l">
+                                    <span>500M</span><img src="{% static 'icon/like.png' %}">
+                                </label>
+                                <label for="like" id="i-d">
+                                    <span>22.5K</span><img src="{% static 'icon/dislike-i.png' %}">
+                                </label>
+                                <label for="like" id="a-d">
+                                    <span>22.5K</span><img src="{% static 'icon/dislike.png' %}">
+                                </label>
+                                <label for="like" id="i-c" onclick="myComment()">
+                                    <span>40K</span><img src="{% static 'icon/comment-i.png' %}">
+                                </label>
+                                <label for="like" id="a-c">
+                                    <span>40K</span><img src="{% static 'icon/comment.png' %}">
+                                </label>
+                                <label for="like" id="i-s">
+                                    <img src="{% static 'icon/share-i.png' %}">
+                                </label>
+                                <label for="like" id="a-s">
+                                    <img src="{% static 'icon/share.png' %}">
+                                </label>
+                                <label for="like" id="i-sa">
+                                    <img src="{% static 'icon/saved-i.png' %}">
+                                </label>
+                                <label for="like" id="a-sa">
+                                    <img src="{% static 'icon/saved-a.png' %}">
+                                </label>
+                                <label for="like" id="i-f">
+                                    <img src="{% static 'icon/flag-i.png' %}">
+                                </label>
+                                <label for="like" id="a-f">
+                                    <img src="{% static 'icon/flag.png' %}">
+                                </label>
+                            </form>
+                        </div>
+                        <div class="comment-section" id="c-section">
+                            <a href="">View all comments</a>
+                            <label>
+                                <input type="text" placeholder="Write comment...">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3rd div -->
+                <div class="container3">
+                    {% include '2_container.html' %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+        <script src="{% static 'js/header.js' %}"></script>
+        <script src="{% static 'js/newsfeed.js' %}"></script>

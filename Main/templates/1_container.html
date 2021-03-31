@@ -8,38 +8,29 @@
 <div class="c1">
     <table class="sidetable">
     {% for i in user %}
-    <tr class="sidemenu">
+    <tr class="sidemenu" onclick="window.open('profile','_self')">
         <td class="c1-img">
-            <a href="profile"><img src="{% static 'img/defaultpp.jpg' %}" style="width:50px"></a>
+            <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
         </td>
         <td class="c1-label"> 
-            <a href="profile" style="width: 100%;">{{i.first_name}} {{i.last_name}}</a>
+            {{i.first_name}} {{i.last_name}}
         </td>
     </tr>
     {% endfor %}
-    <tr class="sidemenu">
+    <tr class="sidemenu" onclick="window.open('saved', '_self')">
         <td class="c1-img">
-            <a href=""><img src="{% static 'icon/follower.png' %}"></a>
+            <img src="{% static 'icon/saved.png' %}">
         </td>
         <td class="c1-label">
-            <a href="">Follower</a><br>
-            <p class="light">1 request</p>
+            Saved
         </td>
     </tr>
-    <tr class="sidemenu">
+    <tr class="sidemenu" onclick="window.open('chatbox', '_self')">
         <td class="c1-img">
-            <a href=""><img src="{% static 'icon/saved.png' %}"></a>
+            <img src="{% static 'icon/message-active.png' %}">
         </td>
         <td class="c1-label">
-            <a href="">Saved</a>
-        </td>
-    </tr>
-    <tr class="sidemenu">
-        <td class="c1-img">
-            <a href=""><img src="{% static 'icon/message-active.png' %}"></a>
-        </td>
-        <td class="c1-label">
-            <a href="">Chatbox</a><br>
+            Chatbox
         </td>
     </tr>
     </table>

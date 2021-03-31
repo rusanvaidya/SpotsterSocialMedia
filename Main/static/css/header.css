@@ -7,7 +7,7 @@
 {
     box-shadow: 0 0 3px 3px #2e7b20c7;
     width: 100%;
-    background-color: white;
+    background: rgb(22, 21, 21);
     z-index: 1;
     position: fixed;
 }
@@ -115,16 +115,20 @@
 {
     display: inline-block;
 }
+.pp-show:hover
+{
+    cursor: pointer;
+}
 .badge-verified
 {
     position: absolute;
-    top: 28px;
-    right: -5px;
+    top: 73px;
+    right: 95px;
     border-radius: 50%;
 }
 .badge-verified img.nv
 {
-    width: 5px;
+    width: 20px;
 }
 
 .dd 
