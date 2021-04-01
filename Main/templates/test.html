@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{profile}}
+<img src='/static/{{profile}}' height="50" width="50">
+
+<img src="{% static 'activity/birthday.png' %}" height="50" width="50">
+</body>
+</html>

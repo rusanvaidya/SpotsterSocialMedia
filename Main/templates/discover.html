@@ -85,42 +85,41 @@
                             </figure>
                         </div>
                     </div>
-
+                    {% block follow %}
                     <div class="c2">
                         <div style="overflow: hidden;">
                             <div class="c2-post">
                                 <p>Suggested People</p>
                                 <div class="suggested-people">
-                                    <table>
-                                        <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
-                                        <tr><td>Rusan Vaidya</td></tr>
-                                        <tr><td><button id="u1" onclick="document.getElementById('u1').innerHTML='Following'; document.getElementById('u1').style.background='white'; document.getElementById('u1').style.color='grey'; document.getElementById('u1').style.border='2px solid grey';">Follow</button></td></tr>
-                                    </table>
+                                        {% for i in other%}
+                                        <div style="display:inline-block;margin-right:-10px;margin-top:10px;">
+                                        <table>
+                                        <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
+
+                                                <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
+                                            <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
+                                            <tr><td>{{i.first_name}} {{i.last_name}}</td></tr>
+                                        {% if i in others%}
+                                            <tr><td><button type="submit" style="background-color:red; border-radius:3px;" class="follow{{i.pk}}">
+                                                UnFollow
+                                            </button></td></tr>
+                                        {% else %}
+                                        <tr><td><button type="submit" class="follow{{i.pk}}">
+                                            Follow
+                                        </button></td></tr>
+
+                                        {% endif %}
+                                            </form>
+                                            </table>
+                                        </div>
+                                        {% endfor %}
+
+
                                 </div>
-                                <div class="suggested-people">
-                                    <table>
-                                        <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
-                                        <tr><td>Rusan Vaidya</td></tr>
-                                        <tr><td><button id="u2" onclick="document.getElementById('u2').innerHTML='Following'; document.getElementById('u2').style.background='white'; document.getElementById('u2').style.color='grey'; document.getElementById('u2').style.border='2px solid grey';">Follow</button></td></tr>
-                                    </table>
-                                </div>
-                                <div class="suggested-people">
-                                    <table>
-                                        <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
-                                        <tr><td>Rusan Vaidya</td></tr>
-                                        <tr><td><button id="u3" onclick="document.getElementById('u3').innerHTML='Following'; document.getElementById('u3').style.background='white'; document.getElementById('u3').style.color='grey'; document.getElementById('u3').style.border='2px solid grey';">Follow</button></td></tr>
-                                    </table>
-                                </div>
-                                <div class="suggested-people">
-                                    <table>
-                                        <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
-                                        <tr><td>Rusan Vaidya</td></tr>
-                                        <tr><td><button id="u4" onclick="document.getElementById('u4').innerHTML='Following'; document.getElementById('u4').style.background='white'; document.getElementById('u4').style.color='grey'; document.getElementById('u4').style.border='2px solid grey';">Follow</button></td></tr>
-                                    </table>
-                                </div>                                
                             </div>
                         </div>
                     </div>
+                    {% endblock %}
                 </div>
 
                 <!-- 3rd div -->
@@ -131,5 +130,45 @@
             </div>
         </div>
     </body>
+ <script>
+                    $('.un-follow').submit(function(e){
+                        e.preventDefault()
+
+                        const follow_id = $(this).attr('id')
+                        const followText = $(`.follow${follow_id}`).text()
+                        const trim = $.trim(followText)
+                        const url =$(this).attr('action')
+
+
+
+                        $.ajax({
+                            type:'POST',
+                            url : url,
+                            data:{
+                            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                            'follow_pk':follow_id
+                            },
+                            success:function(response){
+                            if (trim === 'UnFollow'){
+                                $(`.follow${follow_id}`).css("background-color", "#00AF00")
+                                $(`.follow${follow_id}`).text('Follow')
+
+
+                            } else {
+                                $(`.follow${follow_id}`).css("background-color", "#FF0000")
+                                $(`.follow${follow_id}`).text('UnFollow')
+
+                            }
+                            },
+                            error:function(response){
+                            console.log('error',response)
+                            }
+                           })
+
+
+                    })
+
+
+                 </script>
 </html>
 <script src="{% static 'js/header.js' %}"></script>

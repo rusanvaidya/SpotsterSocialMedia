@@ -40,18 +40,18 @@
                     </table>
                     {% endfor %}
                 </div>
-                <form enctype="multipart/form-data">
+                <form  action="content_post" enctype="multipart/form-data">
                 <div class="caption-write">
-                    <input type="text" id="f-label" style="display: none;">
-                    <input type="text" id="f-img-tag" style="display: none;">
-                    <textarea placeholder="What's your idea today..."></textarea>
+                    <input type="text" id="f-label" style="display: none;" name="feeling">
+                    <input type="text" id="f-img-tag" style="display: none;" name="emoji">
+                    <textarea placeholder="What's your idea today..." name="content"></textarea>
                 </div>
                 <div class="img-div" id="preview-img">
                 </div>
                 <div class="c2-btn-modal">
                     <label class="c2-btns-m" for="fileupload" style="text-align: center;">
                         <img src="{% static 'icon/photo.png' %}">
-                        <input type="file" id="fileupload" multiple="multiple">
+                        <input type="file" id="fileupload" multiple="multiple" name="ufiles">
                     </label>
                     <div class="c2-btns-m" onclick="post_venue()">
                             <img src="{% static 'icon/venue.png' %}">

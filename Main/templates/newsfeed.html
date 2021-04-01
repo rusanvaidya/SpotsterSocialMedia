@@ -86,31 +86,39 @@
 
                     <!-- new post -->
                     {% include 'new_post.html' %}
-                    
-
+<!--                    {%for post in posts%}-->
+<!--                     {% for p in pu %}-->
+<!--                        {% if p.id == post.author_id %}-->
+<!--                            {{p.first_name}}{{p.last_name}}-->
+<!--                            {{post.usercontent}}-->
+<!--                    {% endif %}-->
+<!--                    {% endfor %}-->
+<!--                    {% endfor %}-->
                     <!-- posted contents -->
-                    {% for i in others %}
+                    {%for post in posts%}
+                        {% for p in pu %}
+                            {% if p.id == post.author_id %}
                     <div class="c2">
                         <div style="overflow: hidden;">
                             <div class="c2-post">
                                 <table>
                                     <td class="posted-img"><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                    <td class="posted-name"><a href="">{{i.first_name}} {{i.last_name}}</a>
+                                    <td class="posted-name"><a href="">{{p.first_name}} {{p.last_name}}</a>
                                     </td>
                                     <td>
-                                        is feeling happy 
+                                        {{post.feeling}}
                                     </td>
                                     <td class="femoji">
-                                        <img src="{% static 'emoji/043-happy.png' %}">
+                                        <img src='/static/{{post.emoji}}'>
                                     </td>
                                 </table>
                             </div>
                             <div class="light" style="float: right; font-size: 15px; padding: 15px;">
-                                Yesterday 12:30pm
+                                {{post.created}}
                             </div>
                         </div>
                         <div class="caption">
-                            Today Futsal anyone?
+                            {{post.usercontent}}
                         </div>
                         <div class="postedimg">
                             <img src="{% static 'media/w1.png' %}">
@@ -162,6 +170,8 @@
                             </label>
                         </div>
                     </div>
+                    {% endif %}
+                    {% endfor %}
                     {% endfor %}
                 </div>
 

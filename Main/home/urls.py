@@ -16,12 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.home),
+    path('', views.home,name='home'),
     path('login', views.login),
     path('register', views.register),   
-    path('logout', views.logout), 
+    path('content_post', views.user_post,name='user_post'),
+    path('logout', views.logout),
     path('support',views.support_view,name='supportpage'),
     path('get_location', views.get_location, name='get_location'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

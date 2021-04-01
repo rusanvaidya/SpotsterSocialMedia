@@ -1,17 +1,27 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/header.css' %}">
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script async src="//code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $("#autocomplete").autocomplete({
+      source: '{% url 'home' %}'
+    });
+  } );
+  </script>
 <div class="header_top">
     <table>
 
         <!-- logo -->
         <td class="logo">
-            <a href="/"><img src="{% static 'img/icon2.png' %}"></a>
+            <a href="{% url 'home' %}"><img src="{% static 'img/icon2.png' %}"></a>
         </td>
 
         <!-- searchbar -->
         <td class="searchbar">
-            <input type="text" placeholder="Search...">
+            <input type="text" placeholder="Search..." id="autocomplete">
         </td>
         
         <td class="header_btns_div">

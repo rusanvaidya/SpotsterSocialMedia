@@ -1,19 +1,89 @@
-from django.shortcuts import render
-from .models import registration, support
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render, redirect
+from discover.models import followers
+
+from discover.models import interest
+from .models import registration, support, userpost
 from django.contrib import messages
+from itertools import chain
 from math import sin, cos, sqrt, atan2, radians
 # Create your views here.
 def home(request):
-    if 'email' in request.session:
-        email = request.session['email']
-        user = registration.objects.filter(email=email)
-        other_user = registration.objects.filter().exclude(email=email)
-        dict1 = {
-            'email': email, 
-            'user': user,
-            'others': other_user}
-        return render(request, 'newsfeed.html', dict1)
-    else:
+    email = request.session['email']
+    profile1 = registration.objects.get(email=email)
+    profile = followers.objects.get(user_id = profile1.pk)
+    users1 = [i for i in profile.following.all()]
+    posts = []
+    pu = registration.objects.all()
+    qs =None
+    for u in users1:
+        p = registration.objects.get(id=u.id)
+        try:
+            p_post = userpost.objects.filter(author_id=p.id)
+            posts.append(p_post)
+        except:
+            pass
+
+
+    my_post = userpost.objects.filter(author_id=profile1.id)
+    posts.append(my_post)
+    if len(posts)>0:
+        qs = sorted(chain(*posts),reverse=True,key=lambda obj:obj.created)
+    try:
+
+        if request.session['email']:
+            email = request.session['email']
+            user = registration.objects.filter(email=email)
+            usr_id = registration.objects.get(email=email)
+            usrs_id = usr_id.id
+            other = None
+            my_id = None
+            counts = 0
+            count_following =0
+
+            try:
+                em = followers.objects.get(user_id=usrs_id)
+                other = [user_id for user_id in em.following.all()]
+                count_following= len(other)
+                my_id = [user_id for user_id in em.follow_me.all()]
+                counts = len(my_id)
+
+
+
+            except:
+
+                pass
+            # other_user = registration.objects.all().exclude(email=email)
+            # data = user_location.objects.get(user_id=usrs_id)
+            # country = data.country_name
+            # city = data.city
+            interest_list = interest.objects.all()
+            dict1 = {
+                'email': email,
+                'user': user,
+                'others': other,
+                'followers': my_id,
+                'count':counts,
+                'count_following':count_following,
+                'interest':interest_list,
+                'posts':qs,
+                'pu':pu}
+                # 'country': country,
+                # 'city': city}
+
+            if 'term' in request.GET:
+
+                qs = interest.objects.filter(my_interest__startswith=request.GET.get('term'))
+                titles = list()
+                for product in qs:
+                    titles.append(product.my_interest)
+                return JsonResponse(titles, safe=False)
+            return render(request, 'newsfeed.html', dict1)
+        else:
+            return render(request, 'index.html')
+
+
+    except:
         return render(request, 'index.html')
 
 
@@ -24,14 +94,41 @@ def login(request):
         user = registration.objects.filter(email=email, password=password)
         if user.exists():
             request.session['email'] = email
-            other_user = registration.objects.filter().exclude(email=email)
+            usr_id = registration.objects.get(email=email)
+            usrs_id = usr_id.id
+            other = None
+            my_id = None
+            counts=0
+            count_following =0
+            try:
+                em = followers.objects.get(user_id = usrs_id)
+                other = [user_id for user_id in em.following.all()]
+                count_following=len(other)
+                my_id = [user_id for user_id in em.follow_me.all()]
+                counts=len(my_id)
+
+
+
+            except:
+                pass
+
+            # other_user = registration.objects.all().exclude(email=email)
             dict1 = {
-            'email': email, 
+            'email': email,
             'user': user,
-            'others': other_user}
+            'others': other,
+            'followers':my_id,
+            'count':counts,
+            'count_following':count_following}
             return render(request, 'newsfeed.html', dict1)
         else:
+            messages.info(request, 'Incorrect Email or Password!!!')
             return render(request, 'index.html')
+
+    else:
+        messages.info(request, 'Page not found!!!')
+        return render(request,'index.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -39,34 +136,56 @@ def register(request):
         last_name = request.POST['last_name']
         email = request.POST['email']
         password = request.POST['password']
+        repassword = request.POST['repassword']
         birth_month = request.POST['birth_month']
         birth_day = request.POST['birth_day']
         birth_year = request.POST['birth_year']
         gender = request.POST.get('sex')
-        
+
         # password = base64.encodebytes(password)
-        birthday = birth_day + birth_month + birth_year
+        birthday = birth_day + '-' + birth_month + '-' + birth_year
 
         if registration.objects.filter(email=email).exists():
-                messages.info(request, 'This Email is Taken')
-                return redirect('index.html')
+            messages.info(request, 'This Email is already Taken')
+            return render(request, 'index.html')
+
+        elif password != repassword:
+            messages.info(request, 'Password donot match!!!')
+            return render(request,'index.html')
 
         else:
-            user = registration(first_name=first_name, last_name=last_name, email=email, password=password, birthday=birthday, gender=gender)
+            user = registration(first_name=first_name, last_name=last_name, email=email, password=password,
+                                birthday=birthday, gender=gender)
             user.save()
-            request.session['email'] = email
             user = registration.objects.filter(email=email, password=password)
             if user.exists():
-                other_user = registration.objects.filter().exclude(email=email)
-                dict1 = {
-                'email': email, 
-                'user': user,
-                'others': other_user}
-                return render(request, 'newsfeed.html', dict1)
+                request.session['email'] = email
+                usr_id = registration.objects.get(email=email)
+                usrs_id = usr_id.id
+                interest_list = interest.objects.all()
+                other = None
+                try:
+                    em = followers.objects.get(user_id=usrs_id)
+                    other = [user_id for user_id in em.following.all()]
+
+                except:
+                    pass
+                # other_user = registration.objects.all().exclude(email=email)
+
+                f = registration.objects.get(email=email)
+                try:
+                    followers.objects.get(user_id=f.id)
+
+                except:
+                    my_profile = followers(user_id=f.id)
+                    my_profile.save()
+                return render(request, 'complete.html', {'email': email, 'user': user, 'others': other,'interest':interest_list})
             else:
+                messages.info(request, 'User not exits!!!')
                 return render(request, 'index.html')
     else:
-        return render(request, 'index.html')
+        messages.info(request, 'Page not found!!!')
+        return render(request, 'index.html', {'email': None, 'user': None})
 
 
 def logout(request):
@@ -86,8 +205,8 @@ def support_action(request):
     return redirect('supportpage')
 
 def get_location(request):
-    lng=float(request.GET.get('lng'))
-    lat=float(request.GET.get('lat'))
+    lng=float(request.POST.get('lng'))
+    lat=float(request.POST.get('lat'))
     print(lng)
     print(lat)
     return render(request, 'index.html')
@@ -96,3 +215,16 @@ def get_location(request):
 # def calc_distance(cor1,cor2):
 #     distance=geodist.geodesic(cor1, cor2).km
 #     print(distance)
+def user_post(request):
+    email = request.session['email']
+    user_feeling = request.GET['feeling']
+    user_emoji = request.GET['emoji']
+    user_content = request.GET['content']
+    user_files = request.GET['ufiles']
+    usr_id = registration.objects.get(email=email)
+    usrs_id = usr_id.id
+
+    user_data = userpost(feeling=user_feeling,emoji=user_emoji[21:-6],usercontent=user_content,userfile=user_files,author_id=usrs_id)
+    user_data.save()
+    return redirect('home')
+
