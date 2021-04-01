@@ -126,7 +126,7 @@
                         </div>
                         <div id="{{post.id}}" style="display:none">{{post.userfile}}</div>
                         
-                        <div class="postedimg">
+                        <div class="postedimg" id="newid{{post.id}}">
                             
                             <video src="media/{{post.userfile}}" id='vid_spo{{post.id}}' height='100%' width='100%' controls></video>
                             <img src="media/{{post.userfile}}" id='img_spo{{post.id}}'>
@@ -146,6 +146,10 @@
                             }
                             else if (vids.test(x)){
                                 document.getElementById('img_spo{{post.id}}').style.display='none';
+                            }
+                            else{
+                                
+                                document.getElementById('newid{{post.id}}').style.display='none';
                             }
                        
                             

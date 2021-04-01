@@ -30,7 +30,7 @@ picupload.onchange = function () {
                     img.width = "240";
                     img.src = e.target.result;
                     preview_img.appendChild(img);
-                    document.getElementById('defapp').style.display='none';
+                   
                 }
                 reader.readAsDataURL(file);
             } else {
