@@ -25,8 +25,9 @@
                         <div class="bg-pp" id="bg-ppp">
                             <img class="back-op" src="{% static 'img/defaultpp.jpg' %}" id="defpp">
                             <label class="pp-chg" for="picupload"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
-                            <input type="file" id="picupload" name="image">
+
                         </div>
+                        <input type="file" id="picupload" name="image">
                         {% for i in user %}
                         <b style="padding: 10px;">{{i.first_name}} {{i.last_name}}</b>
                         {% endfor %}
@@ -45,7 +46,7 @@
                         {% for i in interest %}
                         <div style="display:inline-block; padding:5px;background-color:#DAD7D6;border-radius:20px; height:40px; width:150px; margin-bottom:10px;">
                             <span><input type="checkbox" name="interest" value="{{i.my_interest}}">{{i.my_interest}}</span>
-                            <img src="/interest_icon/{{i.my_interest}}.png" height="30" width="30" style="border-radius:50%; background-color:black; padding:5px;float:right;">
+                            <img src="media/interest_icon/{{i.my_interest}}.png" height="30" width="30" style="border-radius:50%; background-color:black; padding:5px;float:right;">
                         </div>
                         {% endfor %}
                     </div>
@@ -61,4 +62,5 @@
         All Right Reserved
     </div>
     <script src="{% static 'js/complete.js' %}"></script>
+    <script src="{% static 'js/newsfeed.js' %}"></script>
 </html>

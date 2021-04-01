@@ -40,7 +40,7 @@ function a_1()
     document.getElementById('feeling-label').innerHTML=label;
     document.getElementById('f-label').value=label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 
 }
 
@@ -55,7 +55,7 @@ function a_2()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function a_3()
 {
@@ -68,7 +68,7 @@ function a_3()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function a_4()
 {
@@ -81,7 +81,7 @@ function a_4()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function a_5()
 {
@@ -94,7 +94,7 @@ function a_5()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function a_6()
 {
@@ -107,7 +107,7 @@ function a_6()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function a_7()
 {
@@ -120,7 +120,7 @@ function a_7()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 
 // feeling
@@ -135,7 +135,7 @@ function feeling_h()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 
 function feeling_s()
@@ -149,7 +149,7 @@ function feeling_s()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_e()
 {
@@ -162,7 +162,7 @@ function feeling_e()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_sick()
 {
@@ -175,7 +175,7 @@ function feeling_sick()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_w()
 {
@@ -188,7 +188,7 @@ function feeling_w()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_crazy()
 {
@@ -201,7 +201,7 @@ function feeling_crazy()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_a()
 {
@@ -214,7 +214,7 @@ function feeling_a()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_t()
 {
@@ -227,7 +227,7 @@ function feeling_t()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_afraid()
 {
@@ -240,7 +240,7 @@ function feeling_afraid()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_d()
 {
@@ -253,7 +253,7 @@ function feeling_d()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_i()
 {
@@ -266,7 +266,7 @@ function feeling_i()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_c()
 {
@@ -279,7 +279,7 @@ function feeling_c()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_surprised()
 {
@@ -292,7 +292,7 @@ function feeling_surprised()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 function feeling_n()
 {
@@ -305,7 +305,7 @@ function feeling_n()
     document.getElementById('feeling-label').innerHTML= label;
     document.getElementById('f-label').value= label;
     document.getElementById('feeling-emoji').innerHTML = "<img src='../static/"+img_tag+"'>";
-    document.getElementById('f-img-tag').value= `<img src="{% static '`+img_tag+`' %}">`;
+    document.getElementById('f-img-tag').value= img_tag;
 }
 
 var fileUpload = document.getElementById("fileupload");
@@ -336,6 +336,7 @@ fileUpload.onchange = function () {
     } else {
         alert("This browser does not support HTML5 FileReader.");
     }
+   
 };
 
 function myComment()

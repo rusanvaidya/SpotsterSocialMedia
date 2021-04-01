@@ -28,6 +28,10 @@ div.container1
     scrollbar-width: none;
     color: white;
 }
+.container1 ::-webkit-scrollbar
+{
+    display: none;
+}
 /* middle container */
 div.container2
 {
@@ -38,6 +42,10 @@ div.container2
     display: inline-block;
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+.container2 ::-webkit-scrollbar
+{
+    display: none;
 }
 /* right container */
 div.container3
@@ -50,18 +58,12 @@ div.container3
     scrollbar-width: none;
     color: white;
 }
-.container1 ::-webkit-scrollbar
-{
-    display: none;
-}
-.container2 ::-webkit-scrollbar
-{
-    display: none;
-}
 .container3 ::-webkit-scrollbar
 {
     display: none;
 }
+
+
 
 /* first container extension */
 .c1

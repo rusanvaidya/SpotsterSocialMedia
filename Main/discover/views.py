@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from home.models import registration
+from home.models import registration,profileinfo
 # Create your views here.
 from discover.models import followers
 
@@ -38,13 +38,9 @@ def discover(request):
 
 def newsfeed(request):
     email = request.session['email']
-   # profile= request.FILES['picupload']
-    #print(profile)
+    profile= request.FILES['image']
     bio=request.POST['bio']
-    print(bio)
     inte = request.POST.getlist('interest')
-    for i in inte:
-        print(i)
 
     user = registration.objects.filter(email=email)
     usr_id = registration.objects.get(email=email)
@@ -56,7 +52,8 @@ def newsfeed(request):
 
     except:
         pass
-
+    savedata=profileinfo(owner_id=usrs_id,profilepic=profile,userbio=bio,userinterest=inte)
+    savedata.save()
     return render(request, 'newsfeed.html', {'email': email, 'user': user, 'others': other})
 
 

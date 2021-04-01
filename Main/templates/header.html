@@ -93,11 +93,11 @@
                 </div>
             </div>
             <div class="dd">
-                <img onclick="myProfile()" class="d1btn" src="{% static 'img/defaultpp.jpg' %}">
+                <img onclick="myProfile()" class="d1btn" src="media/{{profile_id.profilepic}}">
                 <div id="mydd1" class="dd1-content">
                     {% for i in user %}
                     <div class="user_option">
-                        <img class="pp-show" src="{% static 'img/defaultpp.jpg' %}">
+                        <img class="pp-show" src="media/{{profile_id.profilepic}}">
                         <span class="badge-verified"><img src="{% static 'img/not-verified.png' %}" class="nv"></span>
                         <a href="profile">
                             {{i.first_name}} {{i.last_name}}<br>

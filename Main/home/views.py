@@ -3,10 +3,10 @@ from django.shortcuts import render, redirect
 from discover.models import followers
 
 from discover.models import interest
-from .models import registration, support, userpost
+from .models import registration, support, userpost,profileinfo
 from django.contrib import messages
 from itertools import chain
-from math import sin, cos, sqrt, atan2, radians
+
 # Create your views here.
 def home(request):
     try:
@@ -17,6 +17,8 @@ def home(request):
         posts = []
         pu = registration.objects.all()
         qs =None
+        # dict2={'posts':qs,
+        #     'pu':pu}
         for u in users1:
             p = registration.objects.get(id=u.id)
             try:
@@ -36,9 +38,12 @@ def home(request):
 
         if request.session['email']:
             email = request.session['email']
+            
             user = registration.objects.filter(email=email)
             usr_id = registration.objects.get(email=email)
             usrs_id = usr_id.id
+            profile_id=profileinfo.objects.get(owner_id=usrs_id)
+            print(profile_id)
             other = None
             my_id = None
             counts = 0
@@ -68,9 +73,10 @@ def home(request):
                 'followers': my_id,
                 'count':counts,
                 'count_following':count_following,
-                'interest':interest_list,}
-                # 'posts':qs,
-                # 'pu':pu}
+                'interest':interest_list,
+                'posts':qs,
+                'pu':pu,
+                'profile_id':profile_id}
                 # 'country': country,
                 # 'city': city}
 
@@ -223,11 +229,17 @@ def user_post(request):
     user_feeling = request.POST['feeling']
     user_emoji = request.POST['emoji']
     user_content = request.POST['content']
-    user_files = request.FILES['ufiles']
+    
+    try:
+        user_files = request.FILES['ufiles']
+    except:
+        user_files=None
     usr_id = registration.objects.get(email=email)
     usrs_id = usr_id.id
-
-    user_data = userpost(feeling=user_feeling,emoji=user_emoji[21:-6],usercontent=user_content,userfile=user_files,author_id=usrs_id)
+    if user_files==None:
+        user_data = userpost(feeling=user_feeling,emoji=user_emoji,usercontent=user_content,author_id=usrs_id)
+    else:
+        user_data = userpost(feeling=user_feeling,emoji=user_emoji,usercontent=user_content,userfile=user_files,author_id=usrs_id)
     user_data.save()
     return redirect('home')
 

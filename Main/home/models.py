@@ -10,7 +10,11 @@ class registration(models.Model):
     birthday = models.CharField(max_length=100)
     gender = models.CharField(max_length=100)
 
-
+class profileinfo(models.Model):
+    owner=models.ForeignKey(registration,on_delete=models.CASCADE)
+    profilepic=models.ImageField(upload_to='profilepics',blank=True)
+    userbio=models.TextField(max_length=500,blank=True)
+    userinterest=models.CharField(max_length=10000,blank=True)
 
 class userpost(models.Model):
     author = models.ForeignKey(registration, on_delete=models.CASCADE)
