@@ -7,6 +7,13 @@
         <link rel="icon" href="{% static 'img/icon.png' %}">
     </head>
     <body>
+        {% if messages %}
+        <div class="messages" style="background-color:#FF8040">
+            {% for message in messages %}
+            <div class="container message" style="text-align:center;"> <font size="4px">{{ message }}</font></div>
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="bodybg" style="background: url('{% static 'img/theme.png' %}') no-repeat; background-size: 95%;"></div>
         <div class="header">
             <div class="headerlink">
@@ -47,10 +54,10 @@
                                 <b>Spotster</b>
                             </div>
                             <label for="email">
-                                    <input type="email" placeholder="Email or Phone Number" name="email">
+                                    <input type="email" placeholder="Email" name="email" required>
                             </label>
                             <label for="password">
-                                    <input type="password" placeholder="Password" name="password">
+                                    <input type="password" placeholder="Password" name="password" minlength="6" maxlength="15">
                             </label>
                             <div class="forgot">
                                 <label for="forgotpassword">
@@ -95,16 +102,17 @@
                         <form method="POST" action="register">
                             {% csrf_token %}
                             <div class="fullname">
-                                <input type="text" placeholder="First Name" name="first_name" autofocus>
-                                <input type="text" placeholder="Last Name" name="last_name">
+                                <input type="text" placeholder="First Name" name="first_name" autofocus required maxlength="15">
+                                <input type="text" placeholder="Last Name" name="last_name" required maxlength="15">
                             </div>
                             <div class="emailpassword">
-                                <input type="text" placeholder="Email or Phone Number" name="email">
-                                <input type="password" placeholder="Password" name="password">
+                                <input type="email" placeholder="Email" name="email" required>
+                                <input type="password" placeholder="Password" name="password" required minlength="6" maxlength="15">
+                                <input type="password" placeholder="Re-Password" name="repassword" required minlength="6" maxlength="15">
                             </div>
                             <div class="birthday">
                                 <label for="birthday">Birthday:</label>
-                                <select name="birth_month">
+                                <select name="birth_month" required>
                                     <option disabled>Month</option>
                                     <option>Jan</option>
                                     <option>Feb</option>
@@ -197,13 +205,13 @@
                             <div class="gender">
                                 <label>Gender:</label>
                                 <label class="sex" for="male">
-                                    <input type="radio" name="sex" value="male" id="male">Male
+                                    <input type="radio" name="sex" value="male" id="male" required>Male
                                 </label>
                                 <label class="sex" for="female">
-                                    <input type="radio" name="sex" value="male" id="female">Female
+                                    <input type="radio" name="sex" value="male" id="female" required>Female
                                 </label>
                                 <label class="sex" for="custom">
-                                    <input type="radio" name="sex" value="custom" id="custom">Custom
+                                    <input type="radio" name="sex" value="custom" id="custom" required>Custom
                                 </label>
                             </div>
                             <div class="policy">

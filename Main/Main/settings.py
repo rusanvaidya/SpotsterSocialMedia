@@ -37,6 +37,8 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'home',
+    'discover',
+    'complete',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -84,8 +86,8 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'spotster',
-        'USER': 'myuser',
+         'NAME': os.getenv('name'),
+        'USER': os.getenv('user'),
         'PASSWORD': os.getenv("dbpass"),
         'HOST': 'localhost',
         'PORT': '',

@@ -17,6 +17,14 @@
         </td>
     </tr>
     {% endfor %}
+     <tr class="sidemenu" onclick="window.open('Follower', '_self')">
+        <td class="c1-img">
+            <img src="{% static 'icon/follower.png' %}">
+        </td>
+        <td class="c1-label">
+           Followers({{count}})
+        </td>
+    </tr>
     <tr class="sidemenu" onclick="window.open('saved', '_self')">
         <td class="c1-img">
             <img src="{% static 'icon/saved.png' %}">
@@ -66,9 +74,11 @@
         })
     );
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: 'get_location',
         data: {
+           'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+
             "lng": lng,
             "lat": lat,
         },

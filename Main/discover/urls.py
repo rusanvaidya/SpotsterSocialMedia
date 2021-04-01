@@ -19,4 +19,8 @@ from . import views
 
 urlpatterns = [
     path('discover', views.discover),
+    path('newsfeed', views.newsfeed,name = 'newsfeed'),
+    path('Follower', views.follower,name = 'follower'),
+    path('discover_more', views.discover_more, name='discover_more'),
+
 ]
