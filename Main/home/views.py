@@ -9,26 +9,29 @@ from itertools import chain
 from math import sin, cos, sqrt, atan2, radians
 # Create your views here.
 def home(request):
-    email = request.session['email']
-    profile1 = registration.objects.get(email=email)
-    profile = followers.objects.get(user_id = profile1.pk)
-    users1 = [i for i in profile.following.all()]
-    posts = []
-    pu = registration.objects.all()
-    qs =None
-    for u in users1:
-        p = registration.objects.get(id=u.id)
-        try:
-            p_post = userpost.objects.filter(author_id=p.id)
-            posts.append(p_post)
-        except:
-            pass
+    try:
+        email = request.session['email']
+        profile1 = registration.objects.get(email=email)
+        profile = followers.objects.get(user_id = profile1.pk)
+        users1 = [i for i in profile.following.all()]
+        posts = []
+        pu = registration.objects.all()
+        qs =None
+        for u in users1:
+            p = registration.objects.get(id=u.id)
+            try:
+                p_post = userpost.objects.filter(author_id=p.id)
+                posts.append(p_post)
+            except:
+                pass
 
 
-    my_post = userpost.objects.filter(author_id=profile1.id)
-    posts.append(my_post)
-    if len(posts)>0:
-        qs = sorted(chain(*posts),reverse=True,key=lambda obj:obj.created)
+        my_post = userpost.objects.filter(author_id=profile1.id)
+        posts.append(my_post)
+        if len(posts)>0:
+            qs = sorted(chain(*posts),reverse=True,key=lambda obj:obj.created)
+    except:
+        pass
     try:
 
         if request.session['email']:
@@ -65,9 +68,9 @@ def home(request):
                 'followers': my_id,
                 'count':counts,
                 'count_following':count_following,
-                'interest':interest_list,
-                'posts':qs,
-                'pu':pu}
+                'interest':interest_list,}
+                # 'posts':qs,
+                # 'pu':pu}
                 # 'country': country,
                 # 'city': city}
 
@@ -217,10 +220,10 @@ def get_location(request):
 #     print(distance)
 def user_post(request):
     email = request.session['email']
-    user_feeling = request.GET['feeling']
-    user_emoji = request.GET['emoji']
-    user_content = request.GET['content']
-    user_files = request.GET['ufiles']
+    user_feeling = request.POST['feeling']
+    user_emoji = request.POST['emoji']
+    user_content = request.POST['content']
+    user_files = request.FILES['ufiles']
     usr_id = registration.objects.get(email=email)
     usrs_id = usr_id.id
 

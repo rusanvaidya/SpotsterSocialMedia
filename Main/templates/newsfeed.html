@@ -117,12 +117,39 @@
                                 {{post.created}}
                             </div>
                         </div>
+                        
                         <div class="caption">
                             {{post.usercontent}}
+                            
+                            
+                            
                         </div>
+                        <div id="{{post.id}}" style="display:none">{{post.userfile}}</div>
+                        
                         <div class="postedimg">
-                            <img src="{% static 'media/w1.png' %}">
+                            
+                            <video src="media/{{post.userfile}}" id='vid_spo{{post.id}}' height='100%' width='100%' controls></video>
+                            <img src="media/{{post.userfile}}" id='img_spo{{post.id}}'>
                         </div>
+                       
+                       
+                        <script>
+                            var x=document.getElementById(`{{post.id}}`).innerHTML;
+                            console.log(x);
+                    
+                            var pics = /\.(jpeg|jpg|png)$/;
+                            var vids = /\.(mp4|wmv)/;
+            
+
+                            if (pics.test(x)){
+                                document.getElementById('vid_spo{{post.id}}').style.display='none';
+                            }
+                            else if (vids.test(x)){
+                                document.getElementById('img_spo{{post.id}}').style.display='none';
+                            }
+                       
+                            
+                        </script>
                         <div class="joinin">
                             <form>
                                 <label for="like" id="i-l">

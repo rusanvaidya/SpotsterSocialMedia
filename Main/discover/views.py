@@ -38,8 +38,8 @@ def discover(request):
 
 def newsfeed(request):
     email = request.session['email']
-    profile= request.FILES['picupload']
-    print(profile)
+   # profile= request.FILES['picupload']
+    #print(profile)
     bio=request.POST['bio']
     print(bio)
     inte = request.POST.getlist('interest')
