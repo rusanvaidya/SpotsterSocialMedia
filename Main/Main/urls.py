@@ -28,4 +28,5 @@ urlpatterns = [
     path('',include('chatbox.urls')),
     path('',include('saved.urls')),
     path('',include('complete.urls')),
+    path('api/',include('spotsterapi.urls'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
