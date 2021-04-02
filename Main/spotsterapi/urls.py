@@ -1,6 +1,6 @@
 from django.urls import path
-from.views import user_account
+from .views import registration_view
 
 urlpatterns = [
-    path('userdata/',user_account),
+    path('userdata/',registration_view),
 ]
