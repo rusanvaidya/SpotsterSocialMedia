@@ -122,6 +122,8 @@ REST_FRAMEWORK = {
         
     ]
 }
+# from spotsterapi.serializers import UserSerializer
+# USER_DETAILS_SERIALIZER = UserSerializer 
 
 
 # Internationalization
