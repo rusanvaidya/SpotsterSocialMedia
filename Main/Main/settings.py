@@ -37,6 +37,8 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'home',
+    'discover',
+    'complete',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'spotsterapi',
+    
+    'rest_framework.authtoken',
+
 ]
 
 MIDDLEWARE = [
@@ -83,8 +89,8 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'spotster',
-        'USER': 'myuser',
+         'NAME': os.getenv('name'),
+        'USER': os.getenv('user'),
         'PASSWORD': os.getenv("dbpass"),
         'HOST': 'localhost',
         'PORT': '',
@@ -109,6 +115,15 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        
+    ]
+}
+# from spotsterapi.serializers import UserSerializer
+# USER_DETAILS_SERIALIZER = UserSerializer 
 
 
 # Internationalization

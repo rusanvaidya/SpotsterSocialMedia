@@ -21,6 +21,7 @@ picupload.onchange = function () {
         var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.png)$/;
         for (var i = 0; i < picupload.files.length; i++) {
             var file = picupload.files[i];
+            console.log(file)
             if (regex.test(file.name.toLowerCase())) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
@@ -29,7 +30,7 @@ picupload.onchange = function () {
                     img.width = "240";
                     img.src = e.target.result;
                     preview_img.appendChild(img);
-                    document.getElementById('defapp').style.display='none';
+                   
                 }
                 reader.readAsDataURL(file);
             } else {

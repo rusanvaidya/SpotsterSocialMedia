@@ -18,20 +18,23 @@
             <div class="logo">
                 <b>Spotster</b>
             </div>
-            <form>
+            <form action="newsfeed" method="post" enctype='multipart/form-data'>{% csrf_token %}
                 <div id="interest-first">
                     Choose Profile Picture:
                     <div class="c1-profile">
                         <div class="bg-pp" id="bg-ppp">
                             <img class="back-op" src="{% static 'img/defaultpp.jpg' %}" id="defpp">
                             <label class="pp-chg" for="picupload"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
-                            <input type="file" id="picupload">
+
                         </div>
-                        <b style="padding: 10px;">Rusan Vaidya</b>
+                        <input type="file" id="picupload" name="image">
+                        {% for i in user %}
+                        <b style="padding: 10px;">{{i.first_name}} {{i.last_name}}</b>
+                        {% endfor %}
                     </div>
                     <div class="bio-complete">
                         Bio:
-                        <textarea placeholder="Bio"></textarea>
+                        <textarea placeholder="Bio..." name="bio"></textarea>
                     </div>
                 </div>
                 <div id="interest-complete">
@@ -40,49 +43,12 @@
                         <input type="search" placeholder="Search interest">
                     </div>
                     <div id="l-interest" style="height: 380px;">
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
-                        <label><input type="checkbox" value="Art">Art</label>
+                        {% for i in interest %}
+                        <div style="display:inline-block; padding:5px;background-color:#DAD7D6;border-radius:20px; height:40px; width:150px; margin-bottom:10px;">
+                            <span><input type="checkbox" name="interest" value="{{i.my_interest}}">{{i.my_interest}}</span>
+                            <img src="media/interest_icon/{{i.my_interest}}.png" height="30" width="30" style="border-radius:50%; background-color:black; padding:5px;float:right;">
+                        </div>
+                        {% endfor %}
                     </div>
                     <input type="submit" value="SAVE" class="next-complete">
                 </div>
@@ -96,4 +62,5 @@
         All Right Reserved
     </div>
     <script src="{% static 'js/complete.js' %}"></script>
+    <script src="{% static 'js/newsfeed.js' %}"></script>
 </html>
