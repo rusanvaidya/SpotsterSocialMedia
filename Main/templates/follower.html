@@ -14,7 +14,16 @@
                                         <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
 
                                                 <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
-                                            <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
+                                            {% for bio in userdata %}
+                                            {% if bio.owner_id == i.pk %}
+                                                {% if bio.profile_pic != '' %}
+                                                    <tr><td><img src="media/{{bio.profile_pic}}" width="50" height="50"></td></tr>
+                                                    {% else %}
+                                                    <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
+
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
                                             <tr><td>{{i.first_name}} {{i.last_name}}</td></tr>
                                         {% if i in others%}
                                             <tr><td><button type="submit" style="background-color:red; border-radius:3px;" class="follow{{i.pk}}">

@@ -63,6 +63,7 @@
 .header_btns_div .header_btns a img, .header_btns_active a img
 {
     width: 30px;
+    height: 30px;
 }
 .header_m_img
 {
@@ -81,6 +82,7 @@
 .bar_buttons img
 {
     width: 30px;
+    height: 30px;
     padding: 12px;
 }
 .d1btn, .d2btn , .d3btn, .d2btn-a, .d3btn-a
@@ -129,6 +131,7 @@
 .badge-verified img.nv
 {
     width: 20px;
+    height: 20px;
 }
 
 .dd 
@@ -177,6 +180,9 @@
 .user_option img
 {
     width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: 50% 40%;
     border-radius: 200px;
 }
 .light
@@ -198,12 +204,12 @@
 }
 .animate-start
 {
-    animation: loading 2s linear infinite;
+    animation: 2s loading infinite;
 }
 @keyframes loading
 {
-    0%{rotate: 0deg;}
-    100%{rotate: 720deg;}
+    0%{}
+    100%{transform: rotate(720deg);}
 }
 .preloader img
 {

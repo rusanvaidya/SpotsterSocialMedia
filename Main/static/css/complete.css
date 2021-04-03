@@ -71,4 +71,6 @@ button.next-complete:hover
 #bg-ppp img
 {
     border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 40%; 
 }

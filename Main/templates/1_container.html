@@ -9,11 +9,17 @@
     <table class="sidetable">
     {% for i in user %}
     <tr class="sidemenu" onclick="window.open('profile','_self')">
+        {% if mydetials.profile_pic != '' %}
         <td class="c1-img">
-            <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
+            <img src="media/{{mydetials.profile_pic}}" style="width:50px" height="40" width="50">
         </td>
+        {% else %}
+        <td class="c1-img">
+            <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px" >
+        </td>
+        {% endif %}
         <td class="c1-label"> 
-            {{i.first_name}} {{i.last_name}}
+            &emsp;{{i.first_name}} {{i.last_name}}
         </td>
     </tr>
     {% endfor %}
@@ -22,7 +28,7 @@
             <img src="{% static 'icon/follower.png' %}">
         </td>
         <td class="c1-label">
-           Followers({{count}})
+           &emsp;Followers({{count}})
         </td>
     </tr>
     <tr class="sidemenu" onclick="window.open('saved', '_self')">
@@ -30,7 +36,7 @@
             <img src="{% static 'icon/saved.png' %}">
         </td>
         <td class="c1-label">
-            Saved
+            &emsp;Saved
         </td>
     </tr>
     <tr class="sidemenu" onclick="window.open('chatbox', '_self')">
@@ -38,7 +44,7 @@
             <img src="{% static 'icon/message-active.png' %}">
         </td>
         <td class="c1-label">
-            Chatbox
+            &emsp;Chatbox
         </td>
     </tr>
     </table>

@@ -2,7 +2,12 @@
 <div class="c2-new">
     <div class="c2-text">
         <table>
-            <td class="new-poster"><img src="media/{{profile_id.profilepic}}"></td><td class="poster-div"><div class="new_idea" onclick="post_area()">What's your idea today...</div></td>                          
+            {% if mydetials.profile_pic != '' %}
+            <td class="new-poster"><img src="media/{{mydetials.profile_pic}}"></td>
+            {% else %}
+            <td class="new-poster"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+            {% endif %}
+            <td class="poster-div"><div class="new_idea" onclick="post_area()">What's your idea today...</div></td>
         </table>
     </div>
     <div class="c2-new-buttons">
@@ -33,15 +38,18 @@
                 <div class="posting-user">
                     {% for i in user %}
                     <table>
-                        <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                    {% if mydetials.profile_pic != '' %}
+                        <td class="posted-img"><img class="back-op" src="media/{{mydetials.profile_pic}}">
+                     {% else %}
+                        <td class="posted-img"><img class="back-op" src="{% static 'img/defaultpp.jpg' %}"></td>
+                      {% endif %}
                         <td style="font-weight: bold; font-size: 13px;">{{i.first_name}} {{i.last_name}}</td>
                         <td id="feeling-label"></td>
                         <td id="feeling-emoji"></td>
                     </table>
                     {% endfor %}
                 </div>
-                <form  action="content_post" enctype="multipart/form-data" method="post">
-                    {% csrf_token %}
+                <form  action="content_post" enctype="multipart/form-data" method="post">{% csrf_token %}
                 <div class="caption-write">
                     <input type="text" id="f-label" style="display: none;" name="feeling">
                     <input type="text" id="f-img-tag" style="display: none;" name="emoji">
@@ -52,7 +60,7 @@
                 <div class="c2-btn-modal">
                     <label class="c2-btns-m" for="fileupload" style="text-align: center;">
                         <img src="{% static 'icon/photo.png' %}">
-                        <input type="file"  id='fileupload' multiple="multiple" name="ufiles">
+                        <input type="file"  id="fileupload" multiple="multiple" name="ufiles">
                     </label>
                     <div class="c2-btns-m" onclick="post_venue()">
                             <img src="{% static 'icon/venue.png' %}">

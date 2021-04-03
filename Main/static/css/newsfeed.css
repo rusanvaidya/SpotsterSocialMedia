@@ -76,8 +76,11 @@ div.container3
 }
 .c1-img img
 {
-    border-radius: 50px;
+    border-radius: 50%;
     width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: 50% 40%;
 }
 .c1-label
 {
@@ -167,6 +170,9 @@ div.container3
 .new-poster img
 {
     width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: 50% 40%;
     border-radius: 50%;
 }
 .poster-div
@@ -348,23 +354,31 @@ div.container3
 {
     width: 15px;
 }
-#a-l, #a-d, #a-c, #a-s, #a-sa, #a-f
+/* .a-l, .a-d, .a-c, .a-s, .a-sa, .a-f
 {
     display: none;
-}
+} */
 .comment-section
 {
     width: 95%;
     display: none;
 }
-.comment-section a
+.comment-section-show
+{
+    width: 95%;
+}
+.comment-section a,.comment-section-show a
 {
     color: black;
     font-weight: bold;
     padding: 10px;
     text-decoration: none;
 }
-.comment-section input[type='text']
+.comment-section a:hover,.comment-section-show a:hover
+{
+    text-decoration: underline;
+}
+.comment-section input[type='text'], .comment-section-show input[type='text']
 {
     width: 100%;
     padding: 8px 12px;
@@ -455,7 +469,7 @@ div.container3
 
 
 /* new post modal */
-#new_post_modal, #p_update_modal, #mypic
+#new_post_modal, #p_update_modal, #mypic, .view-posted-content
 {
     display: none; 
     position: fixed;
@@ -467,7 +481,7 @@ div.container3
     height: 100%;
     overflow: auto; 
     background-color: rgba(0,0,0,0.4);
-  }
+}
 .modal
 {
     padding: 20px;
@@ -491,6 +505,30 @@ div.container3
     from {top: 0%; opacity: 0}
     to {top: 40%; opacity: 1}; 
 }
+.modal-post
+{
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px grey;
+    box-sizing: border-box;
+    background: white;
+    width: 80%;
+    height: 68%;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    box-shadow: 0 0 3px 3px #8a8a8a;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    -webkit-animation: slidein_modal_post;
+    -webkit-animation-duration: 1s;
+}
+@keyframes slidein_modal_post
+{
+    from {top: 0%; opacity: 0}
+    to {top: 45%; opacity: 1}; 
+}
+
 .modaltop
 {
     overflow: hidden;
@@ -647,4 +685,26 @@ div.container3
     width: 350px;
     padding: 10px;
     height: 300px;
+}
+
+.posted-img-user
+{
+    float: left;
+    width: 65%;
+    padding: 5px;
+    margin: 10px;
+    text-align: center;
+}
+.posted-img-user img
+{
+    max-width: 100%;
+    max-height: 500px;
+}
+
+.comment-section-user
+{
+    float: right;
+    padding: 2px;
+    width: 30%;
+    height: 95%;
 }

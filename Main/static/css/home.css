@@ -8,10 +8,9 @@ body
 {
     left: 0;
     top: 0;
-    padding: 10px;
     position: fixed;
-    width: 1360px;
-    height: 1080px;
+    width: 100%;
+    height: 100%;
     -webkit-animation: bgslide;
     -webkit-animation-duration: 1s;
 }
@@ -21,22 +20,24 @@ body
     to{opacity: 1; left: 0px;}
 }
 
+.overall-container
+{
+    width: 60%;
+    margin: 0 auto;
+    height: 100%;
+    z-index: 1;
+}
 /* header */
 .header
 {
     padding: 20px;
-    top: 6%;
-    left: 50%;
-    width: 900px;
-    position: fixed;
-    transform: translate(-50%, -50%);
     text-align: center;
     display: block;
+    position: relative;
     border-bottom: 2px solid rgb(240, 239, 239);
 }
 .headerlink
 {
-    position: relative;
     display: inline-block;
     width: 19%;
 }
@@ -45,18 +46,15 @@ body
     color: white;
     font-weight: bold;    
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     text-decoration: none;
 }
 
 /* container */
 .main_container
 {
-    width: 900px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: 15% ;
+    display: block;
     -webkit-animation: opa;
     -webkit-animation-duration: 2s;
 }
@@ -72,6 +70,7 @@ body
     display: inline-block;
     width: 50%;
     float: left;
+    position: relative;
 }
 
 .login_container
@@ -79,9 +78,7 @@ body
     display: inline-block;
     float: right;
     width: 50%;
-    position: absolute;
-    top: 45%;
-    transform: translate(0, -50%);
+    position: relative;
 }
 
 .phone img
@@ -94,7 +91,7 @@ body
 {
     width: 400px;
     padding: 20px;
-    background: #f8fff5;
+    background: #ffffff;
     border-radius: 20px;
     box-shadow: 0 0 3px 3px grey;
     box-sizing: border-box;
@@ -311,10 +308,20 @@ body
 }
 
 /* resize window */
-@media only screen and (max-width: 1000px) 
+@media only screen and (max-width: 1400px) 
 {
+    .bodybg
+    {
+        display: none;
+    }
+    .overall-container
+    {
+        width: 100%;
+        height: auto;
+    }
     .main_container
     {
+        margin: 0%;
         width: 100%;
     }
     .header
@@ -328,8 +335,13 @@ body
     .login_container
     {
         width: 100%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    }
+}
+@media only screen and (max-width: 1000px) 
+{
+    .login
+    {
+        width: 90%;
+        height: 100%;
     }
 }

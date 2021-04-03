@@ -60,7 +60,13 @@
                 <div id="mydd3" class="dd3-content">
                     {% for i in user %}
                     <table>
-                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                        <td>
+                            {% if mydetials.profile_pic != '' %}
+                            <a href=""><img src="media/{{mydetials.profile_pic}}"></a>
+                            {% else %}
+                            <a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a>
+                            {% endif %}
+                        </td>
                         <td><a href="">{{i.first_name}} {{i.last_name}}<br>
                             <p class="light">Are you free tonight?</p>
                         </a></td>
@@ -93,11 +99,20 @@
                 </div>
             </div>
             <div class="dd">
-                <img onclick="myProfile()" class="d1btn" src="media/{{profile_id.profilepic}}">
+                {% if mydetials.profile_pic != '' %}
+                <img onclick="myProfile()" class="d1btn" src="media/{{mydetials.profile_pic}}">
+                {% else %}
+                <img onclick="myProfile()" class="d1btn" src="{% static 'img/defaultpp.jpg' %}">
+                {% endif %}
                 <div id="mydd1" class="dd1-content">
                     {% for i in user %}
                     <div class="user_option">
-                        <img class="pp-show" src="media/{{profile_id.profilepic}}">
+                        {% if mydetials.profile_pic != '' %}
+                        <img class="pp-show" src="media/{{mydetials.profile_pic}}">
+                        {% else %}
+                        <img class="pp-show" src="{% static 'img/defaultpp.jpg' %}">
+                        {% endif %}
+
                         <span class="badge-verified"><img src="{% static 'img/not-verified.png' %}" class="nv"></span>
                         <a href="profile">
                             {{i.first_name}} {{i.last_name}}<br>
