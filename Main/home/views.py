@@ -3,51 +3,26 @@ from django.shortcuts import render, redirect
 from discover.models import followers
 
 from discover.models import interest
-from .models import registration, support, userpost,profileinfo
+
+from complete.models import userdetials
+from .models import registration, support, userpost
 from django.contrib import messages
 from itertools import chain
-
+from math import sin, cos, sqrt, atan2, radians
 # Create your views here.
 def home(request):
     try:
-        email = request.session['email']
-        profile1 = registration.objects.get(email=email)
-        profile = followers.objects.get(user_id = profile1.pk)
-        users1 = [i for i in profile.following.all()]
-        posts = []
-        pu = registration.objects.all()
-        qs =None
-        # dict2={'posts':qs,
-        #     'pu':pu}
-        for u in users1:
-            p = registration.objects.get(id=u.id)
-            try:
-                p_post = userpost.objects.filter(author_id=p.id)
-                posts.append(p_post)
-            except:
-                pass
-
-
-        my_post = userpost.objects.filter(author_id=profile1.id)
-        posts.append(my_post)
-        if len(posts)>0:
-            qs = sorted(chain(*posts),reverse=True,key=lambda obj:obj.created)
-    except:
-        pass
-    try:
-
         if request.session['email']:
             email = request.session['email']
-            
             user = registration.objects.filter(email=email)
             usr_id = registration.objects.get(email=email)
             usrs_id = usr_id.id
-            profile_id=profileinfo.objects.get(owner_id=usrs_id)
-            print(profile_id)
             other = None
             my_id = None
             counts = 0
             count_following =0
+            pu = registration.objects.all()
+            qs = None
 
             try:
                 em = followers.objects.get(user_id=usrs_id)
@@ -61,11 +36,34 @@ def home(request):
             except:
 
                 pass
-            # other_user = registration.objects.all().exclude(email=email)
-            # data = user_location.objects.get(user_id=usrs_id)
-            # country = data.country_name
-            # city = data.city
+
+
+            try:
+                profile1 = registration.objects.get(email=email)
+                profile = followers.objects.get(user_id=profile1.pk)
+                users1 = [i for i in profile.following.all()]
+                posts =[]
+                for u in users1:
+                    p = registration.objects.get(id=u.id)
+                    try:
+                        p_post = userpost.objects.filter(author_id=p.id)
+                        posts.append(p_post)
+                    except:
+                        pass
+
+                my_post = userpost.objects.filter(author_id=profile1.id)
+                posts.append(my_post)
+                if len(posts) > 0:
+                    qs = sorted(chain(*posts), reverse=True, key=lambda obj: obj.created)
+            except:
+                pass
             interest_list = interest.objects.all()
+            user_data = userdetials.objects.all()
+            mydetials = 0
+            try:
+                mydetials = userdetials.objects.get(owner_id=usrs_id)
+            except:
+                pass
             dict1 = {
                 'email': email,
                 'user': user,
@@ -76,7 +74,8 @@ def home(request):
                 'interest':interest_list,
                 'posts':qs,
                 'pu':pu,
-                'profile_id':profile_id}
+                'mydetials':mydetials,
+                'userdata':user_data}
                 # 'country': country,
                 # 'city': city}
 
@@ -109,6 +108,8 @@ def login(request):
             my_id = None
             counts=0
             count_following =0
+            pu = registration.objects.all()
+            qs = None
             try:
                 em = followers.objects.get(user_id = usrs_id)
                 other = [user_id for user_id in em.following.all()]
@@ -121,14 +122,44 @@ def login(request):
             except:
                 pass
 
-            # other_user = registration.objects.all().exclude(email=email)
+            try:
+                profile1 = registration.objects.get(email=email)
+                profile = followers.objects.get(user_id=profile1.pk)
+                users1 = [i for i in profile.following.all()]
+                posts = []
+                for u in users1:
+                    p = registration.objects.get(id=u.id)
+                    try:
+                        p_post = userpost.objects.filter(author_id=p.id)
+                        posts.append(p_post)
+                    except:
+                        pass
+
+                my_post = userpost.objects.filter(author_id=profile1.id)
+                posts.append(my_post)
+                if len(posts) > 0:
+                    qs = sorted(chain(*posts), reverse=True, key=lambda obj: obj.created)
+            except:
+                pass
+
+            user_data = userdetials.objects.all()
+            mydetials = 0
+            try:
+                mydetials = userdetials.objects.get(owner_id=usrs_id)
+            except:
+                pass
+
             dict1 = {
             'email': email,
             'user': user,
             'others': other,
             'followers':my_id,
             'count':counts,
-            'count_following':count_following}
+            'count_following':count_following,
+            'pu':pu,
+            'posts':qs,
+            'mydetials':mydetials,
+            'userdata':user_data}
             return render(request, 'newsfeed.html', dict1)
         else:
             messages.info(request, 'Incorrect Email or Password!!!')
@@ -198,8 +229,14 @@ def register(request):
 
 
 def logout(request):
-    del request.session['email']
-    return render(request, 'index.html')
+
+    try:
+        if request.method == 'GET':
+            del request.session['email']
+            return render(request, 'index.html')
+    except KeyError:
+        return render(request, 'index.html')
+
 
 def support_view(request):
     return render(request,'support.html')
@@ -228,18 +265,16 @@ def user_post(request):
     email = request.session['email']
     user_feeling = request.POST['feeling']
     user_emoji = request.POST['emoji']
+    print(user_emoji)
     user_content = request.POST['content']
-    
     try:
         user_files = request.FILES['ufiles']
     except:
-        user_files=None
+        user_files =None
     usr_id = registration.objects.get(email=email)
     usrs_id = usr_id.id
-    if user_files==None:
-        user_data = userpost(feeling=user_feeling,emoji=user_emoji,usercontent=user_content,author_id=usrs_id)
-    else:
-        user_data = userpost(feeling=user_feeling,emoji=user_emoji,usercontent=user_content,userfile=user_files,author_id=usrs_id)
+
+    user_data = userpost(feeling=user_feeling,emoji=user_emoji,usercontent=user_content,userfile=user_files,author_id=usrs_id)
     user_data.save()
     return redirect('home')
 

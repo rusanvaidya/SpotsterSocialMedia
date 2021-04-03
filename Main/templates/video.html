@@ -28,9 +28,15 @@
                     </div>
                     <div class="c2">
                         <div class="video_player">
-                            <video id="video" height="100%" width="100%" controls>
-                                <source src="{% static 'media/123.mp4' %}">
+                            <video id="video" height="100%" width="100%" controls onseeking="video">
+                                <source src="media/123.mp4">
                             </video>
+                            <script>
+                            var vid = document.getElementById("video");
+                            vid.onseeking= function() {
+
+                            };
+                            </script>
                         </div>
                         <div class="video_title">
                             Roberto Carlos Free Kick

@@ -47,9 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'spotsterapi',
-    
-    'rest_framework.authtoken',
-
 ]
 
 MIDDLEWARE = [
@@ -115,15 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        
-    ]
-}
-# from spotsterapi.serializers import UserSerializer
-# USER_DETAILS_SERIALIZER = UserSerializer 
 
 
 # Internationalization

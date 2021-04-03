@@ -16,8 +16,6 @@ function complete_back()
 var picupload = document.getElementById("picupload");
 picupload.onchange = function () {
     if (typeof (FileReader) != "undefined") {
-        var preview_img = document.getElementById("bg-ppp");
-        preview_img.innerHTML = "";
         var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.png)$/;
         for (var i = 0; i < picupload.files.length; i++) {
             var file = picupload.files[i];
@@ -25,17 +23,14 @@ picupload.onchange = function () {
             if (regex.test(file.name.toLowerCase())) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    var img = document.createElement("IMG");
+                    var img = document.getElementById("defpp");
                     img.height = "300";
                     img.width = "240";
                     img.src = e.target.result;
-                    preview_img.appendChild(img);
-                   
                 }
                 reader.readAsDataURL(file);
             } else {
                 alert(file.name + " is not a valid image file.");
-                preview_img.innerHTML = "";
                 return false;
             }
         }

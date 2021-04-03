@@ -23,7 +23,15 @@
 
                         <tr class="chatuser">
                             <td class="c3-img">
-                                <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
+                                 {% for bio in userdata %}
+                                   {% if bio.owner_id == i.pk %}
+                                        {% if bio.profile_pic != '' %}
+                                        <img src="media/{{bio.profile_pic}}" height="50" width="50">
+                                        {% else %}
+                                        <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
                                 <span class="badge-online"><img src="{% static 'icon/online.png' %}"></span>
                             </td>
                             <td class="c3-label">

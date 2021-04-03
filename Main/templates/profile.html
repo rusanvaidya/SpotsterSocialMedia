@@ -16,12 +16,16 @@
             <div class="container_newsfeed not-loaded" id="div-loaded">
                 <div class="container1">
                     <!-- profile picture -->
-                    <form enctype="multipart/form-data">
+                    <form method="post" action="profile" enctype="multipart/form-data">{% csrf_token %}
                     <div class="c1-profile">
                         <div class="bg-pp">
+                            {% if mydetials.profile_pic != '' %}
+                            <img class="back-op" src="media/{{mydetials.profile_pic}}">
+                            {% else %}
                             <img class="back-op" src="{% static 'img/defaultpp.jpg' %}">
+                            {% endif %}
                             <label class="pp-chg" for="picupload" onclick="show_picture()"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
-                            <input type="file" id="picupload">
+                            <input type="file" id="picupload" name="image">
                         </div>
                     </div>
 
@@ -29,10 +33,10 @@
                         <div class="modal">
                             <div class="modaltop">
                                 <div class="modalheader">
-                                    Profile Picture
+                                    <span style="color:black;margin-left:120px;">Profile Picture</span>
                                 </div>
                                 <div class="closebutton">
-                                    <span onclick="document.getElementById('mypic').style.display='none';">&times;</span>
+                                    <span onclick="document.getElementById('mypic').style.display='none';"><b style="color:black; font-size:25px;">&times;</b></span>
                                 </div>
                             </div>
                             <div class="pp-div" id="pp-preview">
@@ -46,16 +50,18 @@
 
                     <!-- name -->
                     <div class="c1-profile">
-                        <b class="name-font">Rusan Vadiya</b>
+                        {% for i in user %}
+                        <b class="name-font">{{i.first_name}} {{i.last_name}}</b>
+                        {% endfor %}
                     </div>
                     <!-- follower/following -->
                     <div class="c1-profile">
                         <table>
                             <td>
-                                0 <br><p>Followers</p>
+                                {{count}} <br><p>Followers</p>
                             </td>
                             <td>
-                                0 <br><p>Following</p>
+                                {{count_following}} <br><p>Following</p>
                             </td>
                         </table>
                     </div>
@@ -144,32 +150,65 @@
                 <div class="container2">
                     {% include 'new_post.html' %}
 
-                    {% for i in user %}
+                       {%for post in posts%}
+                        {% for p in pu %}
+                            {% if p.id == post.author_id %}
                     <div class="c2">
                         <div style="overflow: hidden;">
                             <div class="c2-post">
                                 <table>
-                                    <td class="posted-img"><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                    <td class="posted-name"><a href="">{{i.first_name}} {{i.last_name}}</a>
+                                    {% if mydetials.profile_pic != '' %}
+                                    <td class="posted-img"><img class="back-op" src="media/{{mydetials.profile_pic}}">
+                                    {% else %}
+                                    <td class="posted-img"><img class="back-op" src="{% static 'img/defaultpp.jpg' %}"></td>
+                                    {% endif %}
+                                    <td class="posted-name"><a href="">{{p.first_name}} {{p.last_name}}</a>
                                     </td>
+                                    {% if post.emoji != '' %}
                                     <td>
-                                        is feeling happy 
+                                        {{post.feeling}}
                                     </td>
                                     <td class="femoji">
-                                        <img src="{% static 'emoji/043-happy.png' %}">
+
+                                        <img src='/static/{{post.emoji}}'>
+
                                     </td>
+                                    {% endif %}
                                 </table>
                             </div>
                             <div class="light" style="float: right; font-size: 15px; padding: 15px;">
-                                Yesterday 12:30pm
+                                {{post.created}}
                             </div>
                         </div>
                         <div class="caption">
-                            Today Futsal anyone?dsadmaslkdnasjdkasjncksajnjsandjkasndksabdksabcksabckasbcksajcnascnacnasjcnacnsacnakscnskacnacnaskcasc
+                            {{post.usercontent}}
                         </div>
-                        <div class="postedimg">
-                            <img src="{% static 'media/w1.png' %}">
+                        <div id="{{post.id}}" style="display:none">{{post.userfile}}</div>
+                        <div class="postedimg" id="new{{post.id}}">
+                            <video src="media/{{post.userfile}}" controls id='vid_spo{{post.id}}' width="100%" height="100%"></video>
+                            <img src="media/{{post.userfile}}" id='img_spo{{post.id}}'>
+
                         </div>
+                        <script>
+                            var x=document.getElementById({{post.id}}).innerHTML;
+                            console.log(x);
+
+                            var pics = /.(jpeg|jpg|png)$/;
+                            var vids = /.(mp4|wmv)/;
+
+
+                            if (pics.test(x)){
+                                document.getElementById('vid_spo{{post.id}}').style.display='none';
+                            }
+                            else if (vids.test(x)){
+                                document.getElementById('img_spo{{post.id}}').style.display='none';
+                            }
+                            else{
+                            document.getElementById('new{{post.id}}').style.display='none';
+                            }
+
+
+                        </script>
                         <div class="joinin">
                             <form>
                                 <label for="like" id="i-l">
@@ -211,12 +250,14 @@
                             </form>
                         </div>
                         <div class="comment-section" id="c-section">
-                            <a href="">View all comments</a>
+                            <a href="">View all comments...</a>
                             <label>
                                 <input type="text" placeholder="Write comment...">
                             </label>
                         </div>
                     </div>
+                    {% endif %}
+                    {% endfor %}
                     {% endfor %}
                 </div>
                 <div class="container3">

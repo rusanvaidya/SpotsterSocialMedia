@@ -1,10 +1,6 @@
+from datetime import timezone
+
 from django.db import models
-
-from django.conf import settings
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-# from rest_framework.authtoken.models import Token
-
 
 # Create your models here.
 class registration(models.Model):
@@ -16,11 +12,7 @@ class registration(models.Model):
     birthday = models.CharField(max_length=100)
     gender = models.CharField(max_length=100)
 
-class profileinfo(models.Model):
-    owner=models.ForeignKey(registration,on_delete=models.CASCADE)
-    profilepic=models.ImageField(upload_to='profilepics',blank=True)
-    userbio=models.TextField(max_length=500,blank=True)
-    userinterest=models.CharField(max_length=10000,blank=True)
+
 
 class userpost(models.Model):
     author = models.ForeignKey(registration, on_delete=models.CASCADE)
@@ -45,8 +37,3 @@ class support(models.Model):
     class Meta:
         verbose_name = 'Support'
         verbose_name_plural = 'Support'
-
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)

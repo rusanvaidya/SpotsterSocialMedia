@@ -25,9 +25,9 @@
                         <div class="bg-pp" id="bg-ppp">
                             <img class="back-op" src="{% static 'img/defaultpp.jpg' %}" id="defpp">
                             <label class="pp-chg" for="picupload"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
-
+                            <input type="file" id="picupload" name="image">
                         </div>
-                        <input type="file" id="picupload" name="image">
+
                         {% for i in user %}
                         <b style="padding: 10px;">{{i.first_name}} {{i.last_name}}</b>
                         {% endfor %}
