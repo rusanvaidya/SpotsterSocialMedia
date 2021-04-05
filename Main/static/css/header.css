@@ -262,7 +262,7 @@ img.d1btn
     display: none;
 }
 
-@media only screen and (max-width: 600px) 
+@media only screen and (max-width: 800px) 
 {
     .header_top
     {
