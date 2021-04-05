@@ -21,10 +21,13 @@
 
                 <!-- 2nd div -->
                 <div class="container2">
-                    <div class="c2 videos-search">
-                        <form>
+                    <div class="container2-1">
+                    <div class="videos-search">
+                        <img src="{% static 'icon/search.png' %}" title="Search Video" class="search-v-btn" onclick="document.getElementById('searching-video').style.display='block'">
+                        <div id="searching-video">
                             <input type="search" placeholder="Search Videos...">
-                        </form>
+                            <span onclick="document.getElementById('searching-video').style.display='none'">&times;</span>
+                        </div>
                     </div>
                     <div class="c2">
                         <div class="video_player">
@@ -164,10 +167,11 @@
                     </div>
                     
                 </div>
-                <!-- 3rd div -->
-                <div class="container3">
+                <!-- 2-2 div -->
+                <div class="container2-2">
                     {% include '2_container.html' %}
                 </div>
+            </div>
             </div>
         </div>
     </body>

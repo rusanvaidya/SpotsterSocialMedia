@@ -14,7 +14,7 @@
             
             <!-- 3 divs -->
             <div class="container_newsfeed not-loaded" id="div-loaded">
-                <div class="container1">
+                <div class="mobile-view">
                     <!-- profile picture -->
                     <form method="post" action="profile" enctype="multipart/form-data">{% csrf_token %}
                     <div class="c1-profile">
@@ -148,6 +148,7 @@
                 </div>
 
                 <div class="container2">
+                    <div class="container2-1">
                     {% include 'new_post.html' %}
 
                        {%for post in posts%}
@@ -260,9 +261,10 @@
                     {% endfor %}
                     {% endfor %}
                 </div>
-                <div class="container3">
+                <div class="container2-2">
                     {% include '2_container.html' %}
                 </div>
+            </div>
             </div>
         </div>
 

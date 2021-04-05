@@ -15,6 +15,7 @@
     width: 100%;
     height: 90%;
     position: fixed;
+    min-width: 1200px;
 }
 
 /* left container */
@@ -35,34 +36,36 @@ div.container1
 /* middle container */
 div.container2
 {
-    width: 45%;
+    width: 72%;
+    margin-top: 20px;
     height: 100%;
     padding: 10px;
-    overflow-x: auto;
+    overflow-y: auto;
     display: inline-block;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }
-.container2 ::-webkit-scrollbar
+div.container2-1
 {
-    display: none;
+    width: 60%;
+    min-width: 660px;
+    height: 100%;
+    display: inline-block;
 }
 /* right container */
-div.container3
+div.container2-2
 {
-    width: 26%;
+    width: 25%;
     height: 100%;
-    overflow-x: auto;
+    position: fixed;
     display: inline-block;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
     color: white;
 }
-.container3 ::-webkit-scrollbar
+div.container2-2-element
 {
-    display: none;
+    height: 100%;
+    overflow-y: auto;
+    display: inline-block;
+    scrollbar-width: none;   
 }
-
 
 
 /* first container extension */
@@ -106,7 +109,7 @@ div.container3
 .story figure
 {
     position: relative;
-    width: 500%;
+    width: 2000%;
     margin: 0;
     left: 0;
     animation: 20s slider infinite;
@@ -136,6 +139,10 @@ div.container3
 }
 
 /* new post */
+.c2-new-buttons
+{
+    width: 100%;
+}
 .c2-new, .c2
 {
     background-color: white;
@@ -288,6 +295,7 @@ div.container3
 {
     border-radius: 50%;
     width: 40px;
+    height: 40px;
 }
 .c2 .postedimg
 {
@@ -323,7 +331,7 @@ div.container3
 .caption
 {
     display: block;
-    overflow: hidden;
+    overflow: hidden;500
     word-wrap: break-word ;
 }
 .joinin
@@ -387,16 +395,45 @@ div.container3
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+.videos-search
+{
+    position: absolute;
+    z-index: 1;
+}
 
 .videos-search input
 {
-    width: 100%;
+    width: 300px;
     padding: 8px 12px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    border:none;
+    outline: none;
+    -webkit-animation: width_an;
+    -webkit-animation-duration: 1s;
+}
+
+@keyframes width_an
+{
+    from{width: 0px; opacity: 0;}
+    to{width: 300px; opacity: 1;}
+}
+#searching-video
+{
+    padding: 5px;
+    background-color: white;
+    display: none;
+}
+#searching-video span
+{
+    font-size: 20px;
+}
+#searching-video span:hover
+{
+    cursor: pointer;
 }
 
 /* 3rd container */
@@ -469,7 +506,7 @@ div.container3
 
 
 /* new post modal */
-#new_post_modal, #p_update_modal, #mypic, .view-posted-content
+#new_post_modal, #p_update_modal, #mypic, .view-posted-content, #side_nav
 {
     display: none; 
     position: fixed;
@@ -528,7 +565,28 @@ div.container3
     from {top: 0%; opacity: 0}
     to {top: 45%; opacity: 1}; 
 }
-
+.side_nav_modal
+{
+    padding: 20px;
+    box-shadow: 5px 5px grey;
+    box-sizing: border-box;
+    background: white;
+    width: 300px;
+    height: 100%;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-shadow: 0 0 3px 3px #8a8a8a;
+    box-sizing: border-box;
+    -webkit-animation: slide_right_nav;
+    -webkit-animation-duration: 1s;
+}
+@keyframes slide_right_nav
+{
+    from{right:-350px;}
+    to{right:0px;}
+}
 .modaltop
 {
     overflow: hidden;
@@ -691,8 +749,8 @@ div.container3
 {
     float: left;
     width: 65%;
-    padding: 5px;
-    margin: 10px;
+    max-height: 580px;
+    padding: 15px;
     text-align: center;
 }
 .posted-img-user img
@@ -707,4 +765,79 @@ div.container3
     padding: 2px;
     width: 30%;
     height: 95%;
+}
+.search-v-btn
+{
+    width:40px; 
+    border-radius: 50%; 
+    box-shadow: 0 0 3px 3px #2d7b20;
+}
+.search-v-btn:hover
+{
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) 
+{
+    .container_newsfeed
+    {
+        padding: 0px;
+        min-width: 100%;
+    }
+    div.container1
+    {
+        display: none;
+    }
+    div.container2
+    {
+        width: 95%;
+    }
+    div.container2-2
+    {
+        display: none;
+    }
+    div.container2-1
+    {
+        width: 100%;
+        min-width: 100%;
+    }
+    .modal
+    {
+        width: 400px;
+    }
+    .post-opt
+    {
+        display: none;
+    }
+    .c2-new-buttons
+    {
+        text-align: center;
+    }
+    .c2-btns-l, .c2-btns-e, .c2-btns-v
+    {
+        width: 10%;
+        text-align: center;
+    }
+    .posted-img-user
+    {
+        display: block;
+        width: 95%;
+        max-height: 580px;
+        padding: 15px;
+        text-align: center;
+    }
+    .posted-img-user img
+    {
+        max-width: 100%;
+        max-height: 500px;
+    }
+
+    .comment-section-user
+    {
+        display: none;
+    }
+    .modal-post
+    {
+        height: auto;
+    }
 }

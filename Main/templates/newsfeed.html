@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <head>
         <title>Spotster</title>
@@ -11,7 +12,7 @@
             <!-- header import -->
             {% include 'header.html' %}
             
-            <!-- 3 divs -->
+            <!-- 2 divs -->
             <div class="container_newsfeed not-loaded" id="div-loaded">
 
                 <!-- 1st div -->
@@ -21,6 +22,7 @@
 
                 <!-- 2nd div -->
                 <div class="container2">
+                    <div class="container2-1">
                     <!-- interest-story -->
                     <div class="i-story">
                         <div class="story">
@@ -161,7 +163,7 @@
                         </script>
                         <div id="view-posted-photo{{post.id}}" class="view-posted-content">
                             <div class="modal-post">
-                                <div class="modaltop">
+                                <div class="modaltop" style="padding: 0;">
                                     <div class="closebutton">
                                         <span onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='none';">&times;</span>
                                     </div>
@@ -201,12 +203,6 @@
                                                     <label for="adislike" class="a-d" id="dislike-a-{{post.id}}" style="display: none;">
                                                         <span>22</span><img src="{% static 'icon/dislike.png' %}">
                                                     </label>
-                                                    <label for="comment" class="i-c" id="comment-i-{{post.id}}">
-                                                        <span>40</span><img src="{% static 'icon/comment-i.png' %}">
-                                                    </label>
-                                                    <label for="acomment" class="a-c" id="comment-a-{{post.id}}" style="display: none;">
-                                                        <span>40</span><img src="{% static 'icon/comment.png' %}">
-                                                    </label>
                                                     <label for="share" class="i-s" id="share-i-{{post.id}}">
                                                         <img src="{% static 'icon/share-i.png' %}">
                                                     </label>
@@ -227,7 +223,7 @@
                                                     </label>
                                                 </form>
                                             </div>
-                                            <div class="comment-section-show" id="c-section">
+                                            <div class="comment-section-show">
                                                 <a>View all comments...</a>
                                                 <label>
                                                     <input type="text" placeholder="Write comment...">
@@ -278,6 +274,12 @@
                                 </label>
                             </form>
                         </div>
+                        <div class="comment-section" id="c-section{{post.id}}">
+                            <a href="">View all comments...</a>
+                            <label>
+                                <input type="text" placeholder="Write comment...">
+                            </label>
+                        </div>
                         <script>
                             // like
                             var like_b_i =  document.getElementById('like-i-{{post.id}}');
@@ -320,6 +322,7 @@
                                 document.getElementById('comment-i-{{post.id}}').style.display='none';
                                 document.getElementById('comment-a-{{post.id}}').style.display='inline-block';
                                 document.getElementById('comment-a-{{post.id}}').style.background='rgb(226, 226, 226)';
+                                document.getElementById('c-section{{post.id}}').style.display='inline-block';
                             }
                             var comment_b_a =  document.getElementById('like-a-{{post.id}}');
                             comment_b_a.onclick = function()
@@ -373,22 +376,16 @@
                                 document.getElementById('like-i-{{flag.id}}').style.display='inline-block';
                             }
                         </script>
-                        <div class="comment-section" id="c-section">
-                            <a href="">View all comments...</a>
-                            <label>
-                                <input type="text" placeholder="Write comment...">
-                            </label>
-                        </div>
                     </div>
                     {% endif %}
                     {% endfor %}
                     {% endfor %}
                 </div>
-
-                <!-- 3rd div -->
-                <div class="container3">
+                <div class="container2-2">
                     {% include '2_container.html' %}
                 </div>
+                </div>
+                
             </div>
         </div>
 

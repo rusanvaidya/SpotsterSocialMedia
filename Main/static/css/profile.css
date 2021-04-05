@@ -1,3 +1,13 @@
+div.mobile-view
+{
+    width: 26%;
+    height: 100%;
+    overflow-x: auto;
+    display: inline-block;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    color: white;
+}
 .c1-profile
 {
     padding: 8px;
@@ -24,6 +34,8 @@
     background-color: rgb(0, 0, 0);
     border-radius: 50%;
     max-width: 300px;
+    box-shadow: 0 0 3px 3px #2D7B20;
+    padding: 2px;
 }
 .bg-pp .pp-chg
 {
@@ -191,4 +203,24 @@
 #l-interest label
 {
     display: block;
+}
+
+@media only screen and (max-width: 600px) 
+{
+    div.mobile-view
+    {
+        margin-top: 30px;
+        overflow-x: hidden;
+        display: block;
+        width: 100%;
+        height: 290px;
+    }
+    .c1-profile
+    {
+        padding: 0.5px;
+    }
+    .c1-profile .bg-pp img, .bg-pp
+    {
+        width: 100px;
+    }
 }

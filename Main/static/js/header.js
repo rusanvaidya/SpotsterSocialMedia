@@ -107,3 +107,10 @@ function loader()
     setTimeout(change1, 200);
     setTimeout(change2, 300);    
 }
+
+function show_side_nav()
+{
+    document.getElementById('m-n-i').style.display='none';
+    document.getElementById('m-n-a').style.display='inline-block';
+    document.getElementById('side_nav').style.display='block';
+}

@@ -26,26 +26,21 @@ div.friend-name
     scrollbar-width: none;
     color: white;
 }
+.bg-white
+{
+    background-color: white;
+    padding: 10px;
+}
 /* middle container */
 div.chat-div
 {
-    background-color: rgb(255, 255, 255);
-    width: 45%;
+    width: 72%;
+    margin-top: 20px;
     height: 100%;
     padding: 10px;
-    overflow-x: auto;
+    overflow-y: auto;
     display: inline-block;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-div.container3
-{
-    width: 26%;
-    height: 100%;
-    overflow-x: auto;
-    display: inline-block;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    border-radius: 10px;
 }
 .m1
 {
@@ -226,4 +221,22 @@ div.container3
 .show
 {
     display: block;
+}
+
+@media only screen and (max-width: 600px) 
+{
+    .container_chatbox
+    {
+        width: 95%;
+    }
+    div.friend-name
+    {
+        width: 95%;
+        background-color: white;
+        color: black;
+    }
+    div.chat-div
+    {
+        display: none;
+    }
 }

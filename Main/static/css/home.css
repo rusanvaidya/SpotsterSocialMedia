@@ -9,11 +9,21 @@ body
     left: 0;
     top: 0;
     position: fixed;
-    width: 100%;
-    height: 100%;
+    width: 1360px;
+    height: 1080px;
     -webkit-animation: bgslide;
     -webkit-animation-duration: 1s;
 }
+.mobile
+{
+    left: 0;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
 @keyframes bgslide
 {
     from{opacity: 0; left: -140px;}
@@ -22,7 +32,7 @@ body
 
 .overall-container
 {
-    width: 60%;
+    width: 900px;
     margin: 0 auto;
     height: 100%;
     z-index: 1;
@@ -89,7 +99,7 @@ body
 /* login div */
 .login
 {
-    width: 400px;
+    max-width: 400px;
     padding: 20px;
     background: #ffffff;
     border-radius: 20px;
@@ -225,6 +235,11 @@ body
     float: right;
     display: inline-block;
 }
+.closebutton span
+{
+    font-size: larger;
+    font-weight: bold;
+}
 
 #new_acc_modal span:hover
 {
@@ -308,25 +323,19 @@ body
 }
 
 /* resize window */
-@media only screen and (max-width: 1400px) 
+
+
+
+@media only screen and (max-width: 900px) 
 {
-    .bodybg
-    {
-        display: none;
-    }
+
+}
+@media only screen and (max-width: 600px) 
+{
     .overall-container
     {
         width: 100%;
         height: auto;
-    }
-    .main_container
-    {
-        margin: 0%;
-        width: 100%;
-    }
-    .header
-    {
-        display:none;
     }
     .phone_container
     {
@@ -335,13 +344,30 @@ body
     .login_container
     {
         width: 100%;
+        display: block;
     }
-}
-@media only screen and (max-width: 1000px) 
-{
+    .header
+    {
+        display:none;
+    }
+    .bodybg
+    {
+        display: none;
+    }
     .login
     {
         width: 90%;
+    }
+
+    .mobile
+    {
+        display: block;
         height: 100%;
+        display :fixed;
+        overflow-y: auto;
+    }
+    .modal
+    {
+        width: 400px;
     }
 }

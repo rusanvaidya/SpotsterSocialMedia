@@ -1,90 +1,92 @@
 {% load static %}
 <!-- sponser -->
-<div class="c3">
-    <div class="c3-sponser">
-        <p>Sponsered</p>
+<div class="container2-2-element">
+    <div class="c3">
+        <div class="c3-sponser">
+            <p>Sponsered</p>
+            <table>
+                <td class="sponser-img">
+                    <img src="{% static 'img/sponser.png' %}">
+                </td>
+                <td class="sponser-label">
+                    Dell Inc. Corporateasda dasdsadas sdas
+                </td>
+            </table>
+        </div>
+    </div>
+
+    <!-- chatheads -->
+    <div class="c3">
+        <p class="counter">Following({{count_following}})</p>
         <table>
-            <td class="sponser-img">
-                <img src="{% static 'img/sponser.png' %}">
+        {% for i in others %}
+        <form class="unfollow" action="{%url 'discover_more'%}" method="post" id="{{i.pk}}">{% csrf_token %}
+
+        <tr class="chatuser">
+            <td class="c3-img">
+                {% for bio in userdata %}
+                {% if bio.owner_id == i.pk %}
+                        {% if bio.profile_pic != '' %}
+                        <img src="media/{{bio.profile_pic}}" height="50" width="50">
+                        {% else %}
+                        <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <span class="badge-online"><img src="{% static 'icon/online.png' %}"></span>
             </td>
-            <td class="sponser-label">
-                Dell Inc. Corporateasda dasdsadas sdas
+            <td class="c3-label">
+                {{i.first_name}} {{i.last_name}}
             </td>
+            <td class="c3-btns">
+                    <input type="hidden" name="follow_pk" value="{{i.pk}}">
+                    <button type="submit" class="unfollow{{i.pk}}">UnFollow</button>
+
+            </td>
+
+        </tr>
+        </form>
+        {% endfor %}
         </table>
     </div>
 </div>
+                    <script>
+                        $('.unfollow').submit(function(e){
+                            e.preventDefault()
 
-<!-- chatheads -->
- <div class="c3">
-                        <p class="counter">Following({{count_following}})</p>
-                        <table>
-                        {% for i in others %}
-                        <form class="unfollow" action="{%url 'discover_more'%}" method="post" id="{{i.pk}}">{% csrf_token %}
-
-                        <tr class="chatuser">
-                            <td class="c3-img">
-                                 {% for bio in userdata %}
-                                   {% if bio.owner_id == i.pk %}
-                                        {% if bio.profile_pic != '' %}
-                                        <img src="media/{{bio.profile_pic}}" height="50" width="50">
-                                        {% else %}
-                                        <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
-                                        {% endif %}
-                                    {% endif %}
-                                {% endfor %}
-                                <span class="badge-online"><img src="{% static 'icon/online.png' %}"></span>
-                            </td>
-                            <td class="c3-label">
-                                {{i.first_name}} {{i.last_name}}
-                            </td>
-                            <td class="c3-btns">
-                                    <input type="hidden" name="follow_pk" value="{{i.pk}}">
-                                    <button type="submit" class="unfollow{{i.pk}}">UnFollow</button>
-
-                            </td>
-
-                        </tr>
-                        </form>
-                        {% endfor %}
-                        </table>
-                    </div>
-                <script>
-                    $('.unfollow').submit(function(e){
-                        e.preventDefault()
-
-                        const follow_id = $(this).attr('id')
-                        const followText = $(`.unfollow${follow_id}`).text()
-                        const trim = $.trim(followText)
-                        const url =$(this).attr('action')
+                            const follow_id = $(this).attr('id')
+                            const followText = $(`.unfollow${follow_id}`).text()
+                            const trim = $.trim(followText)
+                            const url =$(this).attr('action')
 
 
 
-                        $.ajax({
-                            type:'POST',
-                            url : url,
-                            data:{
-                            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
-                            'follow_pk':follow_id
-                            },
-                            success:function(response){
-                            if (trim === 'UnFollow'){
+                            $.ajax({
+                                type:'POST',
+                                url : url,
+                                data:{
+                                'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                                'follow_pk':follow_id
+                                },
+                                success:function(response){
+                                if (trim === 'UnFollow'){
 
-                                $(`.unfollow${follow_id}`).text('Follow')
-
-
-                            } else {
-
-                                $(`.unfollow${follow_id}`).text('UnFollow')
-
-                            }
-                            },
-                            error:function(response){
-                            console.log('error',response)
-                            }
-                           })
+                                    $(`.unfollow${follow_id}`).text('Follow')
 
 
-                    })
+                                } else {
+
+                                    $(`.unfollow${follow_id}`).text('UnFollow')
+
+                                }
+                                },
+                                error:function(response){
+                                console.log('error',response)
+                                }
+                            })
 
 
-                 </script>
+                        })
+
+
+                    </script>

@@ -9,6 +9,7 @@
     width: 100%;
     background: rgb(22, 21, 21);
     z-index: 1;
+    min-width: 1200px;
     position: fixed;
 }
 
@@ -56,14 +57,27 @@
 {
     border-bottom: 2px solid #2D7B20;
 }
-#h-a, #v-a, #t-a, #d-a
+#h-a, #v-a, #t-a, #d-a, #m-n-a, #m-n-i
 {
     display: none;
 }
 .header_btns_div .header_btns a img, .header_btns_active a img
 {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
+}
+.mobile_nav
+{
+    display: none;
+}
+.close_nav
+{
+    font-size: larger;
+    font-weight: bold;
+}
+.close_nav:hover
+{
+    cursor: pointer;
 }
 .header_m_img
 {
@@ -93,6 +107,12 @@
     border-radius: 50px;
     cursor: pointer;
 }
+img.d1btn
+{
+    margin: 10px;
+    padding: 0;
+    box-shadow: 0 0 3px 3px #2D7B20;
+}
 .d2btn-a, .d3btn-a
 {
     display: none;
@@ -106,6 +126,18 @@
     position: absolute;
     top: -1px;
     right: -1px;
+    padding: 5px 9px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bolder;
+    background-color: rgb(202, 48, 48);
+    color: white;
+}
+.badge-nav
+{
+    position: absolute;
+    top: 5px;
+    right: 23px;
     padding: 5px 9px;
     border-radius: 50%;
     font-size: 10px;
@@ -176,7 +208,10 @@
 {
     display: block;
 }
-
+.user_option
+{
+    margin-top: 10px;
+}
 .user_option img
 {
     width: 100px;
@@ -184,6 +219,12 @@
     object-fit: cover;
     object-position: 50% 40%;
     border-radius: 200px;
+    box-shadow: 0 0 3px 3px #2D7B20;
+    padding: 0;
+}
+.img-div-1
+{
+    background-color: black;
 }
 .light
 {
@@ -200,6 +241,7 @@
 {
     top: 50%;
     left: 50%;
+    transform: (-50%,-50%);
     position: absolute;
 }
 .animate-start
@@ -218,4 +260,32 @@
 .not-loaded
 {
     display: none;
+}
+
+@media only screen and (max-width: 600px) 
+{
+    .header_top
+    {
+        min-width: 100%;
+    }
+    .logo
+    {
+        display: none;
+    }
+    .bar_buttons
+    {
+        display: none;
+    }
+    .searchbar
+    {
+        display: none;
+    }
+    #m-n-i
+    {
+        display: inline-block;
+    }
+    .header_btns, .header_btns_active
+    {
+        width: 19%;
+    }
 }

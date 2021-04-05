@@ -4,6 +4,8 @@
 <script async src="//code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <script>
   $( function() {
     $("#autocomplete").autocomplete({
@@ -48,6 +50,87 @@
             </div>
             <div class="header_btns" id="d-i">
                 <a href="discover"><img src="{% static 'icon/discover-inactive.png' %}" class="header_m_img"></a>
+            </div>
+            <div class="header_btns_active mobile-nav-active" id="m-n-a">
+                <a href=""><img src="{% static 'icon/menu.png' %}" class="header_m_img"></a>
+            </div>
+            <div class="header_btns mobile-nav" id="m-n-i">
+                <a onclick="show_side_nav()" class="nav-btn"><img src="{% static 'icon/menu-inactive.png' %}" class="header_m_img"></a>
+                <span class="badge-nav" id="b-m">1</span>
+            </div>
+            <div id="side_nav">
+                <div class="side_nav_modal">
+                    <div class="modaltop">
+                        <div class="modalheader close_nav">
+                            <span onclick="document.getElementById('side_nav').style.display='none'; document.getElementById('m-n-i').style.display='inline-block'; document.getElementById('m-n-a').style.display='none';">&times;</span>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            <td class="navsidesearch">
+                                <input type="search" placeholder="Search..." style='width: 100%; padding: 12px 20px; margin: 8px 0; border: 1px solid #ccc; outline: none; box-sizing: border-box;'>
+                            </td>
+                        </tr>
+                        {% for i in user %}
+                        <tr class="sidemenu" onclick="window.open('profile','_self')">
+                            {% if mydetials.profile_pic != '' %}
+                            <td class="c1-img">
+                                <img src="media/{{mydetials.profile_pic}}" style="width:50px" height="40" width="50">
+                            </td>
+                            {% else %}
+                            <td class="c1-img">
+                                <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px" >
+                            </td>
+                            {% endif %}
+                            <td class="c1-label"> 
+                                &emsp;{{i.first_name}} {{i.last_name}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr class="sidemenu" onclick="window.open('Follower', '_self')">
+                            <td class="c1-img">
+                                <img src="{% static 'icon/follower.png' %}">
+                            </td>
+                            <td class="c1-label">
+                                &emsp;Followers({{count}})
+                            </td>
+                        </tr>
+                        <tr class="sidemenu" onclick="window.open('', '_self')">
+                            <td class="c1-img">
+                                <img src="{% static 'icon/notification-nav.png' %}">
+                            </td>
+                            <td class="c1-label">
+                                &emsp;Notification<span></span>
+                            </td>
+                        </tr>
+                        <tr class="sidemenu" onclick="window.open('saved', '_self')">
+                            <td class="c1-img">
+                                <img src="{% static 'icon/saved.png' %}">
+                            </td>
+                            <td class="c1-label">
+                                &emsp;Saved
+                            </td>
+                        </tr>
+                        <tr class="sidemenu" onclick="window.open('chatbox', '_self')">
+                            <td class="c1-img">
+                                <img src="{% static 'icon/message-active.png' %}">
+                            </td>
+                            <td class="c1-label">
+                                &emsp;Chatbox
+                            </td>
+                        </tr>
+                        <tr class="sidemenu" onclick="window.open('logout', '_self')">
+                            <td class="c1-img">
+                                <img class="header_propic"
+                                box-shadow: 0 0 3px 3px #2D7B20;
+                                padding: 2px; src="{% static 'icon/logout.png' %}">
+                            </td>
+                            <td class="c1-label">
+                                &emsp;Logout
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </td>
 
@@ -113,7 +196,9 @@
                         <img class="pp-show" src="{% static 'img/defaultpp.jpg' %}">
                         {% endif %}
 
-                        <span class="badge-verified"><img src="{% static 'img/not-verified.png' %}" class="nv"></span>
+                        <!-- <span class="badge-verified"><img src="{% static 'img/not-verified.png' %}" title="Not-Verified" class="nv"></span> -->
+                        <span class="badge-verified"><img src="{% static 'img/verified.png' %}" title="Verified" class="nv"></span>
+
                         <a href="profile">
                             {{i.first_name}} {{i.last_name}}<br>
                             <p class="light">{{email}}</p>
