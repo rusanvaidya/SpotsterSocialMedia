@@ -322,14 +322,7 @@ body
     color: rgb(255, 255, 255);
 }
 
-/* resize window */
-
-
-
-@media only screen and (max-width: 900px) 
-{
-
-}
+/* mobile responsive window */
 @media only screen and (max-width: 600px) 
 {
     .overall-container

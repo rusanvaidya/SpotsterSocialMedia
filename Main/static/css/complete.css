@@ -2,6 +2,7 @@
 {
     width: 45%;
     height: 600px;
+    min-width: 440px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -73,4 +74,22 @@ button.next-complete:hover
     border-radius: 50%;
     object-fit: cover;
     object-position: 50% 40%; 
+}
+
+@media only screen and (max-width: 600px) 
+{
+    .container-complete
+    {
+        width: 95%;
+        min-width: 95%;
+    }
+    .bio-complete textarea
+    {
+        min-height: 250px;
+    }
+    #bg-ppp img
+    {
+        width: 100px;
+        height: 100px;
+    }
 }

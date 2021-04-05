@@ -23,7 +23,10 @@ div.mobile-view
 {
     width: 100%;
     max-width: 300px;
+    max-height: 300px;
     border-radius: 155px;
+    object-fit: cover;
+    object-position: 50% 40%; 
     display: block;
 }
 .bg-pp
@@ -222,5 +225,6 @@ div.mobile-view
     .c1-profile .bg-pp img, .bg-pp
     {
         width: 100px;
+        height: 100px;
     }
 }
