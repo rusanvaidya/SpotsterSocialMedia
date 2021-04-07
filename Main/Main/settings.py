@@ -28,7 +28,7 @@ SECRET_KEY = 'd1)dkh^3+r5@ykk$54k)3ohtv_$r-l0xitf14_u-8*z^q#s&os'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.1.111',
+    os.getenv('ip_address'),
     '127.0.0.1',
 ]    
 
