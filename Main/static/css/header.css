@@ -179,11 +179,9 @@ img.d1btn
     position: absolute;
     background-color: #ffffff;
     min-width: 300px;
-    overflow: auto;
-    box-shadow: 0px 0 3px 3px rgba(0,0,0,0.2);
+    box-shadow: 0px 0 3px 3px #2D7B20;
     top: 120%;
     right: 0;
-    z-index: 1;
     -webkit-animation: slidein_dropdown;
     -webkit-animation-duration: 0.5s;
 }
@@ -192,6 +190,7 @@ img.d1btn
     from {top: 0%; opacity: 0}
     to {top: 120%; opacity: 1}; 
 }
+
   
 .dd1-content a, .dd2-content a, .dd3-content a 
 {
@@ -203,6 +202,24 @@ img.d1btn
 .dd2-content a, .dd3-content a
 {
     text-align: left;
+}
+
+.dd3-content:after , .dd1-content:after, .dd2-content:after 
+{
+    content: "";
+    position: absolute;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid #2D7B20;
+    border-left: 2px solid #2D7B20;
+    background-color: white;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    top: -12px;
+    right: 5%;
+    transform: rotate(45deg);
+    z-index: 1;
 }
 .show 
 {
