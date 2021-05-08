@@ -4,7 +4,7 @@ from discover.models import followers
 
 from discover.models import interest
 
-from complete.models import userdetials
+from complete.models import userdetails
 from .models import registration, support, userpost
 from django.contrib import messages
 from itertools import chain
@@ -58,10 +58,10 @@ def home(request):
             except:
                 pass
             interest_list = interest.objects.all()
-            user_data = userdetials.objects.all()
+            user_data = userdetails.objects.all()
             mydetials = 0
             try:
-                mydetials = userdetials.objects.get(owner_id=usrs_id)
+                mydetials = userdetails.objects.get(owner_id=usrs_id)
             except:
                 pass
             dict1 = {
@@ -142,10 +142,10 @@ def login(request):
             except:
                 pass
 
-            user_data = userdetials.objects.all()
+            user_data = userdetails.objects.all()
             mydetials = 0
             try:
-                mydetials = userdetials.objects.get(owner_id=usrs_id)
+                mydetials = userdetails.objects.get(owner_id=usrs_id)
             except:
                 pass
 

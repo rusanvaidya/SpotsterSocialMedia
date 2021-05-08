@@ -1,275 +1,441 @@
-<!DOCTYPE html>
-<html>
-    {% load static %}
-    <head>
-        <title>Spotser</title>
-        <link rel="icon" href="{% static 'img/icon.png' %}">
-    </head>
-    <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}">
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-    <body  onload="loader()">
-        <div class="homepage">
-            <!-- header import -->
-            {% include 'header.html' %}
-            
-            <!-- 3 divs -->
-            <div class="container_newsfeed not-loaded" id="div-loaded">
-                <div class="mobile-view">
-                    <!-- profile picture -->
-                    <form method="post" action="profile" enctype="multipart/form-data">{% csrf_token %}
-                    <div class="c1-profile">
-                        <div class="bg-pp">
-                            {% if mydetials.profile_pic != '' %}
-                            <img class="back-op" src="media/{{mydetials.profile_pic}}">
-                            {% else %}
-                            <img class="back-op" src="{% static 'img/defaultpp.jpg' %}">
-                            {% endif %}
-                            <label class="pp-chg" for="picupload" onclick="show_picture()"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
-                            <input type="file" id="picupload" name="image">
-                        </div>
-                    </div>
-
-                    <div id="mypic">
-                        <div class="modal">
-                            <div class="modaltop">
-                                <div class="modalheader">
-                                    <span style="color:black;margin-left:120px;">Profile Picture</span>
-                                </div>
-                                <div class="closebutton">
-                                    <span onclick="document.getElementById('mypic').style.display='none';"><b style="color:black; font-size:25px;">&times;</b></span>
-                                </div>
-                            </div>
-                            <div class="pp-div" id="pp-preview">
-                            </div>
-                            <div class="post-submit">
-                                <input type="submit" value="UPLOAD">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                    <!-- name -->
-                    <div class="c1-profile">
-                        {% for i in user %}
-                        <b class="name-font">{{i.first_name}} {{i.last_name}}</b>
-                        {% endfor %}
-                    </div>
-                    <!-- follower/following -->
-                    <div class="c1-profile">
-                        <table>
-                            <td>
-                                {{count}} <br><p>Followers</p>
-                            </td>
-                            <td>
-                                {{count_following}} <br><p>Following</p>
-                            </td>
-                        </table>
-                    </div>
-                    <!-- bio -->
-                    <div class="c1-profile">
-                        <div class="bio">
-                            football gamer
-                        </div>
-                    </div>
-                    <!-- edit profile -->
-                    <div class="c1-profile">
-                        <div class="edit-p">
-                            <button onclick="show_p_editor()">Edit Profile</button>
-                        </div>
-                    </div>
-                    <div id="p_update_modal" style="color:black">
-                        <div class="modal">
-                            <div class="modaltop">
-                                <div class="modalheader">
-                                   <div id="profile-title">Account Information</div>
-                                   <div id="profile-back"><button onclick="show_p_editor()"><table><td><img src="{% static 'icon/back.png' %}"></td><td>Back</td></table></button></div>
-                                </div>
-                                <div class="closebutton">
-                                    <span onclick="document.getElementById('p_update_modal').style.display='none';">&times;</span>
-                                </div>
-                            </div>
-                            <div class="pro_update">
-                                <form method="POST">
-                                    {% csrf_token %}
-                                    <div id="profile-info">
-                                        <div class="fullname">
-                                            <input type="text" placeholder="First Name" name="first_name" value="Rusan">
-                                            <input type="text" placeholder="Last Name" name="last_name" value="Vaidya">
-                                        </div>
-                                        <div class="emailpassword">
-                                            <input type="text" placeholder="Email or Phone Number" name="email" value="abc@gmail.com">
-                                        </div>
-                                        <div class="bio-area">
-                                            <textarea placeholder="Bio" name="bio">football gamer</textarea>
-                                        </div>
-                                        <div class="i-edit">
-                                            <label class="interest-edit">
-                                                <table><td>Interest</td><td><img src="{% static 'icon/edit.png' %}" onclick="chg_interest()"></td></table>
-                                            </label>
-                                            <div class="interest-list">
-                                                <div><table><td><img src="{% static 'interest/football.png' %}"></td><td>Football</td></table></div>
-                                                <div><table><td><img src="{% static 'interest/gaming.png' %}"></td><td>Gaming</td></table></div>
-                                            </div>
-                                        </div>
-                                    </div>     
-                                    <div id="interest-info">
-                                        <div id="s-interest">
-                                            <input type="search" placeholder="Search interest">
-                                        </div>
-                                        <div id="l-interest">
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                            <label><input type="checkbox" value="Art">Art</label>
-                                        </div>
-                                    </div>
-                                    <div class="post-submit">
-                                        <input type="submit" value="Save">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container2">
-                    <div class="container2-1">
-                    {% include 'new_post.html' %}
-
-                       {%for post in posts%}
-                        {% for p in pu %}
-                            {% if p.id == post.author_id %}
-                    <div class="c2">
-                        <div style="overflow: hidden;">
-                            <div class="c2-post">
-                                <table>
-                                    {% if mydetials.profile_pic != '' %}
-                                    <td class="posted-img"><img class="back-op" src="media/{{mydetials.profile_pic}}">
-                                    {% else %}
-                                    <td class="posted-img"><img class="back-op" src="{% static 'img/defaultpp.jpg' %}"></td>
-                                    {% endif %}
-                                    <td class="posted-name"><a href="">{{p.first_name}} {{p.last_name}}</a>
-                                    </td>
-                                    {% if post.emoji != '' %}
-                                    <td>
-                                        {{post.feeling}}
-                                    </td>
-                                    <td class="femoji">
-
-                                        <img src='/static/{{post.emoji}}'>
-
-                                    </td>
-                                    {% endif %}
-                                </table>
-                            </div>
-                            <div class="light" style="float: right; font-size: 15px; padding: 15px;">
-                                {{post.created}}
-                            </div>
-                        </div>
-                        <div class="caption">
-                            {{post.usercontent}}
-                        </div>
-                        <div id="{{post.id}}" style="display:none">{{post.userfile}}</div>
-                        <div class="postedimg" id="new{{post.id}}">
-                            <video src="media/{{post.userfile}}" controls id='vid_spo{{post.id}}' width="100%" height="100%"></video>
-                            <img src="media/{{post.userfile}}" id='img_spo{{post.id}}'>
-
-                        </div>
-                        <script>
-                            var x=document.getElementById({{post.id}}).innerHTML;
-                            console.log(x);
-
-                            var pics = /.(jpeg|jpg|png)$/;
-                            var vids = /.(mp4|wmv)/;
-
-
-                            if (pics.test(x)){
-                                document.getElementById('vid_spo{{post.id}}').style.display='none';
-                            }
-                            else if (vids.test(x)){
-                                document.getElementById('img_spo{{post.id}}').style.display='none';
-                            }
-                            else{
-                            document.getElementById('new{{post.id}}').style.display='none';
-                            }
-
-
-                        </script>
-                        <div class="joinin">
-                            <form>
-                                <label for="like" id="i-l">
-                                    <span>120</span><img src="{% static 'icon/like-i.png' %}">
-                                </label>
-                                <label for="like" id="a-l">
-                                    <span>120</span><img src="{% static 'icon/like.png' %}">
-                                </label>
-                                <label for="like" id="i-d">
-                                    <span>22</span><img src="{% static 'icon/dislike-i.png' %}">
-                                </label>
-                                <label for="like" id="a-d">
-                                    <span>22</span><img src="{% static 'icon/dislike.png' %}">
-                                </label>
-                                <label for="like" id="i-c" onclick="myComment()">
-                                    <span>40</span><img src="{% static 'icon/comment-i.png' %}">
-                                </label>
-                                <label for="like" id="a-c">
-                                    <span>40</span><img src="{% static 'icon/comment.png' %}">
-                                </label>
-                                <label for="like" id="i-s">
-                                    <img src="{% static 'icon/share-i.png' %}">
-                                </label>
-                                <label for="like" id="a-s">
-                                    <img src="{% static 'icon/share.png' %}">
-                                </label>
-                                <label for="like" id="i-sa">
-                                    <img src="{% static 'icon/saved-i.png' %}">
-                                </label>
-                                <label for="like" id="a-sa">
-                                    <img src="{% static 'icon/saved-a.png' %}">
-                                </label>
-                                <label for="like" id="i-f">
-                                    <img src="{% static 'icon/flag-i.png' %}">
-                                </label>
-                                <label for="like" id="a-f">
-                                    <img src="{% static 'icon/flag.png' %}">
-                                </label>
-                            </form>
-                        </div>
-                        <div class="comment-section" id="c-section">
-                            <a href="">View all comments...</a>
-                            <label>
-                                <input type="text" placeholder="Write comment...">
-                            </label>
-                        </div>
-                    </div>
+{% extends 'home.html' %}
+{% block bodyloader %}
+    <body>
+{% endblock %}
+{% block leftfeed %}
+{% load static %}
+<div class="left-feed">
+    <div class="profile-main">
+        <div class="myProfile">
+            <div class="my-pp" id="my-ppp">
+                <form method="post" action="profile" enctype="multipart/form-data">{% csrf_token %}
+                    {% if mydetials.profile_pic != '' %}
+                    <img class="back-op" src="media/{{mydetials.profile_pic}}">
+                    {% else %}
+                    <img class="back-op" src="{% static 'img/defaultpp.jpg' %}">
                     {% endif %}
-                    {% endfor %}
-                    {% endfor %}
-                </div>
-                <div class="container2-2">
-                    {% include '2_container.html' %}
-                </div>
+                    <label class="pp-chg" for="picupload" onclick="show_picture()"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
+                    <input type="file" id="picupload" name="image">
             </div>
+            <div class="my-info">
+                <div class="my-post">
+                    <button id="posts_show_top">Post<br>0</button>
+                </div>
+                <div class="f-f">
+                    <div class="my-followers">
+                        <button>Followers<br>{{count}}</button>
+                    </div>
+                    <div class="my-following">
+                        <button>Following<br>{{count_following}}</button>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    <div id="mypic">
+        <div class="modal">
+            <div class="modaltop">
+                <div class="modalheader">
+                    <p id="modal-title">Profile Picture</p>
+                </div>
+                <div class="closebutton">
+                    <span onclick="document.getElementById('mypic').style.display='none';">&times;</span>
+                </div>
+            </div>
+            <div class="pp-div" id="pp-preview">
+            </div>
+            <div class="post-submit">
+                <input type="submit" value="UPLOAD">
+            </div>
+        </form>
+        </div>
+    </div>
+    <div class="myName">
+        <div class="my-name">
+            Rusan Vaidya
+        </div>
+        <div class="my-info my-bio">
+            <p>I love football. My favorite team is Real Madrid. I have interest in Music too.</p>
+        </div>
+    </div>
+    <div class="my-p-timeline">
+        <ul>
+            <li><button class="active" id="posts-btn">Posts</button></li>
+            <li><button class="inactive" id="settings-btn">Settings</button></li>
+            <li><button class="inactive" id="interests-btn">Interests</button></li>
+        </ul>
+    </div>
+    <div id="my-posted-contents">
+        <div class="new-posting-div">
+            <div class="new-pd">
+                <div class="pd-text">
+                    <table>
+                        {% if mydetials.profile_pic != '' %}
+                        <td class="new-poster"><img src="media/{{mydetials.profile_pic}}"></td>
+                        {% else %}
+                        <td class="new-poster"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                        {% endif %}
+                        <td class="poster-div"><div class="new-idea" onclick="post_area()">What's your idea today...</div></td>
+                    </table>
+                </div>
+                <div class="new-buttons">
+                    <label class="new-btns" for="fileupload" style="text-align: center;" onclick="post_area()">
+                        <table><td><img src="{% static 'icon/photo.png' %}"></td><td class="post-opt"></td></table>
+                    </label>
+                    <div class="new-btns" onclick="post_venue()">
+                            <table><td><img src="{% static 'icon/venue.png' %}"></td><td class="post-opt"></td></table>
+                    </div>
+                    <div class="new-btns" onclick="post_feeling()">
+                        <table><td><img src="{% static 'icon/feeling.png' %}"></td><td class="post-opt"></td></table>
+                    </div>
+                </div>
+            </div>
+            <div id="new_post_modal">
+                <div class="modal">
+                    <div class="modaltop">
+                        <div class="modalheader">
+                            <p id="modal-title">Create Post</p>
+                            <div id="title-back"><button onclick="post_area()"><table><td><img src="{% static 'icon/back.png' %}"></td><td>Back</td></table></button></div>
+                        </div>
+                        <div class="closebutton">
+                            <span onclick="document.getElementById('new_post_modal').style.display='none';">&times;</span>
+                        </div>
+                    </div>
+                    <div class="new_post">
+                        <div id="post-create">
+                            <div class="posting-user">
+                                {% for i in user %}
+                                <table>
+                                {% if mydetials.profile_pic != '' %}
+                                    <td class="posted-img"><img class="back-op" src="media/{{mydetials.profile_pic}}">
+                                {% else %}
+                                    <td class="posted-img"><img class="back-op" src="{% static 'img/defaultpp.jpg' %}"></td>
+                                {% endif %}
+                                    <td style="font-weight: bold; font-size: 13px;">{{i.first_name}} {{i.last_name}}</td>
+                                    <td id="feeling-label"></td>
+                                    <td id="feeling-emoji"></td>
+                                </table>
+                                {% endfor %}
+                            </div>
+                            <form  action="content_post" enctype="multipart/form-data" method="post">{% csrf_token %}
+                            <div class="caption-write">
+                                <input type="text" id="f-label" style="display: none;" name="feeling">
+                                <input type="text" id="f-img-tag" style="display: none;" name="emoji">
+                                <textarea placeholder="What's your idea today..." name="content"></textarea>
+                            </div>
+                            <div class="img-div" id="preview-img">
+                            </div>
+                            <div class="new-btn-modal">
+                                <label class="new-btns-m" for="fileupload" style="text-align: center;">
+                                    <img src="{% static 'icon/photo.png' %}">
+                                    <input type="file"  id="fileupload" multiple="multiple" name="ufiles">
+                                </label>
+                                <div class="new-btns-m" onclick="post_venue()">
+                                        <img src="{% static 'icon/venue.png' %}">
+                                </div>
+                                <div class="new-btns-m" onclick="post_feeling()">
+                                    <img src="{% static 'icon/feeling.png' %}">
+                                </div>
+                            </div>
+                            <div class="post-submit">
+                                <input type="submit" value="POST">
+                            </div>
+                            </form>
+                        </div>
+                        <div id="venue-create">
+                            <button onclick="a_1()"><table><td><img src="{% static 'activity/event.png' %}"></td><td>Organizing Event</td></table></button>
+                            <button onclick="a_2()"><table><td><img src="{% static 'activity/calender.png' %}"></td><td>Going to an Event</td></table></button>
+                            <button onclick="a_3()"><table><td><img src="{% static 'activity/birthday.png' %}"></td><td>Celebrating Birthday</td></table></button>
+                            <button onclick="a_4()"><table><td><img src="{% static 'activity/celebrating.png' %}"></td><td>Celebrating Occasion</td></table></button>
+                            <button onclick="a_5()"><table><td><img src="{% static 'activity/festival.png' %}"></td><td>Celebrating Festival</td></table></button>
+                            <button onclick="a_6()"><table><td><img src="{% static 'activity/movie.png' %}"></td><td>Watching Movie</td></table></button>
+                            <button onclick="a_7()"><table><td><img src="{% static 'activity/travelling.png' %}"></td><td>Travelling</td></table></button>
+                        </div>
+                        <div id="feeling-create">
+                            <button onclick="feeling_h()"><table><td><img src="{% static 'emoji/043-happy.png' %}"></td><td>Happy</td></table></button>
+                            <button onclick="feeling_s()"><table><td><img src="{% static 'emoji/011-bored.png' %}"></td><td>Sad</td></table></button>
+                            <button onclick="feeling_e()"><table><td><img src="{% static 'emoji/047-shining.png' %}"></td><td>Excited</td></table></button>
+                            <button onclick="feeling_sick()"><table><td><img src="{% static 'emoji/034-sick.png' %}"></td><td>Sick</td></table></button>
+                            <button onclick="feeling_w()"><table><td><img src="{% static 'emoji/031-saint.png' %}"></td><td>Wonderful</td></table></button>
+                            <button onclick="feeling_crazy()"><table><td><img src="{% static 'emoji/046-crazy.png' %}"></td><td>Crazy</td></table></button>
+                            <button onclick="feeling_a()"><table><td><img src="{% static 'emoji/037-angry.png' %}"></td><td>Angry</td></table></button>
+                            <button onclick="feeling_t()"><table><td><img src="{% static 'emoji/003-tired.png' %}"></td><td>Tired</td></table></button>
+                            <button onclick="feeling_afraid()"><table><td><img src="{% static 'emoji/021-afraid.png' %}"></td><td>Afraid</td></table></button>
+                            <button onclick="feeling_d()"><table><td><img src="{% static 'emoji/024-dissapointment.png' %}"></td><td>Dissapointed</td></table></button>
+                            <button onclick="feeling_i()"><table><td><img src="{% static 'emoji/039-observing.png' %}"></td><td>Insightful</td></table></button>
+                            <button onclick="feeling_c()"><table><td><img src="{% static 'emoji/018-confused.png' %}"></td><td>Confused</td></table></button>
+                            <button onclick="feeling_surprised()"><table><td><img src="{% static 'emoji/010-surprised.png' %}"></td><td>Surprised</td></table></button>
+                            <button onclick="feeling_n()"><table><td><img src="{% static 'emoji/020-nerd.png' %}"></td><td>Nerd</td></table></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {%for post in posts%}
+        {% for p in pu %}
+        {% if p.id == post.author_id %}
+        <div class="feedsocket">
+            <div class="feedpost">
+                <div class="user-who-posted">
+                    <div class="u-name">
+                        <table>
+                            {% for bio in userdata %}
+                            {% if bio.owner_id == post.author_id %}
+                            {% if bio.profile_pic != '' %}
+                            <td><img src="media/{{bio.profile_pic}}"></td>
+                            {% else %}
+                            <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                            <td class="u-fullname">{{p.first_name}} {{p.last_name}}</td>       
+                            {% if post.emoji != '' %}
+                            <td>{{post.feeling}}</td>
+                            <td class="femoji"><img src='/static/{{post.emoji}}'></td>
+                            {% endif %}
+                        </table>
+                    </div>
+                    <div class="u-edit">
+                        <img src="{% static 'icon/flag-i.png' %}">
+                    </div>
+                </div>
+                <div class="time-post">{{post.created}}</div>
+                <div class="caption">{{post.usercontent}}</div>
+                <div id="{{post.id}}" style="display:none">{{post.userfile}}</div>
+                <div class="postedimg" id="new{{post.id}}">
+                    <video src="media/{{post.userfile}}" controls id='vid_spo{{post.id}}' width="100%" height="100%"></video>
+                    <img src="media/{{post.userfile}}" id='img_spo{{post.id}}' onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'">
+                </div>
+                <script>
+                    var x=document.getElementById({{post.id}}).innerHTML;
+                    console.log(x);
+    
+                    var pics = /.(jpeg|jpg|png)$/;
+                    var vids = /.(mp4|wmv)/;
+    
+    
+                    if (pics.test(x)){
+                        document.getElementById('vid_spo{{post.id}}').style.display='none';
+                    }
+                    else if (vids.test(x)){
+                        document.getElementById('img_spo{{post.id}}').style.display='none';
+                    }
+                    else{
+                    document.getElementById('new{{post.id}}').style.display='none';
+                    }
+                </script>
+                <div class="post-react">
+                    <ul>
+                        <li>
+                            <table>
+                                <td id="like-i-{{post.id}}"><img src="{% static 'icon/like-i.png' %}"></td>
+                                <td class="react-active" id="like-a-{{post.id}}"><img src="{% static 'icon/like.png' %}"></td>
+                                <td>2k</td>
+                            </table>
+                        </li>
+                        <li>
+                            <table>
+                                <td id="dislike-i-{{post.id}}"><img src="{% static 'icon/dislike-i.png' %}"></td>
+                                <td class="react-active" id="dislike-a-{{post.id}}"><img src="{% static 'icon/dislike.png' %}"></td>
+                                <td>1k</td>
+                            </table>
+                        </li>
+                        <li>
+                            <table>
+                                <td><img src="{% static 'icon/comment.png' %}"></td>
+                                <td>2k</td>
+                            </table>
+                        </li>
+                        <li>
+                            <table>
+                                <td><img src="{% static 'icon/share.png' %}"></td>
+                            </table>
+                        </li>
+                        <li>
+                            <table>
+                                <td id="saved-i-{{post.id}}"><img src="{% static 'icon/saved-i.png' %}"></td>
+                                <td class="react-active" id="saved-a-{{post.id}}"><img src="{% static 'icon/saved-a.png' %}"></td>
+                            </table>
+                        </li>
+                    </ul>
+                    <script>
+                        // like
+                        var like_b_i =  document.getElementById('like-i-{{post.id}}');
+                        like_b_i.onclick = function()
+                        {
+                            document.getElementById('like-i-{{post.id}}').style.display='none';
+                            document.getElementById('like-a-{{post.id}}').style.display='inline-block';
+                            document.getElementById('dislike-a-{{post.id}}').style.display='none';
+                            document.getElementById('dislike-i-{{post.id}}').style.display='inline-block';
+                        }
+                        var like_b_a =  document.getElementById('like-a-{{post.id}}');
+                        like_b_a.onclick = function()
+                        {
+                            document.getElementById('like-a-{{post.id}}').style.display='none';
+                            document.getElementById('like-i-{{post.id}}').style.display='inline-block';
+                        }
+    
+                        // dislike
+                        var dislike_b_i =  document.getElementById('dislike-i-{{post.id}}');
+                        dislike_b_i.onclick = function()
+                        {
+                            document.getElementById('dislike-i-{{post.id}}').style.display='none';
+                            document.getElementById('dislike-a-{{post.id}}').style.display='inline-block';
+                            document.getElementById('like-a-{{post.id}}').style.display='none';
+                            document.getElementById('like-i-{{post.id}}').style.display='inline-block';
+                        }
+                        var dislike_b_a =  document.getElementById('dislike-a-{{post.id}}');
+                        dislike_b_a.onclick = function()
+                        {
+                            document.getElementById('dislike-a-{{post.id}}').style.display='none';
+                            document.getElementById('dislike-i-{{post.id}}').style.display='inline-block';
+                        }
+    
+                        // saved
+                        var saved_b_i =  document.getElementById('saved-i-{{post.id}}');
+                        saved_b_i.onclick = function()
+                        {
+                            document.getElementById('saved-i-{{post.id}}').style.display='none';
+                            document.getElementById('saved-a-{{post.id}}').style.display='inline-block';
+                        }
+                        var saved_b_a =  document.getElementById('saved-a-{{post.id}}');
+                        saved_b_a.onclick = function()
+                        {
+                            document.getElementById('saved-a-{{post.id}}').style.display='none';
+                            document.getElementById('saved-i-{{post.id}}').style.display='inline-block';
+                        }
+    
+                        // flag
+                        var flag_b_i =  document.getElementById('flag-i-{{post.id}}');
+                        flag_b_i.onclick = function()
+                        {
+                            document.getElementById('flag-i-{{post.id}}').style.display='none';
+                            document.getElementById('flag-a-{{post.id}}').style.display='inline-block';
+                        }
+                        var flag_b_a =  document.getElementById('like-a-{{post.id}}');
+                        flag_b_a.onclick = function()
+                        {
+                            document.getElementById('flag-a-{{flag.id}}').style.display='none';
+                            document.getElementById('flag-i-{{flag.id}}').style.display='inline-block';
+                        }
+                    </script>
+                </div>
+            </div>    
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </div>
+    <div id="my-settings">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="profile-info">
+                {% for i in user %}
+                <div class="fullname">
+                    <div class="first_name">
+                        <label>First Name : </label>
+                        <input type="text" placeholder="First Name" name="first_name" value="{{i.first_name}}">
+                    </div>
+                    <div class="last_name">
+                        <label>Last Name : </label>
+                        <input type="text" placeholder="Last Name" name="last_name" value="{{i.last_name}}">
+                    </div>
+                </div>
+                <div class="emailpassword">
+                    <label>Email : </label>
+                    <input type="text" placeholder="Email or Phone Number" name="email" value="{{i.email}}">
+                </div>
+                <div class="bio-area">
+                    <label>Bio : </label>
+                    <textarea placeholder="Bio" name="bio">I love football. My favorite team is Real Madrid. I have interest in Music too.</textarea>
+                </div>
+                <div class="emailpassword">
+                    <label>Current Password : </label>
+                    <input type="password" placeholder="Current Password" name="email">
+                </div>
+                <div class="emailpassword">
+                    <label>New Password : </label>
+                    <input type="password" placeholder="New Password" name="email">
+                </div>
+                <div class="emailpassword">
+                    <label>Confirm Password : </label>
+                    <input type="password" placeholder="Confirm Password" name="email">
+                </div>
+                <div class="submit-changes">
+                    <input type="submit" value="Save"> 
+                </div>
+                {% endfor %}
+            </div>
+        </form>
+    </div>
+    <div id="my-interests">
+        <div class="search-bar">
+            <input type="search" placeholder="Search interest" id="searching">
+        </div>
+        <div class="interest-list">
+            <div class="interest-listing">
+                <ul id="thisUL">
+                    {% for i in interest %}
+                    <li>
+                        <label for="this_{{i.my_interest}}" id="div{{i.my_interest}}">
+                            <table>
+                                <td><img src="../media/Interest_icon/{{i.my_interest}}.png" class="id-img" id="id-img-{{i.my_interest}}"></td>
+                                <td><h4>{{i.my_interest}}</h4></td>
+                                <td><input id="this_{{i.my_interest}}" type="checkbox" name="interest" value="{{i.my_interest}}"></td>
+                            </table>
+                        </label>
+                    </li>
+                    <script>
+                        var theme = localStorage.getItem('theme');
+                        if(theme=='light')
+                        {
+                            document.getElementById('id-img-{{i.my_interest}}').style.filter='invert(100%)';
+                        }
+                        document.getElementById('div{{i.my_interest}}').onclick = function()
+                        {
+                            if (document.getElementById('this_{{i.my_interest}}').checked==true)
+                            {
+                                document.getElementById('div{{i.my_interest}}').style.background = "#2D7B20";
+                            }
+                            else if(document.getElementById('this_{{i.my_interest}}').checked==false)
+                            {
+                                document.getElementById('div{{i.my_interest}}').style.background = "none";
+                            }
+                        }
+                        var searchbar = document.getElementById('searching');
+                        searchbar.onkeyup = function()
+                        {
+                            var filter = searchbar.value.toUpperCase();
 
-        <script src="{% static 'js/header.js' %}"></script>
-        <script src="{% static 'js/newsfeed.js' %}"></script>
-        <script src="{% static 'js/profile.js' %}"></script>
-        </body>
-        </html>
+                            var ul = document.getElementById('thisUL');
+                            var li = ul.getElementsByTagName('li');
+                            for(var i=0; i<li.length;i++)
+                            {
+                                var table = li[i].getElementsByTagName('table');
+                                var td = table[0].getElementsByTagName('td')[1];
+                                var h4 = td.getElementsByTagName('h4')[0];
+                                var tex = h4.innerText;
+                                console.log(tex.toUpperCase().indexOf(filter));
+                                if (tex.toUpperCase().indexOf(filter) > -1)
+                                {
+                                    li[i].style.display="";
+                                }
+                                else
+                                {
+                                    li[i].style.display='none';
+                                }
+                            }
+                        }                                                                                              
+                    </script>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="submit-changes">
+            <input type="submit" value="SAVE">
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

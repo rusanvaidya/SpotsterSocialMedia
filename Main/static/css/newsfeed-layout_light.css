@@ -1,0 +1,349 @@
+body
+{
+    background-color: white;
+}
+.feedbody
+{
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-top: 70px;
+    position: relative;
+}
+
+.sidemenudiv, .newsfeed
+{
+    color: black;
+    height: 100%;
+    background-color: white;
+    display: inline-block;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+}
+.sidemenudiv
+{
+    position: fixed;
+    width: 28%;
+    float: left;
+    overflow-y: scroll;
+}
+.sidemenudiv::-webkit-scrollbar
+{
+    display: none;
+}
+.sidemenudiv
+{
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+} 
+.newsfeed
+{
+    width: 72%;
+    float: right;
+}
+.left-feed, .right-feed
+{
+    display: inline-block;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.left-feed
+{
+    width: 60%;
+    float: left;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.right-feed
+{
+    width: 40%;
+    float: right;
+}
+@media only screen and (max-width:1000px)
+{
+    .sidemenudiv, .right-feed
+    {
+        display: none;
+    }
+    .newsfeed, .left-feed
+    {
+        width: 100%;
+    }
+}
+/* ---------------------------------------------------------------------------------------------------------------------- */
+/* sidemenudiv-elements */
+.d1 ul
+{
+    list-style: none;
+}
+.d1 ul li
+{
+    margin: 5px;
+    margin-left: 80px;
+    text-align: center;
+}
+.d1 ul li table
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 25px;
+}
+.d1 ul li div.d1-1
+{
+    width: 100%;
+}
+.d1 ul li table:hover
+{
+    background-color: #76ff5e21;
+    cursor: pointer;
+    font-weight: bold;
+}
+.d1 ul li table.ppd1 td img
+{
+    box-shadow: 0 0 5px 2px #2d7b20;
+    filter: none;
+}
+.d1 ul li table td img
+{
+    filter: invert(100%);
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    object-fit: 50% 50%;
+    border-radius: 50%;
+}
+.du ul li .map-d #map 
+{ 
+    z-index: 1;
+    position: absolute; 
+    width: 20%; 
+    height:40%;
+}
+.du ul li .map-d
+{
+    width: 350px;
+    padding: 10px;
+    height: 300px;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------- */
+/* newsfeed */
+.interests-bar
+{
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.interests-bar figure
+{
+    position: relative;
+    width: 2000%;
+    margin: 0;
+    left: 0;
+    animation: 40s slider infinite;
+}
+.interests-bar figure:hover
+{
+    animation: none;
+}
+
+@keyframes slider
+{
+    0%{left:0}
+    5%{left:0}
+    10%{left:-50}
+    15%{left: -50%}
+    20%{left:-100%}
+    25%{left: -100%}
+    30%{left: -150%;}
+    35%{left: -150%}
+    40%{left: -200%}
+    45%{left: -200%}
+    50%{left: -250%}
+    55%{left: -250%}
+    60%{left: -300%;}
+    65%{left: -300%}
+    70%{left: -350%}
+    75%{left: -350%}
+    80%{left: -400%}
+    85%{left: -400%}
+    90%{left: -450%}
+    95%{left: -500%}
+    100%{left: 0}
+}
+.interests-bar img
+{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    filter: invert(100%);
+}
+.interests-bar-next
+{
+    float: right;
+    position: absolute;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------- */
+/* searchbar */
+.search-feed, .right-div-content
+{
+    margin: 0 auto;
+    margin-top: 10px;
+}
+.search-feed
+{
+    width: 340px;
+}
+
+.right-div-content
+{
+    background-color: #bbbbbb;
+    border-radius: 13px;
+    width: 340px;
+    color: black;
+    font-size: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.right-div-content ul.trending li.r-t, .right-div-content ul.suggestions li.r-t
+{
+    text-align: center;
+}
+
+.search-feed input
+{
+    border-radius: 24px;
+    width: 100%;
+    padding: 12px 17px;
+    box-sizing: border-box;
+    outline: none;
+}
+.right-div-content ul.trending, .right-div-content ul.suggestions
+{
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.right-div-content ul.trending li
+{
+    border-bottom: 2px solid white;
+    width: 100%;
+    box-sizing: border-box;
+}
+.right-div-content ul.suggestions li
+{
+    border-bottom: 2px solid white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.right-div-content ul.trending li button.side-l
+{
+    color: black;
+    border: none;
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    display: inline-block;
+    background-color: transparent;
+}
+.right-div-content ul.trending li button.side-l:hover,.right-div-content ul.trending li.link:hover, button.show-m:hover
+{
+    font-weight: bolder;
+    background-color: #9b9b9b;
+    cursor: pointer;
+}
+.light-trend
+{
+    font-size: 13px;
+    color: rgb(26, 85, 8);
+}
+img.suggest-pp
+{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.right-div-content ul.suggestions button.side-l, .right-div-content ul.suggestions button.side-r, .right-div-content ul.suggestions button.side-after
+{
+    height: 40px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+}
+.right-div-content ul.suggestions li a
+{
+    width: 100%;
+    font-size: 13px;
+    height: 40px;
+    position: relative;
+    background-color: #1c6110;
+}
+.right-div-content ul.suggestions div.side-l
+{
+    padding: 10px;
+    font-size: 15px;
+}
+.right-div-content ul.suggestions div.side-l:hover
+{
+    font-weight: bold;
+    background-color: #383737;
+    cursor: pointer;
+}
+
+.right-div-content ul.suggestions button.side-r, .right-div-content ul.suggestions button.side-after
+{
+    width: 100px;
+    border: 2px solid #225c18;
+    border-radius: 20px;
+    color: #225c18;
+}
+.right-div-content ul.suggestions button.side4dd336-after:hover
+{
+    border: 2px solid #ff0000;
+    color: #ff0000;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #ff3c003f;
+}
+
+.img-li, .name-li, .follow-li
+{
+    display: inline-block;
+    overflow: hidden;
+}
+.name-li
+{
+    width: 150px;
+}
+
+
+.right-div-content ul.suggestions li div.side-l div.follow-li button.side-r:hover
+{
+    font-weight: bold;
+    background-color: #76ff5e21;
+    cursor: pointer;
+}
+
+button.show-m
+{
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    color: rgb(5, 77, 5);
+    font-weight: bold;
+}
+
+.gapping_div
+{
+    padding: 40px;
+    margin: 40px;
+    width: 100%;
+}

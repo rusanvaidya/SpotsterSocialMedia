@@ -6,7 +6,7 @@ from discover.models import followers
 
 from home.models import userpost
 
-from complete.models import userdetials
+from complete.models import userdetails
 from discover.models import interest
 
 
@@ -59,10 +59,10 @@ def trending(request):
             except:
                 pass
             interest_list = interest.objects.all()
-            user_data = userdetials.objects.all()
+            user_data = userdetails.objects.all()
             mydetials = 0
             try:
-                mydetials = userdetials.objects.get(owner_id=usrs_id)
+                mydetials = userdetails.objects.get(owner_id=usrs_id)
             except:
                 pass
             dict1 = {

@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from home.models import registration
 # Create your views here.
 from discover.models import followers
-from complete.models import userdetials
+from complete.models import userdetails
 
 from home.models import userpost
 
@@ -29,10 +29,10 @@ def discover(request):
 
         except:
             pass
-        user_data = userdetials.objects.all()
+        user_data = userdetails.objects.all()
         mydetials = 0
         try:
-            mydetials = userdetials.objects.get(owner_id=userid)
+            mydetials = userdetails.objects.get(owner_id=userid)
         except:
             pass
         other_user = registration.objects.all().exclude(email=email)
@@ -95,10 +95,10 @@ def newsfeed(request):
         'posts': qs,
         'pu': pu}
 
-    userdata = userdetials(profile_pic= profile, user_bio= bio, user_interest= inte , owner_id=usrs_id)
+    userdata = userdetails(profile_pic= profile, user_bio= bio, user_interest= inte , owner_id=usrs_id)
     userdata.save()
 
-    return render(request, 'newsfeed.html', dict1)
+    return render(request, 'home.html', dict1)
 
 
 def discover_more(request):
@@ -155,10 +155,10 @@ def follower(request):
         except:
             pass
 
-        user_data = userdetials.objects.all()
+        user_data = userdetails.objects.all()
         mydetials = 0
         try:
-            mydetials = userdetials.objects.get(owner_id=userid)
+            mydetials = userdetails.objects.get(owner_id=userid)
         except:
             pass
         other_user = registration.objects.all().exclude(email=email)

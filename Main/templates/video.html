@@ -1,180 +1,216 @@
-<!DOCTYPE html>
-<html>
-    {% load static %}
-    <head>
-        <title>Spotser</title>
-        <link rel="icon" href="{% static 'img/icon.png' %}">
-    </head>
-    <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}">
+{% extends 'home.html' %}
+{% load static %}
+{% block bodyloader %}
     <body onload="loader_video()">
-        <div class="homepage">
-            <!-- header import -->
-            {% include 'header.html' %}
-            
-            <!-- 3 divs -->
-            <div class="container_newsfeed not-loaded" id="div-loaded">
-
-                <!-- 1st div -->
-                <div class="container1">
-                    {% include '1_container.html' %}
-                </div>
-
-                <!-- 2nd div -->
-                <div class="container2">
-                    <div class="container2-1">
-                    <div class="videos-search">
-                        <img src="{% static 'icon/search.png' %}" title="Search Video" class="search-v-btn" onclick="document.getElementById('searching-video').style.display='block'">
-                        <div id="searching-video">
-                            <input type="search" placeholder="Search Videos...">
-                            <span onclick="document.getElementById('searching-video').style.display='none'">&times;</span>
-                        </div>
-                    </div>
-                    <div class="c2">
-                        <div class="video_player">
-                            <video id="video" height="100%" width="100%" controls onseeking="video">
-                                <source src="media/123.mp4">
-                            </video>
-                            <script>
-                            var vid = document.getElementById("video");
-                            vid.onseeking= function() {
-
-                            };
-                            </script>
-                        </div>
-                        <div class="video_title">
-                            Roberto Carlos Free Kick
-                        </div>
-                        <div style="overflow: hidden;">
-                            <div class="c2-post">
-                                <table>
-                                    <td class="posted-img"><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                    <td class="posted-name"><a href="">Rusan Vaidya</a>
-                                    </td>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="joinin">
-                            <form>
-                                <label for="like" id="i-l">
-                                    <span>120</span><img src="{% static 'icon/like-i.png' %}">
-                                </label>
-                                <label for="like" id="a-l">
-                                    <span>120</span><img src="{% static 'icon/like.png' %}">
-                                </label>
-                                <label for="like" id="i-d">
-                                    <span>22</span><img src="{% static 'icon/dislike-i.png' %}">
-                                </label>
-                                <label for="like" id="a-d">
-                                    <span>22</span><img src="{% static 'icon/dislike.png' %}">
-                                </label>
-                                <label for="like" id="i-c" onclick="myComment()">
-                                    <span>40</span><img src="{% static 'icon/comment-i.png' %}">
-                                </label>
-                                <label for="like" id="a-c">
-                                    <span>40</span><img src="{% static 'icon/comment.png' %}">
-                                </label>
-                                <label for="like" id="i-s">
-                                    <img src="{% static 'icon/share-i.png' %}">
-                                </label>
-                                <label for="like" id="a-s">
-                                    <img src="{% static 'icon/share.png' %}">
-                                </label>
-                                <label for="like" id="i-sa">
-                                    <img src="{% static 'icon/saved-i.png' %}">
-                                </label>
-                                <label for="like" id="a-sa">
-                                    <img src="{% static 'icon/saved-a.png' %}">
-                                </label>
-                                <label for="like" id="i-f">
-                                    <img src="{% static 'icon/flag-i.png' %}">
-                                </label>
-                                <label for="like" id="a-f">
-                                    <img src="{% static 'icon/flag.png' %}">
-                                </label>
-                            </form>
-                        </div>
-                        <div class="comment-section" id="c-section">
-                            <a href="">View all comments...</a>
-                            <label>
-                                <input type="text" placeholder="Write comment...">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="c2">
-                        <div class="video_player">
-                            <video id="video" height="100%" width="100%" controls>
-                                <source src="{% static 'media/123.mp4' %}">
-                            </video>
-                        </div>
-                        <div class="video_title">
-                            Roberto Carlos Free Kick
-                        </div>
-                        <div style="overflow: hidden;">
-                            <div class="c2-post">
-                                <table>
-                                    <td class="posted-img"><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                    <td class="posted-name"><a href="">Rusan Vaidya</a>
-                                    </td>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="joinin">
-                            <form>
-                                <label for="like" id="i-l">
-                                    <span>120</span><img src="{% static 'icon/like-i.png' %}">
-                                </label>
-                                <label for="like" id="a-l">
-                                    <span>120</span><img src="{% static 'icon/like.png' %}">
-                                </label>
-                                <label for="like" id="i-d">
-                                    <span>22</span><img src="{% static 'icon/dislike-i.png' %}">
-                                </label>
-                                <label for="like" id="a-d">
-                                    <span>22</span><img src="{% static 'icon/dislike.png' %}">
-                                </label>
-                                <label for="like" id="i-c" onclick="myComment()">
-                                    <span>40</span><img src="{% static 'icon/comment-i.png' %}">
-                                </label>
-                                <label for="like" id="a-c">
-                                    <span>40</span><img src="{% static 'icon/comment.png' %}">
-                                </label>
-                                <label for="like" id="i-s">
-                                    <img src="{% static 'icon/share-i.png' %}">
-                                </label>
-                                <label for="like" id="a-s">
-                                    <img src="{% static 'icon/share.png' %}">
-                                </label>
-                                <label for="like" id="i-sa">
-                                    <img src="{% static 'icon/saved-i.png' %}">
-                                </label>
-                                <label for="like" id="a-sa">
-                                    <img src="{% static 'icon/saved-a.png' %}">
-                                </label>
-                                <label for="like" id="i-f">
-                                    <img src="{% static 'icon/flag-i.png' %}">
-                                </label>
-                                <label for="like" id="a-f">
-                                    <img src="{% static 'icon/flag.png' %}">
-                                </label>
-                            </form>
-                        </div>
-                        <div class="comment-section" id="c-section">
-                            <a href="">View all comments...</a>
-                            <label>
-                                <input type="text" placeholder="Write comment...">
-                            </label>
-                        </div>
-                    </div>
-                    
-                </div>
-                <!-- 2-2 div -->
-                <div class="container2-2">
-                    {% include '2_container.html' %}
-                </div>
+{% endblock %}
+{% block sidemenudiv %}
+<div class="video-list">
+    <ul>
+        <li>
+            <div class="video-search">
+                <input type="search" placeholder="Search Videos">
             </div>
+        </li>
+        <li>
+            <div class="video-id">
+                <table>
+                    <td><img src="{% static 'img/thumbnail.jpg' %}"></td>
+                    <td>Roberto Carlos Free Kick<br><span class="light-trend">19:00</span><td>
+                </table>
             </div>
+        </li>
+        <li>
+            <div class="video-id">
+                <table>
+                    <td><img src="{% static 'img/thumbnail.jpg' %}"></td>
+                    <td>Roberto Carlos Free Kick<br><span class="light-trend">19:00</span><td>
+                </table>
+            </div>
+        </li>
+        <li>
+            <div class="video-id">
+                <table>
+                    <td><img src="{% static 'img/thumbnail.jpg' %}"></td>
+                    <td>Roberto Carlos Free Kick<br><span class="light-trend">19:00</span><td>
+                </table>
+            </div>
+        </li>
+        <li>
+            <div class="video-id">
+                <table>
+                    <td><img src="{% static 'img/thumbnail.jpg' %}"></td>
+                    <td>Roberto Carlos Free Kick<br><span class="light-trend">19:00</span><td>
+                </table>
+            </div>
+        </li>
+        <li>
+            <div class="video-id">
+                <table>
+                    <td><img src="{% static 'img/thumbnail.jpg' %}"></td>
+                    <td>Roberto Carlos Free Kick<br><span class="light-trend">19:00</span><td>
+                </table>
+            </div>
+        </li>
+        <li>
+            <div class="video-id">
+                <table>
+                    <td><img src="{% static 'img/thumbnail.jpg' %}"></td>
+                    <td>Roberto Carlos Free Kick<br><span class="light-trend">19:00</span><td>
+                </table>
+            </div>
+        </li>
+        <li>
+            <div class="video-id">
+                <table>
+                    <td><img src="{% static 'img/thumbnail.jpg' %}"></td>
+                    <td>Roberto Carlos Free Kick<br><span class="light-trend">19:00</span><td>
+                </table>
+            </div>
+        </li>
+        <li>
+            <div class="video-id">
+                <table>
+                        <td><img src="{% static 'img/thumbnail.jpg' %}"></td>
+                        <td>Roberto Carlos Free Kick<br><span class="light-trend">19:00</span><td>
+                </table>
+            </div>
+        </li>
+    </ul>
+    <div class="gapping_div"></div>
+</div>
+{% endblock %}
+{% block leftfeed %}
+{% load static %}
+<div class="left-feed">
+    <div class="video-player">
+        <video id="video" height="100%" width="100%" muted autoplay loop controls>
+            <source src="media/123.mp4" type="video/mp4">
+        </video>
+        <!-- <script>
+            var vid = document.getElementById("video");
+            vid.onseeking= function() {
+
+            };
+        </script> -->
+    </div>
+    <div class="video-info">
+        <div class="video-title">
+            Roberto Carlos Free Kick<br><span class="light-trend">April 28, 2021, 11:49 a.m.</span>
         </div>
-    </body>
-</html>
-        <script src="{% static 'js/header.js' %}"></script>
-        <script src="{% static 'js/newsfeed.js' %}"></script>
+        <div class="video-d-show">
+            <button id="show-v-description"><img src="{% static 'icon/dropdown.png' %}"></button>
+        </div>
+    </div>
+    <div id="description" class="hide-video">
+        <div id="d-show">
+            Roberto Carlos da Silva Rocha, commonly known as Roberto Carlos, is a Brazilian former professional footballer who now works as a football ambassador. He started his career in Brazil as a forward but spent most of his career as a left back and has been described as the "most offensive-minded left-back in the history of the game".
+        </div>
+    </div>
+    <div class="owner-video">
+        <table>
+            <td class="posted-img"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+            <td class="posted-name"><a href="">Real Madrid</a></td>
+        </table>
+    </div>
+    <div class="post-react">
+        <ul>
+            <li>
+                <table>
+                    <td id="like-i-{{post.id}}"><img src="{% static 'icon/like-i.png' %}"></td>
+                    <td class="react-active" id="like-a-{{post.id}}"><img src="{% static 'icon/like.png' %}"></td>
+                    <td>2k</td>
+                </table>
+            </li>
+            <li>
+                <table>
+                    <td id="dislike-i-{{post.id}}"><img src="{% static 'icon/dislike-i.png' %}"></td>
+                    <td class="react-active" id="dislike-a-{{post.id}}"><img src="{% static 'icon/dislike.png' %}"></td>
+                    <td>1k</td>
+                </table>
+            </li>
+            <li>
+                <table>
+                    <td><img src="{% static 'icon/comment.png' %}"></td>
+                    <td>2k</td>
+                </table>
+            </li>
+            <li>
+                <table>
+                    <td><img src="{% static 'icon/share.png' %}"></td>
+                </table>
+            </li>
+            <li>
+                <table>
+                    <td id="saved-i-{{post.id}}"><img src="{% static 'icon/saved-i.png' %}"></td>
+                    <td class="react-active" id="saved-a-{{post.id}}"><img src="{% static 'icon/saved-a.png' %}"></td>
+                </table>
+            </li>
+        </ul>
+        <script>
+            // like
+            var like_b_i =  document.getElementById('like-i-{{post.id}}');
+            like_b_i.onclick = function()
+            {
+                document.getElementById('like-i-{{post.id}}').style.display='none';
+                document.getElementById('like-a-{{post.id}}').style.display='inline-block';
+                document.getElementById('dislike-a-{{post.id}}').style.display='none';
+                document.getElementById('dislike-i-{{post.id}}').style.display='inline-block';
+            }
+            var like_b_a =  document.getElementById('like-a-{{post.id}}');
+            like_b_a.onclick = function()
+            {
+                document.getElementById('like-a-{{post.id}}').style.display='none';
+                document.getElementById('like-i-{{post.id}}').style.display='inline-block';
+            }
+
+            // dislike
+            var dislike_b_i =  document.getElementById('dislike-i-{{post.id}}');
+            dislike_b_i.onclick = function()
+            {
+                document.getElementById('dislike-i-{{post.id}}').style.display='none';
+                document.getElementById('dislike-a-{{post.id}}').style.display='inline-block';
+                document.getElementById('like-a-{{post.id}}').style.display='none';
+                document.getElementById('like-i-{{post.id}}').style.display='inline-block';
+            }
+            var dislike_b_a =  document.getElementById('dislike-a-{{post.id}}');
+            dislike_b_a.onclick = function()
+            {
+                document.getElementById('dislike-a-{{post.id}}').style.display='none';
+                document.getElementById('dislike-i-{{post.id}}').style.display='inline-block';
+            }
+
+            // saved
+            var saved_b_i =  document.getElementById('saved-i-{{post.id}}');
+            saved_b_i.onclick = function()
+            {
+                document.getElementById('saved-i-{{post.id}}').style.display='none';
+                document.getElementById('saved-a-{{post.id}}').style.display='inline-block';
+            }
+            var saved_b_a =  document.getElementById('saved-a-{{post.id}}');
+            saved_b_a.onclick = function()
+            {
+                document.getElementById('saved-a-{{post.id}}').style.display='none';
+                document.getElementById('saved-i-{{post.id}}').style.display='inline-block';
+            }
+
+            // flag
+            var flag_b_i =  document.getElementById('flag-i-{{post.id}}');
+            flag_b_i.onclick = function()
+            {
+                document.getElementById('flag-i-{{post.id}}').style.display='none';
+                document.getElementById('flag-a-{{post.id}}').style.display='inline-block';
+            }
+            var flag_b_a =  document.getElementById('like-a-{{post.id}}');
+            flag_b_a.onclick = function()
+            {
+                document.getElementById('flag-a-{{flag.id}}').style.display='none';
+                document.getElementById('flag-i-{{flag.id}}').style.display='inline-block';
+            }
+        </script>
+    </div>
+</div>
+<script src="{% static 'js/video.js' %}"></script>
+
+{% endblock %}
+{% block systemsearch %}
+{% endblock %}

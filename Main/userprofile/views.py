@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from home.models import registration,userpost
-from complete.models import userdetials
+from complete.models import userdetails
 from discover.models import followers,interest
 from itertools import chain
 # Create your views here.
@@ -13,23 +13,23 @@ def profile(request):
 
 
         try:
-            update_id = userdetials.objects.get(owner_id = usrs_id)
+            update_id = userdetails.objects.get(owner_id = usrs_id)
 
         except:
             profile1 = None
             bio = ''
             inte = ''
-            userdata = userdetials(profile_pic= profile1, user_bio= bio, user_interest= inte , owner_id=usrs_id)
+            userdata = userdetails(profile_pic= profile1, user_bio= bio, user_interest= inte , owner_id=usrs_id)
             userdata.save()
 
 
         try:
             update_profile  = request.FILES['image']
-            some = userdetials.objects.get(owner_id=usrs_id)
+            some = userdetails.objects.get(owner_id=usrs_id)
             bio =some.user_bio
             interest1 = some.user_interest
-            userdetials.objects.filter(owner_id=usrs_id).delete()
-            my = userdetials(profile_pic= update_profile, user_bio= bio, user_interest= interest1 , owner_id=usrs_id)
+            userdetails.objects.filter(owner_id=usrs_id).delete()
+            my = userdetails(profile_pic= update_profile, user_bio= bio, user_interest= interest1 , owner_id=usrs_id)
             my.save()
 
 
@@ -56,7 +56,7 @@ def profile(request):
             pass
 
         # try:
-        #     mydetials = userdetials.objects.get(owner_id= usrs_id)
+        #     mydetials = userdetails.objects.get(owner_id= usrs_id)
         #
         # except:
         #     pass
@@ -69,8 +69,8 @@ def profile(request):
             qs = sorted(chain(*posts), reverse=True, key=lambda obj: obj.created)
 
         interest_list = interest.objects.all()
-        mydetials = userdetials.objects.get(owner_id=usrs_id)
-        user_data = userdetials.objects.all()
+        mydetials = userdetails.objects.get(owner_id=usrs_id)
+        user_data = userdetails.objects.all()
         dict1 = {
             'email': email,
             'user': user,

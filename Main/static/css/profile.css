@@ -1,46 +1,50 @@
-div.mobile-view
+.profile-main
 {
-    width: 26%;
-    height: 100%;
-    overflow-x: auto;
+    box-sizing: border-box;
+}
+.profile-main .myProfile
+{
+    margin-top: 10px;
+    height: 100px;
+    box-sizing: border-box;
+}
+.myProfile .my-pp
+{
+    width: 30%;
+    height: 100px;
     display: inline-block;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    color: white;
-}
-.c1-profile
-{
-    padding: 8px;
     text-align: center;
-}
-.c1-profile .name-font
-{
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.c1-profile .bg-pp img
-{
-    width: 100%;
-    max-width: 300px;
-    max-height: 300px;
-    border-radius: 155px;
-    object-fit: cover;
-    object-position: 50% 40%; 
-    display: block;
-}
-.bg-pp
-{
-    margin: 0 auto;
     position: relative;
-    width: 100%;
-    background-color: rgb(0, 0, 0);
-    border-radius: 50%;
-    max-width: 300px;
-    box-shadow: 0 0 3px 3px #2D7B20;
-    padding: 2px;
+    box-sizing: border-box;
+    float: left;
 }
-.bg-pp .pp-chg
+.myName .my-name
+{
+    text-align: center;
+    width: 30%;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    box-sizing: border-box;
+    position: relative;
+}
+.myProfile .my-bio p
+{
+    margin-top: none;
+    font-size: 15px;
+    font-weight: lighter;
+}
+.myProfile .my-pp img
+{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: 50% 50%;
+    border-radius: 50%;
+    box-shadow: 0 0 4px 4px #2d7b20;
+    position: relative;
+}
+.my-pp .pp-chg
 {
     position: absolute;
     top: 50%;
@@ -53,19 +57,38 @@ div.mobile-view
     padding: 12px 24px;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
-    text-align: center;  
+    border-radius: 5px;  
 }
-.bg-pp .pp-chg .camera
+.my-pp .pp-chg .camera
 {
-    width: 50px;
+    width: 38px;
+    height: 38px;
 }
+
 #picupload
 {
     display: none;
 }
-.bg-pp:hover .pp-chg {display: block;}
-.bg-pp:hover .back-op {opacity: 50%;}
+
+.my-pp:hover .pp-chg {display: block;}
+.my-pp:hover .back-op {opacity: 50%; cursor: pointer;}
+.my-pp label
+{
+    display: none;
+}
+#mypic
+{
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+}
 .pp-div
 {
     height: 270px;
@@ -78,153 +101,257 @@ div.mobile-view
 }
 .pp-div img
 {
+    object-fit: cover;
+    object-position: 50% 50%;
     border-radius: 50%;
     border: 1px solid rgb(204, 203, 203);
     padding: 10px;
 }
-.c1-profile table
+
+.myProfile .my-info
 {
-    margin:0 auto;
-    padding: 8px;
+    width: 70%;
+    height: 100px;
+    display: inline-block;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    float: right;
 }
-.c1-profile table td
+.myProfile .my-info button
 {
-    padding: 8px;
-}
-.c1-profile table td p
-{
-    font-weight: bold;
-}
-.c1-profile .edit-p button
-{
-    background-color: inherit;
-    box-shadow: 0 0 3px 3px #2D7B20;
-    background-color: white;
+    font-size: 18px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
     border: none;
-    color: #2D7B20;
-    padding: 5px;
-    width: 45%;
-    border-radius: 10px;
+    color: white;
 }
-.c1-profile .edit-p button:hover
-{
-    box-shadow: 0 0 3px 3px #1a4213;
-    color: #1a4213;
-}
-.bio
-{
-    padding: 15px;
-}
-.interest-edit img
-{
-    width: 15px;
-    padding: 5px;
-}
-.interest-edit img:hover
+.myProfile .my-info button:hover
 {
     cursor: pointer;
+    background-color: rgb(14, 14, 14);
+    font-weight: bold;
 }
-.interest-list
+.myProfile .my-info .my-post
 {
-    height: 60px;
-    width: 100%;
-    padding: 8px 2px;
-    font-size: 15px;
-    overflow-y: auto;
-    margin: 8px 0;
-}
-.interest-list a
-{
-    display: block;
-}
-.bio-area textarea
-{
-    resize:none;
-    width: 100%;
-    padding: 8px 12px;
-    margin: 8px 0;
+    width: 33.33%;
+    height: 100px;
     display: inline-block;
-    border: 1px solid #ccc;
+    float: left;
+}
+.myProfile .my-info .f-f
+{
+    width: 66.66%;
+    height: 100px;
+    display: inline-block;
     box-sizing: border-box;
-}
-#profile-info
-{
-    -webkit-animation: op;
-    -webkit-animation-duration: 1s;
-}
-@keyframes op
-{
-    from{opacity: 0;}
-    to{opacity: 1;}
+    float: right;
 }
 
-#interest-info
+.myProfile .my-info .my-following, .myProfile .my-info .my-followers
+{
+    width: 50%;
+    height: 100px;
+    top: 10;
+    display: inline-block;
+    float: left;
+}
+
+.myProfile .my-info b
+{
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+    color: rgb(252, 219, 159);
+    box-sizing: border-box;
+    display: block;
+}
+
+.my-p-timeline
+{
+    width: 300px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.my-p-timeline ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.my-p-timeline ul li
+{
+    margin: 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
+.my-p-timeline ul li button.active, .my-p-timeline ul li button.inactive
+{
+    width: 90px;
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: white;
+}
+.my-p-timeline ul li button.active:hover, .my-p-timeline ul li button.inactive:hover
+{
+    font-weight: bold;
+    cursor: pointer;
+}
+.my-p-timeline ul li button.active
+{
+    border-bottom: 2px solid #2d7b20;
+    color: #2d7b20;
+}
+#my-settings, #my-interests
 {
     display: none;
-    -webkit-animation: op;
-    -webkit-animation-duration: 1s;
-}
-.interest-list div
-{
-    width: 42%;
-    display: inline-block;
 }
 
-.interest-list div
+#my-posted-contents, #my-settings, #my-interests
 {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 3px;
-    background-color: white;
-    box-shadow: 0 0 2px 2px rgb(172, 172, 172);
-    margin: 2.5px;
+    -webkit-animation: fading;
+    -webkit-animation-duration: 1.5s;
 }
-.interest-list div table td img
-{
-    width: 20px;
+@keyframes fading {
+    from{opacity: 0;}
+    to{opacity: 1;}    
 }
 
-#s-interest input[type='search']
+/* __________________________________________________________________________________________________________ */
+/* settings */
+.profile-info
 {
-    padding: 8px 12px;
+    margin-top: 20px;
     width: 100%;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
     box-sizing: border-box;
-    border-radius: 9px;
 }
-#l-interest
+.fullname, .emailpassword, .bio-area, .submit-changes
 {
-    height: 180px;
     width: 100%;
-    padding: 8px 2px;
-    font-size: 15px;
-    overflow-y: auto;
-    margin: 8px 0;
+    box-sizing: border-box;
 }
-#l-interest label
+
+.first_name, .last_name
+{
+    width: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.first_name
+{
+    float: left;
+}
+.last_name
+{
+    float: right;
+}
+.emailpassword, .bio-area
+{
+    padding: 10px;
+}
+.first_name label, .last_name label, .emailpassword label, .bio-area label
+{
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.first_name input, .last_name input, .emailpassword input, .bio-area textarea
+{
+    width: 100%;
+    padding: 8px 12px;
+    box-sizing: border-box;
+}
+
+.bio-area textarea
+{
+    resize: none;
+    height: 100px;
+}
+.submit-changes
+{
+    margin-top: 10px;
+    text-align: center;
+}
+.submit-changes input
+{
+    background-color: transparent;
+    box-shadow: 0 0 5px 5px #2D7B20;
+    color: #2d7b20;
+    padding: 8px 12px;
+    font-size: 20px;
+    border: none;
+    width: 150px;
+}
+
+.submit-changes input:hover
+{
+    font-weight: bolder;
+    box-shadow:0 0 5px 5px #207b34;
+    color: #207b34;
+    cursor: pointer;
+}
+
+/* _____________________________________________________________________________________________________ */
+/* interest editing */
+#my-interests
+{
+    margin-top: 15px;
+}
+.search-bar
+{
+    width: 100%;
+}
+.search-bar input
+{
+    width: 100%;
+    padding: 8px 12px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.interest-list
+{
+    width: 100%;
+    height: 480px;
+    overflow: auto;
+}.interest-list ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.interest-listing
+{
+    box-sizing: border-box;
+    position: relative;
+    padding: 0px;
+    margin: 10px;
+}
+.interest-listing label
 {
     display: block;
+    left: 0;
+    width: 100%;
+    position: relative;
 }
-
-@media only screen and (max-width: 800px) 
+.interest-listing label:hover
 {
-    div.mobile-view
-    {
-        margin-top: 30px;
-        overflow-x: hidden;
-        display: block;
-        width: 100%;
-        height: 290px;
-    }
-    .c1-profile
-    {
-        padding: 0.5px;
-    }
-    .c1-profile .bg-pp img, .bg-pp
-    {
-        width: 100px;
-        height: 100px;
-    }
+    background-color: #181818;
+    cursor: pointer;
+}
+.interest-listing label table
+{
+    margin-top: 2px;
+}
+.interest-listing img.id-img
+{
+    width: 50px;
 }

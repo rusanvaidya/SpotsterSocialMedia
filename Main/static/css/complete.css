@@ -1,95 +1,282 @@
-.container-complete
+*
 {
-    width: 45%;
-    height: 600px;
-    min-width: 440px;
+    margin: 0;
+}
+
+.complete_main
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: black;
+    overflow: hidden;
+}
+
+/* 1st div */
+.complete_form
+{
+    width: 40%;
+    min-width: 500px;
+    box-sizing: border-box;
+    height: 100%;
+    position: fixed;
+    display: inline-block;
+    color: white;
+    float: left
+}
+.ccontent
+{
+    text-align: center;
+    width: 500px;
     position: absolute;
     left: 50%;
     top: 50%;
+    font-weight: bold;
+    font-size: 18px;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 3px 3px grey;
-    border-radius: 10px;
-    background-color: white;
-    -webkit-animation: opa;
-    -webkit-animation-duration: 2s;
 }
-#interest-first
+.comcontent
 {
-    padding: 3px;
-    -webkit-animation: opa;
-    -webkit-animation-duration: 1s;
-}
-#interest-complete
-{
-    display: none;
-    -webkit-animation: opa;
-    -webkit-animation-duration: 1s;
-}
-.bio-complete
-{
-    padding: 10px;
-}
-.bio-complete textarea
-{
-    resize:none;
+    position: relative;
     width: 100%;
-    padding: 8px 12px;
-    margin: 8px 0;
-    font-size: 16px;
-    outline: none;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
 }
-button.back-complete
+.complete_form button, .complete_form input[type='submit']
+{
+    background-color: #2D7B20;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    font-size: 17px;
+    width: 100px;
+}
+.complete_form button:hover, .complete_form input[type='submit']:hover
+{
+    background-color: #207b34;
+    cursor: pointer;
+    font-weight: bolder;
+}
+button.back-complete, button.back-complete2
 {
     display: none;
     float: left;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    margin: 10px;
-    background-color: #2D7B20;
 }
-button.next-complete , input.next-complete
+.complete-content
+{
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    -webkit-animation: appear_form;
+    -webkit-animation-duration: 1.5s;
+}
+@keyframes appear_form {
+    from{opacity: 0; left: -10%;}
+    to{opacity: 1;left: 0;}
+}
+button.next-complete, button.next-complete2, .complete_form input[type='submit']
 {
     float: right;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    margin: 10px;
-    background-color: #2D7B20;
 }
-button.next-complete:hover
+button.next-complete2, #submit-complete
 {
-    background-color: #1b4713;
-    cursor: pointer;
+    display: none;
 }
-#bg-ppp img
+#cc2, #cc3
 {
-    border-radius: 50%;
+    display: none;
+}
+.bg-pp
+{
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 400px;
+    position: relative;
+}
+.bg-pp img
+{
+    width: 300px;
     object-fit: cover;
-    object-position: 50% 40%; 
+    object-position: 50% 50%;
+    border-radius: 50%;
+    box-shadow: 0 0 5px 5px #2D7B20;
+}
+.bg-pp .pp-chg
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0);
+    display: none;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;  
+}
+.bg-pp .pp-chg .camera
+{
+    width: 50px;
+}
+#picupload
+{
+    display: none;
+}
+.bg-pp:hover .pp-chg {display: block;}
+.bg-pp:hover .back-op {opacity: 50%;}
+
+.bg-pp label
+{
+    display: none;
+}
+.bio textarea
+{
+    box-sizing: border-box;
+    resize: none;
+    width: 100%;
+    height: 200px;
+    outline: none;
+    font-size: large;
+}
+.search-bar
+{
+    width: 100%;
+}
+.search-bar input
+{
+    width: 100%;
+    padding: 8px 12px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.interest-list
+{
+    width: 100%;
+    height: 380px;
+    overflow: auto;
+}.interest-list ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.interest-listing
+{
+    box-sizing: border-box;
+    position: relative;
+    padding: 0px;
+    margin: 10px;
+}
+.interest-listing label
+{
+    display: block;
+    left: 0;
+    width: 100%;
+    position: relative;
+}
+.interest-listing label:hover
+{
+    background-color: #a1a1a1;
+}
+.interest-listing label table
+{
+    margin-top: 2px;
+}
+.interest-listing img.id-img
+{
+    width: 50px;
+    height: 50px;
+}
+/* 2nd div */
+
+.image-container
+{
+    width: 60%;
+    min-width: 500px;
+    height: 100%;
+    display: inline-block;
+    float: right;
+    position: relative;
+    background-color: #2D7B20;
+    -webkit-animation: appear_image_container;
+    -webkit-animation-duration: 0.5s;
+}
+@keyframes appear_image_container {
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+.image-content
+{
+    text-align: center;
+    width: 520px;
+    min-width: 400px;
+    position: relative;
+    left: 45%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+    -webkit-animation: appear_image;
+    -webkit-animation-duration: 1.5s;
+}
+@keyframes appear_image {
+    from{opacity: 0; left: 55%;}
+    to{opacity: 1;left: 45%;}
+}
+.image-content b, .image-content p
+{
+    font-size: 80px;
+    color: white;
+    font-weight: bold;
+}
+.image-content p
+{
+    font-size: 40px;
+}
+.image-content img
+{
+    width: 500px;
+    min-height: 400px;
+}
+.image-content img:hover
+{
+    width: 510px;
+    min-width: 410px;
+    cursor: default;
+}
+#im2, #im3
+{
+    display: none;
+}
+
+
+footer
+{
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.copyright
+{
+    text-align: center;
 }
 
 @media only screen and (max-width: 800px) 
 {
-    .container-complete
+	.image-container, .image-content
+	{
+		display: none;
+	}
+    .complete_form
     {
-        width: 95%;
-        min-width: 95%;
+        width: 100%;
+        min-width: 400px;
     }
-    .bio-complete textarea
+    .ccontent
     {
-        min-height: 250px;
-    }
-    #bg-ppp img
-    {
-        width: 100px;
-        height: 100px;
+        width: 100%;
+        min-width: 100%;
     }
 }

@@ -1,68 +1,139 @@
 <!DOCTYPE html>
 <html>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'css/complete.css' %}">
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- {% load static %} -->
 
     <head>
         <title>Spotster</title>
         <link rel="icon" href="{% static 'img/icon.png' %}">
+        <link rel="stylesheet" href="{% static 'css/complete.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div class="bodybg" style="background: url('{% static 'img/theme.png' %}') no-repeat; background-size: 100%;"></div>
-        <div class="mobile" style="background: url('{% static 'img/mobiletheme.png' %}') no-repeat; background-size: 100%;"></div>
+        <div class="complete_main" id="cm">
+            <div class="complete_form" id="cf">
+                <div class="ccontent">
+                    <form action="newsfeed" method="post" enctype='multipart/form-data'>{% csrf_token %}
+                        <div class="comcontent">
+                            <div class="complete-content" id="cc1">
+                                <h1>Add Profile Picture so that people can recognize you.</h1>
+                                <div class="bg-pp" id="bg-ppp">
+                                    <img class="back-op" src="{% static 'img/defaultpp.jpg' %}" id="defpp">
+                                    <label class="pp-chg" for="picupload"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
+                                    <input type="file" id="picupload" name="image">
+                                </div>
+                                {% for i in user %}
+                                    <b style="padding: 10px;">{{i.first_name}} {{i.last_name}}</b>
+                                {% endfor %}
+                                <div>
+                                </div>
+                            </div>
+                            <div class="complete-content" id=cc2>
+                                <h1>Add Bio to your Profile.</h1>
+                                <div class="bio">
+                                    <textarea placeholder="Bio..." name="bio"></textarea>
+                                </div>
+                            </div>
+                            <div class="complete-content" id=cc3>
+                                <h1>Add Your Interest and Hobbies.</h1>
+                                <div>
+                                    <div class="search-bar">
+                                        <input type="search" placeholder="Search interest" id="searching">
+                                    </div>
+                                    <div class="interest-list">
+                                        <div class="interest-listing">
+                                            <ul id="thisUL">
+                                                {% for i in interest %}
+                                                <li>
+                                                    <label for="this_{{i.my_interest}}" id="div{{i.my_interest}}">
+                                                        <table>
+                                                            <td><img src="../media/Interest_icon/{{i.my_interest}}.png" class="id-img" id="id-img-{{i.my_interest}}"></td>
+                                                            <td><h4>{{i.my_interest}}</h4></td>
+                                                            <td><input id="this_{{i.my_interest}}" type="checkbox" name="interest" value="{{i.my_interest}}"></td>
+                                                        </table>
+                                                    </label>
+                                                </li>
+                                                <script>
+                                                    var theme = localStorage.getItem('theme');
+                                                    if(theme=='light')
+                                                    {
+                                                        document.getElementById('id-img-{{i.my_interest}}').style.filter='invert(100%)';
+                                                    }
+                                                    document.getElementById('div{{i.my_interest}}').onclick = function()
+                                                    {
+                                                        if (document.getElementById('this_{{i.my_interest}}').checked==true)
+                                                        {
+                                                            document.getElementById('div{{i.my_interest}}').style.background = "#2D7B20";
+                                                        }
+                                                        else if(document.getElementById('this_{{i.my_interest}}').checked==false)
+                                                        {
+                                                            document.getElementById('div{{i.my_interest}}').style.background = "none";
+                                                        }
+                                                    }
+                                                    var searchbar = document.getElementById('searching');
+                                                    searchbar.onkeyup = function()
+                                                    {
+                                                        var filter = searchbar.value.toUpperCase();
 
-
-        <!-- 2 div -->
-        <div class="container-complete">
-            <div class="logo">
-                <b>Spotster</b>
+                                                        var ul = document.getElementById('thisUL');
+                                                        var li = ul.getElementsByTagName('li');
+                                                        for(var i=0; i<li.length;i++)
+                                                        {
+                                                            var table = li[i].getElementsByTagName('table');
+                                                            var td = table[0].getElementsByTagName('td')[1];
+                                                            var h4 = td.getElementsByTagName('h4')[0];
+                                                            var tex = h4.innerText;
+                                                            console.log(tex.toUpperCase().indexOf(filter));
+                                                            if (tex.toUpperCase().indexOf(filter) > -1)
+                                                            {
+                                                                li[i].style.display="";
+                                                            }
+                                                            else
+                                                            {
+                                                                li[i].style.display='none';
+                                                            }
+                                                        }
+                                                    }                                                                                              
+                                                </script>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" value="SAVE" class="next-complete" id="submit-complete">
+                    </form>
+                    <div>
+                        <button class="next-complete" onclick="complete_next1()" id="next-btn">NEXT</button>
+                        <button class="back-complete" onclick="complete_back()" id="back-btn">BACK</button>
+                        <button class="next-complete2" onclick="complete_next2()" id="next-btn2">NEXT</button>
+                        <button class="back-complete2" onclick="complete_back2()" id="back-btn2">BACK</button>
+                    </div>
+                </div>
+                <footer>
+                    <div class="copyright" id="copyright">
+                        &copy; All Rights Reserved
+                    </div>
+                </footer>
             </div>
-            <form action="newsfeed" method="post" enctype='multipart/form-data'>{% csrf_token %}
-                <div id="interest-first">
-                    Choose Profile Picture:
-                    <div class="c1-profile">
-                        <div class="bg-pp" id="bg-ppp">
-                            <img class="back-op" src="{% static 'img/defaultpp.jpg' %}" id="defpp">
-                            <label class="pp-chg" for="picupload"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
-                            <input type="file" id="picupload" name="image">
-                        </div>
-
-                        {% for i in user %}
-                        <b style="padding: 10px;">{{i.first_name}} {{i.last_name}}</b>
-                        {% endfor %}
-                    </div>
-                    <div class="bio-complete">
-                        Bio:
-                        <textarea placeholder="Bio..." name="bio"></textarea>
-                    </div>
+            <div class="image-container">
+                <div class="image-content" id="im1">
+                    <b>Spotster</b>
+                    <img src="{% static 'img/phone.png' %}">
+                    <p>Find your new Friend.</p>
                 </div>
-                <div id="interest-complete">
-                    What's your interest?
-                    <div id="s-interest">
-                        <input type="search" placeholder="Search interest">
-                    </div>
-                    <div id="l-interest" style="height: 380px;">
-                        {% for i in interest %}
-                        <div style="display:inline-block; padding:5px;background-color:#DAD7D6;border-radius:20px; height:40px; width:150px; margin-bottom:10px;">
-                            <span><input type="checkbox" name="interest" value="{{i.my_interest}}">{{i.my_interest}}</span>
-                            <img src="media/interest_icon/{{i.my_interest}}.png" height="30" width="30" style="border-radius:50%; background-color:black; padding:5px;float:right;">
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <input type="submit" value="SAVE" class="next-complete">
+                <div class="image-content" id="im2">
+                    <b>Spotster</b>
+                    <img src="{% static 'img/phone2.png' %}">
+                    <p>Find people with common interest.</p>
                 </div>
-            </form>
-            <button class="back-complete" onclick="complete_back()" id="back-btn">BACK</button>
-            <button class="next-complete" onclick="complete_next()" id="next-btn">Next</button>
+                <div class="image-content" id="im3">
+                    <b>Spotster</b>
+                    <img src="{% static 'img/connect.png' %}">
+                    <p>Find people with common interest.</p>
+                </div>
+            </div>
         </div>
     </body>
-    <!-- footer -->
-    <div class="footer">
-        All Right Reserved
-    </div>
     <script src="{% static 'js/complete.js' %}"></script>
-    <script src="{% static 'js/newsfeed.js' %}"></script>
 </html>

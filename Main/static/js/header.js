@@ -64,53 +64,30 @@ window.onclick = function(event)
     }
 }
   
-var loader_icon = document.getElementById('pre-loader');
-var toload_div = document.getElementById('div-loaded');
-var change1 =function()
-{
-    loader_icon.classList.toggle('not-loaded');
-}
-var change2 = function()
-{
-    toload_div.classList.remove('not-loaded');
-}
 function loader_feed()
 {
     document.getElementById('h-i').style.display='none';
     document.getElementById('h-a').style.display='inline-block';
-    setTimeout(change1, 200);
-    setTimeout(change2, 300);
 }
 function loader_video()
 {
     document.getElementById('v-i').style.display='none';
     document.getElementById('v-a').style.display='inline-block';
-    setTimeout(change1, 200);
-    setTimeout(change2, 300);
 }
 function loader_trending()
 {
     document.getElementById('t-i').style.display='none';
     document.getElementById('t-a').style.display='inline-block';
-    setTimeout(change1, 200);
-    setTimeout(change2, 300);
 }
 function loader_discover()
 {
     document.getElementById('d-i').style.display='none';
     document.getElementById('d-a').style.display='inline-block';
-    setTimeout(change1, 200);
-    setTimeout(change2, 300);
 }
-function loader()
-{
-    setTimeout(change1, 200);
-    setTimeout(change2, 300);    
-}
-
 function show_side_nav()
 {
     document.getElementById('m-n-i').style.display='none';
     document.getElementById('m-n-a').style.display='inline-block';
     document.getElementById('side_nav').style.display='block';
 }
+

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+    <head>
+        <title>Spotster</title>
+        <link rel="stylesheet" id="header_css">
+        <link rel="stylesheet" id="layout_css">
+        <link rel="stylesheet" id="newsfeed_css">
+        <link rel="stylesheet" id="discover_css">
+        <link rel="stylesheet" id="trending_css">
+        <link rel="stylesheet" id="profile_css">
+        <link rel="stylesheet" id="video_css">
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js%22%3E"></script>
+        <link rel="icon" href="{% static 'img/icon.png' %}">
+    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block bodyloader %}
+    {% endblock %}    
+    <div class="header_top">
+            <table>
+        
+                <!-- logo -->
+                <td class="logo">
+                    <button onclick="window.open('/','_self')">
+                        <img src="{% static 'img/icon2.png' %}">
+                    </button>
+                </td>
+        
+                
+                <td class="header_btns_div">
+                    <div class="header_btns_active" id="h-a">
+                        <a href="/"><img src="{% static 'icon/home.png' %}" class="header_m_img"></a>
+                    </div>
+                    <div class="header_btns" id="h-i">
+                        <a href="/"><img src="{% static 'icon/home-inactive.png' %}" class="header_m_img"></a>
+                    </div>      
+                    <div class="header_btns_active" id="v-a">
+                        <a href="video"><img src="{% static 'icon/video.png' %}" class="header_m_img"></a>
+                    </div>
+                    <div class="header_btns" id="v-i">
+                        <a href="video"><img src="{% static 'icon/video-inactive.png' %}" class="header_m_img"></a>
+                    </div>
+                    <div class="header_btns_active" id="t-a">
+                        <a href="trending"><img src="{% static 'icon/trending.png' %}" class="header_m_img"></a>
+                    </div>
+                    <div class="header_btns" id="t-i">
+                        <a href="trending"><img src="{% static 'icon/trending-inactive.png' %}" class="header_m_img"></a>
+                    </div>
+                    <div class="header_btns_active" id="d-a">
+                        <a href="discover"><img src="{% static 'icon/discover.png' %}" class="header_m_img"></a>
+                    </div>
+                    <div class="header_btns" id="d-i">
+                        <a href="discover"><img src="{% static 'icon/discover-inactive.png' %}" class="header_m_img"></a>
+                    </div>
+                    <div class="header_btns_active mobile-nav-active" id="m-n-a">
+                        <a href=""><img src="{% static 'icon/menu.png' %}" class="header_m_img"></a>
+                    </div>
+                    <div class="header_btns mobile-nav" id="m-n-i">
+                        <a onclick="show_side_nav()" class="nav-btn"><img src="{% static 'icon/menu-inactive.png' %}" class="header_m_img"></a>
+                        <span class="badge-nav" id="b-m">1</span>
+                    </div>
+                    <div id="side_nav">
+                        <div class="side_nav_modal">
+                            <div class="modaltop">
+                                <div class="modalheader close_nav">
+                                    <span onclick="document.getElementById('side_nav').style.display='none'; document.getElementById('m-n-i').style.display='inline-block'; document.getElementById('m-n-a').style.display='none';">&times;</span>
+                                </div>
+                            </div>
+                            <ul>
+                                <li class="sidemenu">
+                                    <div class="navsidesearch">
+                                        <div class="new-idea">Search</div>
+                                    </div>
+                                </li>
+                                <li class="sidemenu" onclick="window.open('profile','_self')">
+                                    {% for i in user %}
+                                    <table>
+                                        {% if mydetials.profile_pic != '' %}
+                                        <td class="c1-img">
+                                            <img src="media/{{mydetials.profile_pic}}" style="width:50px" height="40" width="50">
+                                        </td>
+                                        {% else %}
+                                        <td class="c1-img">
+                                            <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px" >
+                                        </td>
+                                        {% endif %}
+                                        <td class="c1-label"> 
+                                            &emsp;{{i.first_name}} {{i.last_name}}
+                                        </td>
+                                    </table>
+                                </li>
+                                {% endfor %}
+                                <li class="sidemenu" onclick="window.open('Follower', '_self')">
+                                    <table>
+                                        <td class="c1-img">
+                                            <img src="{% static 'icon/follower.png' %}">
+                                        </td>
+                                        <td class="c1-label">
+                                            &emsp;Followers({{count}})
+                                        </td>
+                                    </table>
+                                </li>
+                                <li class="sidemenu" onclick="window.open('', '_self')">
+                                    <table>
+                                        <td class="c1-img">
+                                            <img src="{% static 'icon/notification.png' %}">
+                                        </td>
+                                        <td class="c1-label">
+                                            &emsp;Notification<span></span>
+                                        </td>
+                                    </table>
+                                </li>
+                                <li class="sidemenu" onclick="window.open('saved', '_self')">
+                                    <table>
+                                        <td class="c1-img">
+                                            <img src="{% static 'icon/saved.png' %}">
+                                        </td>
+                                        <td class="c1-label">
+                                            &emsp;Saved
+                                        </td>
+                                    </table>
+                                </li>
+                                <li class="sidemenu" onclick="window.open('chatbox', '_self')">
+                                    <table>
+                                        <td class="c1-img">
+                                            <img src="{% static 'icon/message.png' %}">
+                                        </td>
+                                        <td class="c1-label">
+                                            &emsp;Chatbox
+                                        </td>
+                                    </table>
+                                </li>
+                                <li class="sidemenu" onclick="window.open('logout', '_self')">
+                                    <table>
+                                        <td class="c1-img">
+                                            <img class="header_propic" src="{% static 'icon/logout.png' %}">
+                                        </td>
+                                        <td class="c1-label">
+                                            &emsp;Logout
+                                        </td>
+                                    </table>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+        
+                <!-- buttons -->
+                <td class="bar_buttons">
+                    <div class="dd">
+                        <img src="{% static 'icon/dark.png' %}" id="dark">
+                        <img src="{% static 'icon/light.png' %}" id="light">
+                    </div>
+                    <div class="dd">
+                        <img onclick="myMessage()" class="d3btn" id="b3-i" src="{% static 'icon/message.png' %}">
+                        <img onclick="myMessage()" class="d3btn-a" id="b3-a" src="{% static 'icon/message-active.png' %}">
+                        <span class="badge-message" id="b-m">1</span>
+                        <div id="mydd3" class="dd3-content">
+                            {% for i in user %}
+                            <table>
+                                <td>
+                                    {% if mydetials.profile_pic != '' %}
+                                    <a href=""><img src="media/{{mydetials.profile_pic}}"></a>
+                                    {% else %}
+                                    <a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a>
+                                    {% endif %}
+                                </td>
+                                <td><a href="">{{i.first_name}} {{i.last_name}}<br>
+                                    <p class="light">Are you free tonight?</p>
+                                </a></td>
+                            </table>
+                            <table>
+                                <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                                <td><a href="">{{i.first_name}} {{i.last_name}}<br>
+                                    <p class="light">Are you free tonight?</p>
+                                </a></td>
+                            </table><table>
+                                <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                                <td><a href="">{{i.first_name}} {{i.last_name}}<br>
+                                    <p class="light">Are you free tonight?</p>
+                                </a></td>
+                            </table>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="dd">
+                        <img onclick="myNotification()" class="d2btn" id="b2-i" src="{% static 'icon/notification.png' %}">
+                        <img onclick="myNotification()" class="d2btn-a" id="b2-a" src="{% static 'icon/notification-active.png' %}">
+                        <span class="badge-notification" id="b-n">1</span>
+                        <div id="mydd2" class="dd2-content">
+                            {% for i in user %}
+                            <table>
+                                <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                                <td><a href="">{{i.first_name}} {{i.last_name}} just posted a event you may like.</a>
+                            </table>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="dd">
+                        {% if mydetials.profile_pic != '' %}
+                        <img onclick="myProfile()" class="d1btn" src="media/{{mydetials.profile_pic}}">
+                        {% else %}
+                        <img onclick="myProfile()" class="d1btn" src="{% static 'img/defaultpp.jpg' %}">
+                        {% endif %}
+                        <div id="mydd1" class="dd1-content">
+                            {% for i in user %}
+                            <div class="user_option">
+                                {% if mydetials.profile_pic != '' %}
+                                <img class="pp-show" src="media/{{mydetials.profile_pic}}">
+                                {% else %}
+                                <img class="pp-show" src="{% static 'img/defaultpp.jpg' %}">
+                                {% endif %}
+        
+                                <!-- <span class="badge-verified"><img src="{% static 'img/not-verified.png' %}" title="Not-Verified" class="nv"></span> -->
+                                <span class="badge-verified"><img src="{% static 'img/verified.png' %}" title="Verified" class="nv"></span>
+        
+                                <a href="profile">
+                                    {{i.first_name}} {{i.last_name}}<br>
+                                    <p class="light">{{email}}</p>
+                                </a>
+                            </div>
+                            {% endfor %}
+                            <!-- <img src="{% static 'icon/logout.png' %}"> -->
+                            <a href="logout">Logout</a>
+                            <div class="light bd">
+                                &copy 2021 Spotster
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </table>
+        </div>
+
+
+        <!-- feed div -->
+        <div class="feedbody">
+            <div class="sidemenudiv">
+                {% block sidemenudiv %}
+                <div class="d1">
+                    <ul>
+                        <li>
+                            <div class="d1-1" onclick="window.open('profile','_self')">
+                                <table class="ppd1">
+                                    {% for i in user %}
+                                    {% if mydetials.profile_pic != '' %}
+                                    <td><img src="media/{{mydetials.profile_pic}}"></td>
+                                    {% else %}
+                                    <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                    {% endif %}
+                                    <td>{{i.first_name}} {{i.last_name}}</td>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d1-1" onclick="window.open('Follower', '_self')">
+                                <table>
+                                    <td><img src="{% static 'icon/follower.png' %}"></td>
+                                    <td>Followers <span>({{count}})</span></td>
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d1-1" onclick="window.open('saved', '_self')">
+                                <table>
+                                    <td><img src="{% static 'icon/saved.png' %}"></td>
+                                    <td>Saved</td>
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d1-1" onclick="window.open('chatbox', '_self')">
+                                <table>
+                                    <td><img src="{% static 'icon/message.png' %}"></td>
+                                    <td>Chatbox</td>
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mapping">
+                                <div id="map"></div>
+                            </div>                            
+                            <script>
+                                if ( navigator.geolocation ) 
+                                {
+                                    navigator.geolocation.getCurrentPosition( function(position) 
+                                    {
+                                        var lng = position.coords.longitude;
+                                        var lat = position.coords.latitude; 
+                                        console.log(lng);
+                                        console.log(lat);
+
+                                        mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtaXI4NDc1MyIsImEiOiJja29mbTFiMGMwbm10MnVyMGs2MGJwM2FyIn0.AVzoRvG6EmclKtdIsSeRkw';
+                                        var map = new mapboxgl.Map({
+                                            container: 'map', // container id
+                                            style: 'mapbox://styles/mapbox/streets-v11',
+                                            center: [position.coords.longitude, position.coords.longitude], // starting position
+                                            zoom: 3 // starting zoom
+                                        });
+
+                                        // Add geolocate control to the map.
+                                        map.addControl(
+                                            new mapboxgl.GeolocateControl({
+                                                positionOptions: {
+                                                    enableHighAccuracy: true
+                                                },
+                                                trackUserLocation: true
+                                            })
+                                        );
+                                        $.ajax({
+                                            type: "POST",
+                                            url: 'get_location',
+                                            data: {
+                                            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+
+                                                "lng": lng,
+                                                "lat": lat,
+                                            },
+                                            dataType: "json",});
+                                    });
+                                }
+
+                            </script>                            
+                        </li>
+                    </ul>
+                </div>
+                {% endblock %}
+            </div>
+
+            <div class="newsfeed">
+                {% block leftfeed %}
+                {% endblock %}
+                <div class="right-feed">
+                    {% block systemsearch %}
+                    <div class="search-feed">
+                        <input type="search" placeholder="Search...">
+                    </div>
+                    <div class="right-div-content">
+                        <ul class="trending">
+                            <li class="r-t"><b>Trending Interests.</b></li>
+                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#COVID-19<br><span class="light-trend">200 posts.</span></button></li>
+                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Football<br><span class="light-trend">1.2k posts.</span></button></li>
+                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#CR7<br><span class="light-trend">1.4k posts.</span></button></li>
+                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Messi<br><span class="light-trend">1k posts`.</span></button></li>
+                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Memes<br><span class="light-trend">1.2k posts.</span></button></li>
+                            <li><button class="show-m" id="show_trending">Show more</button></li>
+                        </ul>
+                    </div>
+                    {% endblock %}
+                    <div class="right-div-content">
+                        <ul class="suggestions">
+                            <li class="r-t"><b>Suggestions.</b></li>
+                            {% for i in followers%}
+                            <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
+                                <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
+                                {% for bio in userdata %}
+                                {% if bio.owner_id == i.pk %}
+                                <li>
+                                    <div class="side-l">
+                                        {% if bio.profile_pic != '' %}
+                                        <div class="img-li"><img class="suggest-pp" src="media/{{bio.profile_pic}}"></div>
+                                        {% else %}
+                                        <div class="img-li"><img class="suggest-pp" src="{% static 'img/defaultpp.jpg' %}"></div>
+                                        {% endif %}
+                                        {% endif %}
+                                        {% endfor %}
+                                        <div class="name-li">{{i.first_name}} {{i.last_name}}<br><span class="light-trend">~Football</span></div>
+                                        <div class="follow-li">
+                                            {% if i in others%} 
+                                            <button type="sumbit" id="un_show" class="side-after follow{{i.pk}}">Following</button>
+                                            {% else %}
+                                            <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </li>
+                            </form>
+                            {% endfor %}
+                            <li><button class="show-m" id="show_suggestions">Show more</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'js/newsfeed.js' %}"></script>
+        <script src="{% static 'js/header.js' %}"></script>
+        <script>
+            var show_more_trending = document.getElementById('show_trending');
+            show_more_trending.onclick = function()
+            {
+                window.open('trending','_self');
+            }
+
+            var show_more_suggestions = document.getElementById('show_suggestions');
+            show_more_suggestions.onclick = function()
+            {
+                window.open('discover','_self');
+            }
+            var light = document.getElementById('light');
+            var dark = document.getElementById('dark');
+
+            var theme = localStorage.getItem('theme');
+            var h_top = document.getElementById('header_css');
+            var layout = document.getElementById('layout_css');
+            var newsfeed = document.getElementById('newsfeed_css');
+            var trending = document.getElementById('trending_css');
+            var discover = document.getElementById('discover_css');
+            var videos = document.getElementById('video_css');
+            var profile = document.getElementById('profile_css');
+
+
+            light.onclick = function()
+            {
+                localStorage.setItem('theme', 'light');
+                dark.style.display='block';
+                light.style.display='none';
+                h_top.setAttribute("href", "{% static 'css/header_light.css' %}");
+                layout.setAttribute("href", "{% static 'css/newsfeed-layout_light.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/newsfeed_light.css' %}");
+                trending.setAttribute("href", "{% static 'css/trending_light.css' %}")
+                discover.setAttribute("href","{% static 'css/discover_light.css' %}");
+                videos.setAttribute("href", "{% static 'css/video_light.css' %}");
+                profile.setAttribute("href", "{% static 'css/profile_light.css' %}");
+            }
+            
+            dark.onclick = function()
+            {
+                localStorage.setItem('theme', 'dark');
+                dark.style.display='none';
+                light.style.display='block';
+                h_top.setAttribute("href", "{% static 'css/header.css' %}");
+                layout.setAttribute("href", "{% static 'css/newsfeed-layout.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/newsfeed.css' %}");
+                trending.setAttribute("href", "{% static 'css/trending.css' %}");
+                discover.setAttribute("href","{% static 'css/discover.css' %}");
+                videos.setAttribute("href", "{% static 'css/video.css' %}");
+                profile.setAttribute("href", "{% static 'css/profile.css' %}");
+            }
+            if(theme=='light')
+            {
+                light.style.display='none';
+                h_top.setAttribute("href", "{% static 'css/header_light.css' %}");
+                layout.setAttribute("href", "{% static 'css/newsfeed-layout_light.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/newsfeed_light.css' %}");
+                trending.setAttribute("href", "{% static 'css/trending_light.css' %}")
+                discover.setAttribute("href","{% static 'css/discover_light.css' %}");
+                videos.setAttribute("href", "{% static 'css/video_light.css' %}");
+                profile.setAttribute("href", "{% static 'css/profile_light.css' %}");
+            }
+            else if(theme=='dark')
+            {
+                dark.style.display='none';
+                h_top.setAttribute("href", "{% static 'css/header.css' %}");
+                layout.setAttribute("href", "{% static 'css/newsfeed-layout.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/newsfeed.css' %}");
+                trending.setAttribute("href", "{% static 'css/trending.css' %}");
+                discover.setAttribute("href","{% static 'css/discover.css' %}");
+                videos.setAttribute("href", "{% static 'css/video.css' %}");
+                profile.setAttribute("href", "{% static 'css/profile.css' %}");
+            }
+            else
+            {
+                light.style.display='none';
+                dark.style.display='block';
+                h_top.setAttribute("href", "{% static 'css/header.css' %}");
+                layout.setAttribute("href", "{% static 'css/newsfeed-layout.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/newsfeed.css' %}");
+                trending.setAttribute("href", "{% static 'css/trending.css' %}");
+                discover.setAttribute("href","{% static 'css/discover.css' %}");
+                videos.setAttribute("href", "{% static 'css/video.css' %}");
+                profile.setAttribute("href", "{% static 'css/profile.css' %}");
+            }
+        </script>
+    </body>
+</html>

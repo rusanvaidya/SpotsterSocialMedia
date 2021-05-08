@@ -1,16 +1,44 @@
-function complete_next()
+function complete_next1()
 {
-    document.getElementById('interest-first').style.display='none';
+    document.getElementById('cc1').style.display='none';
     document.getElementById('next-btn').style.display='none';
     document.getElementById('back-btn').style.display='block';
-    document.getElementById('interest-complete').style.display='block';
+    document.getElementById('next-btn2').style.display='block';
+    document.getElementById('cc2').style.display='block';
+    document.getElementById('im1').style.display='none';
+    document.getElementById('im2').style.display='block';
 }
 function complete_back()
 {
-    document.getElementById('interest-first').style.display='block';
+    document.getElementById('cc1').style.display='block';
     document.getElementById('next-btn').style.display='block';
     document.getElementById('back-btn').style.display='none';
-    document.getElementById('interest-complete').style.display='none';
+    document.getElementById('next-btn2').style.display='none';
+    document.getElementById('cc2').style.display='none';
+    document.getElementById('im2').style.display='none';
+    document.getElementById('im1').style.display='block';
+}
+function complete_next2()
+{
+    document.getElementById('cc2').style.display='none';
+    document.getElementById('next-btn2').style.display='none';
+    document.getElementById('back-btn').style.display='none';
+    document.getElementById('back-btn2').style.display='block';
+    document.getElementById('submit-complete').style.display='block';
+    document.getElementById('cc3').style.display='block';
+    document.getElementById('im2').style.display='none';
+    document.getElementById('im3').style.display='block';
+}
+function complete_back2()
+{
+    document.getElementById('cc2').style.display='block';
+    document.getElementById('next-btn2').style.display='block';
+    document.getElementById('back-btn').style.display='block';
+    document.getElementById('submit-complete').style.display='none';
+    document.getElementById('cc3').style.display='none';
+    document.getElementById('im3').style.display='none';
+    document.getElementById('back-btn2').style.display='none';
+    document.getElementById('im2').style.display='block';
 }
 
 var picupload = document.getElementById("picupload");
@@ -38,3 +66,27 @@ picupload.onchange = function () {
         alert("This browser does not support HTML5 FileReader.");
     }
 };
+
+// theme
+var theme = localStorage.getItem('theme');
+if(theme=='dark')
+{
+    document.getElementById('cm').style.background='black';
+    document.getElementById('cf').style.color='white';
+    document.getElementById('copyright').style.color='white';
+    localStorage.setItem('theme','dark');
+}
+else if (theme == 'light')
+{
+    document.getElementById('cm').style.background='rgb(209, 209, 209)';
+    document.getElementById('cf').style.color='black';
+    document.getElementById('copyright').style.color='black';
+    localStorage.setItem('theme','light');
+}
+else
+{
+    document.getElementById('cm').style.background='black';
+    document.getElementById('cf').style.color='white';
+    document.getElementById('copyright').style.color='white';
+    localStorage.setItem('theme','dark');
+}

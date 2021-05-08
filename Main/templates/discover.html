@@ -1,185 +1,94 @@
-<!DOCTYPE html>
-<html>
-    {% load static %}
-    <head>
-        <title>Spotser</title>
-        <link rel="icon" href="{% static 'img/icon.png' %}">
-    </head>
-    <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}">
-    <link rel="stylesheet" href="{% static 'css/discover.css' %}">
+{% extends 'home.html' %}
+{% block bodyloader %}
+<body onload="loader_discover()">
+{% endblock %}
+{% block leftfeed %}
+{% load static %}
+<div class="left-feed">
+    {% block follow %}
+    <div class="topic">
+        Suggested People
+    </div>
+    <div class="people-list">
+        <ul>
+            {% for i in other%}
+            <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
+                <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
+                <li>
+                    <table>
+                        {% for bio in userdata %}
+                        {% if bio.owner_id == i.pk %}
+                        {% if bio.profile_pic != '' %}
+                        <td class="sp-pp"><img src="media/{{bio.profile_pic}}" height="50" width="50"></td>
+                        {% else %}
+                        <td class="sp-pp"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
+                        <td class="sp-button">
+                            {% if i in others%} 
+                            <button type="sumbit" id="un_show{{i.pk}}" class="side-after follow{{i.pk}}">Following</button>
+                            {% else %}
+                            <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
+                            {% endif %}
+                        </td>
+                        <script>
+                            document.getElementById('un_show{{i.pk}}').onmouseenter = function()
+                            {
+                                document.getElementById('un_show{{i.pk}}').innerText='Unfollow';
+                            }
+                            document.getElementById('un_show{{i.pk}}').onmouseout = function()
+                            {
+                                document.getElementById('un_show{{i.pk}}').innerText='Following';
+                            }
+                        </script>
+                    </table>
+                </li>
+            </form>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+{% endblock %}
 
-    <body onload="loader_discover()">
-        <div class="homepage">
-            <!-- header import -->
-            {% include 'header.html' %}
-            
-            <!-- 3 divs -->
-            <div class="container_newsfeed not-loaded" id="div-loaded">
-
-                <!-- 1st div -->
-                <div class="container1">
-                    {% include '1_container.html' %}
-                </div>
-
-                <!-- 2nd div -->
-                <div class="container2">
-                    <div class="container2-1">
-                    <!-- interest-story -->
-                    <div class="i-story">
-                        <div class="story">
-                            <figure>
-                                <img src="{% static 'interest/cycle.png' %}">
-                                <img src="{% static 'interest/football.png' %}">
-                                <img src="{% static 'interest/swim.png' %}">
-                                <img src="{% static 'interest/dance.png' %}">
-                                <img src="{% static 'interest/hiking.png' %}">
-                                <img src="{% static 'interest/art.png' %}">
-                                <img src="{% static 'interest/writing.png' %}">
-                                <img src="{% static 'interest/singing.png' %}">
-                                <img src="{% static 'interest/riding.png' %}">
-                                <img src="{% static 'interest/reading.png' %}">
-                                <img src="{% static 'interest/gaming.png' %}">
-                                <img src="{% static 'interest/cycle.png' %}">
-                                <img src="{% static 'interest/football.png' %}">
-                                <img src="{% static 'interest/swim.png' %}">
-                                <img src="{% static 'interest/dance.png' %}">
-                                <img src="{% static 'interest/hiking.png' %}">
-                                <img src="{% static 'interest/art.png' %}">
-                                <img src="{% static 'interest/writing.png' %}">
-                                <img src="{% static 'interest/singing.png' %}">
-                                <img src="{% static 'interest/riding.png' %}">
-                                <img src="{% static 'interest/reading.png' %}">
-                                <img src="{% static 'interest/gaming.png' %}">
-                                <img src="{% static 'interest/cycle.png' %}">
-                                <img src="{% static 'interest/football.png' %}">
-                                <img src="{% static 'interest/swim.png' %}">
-                                <img src="{% static 'interest/dance.png' %}">
-                                <img src="{% static 'interest/hiking.png' %}">
-                                <img src="{% static 'interest/art.png' %}">
-                                <img src="{% static 'interest/writing.png' %}">
-                                <img src="{% static 'interest/singing.png' %}">
-                                <img src="{% static 'interest/riding.png' %}">
-                                <img src="{% static 'interest/reading.png' %}">
-                                <img src="{% static 'interest/gaming.png' %}">
-                                <img src="{% static 'interest/cycle.png' %}">
-                                <img src="{% static 'interest/football.png' %}">
-                                <img src="{% static 'interest/swim.png' %}">
-                                <img src="{% static 'interest/dance.png' %}">
-                                <img src="{% static 'interest/hiking.png' %}">
-                                <img src="{% static 'interest/art.png' %}">
-                                <img src="{% static 'interest/writing.png' %}">
-                                <img src="{% static 'interest/singing.png' %}">
-                                <img src="{% static 'interest/riding.png' %}">
-                                <img src="{% static 'interest/reading.png' %}">
-                                <img src="{% static 'interest/gaming.png' %}">
-                                <img src="{% static 'interest/cycle.png' %}">
-                                <img src="{% static 'interest/football.png' %}">
-                                <img src="{% static 'interest/swim.png' %}">
-                                <img src="{% static 'interest/dance.png' %}">
-                                <img src="{% static 'interest/hiking.png' %}">
-                                <img src="{% static 'interest/art.png' %}">
-                                <img src="{% static 'interest/writing.png' %}">
-                                <img src="{% static 'interest/singing.png' %}">
-                                <img src="{% static 'interest/riding.png' %}">
-                                <img src="{% static 'interest/reading.png' %}">
-                                <img src="{% static 'interest/gaming.png' %}">
-                            </figure>
-                        </div>
-                    </div>
-                    {% block follow %}
-                    <div class="c2">
-                        <div style="overflow: hidden;">
-                            <div class="c2-post">
-                                <p>Suggested People</p>
-                                <div class="suggested-people">
-                                        {% for i in other%}
-                                        <div style="display:inline-block;margin-right:-10px;margin-top:10px;">
-                                        <table>
-                                        <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
-
-                                                <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
-                                        {% for bio in userdata %}
-                                            {% if bio.owner_id == i.pk %}
-                                                {% if bio.profile_pic != '' %}
-                                                    <tr><td><img src="media/{{bio.profile_pic}}" height="50" width="50"></td></tr>
-                                                    {% else %}
-                                                    <tr><td><img src="{% static 'img/defaultpp.jpg' %}"></td></tr>
-
-                                                {% endif %}
-                                            {% endif %}
-                                        {% endfor %}
-
-
-                                            <tr><td>{{i.first_name}} {{i.last_name}}</td></tr>
-                                        {% if i in others%}
-                                            <tr><td><button type="submit" style="background-color:red; border-radius:3px;" class="follow{{i.pk}}">
-                                                UnFollow
-                                            </button></td></tr>
-                                        {% else %}
-                                        <tr><td><button type="submit" class="follow{{i.pk}}">
-                                            Follow
-                                        </button></td></tr>
-
-                                        {% endif %}
-                                            </form>
-                                            </table>
-                                        </div>
-                                        {% endfor %}
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endblock %}
-                </div>
-                <!-- 2-2rd div -->
-                <div class="container2-2">
-                    {% include '2_container.html' %}
-                </div>
-            </div>
-            </div>
-        </div>
-    </body>
  <script>
-                    $('.un-follow').submit(function(e){
-                        e.preventDefault()
+$('.un-follow').submit(function(e){
+    e.preventDefault()
 
-                        const follow_id = $(this).attr('id')
-                        const followText = $(`.follow${follow_id}`).text()
-                        const trim = $.trim(followText)
-                        const url =$(this).attr('action')
-
-
-
-                        $.ajax({
-                            type:'POST',
-                            url : url,
-                            data:{
-                            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
-                            'follow_pk':follow_id
-                            },
-                            success:function(response){
-                            if (trim === 'UnFollow'){
-                                $(`.follow${follow_id}`).css("background-color", "#00AF00")
-                                $(`.follow${follow_id}`).text('Follow')
+    const follow_id = $(this).attr('id')
+    const followText = $(`.follow${follow_id}`).text()
+    const trim = $.trim(followText)
+    const url =$(this).attr('action')
 
 
-                            } else {
-                                $(`.follow${follow_id}`).css("background-color", "#FF0000")
-                                $(`.follow${follow_id}`).text('UnFollow')
 
-                            }
-                            },
-                            error:function(response){
-                            console.log('error',response)
-                            }
-                           })
+    $.ajax({
+        type:'POST',
+        url : url,
+        data:{
+        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+        'follow_pk':follow_id
+        },
+        success:function(response){
+        if (trim === 'UnFollow'){
+            $(`.follow${follow_id}`).css("background-color", "#00AF00")
+            $(`.follow${follow_id}`).text('Follow')
 
 
-                    })
+        } else {
+            $(`.follow${follow_id}`).css("background-color", "#FF0000")
+            $(`.follow${follow_id}`).text('UnFollow')
+
+        }
+        },
+        error:function(response){
+        console.log('error',response)
+        }
+        })
 
 
-                 </script>
-</html>
+})
+</script>
 <script src="{% static 'js/header.js' %}"></script>
