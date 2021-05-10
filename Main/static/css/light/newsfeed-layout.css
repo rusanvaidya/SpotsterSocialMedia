@@ -114,19 +114,23 @@ body
     object-fit: 50% 50%;
     border-radius: 50%;
 }
-.du ul li .map-d #map 
-{ 
-    z-index: 1;
-    position: absolute; 
-    width: 20%; 
-    height:40%;
-}
-.du ul li .map-d
+.d1 ul
 {
-    width: 350px;
-    padding: 10px;
-    height: 300px;
+    position: fixed;
 }
+.d1 ul li .mapping
+{
+	width: 200px ;
+    height: 350px;
+    position: absolute;
+    overflow: hidden;
+}
+.d1 ul li .mapping #map 
+{ 
+	width: 100%;
+    height: 90%;
+}
+
 
 /* ---------------------------------------------------------------------------------------------------------------------- */
 /* newsfeed */
