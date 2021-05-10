@@ -332,7 +332,6 @@
                 {% block leftfeed %}
                 {% endblock %}
                 <div class="right-feed">
-                    {% block systemsearch %}
                     <div class="search-feed">
                         <input type="search" placeholder="Search...">
                     </div>
@@ -347,7 +346,6 @@
                             <li><button class="show-m" id="show_trending">Show more</button></li>
                         </ul>
                     </div>
-                    {% endblock %}
                     <div class="right-div-content">
                         <ul class="suggestions">
                             <li class="r-t"><b>Suggestions.</b></li>
@@ -406,7 +404,7 @@
             var newsfeed = document.getElementById('newsfeed_css');
             var trending = document.getElementById('trending_css');
             var discover = document.getElementById('discover_css');
-            var videos = document.getElementById('video_css');
+            var video = document.getElementById('video_css');
             var profile = document.getElementById('profile_css');
 
 
@@ -415,13 +413,13 @@
                 localStorage.setItem('theme', 'light');
                 dark.style.display='block';
                 light.style.display='none';
-                h_top.setAttribute("href", "{% static 'css/header_light.css' %}");
-                layout.setAttribute("href", "{% static 'css/newsfeed-layout_light.css' %}");
-                newsfeed.setAttribute("href", "{% static 'css/newsfeed_light.css' %}");
-                trending.setAttribute("href", "{% static 'css/trending_light.css' %}")
-                discover.setAttribute("href","{% static 'css/discover_light.css' %}");
-                videos.setAttribute("href", "{% static 'css/video_light.css' %}");
-                profile.setAttribute("href", "{% static 'css/profile_light.css' %}");
+                h_top.setAttribute("href", "{% static 'css/light/header.css' %}");
+                layout.setAttribute("href", "{% static 'css/light/newsfeed-layout.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/light/newsfeed.css' %}");
+                trending.setAttribute("href", "{% static 'css/light/trending.css' %}")
+                discover.setAttribute("href","{% static 'css/light/discover.css' %}");
+                video.setAttribute("href", "{% static 'css/light/video.css' %}");
+                profile.setAttribute("href", "{% static 'css/light/profile.css' %}");
             }
             
             dark.onclick = function()
@@ -429,47 +427,47 @@
                 localStorage.setItem('theme', 'dark');
                 dark.style.display='none';
                 light.style.display='block';
-                h_top.setAttribute("href", "{% static 'css/header.css' %}");
-                layout.setAttribute("href", "{% static 'css/newsfeed-layout.css' %}");
-                newsfeed.setAttribute("href", "{% static 'css/newsfeed.css' %}");
-                trending.setAttribute("href", "{% static 'css/trending.css' %}");
-                discover.setAttribute("href","{% static 'css/discover.css' %}");
-                videos.setAttribute("href", "{% static 'css/video.css' %}");
-                profile.setAttribute("href", "{% static 'css/profile.css' %}");
+                h_top.setAttribute("href", "{% static 'css/dark/header.css' %}");
+                layout.setAttribute("href", "{% static 'css/dark/newsfeed-layout.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/dark/newsfeed.css' %}");
+                trending.setAttribute("href", "{% static 'css/dark/trending.css' %}");
+                discover.setAttribute("href","{% static 'css/dark/discover.css' %}");
+                video.setAttribute("href", "{% static 'css/dark/video.css' %}");
+                profile.setAttribute("href", "{% static 'css/dark/profile.css' %}");
             }
             if(theme=='light')
             {
                 light.style.display='none';
-                h_top.setAttribute("href", "{% static 'css/header_light.css' %}");
-                layout.setAttribute("href", "{% static 'css/newsfeed-layout_light.css' %}");
-                newsfeed.setAttribute("href", "{% static 'css/newsfeed_light.css' %}");
-                trending.setAttribute("href", "{% static 'css/trending_light.css' %}")
-                discover.setAttribute("href","{% static 'css/discover_light.css' %}");
-                videos.setAttribute("href", "{% static 'css/video_light.css' %}");
-                profile.setAttribute("href", "{% static 'css/profile_light.css' %}");
+                h_top.setAttribute("href", "{% static 'css/light/header.css' %}");
+                layout.setAttribute("href", "{% static 'css/light/newsfeed-layout.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/light/newsfeed.css' %}");
+                trending.setAttribute("href", "{% static 'css/light/trending.css' %}")
+                discover.setAttribute("href","{% static 'css/light/discover.css' %}");
+                video.setAttribute("href", "{% static 'css/light/video.css' %}");
+                profile.setAttribute("href", "{% static 'css/light/profile.css' %}");
             }
             else if(theme=='dark')
             {
                 dark.style.display='none';
-                h_top.setAttribute("href", "{% static 'css/header.css' %}");
-                layout.setAttribute("href", "{% static 'css/newsfeed-layout.css' %}");
-                newsfeed.setAttribute("href", "{% static 'css/newsfeed.css' %}");
-                trending.setAttribute("href", "{% static 'css/trending.css' %}");
-                discover.setAttribute("href","{% static 'css/discover.css' %}");
-                videos.setAttribute("href", "{% static 'css/video.css' %}");
-                profile.setAttribute("href", "{% static 'css/profile.css' %}");
+                h_top.setAttribute("href", "{% static 'css/dark/header.css' %}");
+                layout.setAttribute("href", "{% static 'css/dark/newsfeed-layout.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/dark/newsfeed.css' %}");
+                trending.setAttribute("href", "{% static 'css/dark/trending.css' %}");
+                discover.setAttribute("href","{% static 'css/dark/discover.css' %}");
+                video.setAttribute("href", "{% static 'css/dark/video.css' %}");
+                profile.setAttribute("href", "{% static 'css/dark/profile.css' %}");
             }
             else
             {
                 light.style.display='none';
                 dark.style.display='block';
-                h_top.setAttribute("href", "{% static 'css/header.css' %}");
-                layout.setAttribute("href", "{% static 'css/newsfeed-layout.css' %}");
-                newsfeed.setAttribute("href", "{% static 'css/newsfeed.css' %}");
-                trending.setAttribute("href", "{% static 'css/trending.css' %}");
-                discover.setAttribute("href","{% static 'css/discover.css' %}");
-                videos.setAttribute("href", "{% static 'css/video.css' %}");
-                profile.setAttribute("href", "{% static 'css/profile.css' %}");
+                h_top.setAttribute("href", "{% static 'css/dark/header.css' %}");
+                layout.setAttribute("href", "{% static 'css/dark/newsfeed-layout.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/dark/newsfeed.css' %}");
+                trending.setAttribute("href", "{% static 'css/dark/trending.css' %}");
+                discover.setAttribute("href","{% static 'css/dark/discover.css' %}");
+                video.setAttribute("href", "{% static 'css/dark/video.css' %}");
+                profile.setAttribute("href", "{% static 'css/dark/profile.css' %}");
             }
         </script>
     </body>

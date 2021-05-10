@@ -1,0 +1,347 @@
+.profile-main
+{
+    box-sizing: border-box;
+}
+.profile-main .myProfile
+{
+    margin-top: 10px;
+    height: 100px;
+    box-sizing: border-box;
+}
+.myProfile .my-pp
+{
+    width: 30%;
+    height: 100px;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    float: left;
+}
+.myName .my-name
+{
+    text-align: center;
+    width: 30%;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    box-sizing: border-box;
+    position: relative;
+}
+.myProfile .my-bio p
+{
+    margin-top: none;
+    font-size: 15px;
+    font-weight: lighter;
+}
+.myProfile .my-pp img
+{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: 50% 50%;
+    border-radius: 50%;
+    box-shadow: 0 0 4px 4px #2d7b20;
+    position: relative;
+}
+.my-pp .pp-chg
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0);
+    display: none;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;  
+}
+.my-pp .pp-chg .camera
+{
+    width: 38px;
+    height: 38px;
+}
+
+#picupload
+{
+    display: none;
+}
+
+.my-pp:hover .pp-chg {display: block;}
+.my-pp:hover .back-op {opacity: 50%; cursor: pointer;}
+.my-pp label
+{
+    display: none;
+}
+#mypic
+{
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+}
+.pp-div
+{
+    height: 270px;
+    padding: 10px;
+    margin: 5px;
+    width: 95%;
+    overflow-y: auto;
+    margin: 8px 0;
+    text-align: center;
+}
+.pp-div img
+{
+    object-fit: cover;
+    object-position: 50% 50%;
+    border-radius: 50%;
+    border: 1px solid rgb(204, 203, 203);
+    padding: 10px;
+}
+
+.myProfile .my-info
+{
+    width: 70%;
+    height: 100px;
+    display: inline-block;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    float: right;
+}
+.myProfile .my-info button
+{
+    font-size: 18px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+.myProfile .my-info button:hover
+{
+    cursor: pointer;
+    background-color: rgb(180, 180, 180);
+    font-weight: bold;
+}
+.myProfile .my-info .my-post
+{
+    width: 33.33%;
+    height: 100px;
+    display: inline-block;
+    float: left;
+}
+.myProfile .my-info .f-f
+{
+    width: 66.66%;
+    height: 100px;
+    display: inline-block;
+    box-sizing: border-box;
+    float: right;
+}
+
+.myProfile .my-info .my-following, .myProfile .my-info .my-followers
+{
+    width: 50%;
+    height: 100px;
+    top: 10;
+    display: inline-block;
+    float: left;
+}
+
+.my-p-timeline
+{
+    width: 300px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.my-p-timeline ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.my-p-timeline ul li
+{
+    margin: 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
+.my-p-timeline ul li button.active, .my-p-timeline ul li button.inactive
+{
+    width: 90px;
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: black;
+}
+.my-p-timeline ul li button.active:hover, .my-p-timeline ul li button.inactive:hover
+{
+    font-weight: bold;
+    cursor: pointer;
+}
+.my-p-timeline ul li button.active
+{
+    border-bottom: 2px solid #2d7b20;
+    color: #2d7b20;
+}
+#my-settings, #my-interests
+{
+    display: none;
+}
+
+#my-posted-contents, #my-settings, #my-interests
+{
+    -webkit-animation: fading;
+    -webkit-animation-duration: 1.5s;
+}
+@keyframes fading {
+    from{opacity: 0;}
+    to{opacity: 1;}    
+}
+
+/* __________________________________________________________________________________________________________ */
+/* settings */
+.profile-info
+{
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.fullname, .emailpassword, .bio-area, .submit-changes
+{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.first_name, .last_name
+{
+    width: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.first_name
+{
+    float: left;
+}
+.last_name
+{
+    float: right;
+}
+.emailpassword, .bio-area
+{
+    padding: 10px;
+}
+.first_name label, .last_name label, .emailpassword label, .bio-area label
+{
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.first_name input, .last_name input, .emailpassword input, .bio-area textarea
+{
+    width: 100%;
+    padding: 8px 12px;
+    box-sizing: border-box;
+}
+
+.bio-area textarea
+{
+    resize: none;
+    height: 100px;
+}
+.submit-changes
+{
+    margin-top: 10px;
+    text-align: center;
+}
+.submit-changes input
+{
+    background-color: transparent;
+    box-shadow: 0 0 5px 5px #2D7B20;
+    color: #2d7b20;
+    padding: 8px 12px;
+    font-size: 20px;
+    border: none;
+    width: 150px;
+}
+
+.submit-changes input:hover
+{
+    font-weight: bolder;
+    box-shadow:0 0 5px 5px #207b34;
+    color: #207b34;
+    cursor: pointer;
+}
+
+/* _____________________________________________________________________________________________________ */
+/* interest editing */
+#my-interests
+{
+    margin-top: 15px;
+}
+.search-bar
+{
+    width: 100%;
+}
+.search-bar input
+{
+    width: 100%;
+    padding: 8px 12px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.interest-list
+{
+    width: 100%;
+    height: 480px;
+    overflow: auto;
+}.interest-list ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.interest-listing
+{
+    box-sizing: border-box;
+    position: relative;
+    padding: 0px;
+    margin: 10px;
+}
+.interest-listing label
+{
+    display: block;
+    left: 0;
+    width: 100%;
+    position: relative;
+}
+.interest-listing label:hover
+{
+    background-color: #d4d4d4;
+    cursor: pointer;
+}
+.interest-listing label table
+{
+    margin-top: 2px;
+}
+.interest-listing img.id-img
+{
+    width: 50px;
+}

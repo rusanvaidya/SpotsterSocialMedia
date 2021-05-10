@@ -1,0 +1,380 @@
+.header_top
+{
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 3px 3px #2e7b20c7;
+    width: 100%;
+    background: white;
+    min-width: 1000px;
+    position: fixed;
+    z-index: 1;
+}
+
+.header_top table 
+{
+    width: 100%;
+}
+
+.header_top .logo
+{
+    text-align: center;
+    width: 25%;
+}
+.header_top .logo button
+{
+    background-color: transparent;
+    border: None;
+}
+.header_top .logo button:hover 
+{
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.logo img
+{
+    width: 120px;
+    height: 60px;
+}
+.header_btns_div
+{
+    width: 45%;
+    min-width: 400px;   
+}
+.header_btns, .header_btns_active
+{
+    width: 24%;
+    display: inline-block;
+    text-align: center;
+}
+.header_btns_active
+{
+    border-bottom: 2px solid #2D7B20;
+}
+#h-a, #v-a, #t-a, #d-a, #m-n-a, #m-n-i, #search-i, #search-a
+{
+    display: none;
+}
+.header_btns_div .header_btns a img, .header_btns_active a img
+{
+    width: 35px;
+    height: 35px;
+}
+.header_btns_div .header_btns a img
+{
+    filter: invert(100%);
+}
+.mobile_nav
+{
+    display: none;
+}
+.close_nav
+{
+    font-size: 25px;
+    font-weight: bold;
+}
+.close_nav:hover
+{
+    cursor: pointer;
+}
+.header_m_img
+{
+    padding: 12px;
+    border-radius: 30px;
+}
+.header_m_img:hover
+{
+    opacity: 50%;
+}
+.bar_buttons
+{
+    width: 25%;
+    text-align: center;
+}
+.bar_buttons img
+{
+    width: 30px;
+    height: 30px;
+    padding: 12px;
+}
+.d1btn, .d2btn , .d3btn, .d2btn-a, .d3btn-a, #dark
+{
+    background-color: inherit;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.d2btn, .d3btn
+{
+    filter: invert(100%);
+}
+img.d1btn
+{
+    filter: none;
+    object-fit: cover;
+    object-position: 50%, 50%;
+    margin: 10px;
+    padding: 0;
+    box-shadow: 0 0 3px 3px #2D7B20;
+}
+.d2btn-a, .d3btn-a
+{
+    display: none;
+}
+.d1btn:hover, .d1btn:focus, .d2btn:hover, .d2btn:focus, .d3btn:hover, .d3btn:focus, .d2btn-a:hover, .d2btn-a:focus, .d3btn-a:hover, .d3btn-a:focus, #dark:hover, #dark:focus 
+{
+    opacity: 50%;
+}
+.badge-message, .badge-notification
+{
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    padding: 5px 9px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bolder;
+    background-color: rgb(202, 48, 48);
+    color: white;
+}
+.badge-nav
+{
+    position: absolute;
+    top: 5px;
+    right: 23px;
+    padding: 5px 9px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bolder;
+    background-color: rgb(202, 48, 48);
+    color: white;
+}
+.pp-show
+{
+    display: inline-block;
+}
+.pp-show:hover
+{
+    cursor: pointer;
+}
+.badge-verified
+{
+    position: absolute;
+    top: 73px;
+    right: 95px;
+    border-radius: 50%;
+}
+.badge-verified img.nv
+{
+    width: 20px;
+    height: 20px;
+}
+
+.dd 
+{
+    position: relative;
+    border-radius: 50px;
+    display: inline-block;
+}
+
+.dd1-content, .dd2-content, .dd3-content
+{
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 300px;
+    box-shadow: 0px 0 3px 3px #2D7B20;
+    top: 120%;
+    right: 0;
+    -webkit-animation: slidein_dropdown;
+    -webkit-animation-duration: 0.5s;
+}
+@keyframes slidein_dropdown
+{
+    from {top: 0%; opacity: 0}
+    to {top: 120%; opacity: 1}; 
+}
+
+  
+.dd1-content a, .dd2-content a, .dd3-content a 
+{
+    color: black;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: block;
+}
+.dd2-content a, .dd3-content a
+{
+    text-align: left;
+}
+
+.dd3-content:after , .dd1-content:after, .dd2-content:after 
+{
+    content: "";
+    position: absolute;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid #2D7B20;
+    border-left: 2px solid #2D7B20;
+    background-color: white;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    top: -12px;
+    right: 5%;
+    transform: rotate(45deg);
+    z-index: 1;
+}
+.show 
+{
+    display: block;
+}
+.user_option
+{
+    margin-top: 10px;
+}
+.user_option img
+{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: 50% 40%;
+    border-radius: 200px;
+    box-shadow: 0 0 3px 3px #2D7B20;
+    padding: 0;
+}
+.img-div-1
+{
+    background-color: black;
+}
+.light
+{
+    color:rgb(148, 148, 148);
+    font-size: 13px;
+}
+.bd
+{
+    border-top: 1px solid grey;
+}
+
+/* preloader */
+.preloader
+{
+    top: 50%;
+    left: 50%;
+    transform: (-50%,-50%);
+    position: absolute;
+}
+.animate-start
+{
+    animation: 2s loading infinite;
+}
+@keyframes loading
+{
+    0%{}
+    100%{transform: rotate(720deg);}
+}
+.preloader img
+{
+    width: 80px;
+}
+.not-loaded
+{
+    display: none;
+}
+.dd3-content table td a img
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+#side_nav
+{
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+}
+.side_nav_modal
+{
+    padding: 20px;
+    box-shadow: 5px 5px grey;
+    box-sizing: border-box;
+    background: black;
+    color: white;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-shadow: 0 0 3px 3px #8a8a8a;
+    box-sizing: border-box;
+    -webkit-animation: slide_right_nav;
+    -webkit-animation-duration: 1s;
+}
+.side_nav_modal ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.side_nav_modal ul li.sidemenu:hover
+{
+    cursor: pointer;
+    border-radius: 52px;
+    background-color: rgb(31, 31, 31);
+}
+.side_nav_modal ul li.sidemenu table td.c1-img img
+{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: 50% 40%;
+}
+.side_nav_modal ul li.sidemenu table td.c1-img
+{
+    display: inline-block;
+}
+.side_nav_modal ul li.sidemenu table td.c1-label
+{
+    text-align: left;
+    display: inline-block;
+}
+@media only screen and (max-width: 1000px) 
+{
+    .header_top
+    {
+        min-width: 100%;
+    }
+    .logo
+    {
+        display: none;
+    }
+    .bar_buttons
+    {
+        display: none;
+    }
+    .searchbar
+    {
+        display: none;
+    }
+    #m-n-i, #search-i
+    {
+        display: inline-block;
+    }
+    .header_btns, .header_btns_active
+    {
+        width: 19%;
+    }
+}

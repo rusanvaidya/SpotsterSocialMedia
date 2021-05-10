@@ -1,0 +1,640 @@
+.new-pd
+{
+    margin-top: 15px;
+}
+
+.new-pd 
+{
+    width: 100%;
+}
+
+.new-pd .pd-text
+{
+    width: 100%;
+}
+.new-idea .pd-text table
+{
+    margin: 0 auto;
+    width: 100%;
+}
+.new-pd .pd-text .new-poster
+{
+    width: 5%;
+}
+.new-pd .pd-text .poster-div
+{
+    width: 95%;
+}
+.new-pd .pd-text .new-poster img
+{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: 50% 50%;
+    border-radius: 50%;
+    box-shadow: 0 0 5px 2px #2d7b20;
+}
+
+.new-idea
+{
+    border: 2px solid black;
+    color: black;
+    box-sizing: border-box;
+    border-radius: 25px;
+    padding: 15px;
+    width: 100%;
+}
+
+.new-idea:hover
+{
+    background-color: #76ff5e1c;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.new-buttons
+{
+    margin: 0 auto;
+    width: 300px;
+    text-align: center;
+}
+
+.new-buttons .new-btns
+{
+    display: inline-block;
+    margin: 9px;
+    height: 50px;
+}
+
+.new-buttons .new-btns img, .new-btns-m img
+{
+    filter: invert(100%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.new-buttons .new-btns img:hover, .new-btns-m img:hover
+{
+    background-color: #bf5eff3d;
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+}
+
+#new_post_modal, #p_update_modal, #mypic, .view-posted-content, #side_nav
+{
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0, 34, 6, 0.712);
+}
+.modal
+{
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 0 0 5px 5px white;
+    box-sizing: border-box;
+    background: white;
+    width: 400px;
+    height: 440px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    -webkit-animation: slidein_modal;
+    -webkit-animation-duration: 1s;
+}
+@keyframes slidein_modal
+{
+    from {opacity: 0}
+    to {opacity: 1}; 
+}
+
+.modaltop
+{
+    overflow: hidden;
+}
+.modalheader
+{
+    display: inline-block;
+    float: left;
+}
+.closebutton
+{
+    font-size: 40px;
+    height: 50px;
+    cursor: pointer;
+    float: right;
+    display: inline-block;
+}
+#new_post_modal span:hover, #p-update-modal span:hover
+{
+    cursor: pointer;
+}
+
+#title-back button, #profile-back button
+{
+    color: #2D7B20;
+    border: none;
+    background-color: inherit;
+}
+#title-back button img, #profile-back button img
+{
+    width: 12px;
+}
+#title-back button:hover, #profile-back button:hover
+{
+    cursor: pointer;
+}
+
+#venue-create, #feeling-create, #post-create
+{
+    -webkit-animation: o-post;
+    -webkit-animation-duration: 1s;
+}
+@keyframes o-post {
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+
+.posting-user img
+{
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50%, 50%;
+    box-shadow: 0 0 5px 2px #2d7b20;
+    width: 40px;
+    height: 40px;
+}
+
+.caption-write textarea
+{
+    width: 100%;
+    padding: 8px 2px;
+    background-color: white;
+    color: black;
+    font-size: 23px;
+    margin: 8px 0;
+    display: inline-block;
+    border: none;
+    resize: none;
+    outline: none;
+    height: 50px;
+    overflow-y: auto;
+}
+.img-div
+{
+    height: 70px;
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    padding: 8px 2px;
+    font-size: 23px;
+    overflow-y: auto;
+    margin: 8px 0;
+}
+.img-div img
+{
+    border: 1px solid rgb(204, 203, 203);
+    padding: 2px;
+    margin: 2px;
+}
+
+.new-btn-modal
+{
+    width: 200px;
+    height: 50px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.new-btns-m
+{
+    margin: 9px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+#fileupload
+{
+    display: none;
+}
+#venue-create button
+{
+    width: 100%;
+}
+#feeling-label
+{
+    font-size: 14px;
+}
+#feeling-emoji img
+{
+    width: 20px;
+    height: 20px;
+}
+#feeling-create button
+{
+    width: 45%;
+}
+#feeling-create button, #venue-create button
+{
+    padding: 5px 10px;
+    border: 2px solid black;
+    color: black;
+    border-radius: 3px;
+    background-color: transparent;
+    margin: 2.5px;
+    border-radius: 20px;
+}
+#feeling-create button:hover, #venue-create button:hover
+{
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #76ff5e3d;
+}
+#feeling-create button table td img, #venue-create button table td img
+{
+    width: 20px;
+    height: 20px;
+}
+.post-submit
+{
+    width: 80px;
+    margin: 0 auto;
+}
+
+.post-submit input[type='submit']
+{
+    width: 100%;
+    box-sizing: border-box;
+    color: #2d7b20;
+    padding: 10px;
+    background: transparent;
+    box-shadow: 0 0 5px 5px #2d7b20;
+    border: none;
+}
+.post-submit input[type='submit']:hover
+{
+    font-weight: bolder;
+    box-shadow:0 0 5px 5px #207b34;
+    color: #207b34;
+    cursor: pointer;}
+/* ------------------------------------------------------------------------------------------------------ */
+.feedsocket
+{
+    box-sizing: border-box;
+}
+.feedpost
+{
+    margin: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 0 3px 3px #dbdbdb;
+    background-color: #dbdbdb;
+    margin-bottom: 20px;
+}
+
+.feedsocket .feedpost .user-who-posted
+{
+    width: 100%;
+    display: block;
+}
+
+.feedsocket .feedpost .user-who-posted .u-name
+{
+    width: 90%;
+    height: 60px;
+    display: inline-block;
+    float: left;
+}
+.feedsocket .feedpost .user-who-posted .u-name .u-fullname
+{
+    font-weight: bold;
+}
+.feedsocket .feedpost .user-who-posted .u-name .u-fullname a
+{
+    color: black;
+    text-decoration: none;
+}
+.time-post
+{
+    font-size: 13px;
+    color: rgb(19, 66, 31);
+}
+
+.feedsocket .feedpost .user-who-posted .u-name img
+{
+    width: 50px;
+    height: 50px;
+    object-fit : cover;
+    object-position: 50% 50%;
+    border-radius: 50%;
+}
+.feedsocket .feedpost .user-who-posted .u-edit
+{
+    width: 10%;
+    height: 60px;
+    display: inline-block;
+    float: right;
+}
+.feedsocket .feedpost .user-who-posted .u-edit img
+{
+    padding: 17px;
+    width: 15px;
+    height: 15px;
+    filter: invert(100%);
+}
+.feedsocket .feedpost .user-who-posted .u-edit img:hover
+{
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+.feedsocket .feedpost .user-who-posted .u-name table td.femoji img
+{
+    width: 20px;
+    height: 20px;
+}
+.modal_photo
+{
+    padding: 20px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    width: 900px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-animation: slidein_modal;
+    -webkit-animation-duration: 1s;
+}
+.modal_photo img
+{
+    width: 100%;
+}
+.caption
+{
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.feedsocket .feedpost .post-react
+{
+    margin: 10px;
+    box-sizing: border-box;
+    border-top: 2px solid black;
+}
+
+.feedsocket .feedpost .post-react ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+}
+
+
+.feedsocket .feedpost .post-react ul li
+{
+    display: inline-block;
+    width: 24%;
+    text-align: center;
+}
+.feedsocket .feedpost .post-react ul li table
+{
+    width: 60px;
+    border-radius: 4px;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.react-act
+{
+    -webkit-animation-name: r_a;
+    -webkit-animation-duration: 1s;
+}
+@keyframes r_a {
+    from{opacity: 0;}
+    to{opacity: 60px;}    
+}
+
+.feedsocket .feedpost .post-react ul li table img
+{
+    width: 25px;
+}
+.none-react-post
+{
+    display: none;
+}
+.like-on-this-post
+{
+    color: #0082c1;
+    font-weight: bold;
+}
+.dislike-on-this-post
+{
+    color: #fd2020;
+    font-weight: bold;
+}
+.post-react ul li table.tab-like:hover
+{
+    background-color: rgba(0, 128, 128, 0.30);
+    cursor: pointer;
+}
+.post-react ul li table.tab-dislike:hover
+{
+    background-color: rgba(128, 9, 0, 0.240);
+    cursor: pointer;
+}
+.post-react ul li table.tab-comment:hover
+{
+    background-color: rgba(47, 128, 0, 0.240);
+    cursor: pointer;
+}
+.post-react ul li table.tab-share:hover
+{
+    background-color: rgba(138, 73, 0, 0.452);
+    cursor: pointer;
+}
+.feedsocket .feedpost .post-react li table td.active-btn img
+{
+    filter: none;
+}
+.postedimg
+{
+    border: 3px solid #999999;
+    padding: 2px;
+    margin: 10px;
+}
+.feedpost .postedimg img
+{
+    box-sizing: border-box;
+    width: 100%;
+}
+.feedpost .postedimg img:hover
+{
+    cursor: pointer;
+}
+
+/* ----------------------------------------------------- */
+/* comment */
+.comment-content .modaltop table td img
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 0 3px 3px #2d7b20;
+    object-fit: cover;
+    object-position: 50%, 50%;
+}
+.comment-content .modaltop .modalheader
+{
+    width: 100%;
+    display: block;
+}
+.comment-content .modaltop div.feeling-cmnt-section table td.femoji img
+{
+    width: 20px;
+    height: 20px;
+    box-shadow: none;
+}
+.comment-content .modaltop table td.u-fullname a
+{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+.cmnt-on-this
+{
+    width: 90px;
+    margin: 0 auto;
+}
+
+.cmnt-on-this img
+{
+    margin: 5px;
+    width: 80px;
+    border: 2px solid grey;
+    padding: 5px;
+}
+.cmnt-on-this img:hover
+{
+    cursor: pointer;
+}
+
+.view-cmnt
+{
+    text-align: center;
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+.view-cmnt a
+{
+    color: black;
+}
+.view-cmnt a:hover
+{
+    font-weight: bold;
+}
+.give-cmnt
+{
+    width: 100%;
+}
+.give-cmnt textarea
+{
+    width: 100%;
+    height: 150px;
+    resize: none;
+    border: none;
+    font-size: 20px;
+    padding: 8px 12px;
+    background-color: transparent;
+    box-sizing: border-box;
+    outline: none;
+}
+.submit-cmnt
+{
+    width: 150px;
+    margin: 0 auto;
+}
+.submit-cmnt input[type=submit]
+{
+    width: 100%;
+    border: 2px solid #2d7b20;
+    color: #2d7b20;
+    border-radius: 24px;
+    padding: 8px 12px;
+    background-color: transparent;
+}
+.submit-cmnt input[type=submit]:hover
+{
+    background-color: #14860077;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ------------------------------------------------------------------------------ */
+/* share */
+
+.comment-content table.other-user-content td img
+{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    object-position: 50%, 50%;
+    box-shadow: 0 0 3px 1px #2d7b20;
+}
+.comment-content div.feeling-cmnt-section table td.femoji img
+{
+    width: 20px;
+    height: 20px;
+    box-shadow: none;
+}
+
+.comment-content table.other-user-content td.u-fullname a
+{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    font-size: 15px;
+}
+.border-share-content
+{
+    box-shadow: 0 0 3px 1px #2d7b20;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px;
+}
+.caption-share
+{
+    width: 100%;
+}
+.caption-share textarea
+{
+    width: 100%;
+    height: 90px;
+    resize: none;
+    border: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: black;
+    outline: none;
+}
