@@ -293,3 +293,10 @@ footer ul li a:hover
         display: none;
     }
 }
+@media only screen and (max-width: 400px) 
+{
+    .login_container, .signup_container
+    {
+        width: 100%;
+    }
+}

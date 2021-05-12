@@ -297,7 +297,7 @@ img.suggest-pp
 .right-div-content ul.suggestions div.side-l:hover
 {
     font-weight: bold;
-    background-color: #383737;
+    background-color: #9b9b9b;
     cursor: pointer;
 }
 
@@ -308,7 +308,7 @@ img.suggest-pp
     border-radius: 20px;
     color: #225c18;
 }
-.right-div-content ul.suggestions button.side4dd336-after:hover
+.right-div-content ul.suggestions button.side-after:hover
 {
     border: 2px solid #ff0000;
     color: #ff0000;

@@ -143,6 +143,7 @@ body
     margin: 0;
     left: 0;
     animation: 40s slider infinite;
+    -webkit-animation: 40s slider infinite;
 }
 .interests-bar figure:hover
 {

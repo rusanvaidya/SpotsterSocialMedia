@@ -17,37 +17,37 @@
                     <label class="pp-chg" for="picupload" onclick="show_picture()"><img class="camera" src="{% static 'icon/camera.png' %}"></label>
                     <input type="file" id="picupload" name="image">
             </div>
+            <div id="mypic">
+                <div class="modal">
+                    <div class="modaltop">
+                        <div class="modalheader">
+                            <p id="modal-title">Profile Picture</p>
+                        </div>
+                        <div class="closebutton">
+                            <span onclick="document.getElementById('mypic').style.display='none';">&times;</span>
+                        </div>
+                    </div>
+                    <div class="pp-div" id="pp-preview">
+                    </div>
+                    <div class="post-submit">
+                        <input type="submit" value="UPLOAD">
+                    </div>
+                </form>
+                </div>
+            </div>
             <div class="my-info">
                 <div class="my-post">
                     <button id="posts_show_top">Post<br>0</button>
                 </div>
                 <div class="f-f">
                     <div class="my-followers">
-                        <button>Followers<br>{{count}}</button>
+                        <button onclick="window.open('Follower','_self')">Followers<br>{{count}}</button>
                     </div>
                     <div class="my-following">
-                        <button>Following<br>{{count_following}}</button>
+                        <button onclick="window.open('Following','_self')">Following<br>{{count_following}}</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div id="mypic">
-        <div class="modal">
-            <div class="modaltop">
-                <div class="modalheader">
-                    <p id="modal-title">Profile Picture</p>
-                </div>
-                <div class="closebutton">
-                    <span onclick="document.getElementById('mypic').style.display='none';">&times;</span>
-                </div>
-            </div>
-            <div class="pp-div" id="pp-preview">
-            </div>
-            <div class="post-submit">
-                <input type="submit" value="UPLOAD">
-            </div>
-        </form>
         </div>
     </div>
     <div class="myName">
@@ -197,8 +197,25 @@
                         </table>
                     </div>
                     <div class="u-edit">
-                        <img src="{% static 'icon/dropdown.png' %}">
+                        <img src="{% static 'icon/dropdown.png' %}" id="ab-img-{{post.id}}" class="post-drop">
+                        <div class="about-post" id="ap-{{post.id}}">
+                            <ul>
+                                <li>Edit this post</li>
+                                <li>Delete this post</li>
+                                <li>Save this post</li>
+                                <li>Flag inappropriate</li>
+                                <li>Block {{p.first_name}} {{p.last_name}}</li>
+                                <li class="last-ap">Unfollow {{p.first_name}} {{p.last_name}}</li>
+                            </ul>
+                        </div>
                     </div>
+                    <script>
+                        var post_about = document.getElementById('ab-img-{{post.id}}')
+                        post_about.onclick = function()
+                        {
+                            document.getElementById('ap-{{post.id}}').classList.toggle('show');
+                        }
+                    </script>
                 </div>
                 <div class="time-post">{{post.created}}</div>
                 <div class="caption">{{post.usercontent}}</div>

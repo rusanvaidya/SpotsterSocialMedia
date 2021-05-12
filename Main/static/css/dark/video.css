@@ -61,24 +61,16 @@
     width: 95%;
     float: left;
 }
-.video-d-show
+.u-edit
 {
     width: 5%;
     float: right;
 }
-.video-d-show img
+.u-edit img.post-drop
 {
     width: 18px;
 }
-.video-d-show button
-{
-    background-color: transparent;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-.video-d-show button:hover .video-d-show img{width: 20px;}
-.video-d-show button:hover
+.u-edit img.post-drop
 {
     cursor: pointer;
 }
@@ -121,7 +113,7 @@
 .post-react ul li
 {
     display: inline-block;
-    width: 19%;
+    width: 24%;
     text-align: center;
 }
 .post-react ul li table

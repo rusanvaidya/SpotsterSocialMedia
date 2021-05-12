@@ -1,143 +1,23 @@
-<!DOCTYPE html>
-<html>
-    {% load static %}
-    <head>
-        <title>Spotser</title>
-        <link rel="icon" href="{% static 'img/icon.png' %}">
-    </head>
-    <link rel="stylesheet" href="{% static 'css/chatbox.css' %}">
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-    <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}">
-    <body  onload="loader()">
-        <div class="chatpage">
-            <!-- header import -->
-            {% include 'header.html' %}
-            
-            <!-- 3 divs -->
-            <div class="container_chatbox not-loaded" id="div-loaded">
-                <!-- div num 1 -->
-                <div class="friend-name">
-                    <div class="name-list">
-                        <table class="nametable">
-                            <tr class="m-menu">
-                                <td class="m1-img">
-                                    <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
-                                </td>
-                                <td class="m1-label"> 
-                                    Samir Maharjhan
-                                </td>
-                            </tr>
-                        </table>
-                        <table class="nametable">
-                            <tr class="m-menu">
-                                <td class="m1-img">
-                                    <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
-                                </td>
-                                <td class="m1-label"> 
-                                    Samir Maharjhan
-                                </td>
-                            </tr>
-                        </table>
-                        <table class="nametable">
-                            <tr class="m-menu">
-                                <td class="m1-img">
-                                    <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
-                                </td>
-                                <td class="m1-label"> 
-                                    Samir Maharjhan
-                                </td>
-                            </tr>
-                        </table>
-                        <table class="nametable">
-                            <tr class="m-menu">
-                                <td class="m1-img">
-                                    <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px">
-                                </td>
-                                <td class="m1-label"> 
-                                    Samir Maharjhan
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="chat-div">
-                    <div class="container2-1 bg-white">
-                    <div class="to-user">
-                        <table>
-                            <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                            <td><p>Samir Maharjhan</p></td>
-                        </table>
-                    </div>
-                    <div class="msg-box">
-                        <div class="show-msg">
-                            <img src="{% static 'img/defaultpp.jpg' %}" alt="Avatar" style="width:50px;">
-                            <p>Hello. How are you today?</p>
-                            <span class="time-right">11:00</span>
-                        </div>
-                        
-                        <div class="show-msg darker">
-                            <img src="{% static 'img/defaultpp.jpg' %}" alt="Avatar" class="right" style="width:50px;">
-                            <p>Hey! I'm fine. Thanks for asking!</p>
-                            <span class="time-left">11:01</span>
-                        </div>
-                        
-                        <div class="show-msg">
-                            <img src="{% static 'img/defaultpp.jpg' %}" alt="Avatar" style="width:50px;">
-                            <p>Sweet! So, what do you wanna do today?</p>
-                            <span class="time-right">11:02</span>
-                        </div>
-                        
-                        <div class="show-msg darker">
-                            <img src="{% static 'img/defaultpp.jpg' %}" alt="Avatar" class="right" style="width:50px;">
-                            <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?tfufghjkgk jkkjhkhukh uihiklklk kgjkhkljhkj &#128540; kjhjkhkjjbkjnkbkjkjk ghgjhbjkbkjbbmbm  gfchghvjhbjhvjc</p>
-                            <span class="time-left">11:05</span>
-                        </div>
-                        <div class="show-msg">
-                            <img src="{% static 'img/defaultpp.jpg' %}" alt="Avatar" style="width:50px;">
-                            <p>Hello. How are you today?</p>
-                            <span class="time-right">11:00</span>
-                        </div>
-                        
-                        <div class="show-msg darker">
-                            <img src="{% static 'img/defaultpp.jpg' %}" alt="Avatar" class="right" style="width:50px;">
-                            <p>Hey! I'm fine. Thanks for asking!</p>
-                            <span class="time-left">11:01</span>
-                        </div>
-                        
-                        <div class="show-msg">
-                            <img src="{% static 'img/defaultpp.jpg' %}" alt="Avatar" style="width:50px;">
-                            <p>Sweet! So, what do you wanna do today?</p>
-                            <span class="time-right">11:02</span>
-                        </div>
-                        
-                        <div class="show-msg darker">
-                            <img src="{% static 'img/defaultpp.jpg' %}" alt="Avatar" class="right" style="width:50px;">
-                            <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?tfufghjkgk jkkjhkhukh uihiklklk kgjkhkljhkj &#128540; kjhjkhkjjbkjnkbkjkjk ghgjhbjkbkjbbmbm  gfchghvjhbjhvjc</p>
-                            <span class="time-left">11:05</span>
-                        </div>       
-                    </div>
-                    <div class="write-msg">
-                        <div class="msg-put">
-                            <textarea placeholder="Write message" id="m-b-1"></textarea>
-                        </div>
-                        <div class="emoji-put">
-                            <button class="emdisp" onclick="smileyshow()"><img src="{% static 'icon/smiley.png' %}"></button>
-                            <div id="emobox" class="emo-box"></div>
-                        </div>
-                    </div>
-                    </div>
-                <div class="container2-2">
-                    {% include '2_container.html' %}
-                 </div>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+{% extends 'home.html' %}
+{% block bodyloader %}
+    <body>
+{% endblock %}
+
+{% block leftfeed %}
+{% load static %}
+<div class="write-msg">
+    <div class="msg-put">
+        <textarea placeholder="Write message" id="m-b-1"></textarea>
+    </div>
+    <div class="emoji-put">
+        <button class="emdisp" onclick="smileyshow()"><img src="{% static 'icon/smiley.png' %}"></button>
+        <div id="emobox" class="emo-box"></div>
+    </div>
+</div>
+{% endblock %}
 
         <script src="{% static 'js/header.js' %}"></script>
         <script src="{% static 'js/newsfeed.js' %}"></script>
-        <script src="{% static 'js/profile.js' %}"></script>
         <script src="{% static 'js/chatbox.js' %}"></script>
         </body>
         </html>

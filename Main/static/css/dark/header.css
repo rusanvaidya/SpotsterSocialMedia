@@ -39,7 +39,7 @@
 .header_btns_div
 {
     width: 45%;
-    min-width: 400px;   
+    min-width: 340px;   
 }
 .header_btns, .header_btns_active
 {
@@ -76,7 +76,7 @@
 .header_m_img
 {
     padding: 12px;
-    border-radius: 30px;
+    border-radius: 50%;
 }
 .header_m_img:hover
 {
@@ -129,11 +129,22 @@ img.d1btn
     background-color: rgb(202, 48, 48);
     color: white;
 }
-.badge-nav
+.header_menu_img
+{
+    padding: 12px;
+    border-radius: 50%;
+    position: relative;
+}
+.nav-btn
+{
+  position: relative;
+  display: inline-block;
+}
+.nav-btn .badge-nav
 {
     position: absolute;
-    top: 5px;
-    right: 23px;
+    top: -1px;
+    right: -1px;
     padding: 5px 9px;
     border-radius: 50%;
     font-size: 10px;
@@ -192,7 +203,6 @@ img.d1btn
 {
     color: white;
     text-decoration: none;
-    padding: 8px 12px;
     display: block;
 }
 .dd2-content a, .dd3-content a
@@ -274,13 +284,34 @@ img.d1btn
 {
     display: none;
 }
-.dd3-content table td a img
+.dd3-content ul, .dd2-content ul
 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.dd3-content ul li table td.msg-img, .dd2-content ul li table td.msg-img
+{
+    width: 10%;
+}
+.dd3-content table td a img, .dd2-content table td a img
+{
+    padding: 0;
     width: 50px;
     height: 50px;
+    object-fit: cover;
+    object-position: 50%, 50%;
     border-radius: 50%;
+    border: 1px solid #2D7B20;
 }
-
+.dd3-content ul li table td.name-msg, .dd2-content ul li table td.name-msg
+{
+    text-align: left;
+}
+.dd3-content ul li:hover, .dd3-content ul li:hover
+{
+    border-bottom: 2px solid #2d7b20;
+}
 #side_nav
 {
     display: none; 
@@ -366,6 +397,6 @@ img.d1btn
     }
     .header_btns, .header_btns_active
     {
-        width: 19%;
+        width: 18%;
     }
 }

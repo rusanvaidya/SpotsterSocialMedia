@@ -343,6 +343,7 @@
 }
 .feedsocket .feedpost .user-who-posted .u-edit
 {
+    margin-top: 17px;
     width: 10%;
     height: 60px;
     display: inline-block;
@@ -350,15 +351,13 @@
 }
 .feedsocket .feedpost .user-who-posted .u-edit img
 {
-    padding: 17px;
+    border-radius: 50%;
     width: 15px;
     height: 15px;
     filter: invert(100%);
 }
 .feedsocket .feedpost .user-who-posted .u-edit img:hover
 {
-    width: 18px;
-    height: 18px;
     cursor: pointer;
 }
 .feedsocket .feedpost .user-who-posted .u-name table td.femoji img
@@ -637,4 +636,85 @@
     background-color: transparent;
     color: black;
     outline: none;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------- */
+/* post-review */
+.about-post
+{
+    z-index: 1;
+    display: none;
+    position: absolute;
+    border: 2px solid black;
+    border-radius: 2px;
+    padding: 2px;
+    background-color: rgb(216, 216, 216);
+    -webkit-animation: height_animation;
+    -webkit-animation-duration: 0.1s;
+}
+
+@keyframes height_animation {
+    from{height: 0;}
+    to{height: 100px;}
+}
+
+.about-post ul
+{
+    width: 200px;
+    list-style: none;
+    margin: 0;    
+    padding: 0;    
+    -webkit-animation: show_option;
+    -webkit-animation-duration: 2s;
+}
+
+@keyframes show_option {
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+
+.about-post ul li
+{
+    padding: 8px 12px;
+    border-bottom: 1px solid black;
+}
+.about-post ul li.last-ap
+{
+    border: none;
+}
+
+.about-post ul li:hover
+{
+    background-color: #76ff5e21;
+    cursor: pointer;
+    font-weight: bold;
+}
+.show
+{
+    display: block;
+}
+
+
+@media only screen and (max-width: 1000px) 
+{
+    .about-post
+    {
+        right: 0;
+    }
+}
+@media only screen and (max-width: 390px) 
+{
+    .feedsocket .feedpost .post-react ul li
+    {
+        width: 22%;
+    }
+    .modal
+    {
+        width: 330px;
+    }
+    .modal_photo
+    {
+        width: 100%;
+    }
 }

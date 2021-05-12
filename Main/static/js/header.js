@@ -62,6 +62,19 @@ window.onclick = function(event)
             }
         }
     }
+    if (!event.target.matches('.post-drop')) 
+    {
+        var pdrop = document.getElementsByClassName("about-post");
+        var i;
+        for (i = 0; i < pdrop.length; i++) 
+        {
+            var openpd = pdrop[i];
+            if (openpd.classList.contains('show')) 
+            {
+                openpd.classList.remove('show');
+            }
+        }
+    }
 }
   
 function loader_feed()

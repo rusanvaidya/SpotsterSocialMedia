@@ -55,11 +55,13 @@
                         <a href="discover"><img src="{% static 'icon/discover-inactive.png' %}" class="header_m_img"></a>
                     </div>
                     <div class="header_btns_active mobile-nav-active" id="m-n-a">
-                        <a href=""><img src="{% static 'icon/menu.png' %}" class="header_m_img"></a>
+                        <a href=""><img src="{% static 'icon/menu.png' %}" class="header_menu_img"></a>
                     </div>
                     <div class="header_btns mobile-nav" id="m-n-i">
-                        <a onclick="show_side_nav()" class="nav-btn"><img src="{% static 'icon/menu-inactive.png' %}" class="header_m_img"></a>
-                        <span class="badge-nav" id="b-m">1</span>
+                        <a onclick="show_side_nav()" class="nav-btn">
+                            <img src="{% static 'icon/menu-inactive.png' %}" class="header_m_img">
+                            <span class="badge-nav" id="b-m">1</span>
+                        </a>
                     </div>
                     <div id="side_nav">
                         <div class="side_nav_modal">
@@ -69,7 +71,7 @@
                                 </div>
                             </div>
                             <ul>
-                                <li class="sidemenu">
+                                <li class="sidemenu" style="margin-bottom: 10px;">
                                     <div class="navsidesearch">
                                         <div class="new-idea">Search</div>
                                     </div>
@@ -79,11 +81,11 @@
                                     <table>
                                         {% if mydetials.profile_pic != '' %}
                                         <td class="c1-img">
-                                            <img src="media/{{mydetials.profile_pic}}" style="width:50px" height="40" width="50">
+                                            <img src="media/{{mydetials.profile_pic}}" style="width:50px; filter:none; box-shadow: 0 0 1px 3px #2d7b20" height="40" width="50">
                                         </td>
                                         {% else %}
                                         <td class="c1-img">
-                                            <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px" >
+                                            <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px; filter:none; box-shadow: 0 0 1px 3px #2d7b20;" >
                                         </td>
                                         {% endif %}
                                         <td class="c1-label"> 
@@ -99,6 +101,16 @@
                                         </td>
                                         <td class="c1-label">
                                             &emsp;Followers({{count}})
+                                        </td>
+                                    </table>
+                                </li>
+                                <li class="sidemenu" onclick="window.open('Follower', '_self')">
+                                    <table>
+                                        <td class="c1-img">
+                                            <img src="{% static 'icon/following.png' %}">
+                                        </td>
+                                        <td class="c1-label">
+                                            &emsp;Following({{count}})
                                         </td>
                                     </table>
                                 </li>
@@ -132,6 +144,26 @@
                                         </td>
                                     </table>
                                 </li>
+                                <li class="sidemenu" id="dark_sidemenu">
+                                    <table>
+                                        <td class="c1-img">
+                                            <img src="{% static 'icon/dark.png' %}" style="filter:none">                                        
+                                        </td>
+                                        <td class="c1-label">
+                                            &emsp;Dark Theme
+                                        </td>
+                                    </table>
+                                </li>
+                                <li class="sidemenu" id="light_sidemenu">
+                                    <table>
+                                        <td class="c1-img">
+                                            <img src="{% static 'icon/light.png' %}" style="filter: none;">
+                                        </td>
+                                        <td class="c1-label">
+                                            &emsp;Light Theme
+                                        </td>
+                                    </table>
+                                </li>
                                 <li class="sidemenu" onclick="window.open('logout', '_self')">
                                     <table>
                                         <td class="c1-img">
@@ -158,30 +190,23 @@
                         <img onclick="myMessage()" class="d3btn-a" id="b3-a" src="{% static 'icon/message-active.png' %}">
                         <span class="badge-message" id="b-m">1</span>
                         <div id="mydd3" class="dd3-content">
-                            {% for i in user %}
-                            <table>
-                                <td>
-                                    {% if mydetials.profile_pic != '' %}
-                                    <a href=""><img src="media/{{mydetials.profile_pic}}"></a>
-                                    {% else %}
-                                    <a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a>
-                                    {% endif %}
-                                </td>
-                                <td><a href="">{{i.first_name}} {{i.last_name}}<br>
-                                    <p class="light">Are you free tonight?</p>
-                                </a></td>
-                            </table>
-                            <table>
-                                <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
-                                <td><a href="">{{i.first_name}} {{i.last_name}}<br>
-                                    <p class="light">Are you free tonight?</p>
-                                </a></td>
-                            </table><table>
-                                <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
-                                <td><a href="">{{i.first_name}} {{i.last_name}}<br>
-                                    <p class="light">Are you free tonight?</p>
-                                </a></td>
-                            </table>
+                            <ul>
+                                {% for i in user %}
+                                <li>
+                                    <table>
+                                        <td class="msg-img">
+                                            {% if mydetials.profile_pic != '' %}
+                                            <a href=""><img src="media/{{mydetials.profile_pic}}"></a>
+                                            {% else %}
+                                            <a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a>
+                                            {% endif %}
+                                        </td>
+                                        <td class="name-msg"><a href="">{{i.first_name}} {{i.last_name}}<br>
+                                            <p class="light">Are you free tonight?</p>
+                                        </a></td>
+                                    </table>
+                                </li>
+                            </ul>
                             {% endfor %}
                         </div>
                     </div>
@@ -190,12 +215,16 @@
                         <img onclick="myNotification()" class="d2btn-a" id="b2-a" src="{% static 'icon/notification-active.png' %}">
                         <span class="badge-notification" id="b-n">1</span>
                         <div id="mydd2" class="dd2-content">
-                            {% for i in user %}
-                            <table>
-                                <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
-                                <td><a href="">{{i.first_name}} {{i.last_name}} just posted a event you may like.</a>
-                            </table>
-                            {% endfor %}
+                            <ul>
+                                {% for i in user %}
+                                <li>
+                                    <table>
+                                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                                        <td><a href="">{{i.first_name}} {{i.last_name}} just posted a event you may like.</a>
+                                    </table>
+                                </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
                     <div class="dd">
@@ -259,6 +288,14 @@
                                 <table>
                                     <td><img src="{% static 'icon/follower.png' %}"></td>
                                     <td>Followers <span>({{count}})</span></td>
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d1-1" onclick="window.open('Following', '_self')">
+                                <table>
+                                    <td><img src="{% static 'icon/following.png' %}"></td>
+                                    <td>Following <span>({{count_following}})</span></td>
                                 </table>
                             </div>
                         </li>
@@ -367,11 +404,21 @@
                                         <div class="name-li">{{i.first_name}} {{i.last_name}}<br><span class="light-trend">~Football</span></div>
                                         <div class="follow-li">
                                             {% if i in others%} 
-                                            <button type="sumbit" id="un_show" class="side-after follow{{i.pk}}">Following</button>
+                                            <button type="sumbit" id="un_show{{i.pk}}" class="side-after follow{{i.pk}}">Following</button>
                                             {% else %}
                                             <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
                                             {% endif %}
                                         </div>
+                                        <script>
+                                            document.getElementById('un_show{{i.pk}}').onmouseenter = function()
+                                            {
+                                                document.getElementById('un_show{{i.pk}}').innerText='Unfollow';
+                                            }
+                                            document.getElementById('un_show{{i.pk}}').onmouseout = function()
+                                            {
+                                                document.getElementById('un_show{{i.pk}}').innerText='Following';
+                                            }
+                                        </script>
                                     </div>
                                 </li>
                             </form>
@@ -408,12 +455,44 @@
             var video = document.getElementById('video_css');
             var profile = document.getElementById('profile_css');
 
+            document.getElementById('light_sidemenu').onclick = function()
+            {
+                localStorage.setItem('theme', 'light');
+                dark.style.display='block';
+                light.style.display='none';
+                document.getElementById('light_sidemenu').style.display='none';
+                document.getElementById('dark_sidemenu').style.display='block';
+                h_top.setAttribute("href", "{% static 'css/light/header.css' %}");
+                layout.setAttribute("href", "{% static 'css/light/newsfeed-layout.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/light/newsfeed.css' %}");
+                trending.setAttribute("href", "{% static 'css/light/trending.css' %}")
+                discover.setAttribute("href","{% static 'css/light/discover.css' %}");
+                video.setAttribute("href", "{% static 'css/light/video.css' %}");
+                profile.setAttribute("href", "{% static 'css/light/profile.css' %}");
+            }
+            document.getElementById('dark_sidemenu').onclick = function()
+            {
+                localStorage.setItem('theme', 'dark');
+                dark.style.display='none';
+                light.style.display='block';
+                document.getElementById('light_sidemenu').style.display='block';
+                document.getElementById('dark_sidemenu').style.display='none';
+                h_top.setAttribute("href", "{% static 'css/dark/header.css' %}");
+                layout.setAttribute("href", "{% static 'css/dark/newsfeed-layout.css' %}");
+                newsfeed.setAttribute("href", "{% static 'css/dark/newsfeed.css' %}");
+                trending.setAttribute("href", "{% static 'css/dark/trending.css' %}");
+                discover.setAttribute("href","{% static 'css/dark/discover.css' %}");
+                video.setAttribute("href", "{% static 'css/dark/video.css' %}");
+                profile.setAttribute("href", "{% static 'css/dark/profile.css' %}");
+            }
 
             light.onclick = function()
             {
                 localStorage.setItem('theme', 'light');
                 dark.style.display='block';
                 light.style.display='none';
+                document.getElementById('light_sidemenu').style.display='none';
+                document.getElementById('dark_sidemenu').style.display='block';
                 h_top.setAttribute("href", "{% static 'css/light/header.css' %}");
                 layout.setAttribute("href", "{% static 'css/light/newsfeed-layout.css' %}");
                 newsfeed.setAttribute("href", "{% static 'css/light/newsfeed.css' %}");
@@ -428,6 +507,8 @@
                 localStorage.setItem('theme', 'dark');
                 dark.style.display='none';
                 light.style.display='block';
+                document.getElementById('light_sidemenu').style.display='block';
+                document.getElementById('dark_sidemenu').style.display='none';
                 h_top.setAttribute("href", "{% static 'css/dark/header.css' %}");
                 layout.setAttribute("href", "{% static 'css/dark/newsfeed-layout.css' %}");
                 newsfeed.setAttribute("href", "{% static 'css/dark/newsfeed.css' %}");
@@ -439,6 +520,7 @@
             if(theme=='light')
             {
                 light.style.display='none';
+                document.getElementById('light_sidemenu').style.display='none';
                 h_top.setAttribute("href", "{% static 'css/light/header.css' %}");
                 layout.setAttribute("href", "{% static 'css/light/newsfeed-layout.css' %}");
                 newsfeed.setAttribute("href", "{% static 'css/light/newsfeed.css' %}");
@@ -450,6 +532,7 @@
             else if(theme=='dark')
             {
                 dark.style.display='none';
+                document.getElementById('dark_sidemenu').style.display='none';
                 h_top.setAttribute("href", "{% static 'css/dark/header.css' %}");
                 layout.setAttribute("href", "{% static 'css/dark/newsfeed-layout.css' %}");
                 newsfeed.setAttribute("href", "{% static 'css/dark/newsfeed.css' %}");
@@ -460,8 +543,10 @@
             }
             else
             {
-                light.style.display='none';
-                dark.style.display='block';
+                light.style.display='block';
+                dark.style.display='none';
+                document.getElementById('light_sidemenu').style.display='block';
+                document.getElementById('dark_sidemenu').style.display='none';
                 h_top.setAttribute("href", "{% static 'css/dark/header.css' %}");
                 layout.setAttribute("href", "{% static 'css/dark/newsfeed-layout.css' %}");
                 newsfeed.setAttribute("href", "{% static 'css/dark/newsfeed.css' %}");

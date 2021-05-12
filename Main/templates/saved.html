@@ -1,21 +1,10 @@
 {% extends 'home.html' %}
 {% block bodyloader %}
-    <body onload="loader_trending()">
+    <body>
 {% endblock %}
 {% block leftfeed %}
 {% load static %}
 <div class="left-feed">
-    <div class="trending-topics-div">
-        <div class="topic">
-            Trending
-        </div>
-        <ul>
-            <li><button>#COVID-19</button></li>
-            <li><button>#CR7</button></li>
-            <li><button>#Messi</button></li>
-            <li><button>#Memes</button></li>
-        </ul>
-    </div>
     {%for post in posts%}
     {% for p in pu %}
     {% if p.id == post.author_id %}

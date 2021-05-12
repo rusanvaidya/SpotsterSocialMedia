@@ -1,0 +1,46 @@
+{% extends 'discover.html'%}
+{% load static %}
+{% block follow %}
+<div class="topic">
+    Following({{{{count_following}}}})
+</div>
+<div class="people-list">
+    <ul>
+        {% for i in followers%}
+        <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
+        <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
+        <li>
+            <table>
+            {% for bio in userdata %}
+            {% if bio.owner_id == i.pk %}
+            {% if bio.profile_pic != '' %}
+            <td class="sp-pp"><img src="media/{{bio.profile_pic}}" width="50" height="50"></td>
+            {% else %}
+            <td class="sp-pp"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
+            <td class="sp-button">
+                {% if i in others%} 
+                <button type="sumbit" id="un_show{{i.pk}}" class="side-after follow{{i.pk}}">Following</button>
+                {% else %}
+                <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
+                {% endif %}
+                <script>
+                    document.getElementById('un_show{{i.pk}}').onmouseenter = function()
+                    {
+                        document.getElementById('un_show{{i.pk}}').innerText='Unfollow';
+                    }
+                    document.getElementById('un_show{{i.pk}}').onmouseout = function()
+                    {
+                        document.getElementById('un_show{{i.pk}}').innerText='Following';
+                    }
+                </script>
+            </table>
+        </li>
+        </form>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}

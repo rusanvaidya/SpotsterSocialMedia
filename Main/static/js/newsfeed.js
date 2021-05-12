@@ -346,14 +346,3 @@ function myComment()
     document.getElementById('a-c').style.background='rgb(226, 226, 226)';
     document.getElementById('c-section').style.display='block';
 }
-
-var follow = document.getElementById('un_show');
-follow.onmouseenter = function()
-{
-    document.getElementById('un_show').innerText='Unfollow';
-}
-follow.onmouseout = function()
-{
-    document.getElementById('un_show').innerText='Following';
-}
-

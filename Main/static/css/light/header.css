@@ -7,7 +7,7 @@
     background: white;
     min-width: 1000px;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
 }
 
 .header_top table 
@@ -39,7 +39,7 @@
 .header_btns_div
 {
     width: 45%;
-    min-width: 400px;   
+    min-width: 340px;   
 }
 .header_btns, .header_btns_active
 {
@@ -138,11 +138,22 @@ img.d1btn
     background-color: rgb(202, 48, 48);
     color: white;
 }
-.badge-nav
+.header_menu_img
+{
+    padding: 12px;
+    border-radius: 50%;
+    position: relative;
+}
+.nav-btn
+{
+  position: relative;
+  display: inline-block;
+}
+.nav-btn .badge-nav
 {
     position: absolute;
-    top: 5px;
-    right: 23px;
+    top: -1px;
+    right: -1px;
     padding: 5px 9px;
     border-radius: 50%;
     font-size: 10px;
@@ -150,6 +161,7 @@ img.d1btn
     background-color: rgb(202, 48, 48);
     color: white;
 }
+
 .pp-show
 {
     display: inline-block;
@@ -201,7 +213,6 @@ img.d1btn
 {
     color: black;
     text-decoration: none;
-    padding: 8px 12px;
     display: block;
 }
 .dd2-content a, .dd3-content a
@@ -283,11 +294,33 @@ img.d1btn
 {
     display: none;
 }
-.dd3-content table td a img
+.dd3-content ul, .dd2-content ul
 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.dd3-content ul li table td.msg-img, .dd2-content ul li table td.msg-img
+{
+    width: 10%;
+}
+.dd3-content table td a img, .dd2-content table td a img
+{
+    padding: 0;
     width: 50px;
     height: 50px;
+    object-fit: cover;
+    object-position: 50%, 50%;
     border-radius: 50%;
+    border: 1px solid #2D7B20;
+}
+.dd3-content ul li table td.name-msg, .dd2-content ul li table td.name-msg
+{
+    text-align: left;
+}
+.dd3-content ul li:hover, .dd3-content ul li:hover
+{
+    border-bottom: 2px solid #2d7b20;
 }
 
 #side_nav
@@ -308,8 +341,8 @@ img.d1btn
     padding: 20px;
     box-shadow: 5px 5px grey;
     box-sizing: border-box;
-    background: black;
-    color: white;
+    background: white;
+    color: black;
     width: 100%;
     height: 100%;
     overflow-y: auto;
@@ -332,7 +365,7 @@ img.d1btn
 {
     cursor: pointer;
     border-radius: 52px;
-    background-color: rgb(31, 31, 31);
+    background-color: rgba(0, 99, 5, 0.253);
 }
 .side_nav_modal ul li.sidemenu table td.c1-img img
 {
@@ -340,7 +373,8 @@ img.d1btn
     width: 50px;
     height: 50px;
     object-fit: cover;
-    object-position: 50% 40%;
+    object-position: 50% 50%;
+    filter: invert(100%);
 }
 .side_nav_modal ul li.sidemenu table td.c1-img
 {
@@ -375,6 +409,6 @@ img.d1btn
     }
     .header_btns, .header_btns_active
     {
-        width: 19%;
+        width: 18%;
     }
 }

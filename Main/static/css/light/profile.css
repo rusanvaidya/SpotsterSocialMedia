@@ -345,3 +345,11 @@
 {
     width: 50px;
 }
+
+@media only screen and (max-width:425px) 
+{
+    .myProfile .my-info button
+    {
+        font-size: 15px;
+    }    
+}
