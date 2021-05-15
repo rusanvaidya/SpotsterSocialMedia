@@ -4,13 +4,14 @@
     left: 0;
     box-shadow: 0 0 3px 3px #2e7b20c7;
     width: 100%;
-    background: black;
+    background: rgb(10, 10, 10);
     min-width: 1000px;
     position: fixed;
     z-index: 1;
+    color: white;
 }
 
-.header_top table 
+.header_top table
 {
     width: 100%;
 }
@@ -25,7 +26,7 @@
     background-color: transparent;
     border: None;
 }
-.header_top .logo button:hover 
+.header_top .logo button:hover
 {
     cursor: pointer;
     font-weight: bold;
@@ -39,7 +40,7 @@
 .header_btns_div
 {
     width: 45%;
-    min-width: 340px;   
+    min-width: 340px;
 }
 .header_btns, .header_btns_active
 {
@@ -113,7 +114,7 @@ img.d1btn
 {
     display: none;
 }
-.d1btn:hover, .d1btn:focus, .d2btn:hover, .d2btn:focus, .d3btn:hover, .d3btn:focus, .d2btn-a:hover, .d2btn-a:focus, .d3btn-a:hover, .d3btn-a:focus, #light:hover, #light:focus 
+.d1btn:hover, .d1btn:focus, .d2btn:hover, .d2btn:focus, .d3btn:hover, .d3btn:focus, .d2btn-a:hover, .d2btn-a:focus, .d3btn-a:hover, .d3btn-a:focus, #light:hover, #light:focus
 {
     opacity: 50%;
 }
@@ -173,7 +174,7 @@ img.d1btn
     height: 20px;
 }
 
-.dd 
+.dd
 {
     position: relative;
     border-radius: 50px;
@@ -184,7 +185,7 @@ img.d1btn
 {
     display: none;
     position: absolute;
-    background-color: black;
+    background-color: rgb(20, 20, 20);
     min-width: 300px;
     box-shadow: 0px 0 3px 3px #2D7B20;
     top: 120%;
@@ -195,11 +196,11 @@ img.d1btn
 @keyframes slidein_dropdown
 {
     from {top: 0%; opacity: 0}
-    to {top: 120%; opacity: 1}; 
+    to {top: 120%; opacity: 1};
 }
 
-  
-.dd1-content a, .dd2-content a, .dd3-content a 
+
+.dd1-content a, .dd2-content a, .dd3-content a
 {
     color: white;
     text-decoration: none;
@@ -210,7 +211,7 @@ img.d1btn
     text-align: left;
 }
 
-.dd3-content:after , .dd1-content:after, .dd2-content:after 
+.dd3-content:after , .dd1-content:after, .dd2-content:after
 {
     content: "";
     position: absolute;
@@ -219,17 +220,17 @@ img.d1btn
     height: 20px;
     border-top: 2px solid #2D7B20;
     border-left: 2px solid #2D7B20;
-    background-color: black;
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
+    background-color: rgb(20, 20, 20);
+    border-right: 2px solid rgb(20, 20, 20);
+    border-bottom: 2px solid rgb(20, 20, 20);
     top: -12px;
     right: 5%;
     transform: rotate(45deg);
     z-index: 1;
 }
-.show 
+.show
 {
-    display: block;
+    display: block;rgb(20, 20, 20)
 }
 .user_option
 {
@@ -247,7 +248,7 @@ img.d1btn
 }
 .img-div-1
 {
-    background-color: black;
+    background-color: rgb(20, 20, 20);
 }
 .light
 {
@@ -290,6 +291,11 @@ img.d1btn
     margin: 0;
     padding: 0;
 }
+.dd3-content ul li:hover, .dd2-content ul li:hover
+{
+  font-weight: bold;
+  cursor: pointer;
+}
 .dd3-content ul li table td.msg-img, .dd2-content ul li table td.msg-img
 {
     width: 10%;
@@ -308,21 +314,21 @@ img.d1btn
 {
     text-align: left;
 }
-.dd3-content ul li:hover, .dd3-content ul li:hover
+.dd3-content ul li:hover, .dd2-content ul li:hover
 {
     border-bottom: 2px solid #2d7b20;
 }
 #side_nav
 {
-    display: none; 
+    display: none;
     position: fixed;
-    z-index: 1; 
-    padding-top: 100px; 
+    z-index: 1;
+    padding-top: 100px;
     left: 0;
     top: 0;
-    width: 100%; 
+    width: 100%;
     height: 100%;
-    overflow: auto; 
+    overflow: auto;
     background-color: rgba(0,0,0,0.4);
 }
 .side_nav_modal
@@ -330,7 +336,7 @@ img.d1btn
     padding: 20px;
     box-shadow: 5px 5px grey;
     box-sizing: border-box;
-    background: black;
+    background: rgb(20, 20, 20);
     color: white;
     width: 100%;
     height: 100%;
@@ -373,7 +379,16 @@ img.d1btn
     text-align: left;
     display: inline-block;
 }
-@media only screen and (max-width: 1000px) 
+
+/* --------------------------------------------------------------------------------------- */
+/* search-mobile */
+#search-mobile, #search-mobile .search-feed, #search-mobile .right-div-content
+{
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------------------- */
+@media only screen and (max-width: 1000px)
 {
     .header_top
     {

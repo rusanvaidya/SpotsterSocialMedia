@@ -5,10 +5,15 @@
 {% block leftfeed %}
 {% load static %}
 <div class="left-feed">
+    <div class="trending-topics-div">
+        <div class="topic">
+            Saved Posts
+        </div>
+    </div>
     {%for post in posts%}
     {% for p in pu %}
     {% if p.id == post.author_id %}
-    
+
     <div class="feedsocket">
         <div class="feedpost">
             <div class="user-who-posted">
@@ -23,7 +28,7 @@
                         {% endif %}
                         {% endif %}
                         {% endfor %}
-                        <td class="u-fullname">{{p.first_name}} {{p.last_name}}</td>       
+                        <td class="u-fullname">{{p.first_name}} {{p.last_name}}</td>
                         {% if post.emoji != '' %}
                         <td>{{post.feeling}}</td>
                         <td class="femoji"><img src='/static/{{post.emoji}}'></td>
@@ -31,8 +36,25 @@
                     </table>
                 </div>
                 <div class="u-edit">
-                    <img src="{% static 'icon/flag-i.png' %}">
+                    <img src="{% static 'icon/dropdown.png' %}" id="ab-img-{{post.id}}" class="post-drop">
+                    <div class="about-post" id="ap-{{post.id}}">
+                        <ul>
+                            <li>Edit this post</li>
+                            <li>Delete this post</li>
+                            <li>Save this post</li>
+                            <li>Flag inappropriate</li>
+                            <li>Block {{p.first_name}} {{p.last_name}}</li>
+                            <li class="last-ap">Unfollow {{p.first_name}} {{p.last_name}}</li>
+                        </ul>
+                    </div>
                 </div>
+                <script>
+                    var post_about = document.getElementById('ab-img-{{post.id}}')
+                    post_about.onclick = function()
+                    {
+                        document.getElementById('ap-{{post.id}}').classList.toggle('show');
+                    }
+                </script>
             </div>
             <div class="time-post">{{post.created}}</div>
             <div class="caption">{{post.usercontent}}</div>
@@ -61,20 +83,215 @@
             </script>
             <div class="post-react">
                 <ul>
-                    <li><img src="{% static 'icon/like-i.png' %}"></li>
-                    <li><img src="{% static 'icon/dislike-i.png' %}"></li>
-                    <li><img src="{% static 'icon/comment.png' %}"></li>
-                    <li><img src="{% static 'icon/share.png' %}"></li>
-                    <li><img src="{% static 'icon/saved.png' %}"></li>
+                    <li>
+                        <table id="table-like-{{post.id}}" class="tab-like">
+                            <td class="react-act" id="like-i-{{post.id}}"><img src="{% static 'icon/like-i.png' %}"></td>
+                            <td class="none-react-post react-act active-btn" id="like-a-{{post.id}}"><img src="{% static 'icon/like.png' %}"></td>
+                            <td>2k</td>
+                        </table>
+                    </li>
+                    <li>
+                        <table class="tab-dislike" id="table-dislike-{{post.id}}">
+                            <td class="react-act" id="dislike-i-{{post.id}}"><img src="{% static 'icon/dislike-i.png' %}"></td>
+                            <td class="none-react-post react-act active-btn" id="dislike-a-{{post.id}}"><img src="{% static 'icon/dislike.png' %}"></td>
+                            <td>1k</td>
+                        </table>
+                    </li>
+                    <li>
+                        <table class="tab-comment" onclick="document.getElementById('give-comment-{{post.id}}').style.display='block';">
+                            <td><img src="{% static 'icon/comment.png' %}"></td>
+                            <td>2k</td>
+                        </table>
+                    </li>
+                    <li>
+                        <table class="tab-share" onclick="document.getElementById('give-share-{{post.id}}').style.display='block';">
+                            <td><img src="{% static 'icon/share.png' %}"></td>
+                            <td>2k</td>
+                        </table>
+                    </li>
                 </ul>
+                <div class="view-posted-content" id="give-comment-{{post.id}}">
+                    <div class="modal comment-content">
+                        <div class="modaltop">
+                            <div class="modalheader">
+                                <div class="closebutton">
+                                    <span onclick="document.getElementById('give-comment-{{post.id}}').style.display='none';">&times;</span>
+                                </div>
+                                <table>
+                                    {% for bio in userdata %}
+                                    {% if bio.owner_id == post.author_id %}
+                                    {% if bio.profile_pic != '' %}
+                                    <td><img src="media/{{bio.profile_pic}}"></td>
+                                    {% else %}
+                                    <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    <td class="u-fullname"><a href="profile">{{p.first_name}} {{p.last_name}}</a></td>
+                                </table>
+                            </div>
+                            <div class="feeling-cmnt-section">
+                                <table>
+                                {% if post.emoji != '' %}
+                                    <td>~ {{post.feeling}}</td>
+                                    <td class="femoji"><img src='/static/{{post.emoji}}'></td>
+                                {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                        <div class="caption" id="caption-{{post.id}}">{{post.usercontent}}</div>
+                        <div class="cmnt-on-this" id="cmnt-on-this-{{post.id}}">
+                            <img src="media/{{post.userfile}}" id="cmnt-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-comment-{{post.id}}').style.display='none'">
+                        </div>
+                        <form>
+                            <div class="view-cmnt">
+                                <a href="post">View all Comments</a>
+                            </div>
+                            <div class="give-cmnt">
+                                <textarea placeholder="Write Comment Here..."></textarea>
+                            </div>
+                            <div class="submit-cmnt">
+                                <input type="submit" value="Comment">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="view-posted-content" id="give-share-{{post.id}}">
+                    <div class="modal comment-content">
+                        <div class="modaltop">
+                            <div class="modalheader">
+                                <div class="closebutton">
+                                    <span onclick="document.getElementById('give-share-{{post.id}}').style.display='none';">&times;</span>
+                                </div>
+                                <table>
+                                    {% for i in user %}
+                                    {% if mydetials.profile_pic != '' %}
+                                    <td class="new-poster"><img src="media/{{mydetials.profile_pic}}"></td>
+                                    {% else %}
+                                    <td class="new-poster"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                    {% endif %}
+                                    <td class="u-fullname"><a href="profile">{{i.first_name}} {{i.last_name}}</a></td>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                        <div class="caption-share">
+                            <textarea placeholder="Write your thoughts..."></textarea>
+                        </div>
+                        <div class="feeling-cmnt-section border-share-content">
+                            <table class="other-user-content">
+                                {% for bio in userdata %}
+                                {% if bio.owner_id == post.author_id %}
+                                {% if bio.profile_pic != '' %}
+                                <td><img src="media/{{bio.profile_pic}}"></td>
+                                {% else %}
+                                <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                <td class="u-fullname"><a href="profile">{{p.first_name}} {{p.last_name}}</a></td>
+                            </table>
+                            <table>
+                            {% if post.emoji != '' %}
+                                <td>~ {{post.feeling}}</td>
+                                <td class="femoji"><img src='/static/{{post.emoji}}'></td>
+                            {% endif %}
+                            </table>
+                            <div class="caption" id="share-{{post.id}}">{{post.usercontent}}</div>
+                            <div class="cmnt-on-this" id="share-on-this-{{post.id}}">
+                            <img src="media/{{post.userfile}}" id="share-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-share-{{post.id}}').style.display='none'">
+                        </div>
+                        </div>
+                        <form>
+                            <div class="submit-cmnt">
+                                <input type="submit" value="Share">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <script>
+                    var x=document.getElementById({{post.id}}).innerHTML;
+
+                    var pics = /.(jpeg|jpg|png)$/;
+                    var vids = /.(mp4|wmv)/;
+
+
+                    if (pics.test(x)){
+                        document.getElementById('vid_spo{{post.id}}').style.display='none';
+                        document.getElementById('cmnt-on-vid-{{post.id}}').style.display='none';
+                        document.getElementById('share-on-video-{{post.id}}').style.display='none';
+                    }
+                    else if (vids.test(x)){
+                        document.getElementById('img_spo{{post.id}}').style.display='none';
+                        document.getElementById('cmnt-on-img-{{post.id}}').style.display='none';
+                        document.getElementById('share-on-img-{{post.id}}').style.display='none';
+                    }
+                    else{
+                    document.getElementById('new{{post.id}}').style.display='none';
+                    document.getElementById('cmnt-on-this-{{post.id}}').style.display='none';
+                    document.getElementById('caption-{{post.id}}').style.height='100px';
+                    document.getElementById('share-on-this-{{post.id}}').style.display='none';
+                    document.getElementById('share-{{post.id}}').style.height='100px';
+                    }
+                </script>
+                <script>
+                    // like
+                    var like_b_i = document.getElementById('table-like-{{post.id}}');
+
+                    like_b_i.onclick = function()
+                    {
+                        document.getElementById('table-like-{{post.id}}').classList.toggle('like-on-this-post');
+                        document.getElementById('table-dislike-{{post.id}}').classList.remove('dislike-on-this-post');
+                        if(document.getElementById('like-i-{{post.id}}').classList.contains('none-react-post'))
+                        {
+                            document.getElementById('like-i-{{post.id}}').classList.remove('none-react-post');
+                            document.getElementById('like-a-{{post.id}}').classList.toggle('none-react-post');
+                        }
+                        else if(document.getElementById('like-a-{{post.id}}').classList.contains('none-react-post'))
+                        {
+                            document.getElementById('like-i-{{post.id}}').classList.toggle('none-react-post');
+                            document.getElementById('like-a-{{post.id}}').classList.remove('none-react-post');
+                            if(document.getElementById('dislike-i-{{post.id}}').classList.contains('none-react-post'))
+                            {
+                                document.getElementById('dislike-i-{{post.id}}').classList.remove('none-react-post');
+                                document.getElementById('dislike-a-{{post.id}}').classList.toggle('none-react-post');
+                            }
+                        }
+                    }
+
+                    // dislike
+                    var dislike_b_i = document.getElementById('table-dislike-{{post.id}}');
+                    dislike_b_i.onclick = function()
+                    {
+                        document.getElementById('table-dislike-{{post.id}}').classList.toggle('dislike-on-this-post');
+                        document.getElementById('table-like-{{post.id}}').classList.remove('like-on-this-post');
+                        if(document.getElementById('dislike-i-{{post.id}}').classList.contains('none-react-post'))
+                        {
+                            document.getElementById('dislike-i-{{post.id}}').classList.remove('none-react-post');
+                            document.getElementById('dislike-a-{{post.id}}').classList.toggle('none-react-post');
+                        }
+                        else if(document.getElementById('dislike-a-{{post.id}}').classList.contains('none-react-post'))
+                        {
+                            document.getElementById('dislike-i-{{post.id}}').classList.toggle('none-react-post');
+                            document.getElementById('dislike-a-{{post.id}}').classList.remove('none-react-post');
+                            if(document.getElementById('like-i-{{post.id}}').classList.contains('none-react-post'))
+                            {
+                                document.getElementById('like-i-{{post.id}}').classList.remove('none-react-post');
+                                document.getElementById('like-a-{{post.id}}').classList.toggle('none-react-post');
+                            }
+                        }
+                    }
+                </script>
             </div>
-        </div>    
+        </div>
     </div>
-    
+
     {% endif %}
     {% endfor %}
     {% endfor %}
-</div>    
+</div>
 {% endblock %}
 <script src="{% static 'js/header.js' %}"></script>
 <script src="{% static 'js/newsfeed.js' %}"></script>

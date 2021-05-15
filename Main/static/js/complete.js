@@ -71,7 +71,7 @@ picupload.onchange = function () {
 var theme = localStorage.getItem('theme');
 if(theme=='dark')
 {
-    document.getElementById('cm').style.background='black';
+    document.getElementById('cm').style.background='rgb(60, 60, 60)';
     document.getElementById('cf').style.color='white';
     document.getElementById('copyright').style.color='white';
     localStorage.setItem('theme','dark');
@@ -85,7 +85,7 @@ else if (theme == 'light')
 }
 else
 {
-    document.getElementById('cm').style.background='black';
+    document.getElementById('cm').style.background='rgb(60, 60, 60)';
     document.getElementById('cf').style.color='white';
     document.getElementById('copyright').style.color='white';
     localStorage.setItem('theme','dark');

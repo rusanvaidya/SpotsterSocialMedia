@@ -10,32 +10,34 @@
         <link rel="stylesheet" id="trending_css">
         <link rel="stylesheet" id="profile_css">
         <link rel="stylesheet" id="video_css">
+        <link rel="stylesheet" href="{% static 'css/chatbox.css' %}">
+        <link rel="stylesheet" href="{% static 'css/post.css' %}">
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
-        
+
         <link rel="icon" href="{% static 'img/icon.png' %}">
     </head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block bodyloader %}
-    {% endblock %}    
+    {% endblock %}
     <div class="header_top">
             <table>
-        
+
                 <!-- logo -->
                 <td class="logo">
                     <button onclick="window.open('/','_self')">
                         <img src="{% static 'img/icon2.png' %}">
                     </button>
                 </td>
-        
-                
+
+
                 <td class="header_btns_div">
                     <div class="header_btns_active" id="h-a">
                         <a href="/"><img src="{% static 'icon/home.png' %}" class="header_m_img"></a>
                     </div>
                     <div class="header_btns" id="h-i">
                         <a href="/"><img src="{% static 'icon/home-inactive.png' %}" class="header_m_img"></a>
-                    </div>      
+                    </div>
                     <div class="header_btns_active" id="v-a">
                         <a href="video"><img src="{% static 'icon/video.png' %}" class="header_m_img"></a>
                     </div>
@@ -65,13 +67,16 @@
                     </div>
                     <div id="side_nav">
                         <div class="side_nav_modal">
-                            <div class="modaltop">
-                                <div class="modalheader close_nav">
-                                    <span onclick="document.getElementById('side_nav').style.display='none'; document.getElementById('m-n-i').style.display='inline-block'; document.getElementById('m-n-a').style.display='none';">&times;</span>
-                                </div>
+                          <div class="modaltop">
+                              <div class="modalheader">
+                                <span style="display:none; font-weight: bold;" id="back-side" onclick="document.getElementById('sm-content').style.display='block'; document.getElementById('search-mobile').style.display='none'; document.getElementById('back-side').style.display='none';">< Back</span>
+                              </div>
+                              <div class="closebutton">
+                                  <span onclick="document.getElementById('side_nav').style.display='none'; document.getElementById('m-n-i').style.display='inline-block'; document.getElementById('m-n-a').style.display='none';">&times;</span>
+                              </div>
                             </div>
-                            <ul>
-                                <li class="sidemenu" style="margin-bottom: 10px;">
+                            <ul id="sm-content">
+                                <li class="sidemenu" style="margin-bottom: 10px;" onclick="document.getElementById('sm-content').style.display='none'; document.getElementById('search-mobile').style.display='block'; document.getElementById('back-side').style.display='block';">
                                     <div class="navsidesearch">
                                         <div class="new-idea">Search</div>
                                     </div>
@@ -88,7 +93,7 @@
                                             <img src="{% static 'img/defaultpp.jpg' %}" style="width:50px; filter:none; box-shadow: 0 0 1px 3px #2d7b20;" >
                                         </td>
                                         {% endif %}
-                                        <td class="c1-label"> 
+                                        <td class="c1-label">
                                             &emsp;{{i.first_name}} {{i.last_name}}
                                         </td>
                                     </table>
@@ -114,7 +119,7 @@
                                         </td>
                                     </table>
                                 </li>
-                                <li class="sidemenu" onclick="window.open('', '_self')">
+                                <li class="sidemenu" onclick="window.open('notification', '_self')">
                                     <table>
                                         <td class="c1-img">
                                             <img src="{% static 'icon/notification.png' %}">
@@ -147,7 +152,7 @@
                                 <li class="sidemenu" id="dark_sidemenu">
                                     <table>
                                         <td class="c1-img">
-                                            <img src="{% static 'icon/dark.png' %}" style="filter:none">                                        
+                                            <img src="{% static 'icon/dark.png' %}" style="filter:none">
                                         </td>
                                         <td class="c1-label">
                                             &emsp;Dark Theme
@@ -175,10 +180,26 @@
                                     </table>
                                 </li>
                             </ul>
+                            <div id="search-mobile" style="display:none;">
+                              <div class="search-feed">
+                                  <input type="search" placeholder="Search...">
+                              </div>
+                              <div class="right-div-content">
+                                  <ul class="trending">
+                                      <li class="r-t"><b>Trending Interests.</b></li>
+                                      <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#COVID-19<br><span class="light-trend">200 posts.</span></button></li>
+                                      <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Football<br><span class="light-trend">1.2k posts.</span></button></li>
+                                      <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#CR7<br><span class="light-trend">1.4k posts.</span></button></li>
+                                      <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Messi<br><span class="light-trend">1k posts`.</span></button></li>
+                                      <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Memes<br><span class="light-trend">1.2k posts.</span></button></li>
+                                      <li><button class="show-m" id="show_trending">Show more</button></li>
+                                  </ul>
+                              </div>
+                            </div>
                         </div>
                     </div>
                 </td>
-        
+
                 <!-- buttons -->
                 <td class="bar_buttons">
                     <div class="dd">
@@ -192,22 +213,25 @@
                         <div id="mydd3" class="dd3-content">
                             <ul>
                                 {% for i in user %}
-                                <li>
+                                <li onclick="window.open('chatbox','_self');">
                                     <table>
                                         <td class="msg-img">
                                             {% if mydetials.profile_pic != '' %}
-                                            <a href=""><img src="media/{{mydetials.profile_pic}}"></a>
+                                            <img src="media/{{mydetials.profile_pic}}">
                                             {% else %}
-                                            <a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a>
+                                            <img src="{% static 'img/defaultpp.jpg' %}">
                                             {% endif %}
                                         </td>
-                                        <td class="name-msg"><a href="">{{i.first_name}} {{i.last_name}}<br>
-                                            <p class="light">Are you free tonight?</p>
-                                        </a></td>
+                                        <td class="name-msg">{{i.first_name}} {{i.last_name}}<br>
+                                            <p class="light msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
+                                        </td>
                                     </table>
                                 </li>
+                                {% endfor %}
+                                <li onclick="window.open('chatbox', '_self')" style="color:green">
+                                  See More
+                                </li>
                             </ul>
-                            {% endfor %}
                         </div>
                     </div>
                     <div class="dd">
@@ -224,6 +248,9 @@
                                     </table>
                                 </li>
                                 {% endfor %}
+                                <li onclick="window.open('notification', '_self')" style="color:green">
+                                  See More
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -241,10 +268,10 @@
                                 {% else %}
                                 <img class="pp-show" src="{% static 'img/defaultpp.jpg' %}">
                                 {% endif %}
-        
+
                                 <!-- <span class="badge-verified"><img src="{% static 'img/not-verified.png' %}" title="Not-Verified" class="nv"></span> -->
                                 <span class="badge-verified"><img src="{% static 'img/verified.png' %}" title="Verified" class="nv"></span>
-        
+
                                 <a href="profile">
                                     {{i.first_name}} {{i.last_name}}<br>
                                     <p class="light">{{email}}</p>
@@ -318,14 +345,14 @@
                         <li>
                             <div class="mapping">
                                 <div id="map"></div>
-                            </div>                            
+                            </div>
                             <script>
-                                if ( navigator.geolocation ) 
+                                if ( navigator.geolocation )
                                 {
-                                    navigator.geolocation.getCurrentPosition( function(position) 
+                                    navigator.geolocation.getCurrentPosition( function(position)
                                     {
                                         var lng = position.coords.longitude;
-                                        var lat = position.coords.latitude; 
+                                        var lat = position.coords.latitude;
                                         console.log(lng);
                                         console.log(lat);
 
@@ -359,7 +386,7 @@
                                     });
                                 }
 
-                            </script>                            
+                            </script>
                         </li>
                     </ul>
                 </div>
@@ -403,7 +430,7 @@
                                         {% endfor %}
                                         <div class="name-li">{{i.first_name}} {{i.last_name}}<br><span class="light-trend">~Football</span></div>
                                         <div class="follow-li">
-                                            {% if i in others%} 
+                                            {% if i in others%}
                                             <button type="sumbit" id="un_show{{i.pk}}" class="side-after follow{{i.pk}}">Following</button>
                                             {% else %}
                                             <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
@@ -469,6 +496,8 @@
                 discover.setAttribute("href","{% static 'css/light/discover.css' %}");
                 video.setAttribute("href", "{% static 'css/light/video.css' %}");
                 profile.setAttribute("href", "{% static 'css/light/profile.css' %}");
+                document.getElementById('msg-here-text').style.color='black';
+                document.getElementById('emobox').style.backgroundColor='white';
             }
             document.getElementById('dark_sidemenu').onclick = function()
             {
@@ -484,6 +513,8 @@
                 discover.setAttribute("href","{% static 'css/dark/discover.css' %}");
                 video.setAttribute("href", "{% static 'css/dark/video.css' %}");
                 profile.setAttribute("href", "{% static 'css/dark/profile.css' %}");
+                document.getElementById('msg-here-text').style.color='white';
+                document.getElementById('emobox').style.backgroundColor='black';
             }
 
             light.onclick = function()
@@ -500,8 +531,10 @@
                 discover.setAttribute("href","{% static 'css/light/discover.css' %}");
                 video.setAttribute("href", "{% static 'css/light/video.css' %}");
                 profile.setAttribute("href", "{% static 'css/light/profile.css' %}");
+                document.getElementById('msg-here-text').style.color='black';
+                document.getElementById('emobox').style.backgroundColor='white';
             }
-            
+
             dark.onclick = function()
             {
                 localStorage.setItem('theme', 'dark');
@@ -516,6 +549,8 @@
                 discover.setAttribute("href","{% static 'css/dark/discover.css' %}");
                 video.setAttribute("href", "{% static 'css/dark/video.css' %}");
                 profile.setAttribute("href", "{% static 'css/dark/profile.css' %}");
+                document.getElementById('msg-here-text').style.color='white';
+                document.getElementById('emobox').style.backgroundColor='black';
             }
             if(theme=='light')
             {

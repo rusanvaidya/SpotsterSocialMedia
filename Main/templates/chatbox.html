@@ -2,22 +2,124 @@
 {% block bodyloader %}
     <body>
 {% endblock %}
-
-{% block leftfeed %}
+{% block sidemenudiv %}
 {% load static %}
-<div class="write-msg">
-    <div class="msg-put">
-        <textarea placeholder="Write message" id="m-b-1"></textarea>
-    </div>
-    <div class="emoji-put">
-        <button class="emdisp" onclick="smileyshow()"><img src="{% static 'icon/smiley.png' %}"></button>
-        <div id="emobox" class="emo-box"></div>
-    </div>
+<div class="chating">
+  <div class="search_names">
+    <input type="search" placeholder="Search...">
+  </div>
+  <div class="name_for_chat">
+    <ul>
+      <li>
+        <table>
+          <td>
+            <img src="{% static 'img/defaultpp.jpg' %}"
+          </td>
+          <td>
+            Harry Maguire<br>
+            <p class="msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
+          </td>
+        </table>
+      </li>
+
+        <li>
+          <table>
+            <td>
+              <img src="{% static 'img/defaultpp.jpg' %}"
+            </td>
+            <td>
+              Harry Maguire<br>
+              <p class="msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
+            </td>
+          </table>
+        </li>
+
+          <li>
+            <table>
+              <td>
+                <img src="{% static 'img/defaultpp.jpg' %}"
+              </td>
+              <td>
+                Harry Maguire<br>
+                <p class="msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
+              </td>
+            </table>
+          </li>
+
+            <li>
+              <table>
+                <td>
+                  <img src="{% static 'img/defaultpp.jpg' %}"
+                </td>
+                <td>
+                  Harry Maguire<br>
+                  <p class="msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
+                </td>
+              </table>
+            </li>
+
+              <li>
+                <table>
+                  <td>
+                    <img src="{% static 'img/defaultpp.jpg' %}"
+                  </td>
+                  <td>
+                    Harry Maguire<br>
+                    <p class="msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
+                  </td>
+                </table>
+              </li>
+    </ul>
+  </div>
 </div>
 {% endblock %}
+{% block leftfeed %}
+<div class="left-feed">
+  <div class="chatbox_container">
+    <div class="chat-with">
+      <table>
+        <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+        <td>Harry Maguire</td>
+      </table>
+    </div>
+    <div class="chat_here">
+        <div class="sender">
+          <div class="sender-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="sender-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
+        </div>
+        <div class="you-sent">
+            <div class="you-sent-img">
+              <img src="{% static 'img/defaultpp.jpg' %}">
+            </div>
+            <div class="you-sent-msg">
+              Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+              Hello there how are you? Hope you're doing good. When are we meeting
+              Hello there how are you? Hope you're doing good. When are we meeting
+              Hello there how are you? Hope you're doing good. When are we meeting
+            </div>
+        </div>
+      </div>
+    <div class="write-msg">
+        <div class="msg-put">
+            <textarea placeholder="Write message" id="msg-here-text"></textarea>
+        </div>
+        <div class="emoji-put">
+            <img src="{% static 'icon/smiley.png' %}" class="emdisp" onclick="smileyshow()">
+            <div id="emobox" class="emo-box"></div>
+            <script src="{% static 'js/chatbox.js' %}"></script>
+        </div>
+    </div>
+  </div>
+</div>
 
-        <script src="{% static 'js/header.js' %}"></script>
-        <script src="{% static 'js/newsfeed.js' %}"></script>
-        <script src="{% static 'js/chatbox.js' %}"></script>
-        </body>
-        </html>
+{% endblock %}
+
+<script src="{% static 'js/header.js' %}"></script>
+<script src="{% static 'js/newsfeed.js' %}"></script>

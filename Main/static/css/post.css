@@ -1,0 +1,47 @@
+.comments-hist
+{
+  width: 100%;
+}
+.comments-hist ul
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.comments-hist ul li
+{
+  background-color: rgba(130, 130, 130, 0.51);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.comments-hist ul li table td
+{
+  font-weight: bold;
+}
+.comments-hist ul li table td img
+{
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  object-position: 50%, 50%;
+  border-radius: 50%;
+}
+.comments-hist ul li table.you-cmnt
+{
+  width: 100%;
+}
+.comments-hist ul li table td.user-img-td
+{
+    width: 40px;
+}
+.comments-hist ul li table td input[type='text']
+{
+  width: 100%;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  background-color: transparent;
+  border:none;
+  outline: none;
+  color: white;
+}

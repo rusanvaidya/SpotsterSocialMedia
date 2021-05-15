@@ -1,6 +1,7 @@
 {% extends 'discover.html'%}
 {% load static %}
 {% block follow %}
+<div class="left-feed">
 <div class="topic">
     Followers({{count}})
 </div>
@@ -22,7 +23,7 @@
             {% endfor %}
             <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
             <td class="sp-button">
-                {% if i in others%} 
+                {% if i in others%}
                 <button type="sumbit" id="un_show{{i.pk}}" class="side-after follow{{i.pk}}">Following</button>
                 {% else %}
                 <button type="submit" class="side-r follow{{i.pk}}">Follow</button>

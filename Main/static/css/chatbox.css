@@ -1,0 +1,259 @@
+.chating
+{
+  margin-top: 10px;
+  margin:10px;
+}
+
+.chating .search_names
+{
+  width: 100%;
+  display: block;
+}
+.chating .search_names input[type='search']
+{
+  padding: 8px 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.chating .name_for_chat
+{
+  display: block;
+  margin-top: 10px;
+}
+.chating .name_for_chat ul
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.chating .name_for_chat ul li
+{
+  width: 100%;
+  margin-bottom: 10px;
+}
+.chating .name_for_chat ul li:hover
+{
+  background-color: rgba(45, 122, 32, 0.62);
+  cursor: pointer;
+}
+
+.chating .name_for_chat ul li table td img
+{
+  width: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50%, 50%;
+}
+
+p.msg_preview
+{
+  margin-top:-2px;
+  font-size: 13px;
+  white-space: nowrap;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* chat */
+.chatbox_container
+{
+  margin: 10px;
+  width: 100%;
+  height: 500px;
+  background-color: rgba(68, 68, 68, 0.34);
+}
+.chatbox_container .chat-with
+{
+  width: 100%;
+  background-color: #2d7b20;
+}
+.chatbox_container .chat-with table td img
+{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50%, 50%;
+}
+.chatbox_container .chat-with table td
+{
+  font-weight: bold;
+}
+.chatbox_container .write_msg
+{
+  height: 10%;
+  width: 100%;
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+.chatbox_container .write-msg .msg-put
+{
+  width: 95%;
+  display: inline-block;
+  height: 38px;
+}
+@media only screen and (max-width:1000px)
+{
+  .chatbox_container
+  {
+    margin: 0px;
+  }
+  .chatbox_container .write-msg .msg-put
+  {
+    width: 250px;
+  }
+  .chatbox_container .write-msg
+  {
+    width: 90%;
+    box-sizing: border-box;
+  }
+}
+.chatbox_container .write-msg .msg-put
+{
+  float:left;
+}
+.chatbox_container .write-msg .msg-put textarea
+{
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  height: 37px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 8px 12px;
+}
+.chatbox_container .write-msg .emoji-put
+{
+  width: 5%;
+  height: 38px;
+}
+.chatbox_container .write-msg .emoji-put
+{
+  position: relative;
+  display: inline-block;
+}
+.chatbox_container .write-msg .emoji-put button
+{
+  background-color: transparent;
+  border: none;
+  }
+.chatbox_container .write-msg .emoji-put img
+{
+  width: 20px;
+  padding: 4px 6px;
+}
+.chatbox_container .write-msg .emoji-put img:hover
+{
+  cursor: pointer;
+}
+.chatbox_container .write-msg .emoji-put .emo-box
+{
+  position: absolute;
+  top: -200px;
+  right: 0px;
+  width: 220px;
+  height: 200px;
+  overflow-y: auto;
+  border: 1px solid white;
+  background-color: rgb(20, 20, 20);
+}
+.chatbox_container .write-msg .emo-box button
+{
+  background-color: transparent;
+  border: none;
+}
+.chatbox_container .write-msg .emo-box button:hover
+{
+    background-color: rgb(78, 78, 78);
+    cursor: pointer;
+}
+.emo-box
+{
+  display: none;
+}
+@media only screen and (max-width:1000)
+{
+  .chatbox_container .write-msg .emo-box
+  {
+    right: 0;
+  }
+}
+/* ------------------------------------------------------------------------------------------------ */
+/* chat layout */
+
+.chat_here
+{
+  width: 100%;
+  height: 90%;
+  background-color: rgba(68, 68, 68, 0.34);
+  overflow-y: auto;
+}
+.chat_here .sender
+{
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.chat_here .sender .sender-img
+{
+  width: 50px;
+  text-align: center;
+  display: inline-block;
+  float: left;
+}
+.chat_here .sender .sender-img img
+{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50%, 50%;
+}
+.chat_here .sender .sender-msg
+{
+  max-width: 250px;
+  background-color: green;
+  display: inline-block;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+.chat_here .you-sent
+{
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.chat_here .you-sent .you-sent-img
+{
+  text-align: center;
+  width: 50px;
+  display: inline-block;
+  float: right;
+}
+.chat_here .you-sent .you-sent-img img
+{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50%, 50%;
+}
+.chat_here .you-sent .you-sent-msg
+{
+  width: 250px;
+  background-color: rgba(62, 139, 63, 0.44);
+  display: inline-block;
+  padding: 5px;
+  border-radius: 5px;
+  float: right;
+}
+
+.show_emoji
+{
+  display: block;
+}

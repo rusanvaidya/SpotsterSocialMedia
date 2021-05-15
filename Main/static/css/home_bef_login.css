@@ -7,7 +7,7 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: black;
+    background-color: rgb(20, 20, 20);
 }
 
 .img_theme
@@ -26,7 +26,7 @@
     -webkit-animation: appear;
     -webkit-animation-duration: 1s;
 }
-@keyframes appear 
+@keyframes appear
 {
     from{left:-10%; opacity: 0;}
     to{left:0; opacity: 1;}
@@ -70,7 +70,7 @@
     color: white;
     font-weight: bold;
     font-size: 18px;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
     -webkit-animation: appear_login;
     -webkit-animation-duration: 1.5s;
 }
@@ -168,7 +168,7 @@
 {
     margin-top: 20px;
 }
-.signup-btn button 
+.signup-btn button
 {
     padding: 8px 12px;
     width: 100%;
@@ -243,7 +243,7 @@ footer ul
 }
 
 footer ul li
-{   
+{
     width: 24%;
     display: inline-block;
 }
@@ -262,7 +262,7 @@ footer ul li a:hover
     margin-top: 10px;
 }
 
-@media only screen and (max-width: 800px) 
+@media only screen and (max-width: 800px)
 {
     .logo
     {
@@ -286,14 +286,14 @@ footer ul li a:hover
     }
 }
 
-@media only screen and (max-height: 600px) 
+@media only screen and (max-height: 600px)
 {
     footer ul
     {
         display: none;
     }
 }
-@media only screen and (max-width: 400px) 
+@media only screen and (max-width: 400px)
 {
     .login_container, .signup_container
     {

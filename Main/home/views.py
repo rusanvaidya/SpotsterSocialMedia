@@ -278,3 +278,22 @@ def user_post(request):
     user_data.save()
     return redirect('home')
 
+def notification(request):
+    if request.session['email']:
+        email = request.session['email']
+        user = registration.objects.filter(email=email)
+    dict1 = {
+        'email': email,
+        'user': user,
+    }
+    return render(request, 'notification.html', dict1)
+
+def post(request):
+    if request.session['email']:
+        email = request.session['email']
+        user = registration.objects.filter(email=email)
+    dict1 = {
+        'email': email,
+        'user': user,
+    }
+    return render(request, 'post.html', dict1)

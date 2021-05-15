@@ -1,0 +1,40 @@
+{% extends 'home.html' %}
+{% block bodyloader %}
+    <body>
+{% endblock %}
+{% block leftfeed %}
+{% load static %}
+<div class="left-feed">
+  <div class="topic">
+      Notification
+  </div>
+  <div class="people-list">
+      <ul>
+          <li>
+            <table>
+                <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                <td>Hary Kane just posted a event you may like.
+            </table>
+          </li>
+          <li>
+            <table>
+                <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                <td>Hary Kane just posted a event you may like.
+            </table>
+          </li>
+          <li>
+            <table>
+                <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                <td>Hary Kane just posted a event you may like.
+            </table>
+          </li>
+          <li>
+            <table>
+                <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                <td>Hary Kane just posted a event you may like.
+            </table>
+          </li>
+        </ul>
+  </div>
+</div>
+{% endblock %}

@@ -171,7 +171,7 @@
                 </div>
             </div>
         </div>
-        
+
         {%for post in posts%}
         {% for p in pu %}
         {% if p.id == post.author_id %}
@@ -189,7 +189,7 @@
                             {% endif %}
                             {% endif %}
                             {% endfor %}
-                            <td class="u-fullname">{{p.first_name}} {{p.last_name}}</td>       
+                            <td class="u-fullname">{{p.first_name}} {{p.last_name}}</td>
                             {% if post.emoji != '' %}
                             <td>{{post.feeling}}</td>
                             <td class="femoji"><img src='/static/{{post.emoji}}'></td>
@@ -227,11 +227,11 @@
                 <script>
                     var x=document.getElementById({{post.id}}).innerHTML;
                     console.log(x);
-    
+
                     var pics = /.(jpeg|jpg|png)$/;
                     var vids = /.(mp4|wmv)/;
-    
-    
+
+
                     if (pics.test(x)){
                         document.getElementById('vid_spo{{post.id}}').style.display='none';
                     }
@@ -288,7 +288,7 @@
                                         {% endif %}
                                         {% endif %}
                                         {% endfor %}
-                                        <td class="u-fullname"><a href="profile">{{p.first_name}} {{p.last_name}}</a></td>       
+                                        <td class="u-fullname"><a href="profile">{{p.first_name}} {{p.last_name}}</a></td>
                                     </table>
                                 </div>
                                 <div class="feeling-cmnt-section">
@@ -298,7 +298,7 @@
                                         <td class="femoji"><img src='/static/{{post.emoji}}'></td>
                                     {% endif %}
                                     </table>
-                                </div>                            
+                                </div>
                             </div>
                             <div class="caption" id="caption-{{post.id}}">{{post.usercontent}}</div>
                             <div class="cmnt-on-this" id="cmnt-on-this-{{post.id}}">
@@ -306,7 +306,7 @@
                             </div>
                             <form>
                                 <div class="view-cmnt">
-                                    <a href="">View all Comments</a>
+                                    <a href="post">View all Comments</a>
                                 </div>
                                 <div class="give-cmnt">
                                     <textarea placeholder="Write Comment Here..."></textarea>
@@ -317,14 +317,14 @@
                             </form>
                         </div>
                     </div>
-                    
+
                     <div class="view-posted-content" id="give-share-{{post.id}}">
                         <div class="modal comment-content">
                             <div class="modaltop">
                                 <div class="modalheader">
                                     <div class="closebutton">
                                         <span onclick="document.getElementById('give-share-{{post.id}}').style.display='none';">&times;</span>
-                                    </div>    
+                                    </div>
                                     <table>
                                         {% for i in user %}
                                         {% if mydetials.profile_pic != '' %}
@@ -332,10 +332,10 @@
                                         {% else %}
                                         <td class="new-poster"><img src="{% static 'img/defaultpp.jpg' %}"></td>
                                         {% endif %}
-                                        <td class="u-fullname"><a href="profile">{{i.first_name}} {{i.last_name}}</a></td>       
+                                        <td class="u-fullname"><a href="profile">{{i.first_name}} {{i.last_name}}</a></td>
                                         {% endfor %}
                                     </table>
-                                </div>                      
+                                </div>
                             </div>
                             <div class="caption-share">
                                 <textarea placeholder="Write your thoughts..."></textarea>
@@ -351,7 +351,7 @@
                                     {% endif %}
                                     {% endif %}
                                     {% endfor %}
-                                    <td class="u-fullname"><a href="profile">{{p.first_name}} {{p.last_name}}</a></td>       
+                                    <td class="u-fullname"><a href="profile">{{p.first_name}} {{p.last_name}}</a></td>
                                 </table>
                                 <table>
                                 {% if post.emoji != '' %}
@@ -363,7 +363,7 @@
                                 <div class="cmnt-on-this" id="share-on-this-{{post.id}}">
                                 <img src="media/{{post.userfile}}" id="share-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-share-{{post.id}}').style.display='none'">
                             </div>
-                            </div>      
+                            </div>
                             <form>
                                 <div class="submit-cmnt">
                                     <input type="submit" value="Share">
@@ -371,14 +371,14 @@
                             </form>
                         </div>
                     </div>
-                    
+
                     <script>
                         var x=document.getElementById({{post.id}}).innerHTML;
-    
+
                         var pics = /.(jpeg|jpg|png)$/;
                         var vids = /.(mp4|wmv)/;
-    
-    
+
+
                         if (pics.test(x)){
                             document.getElementById('vid_spo{{post.id}}').style.display='none';
                             document.getElementById('cmnt-on-vid-{{post.id}}').style.display='none';
@@ -400,7 +400,7 @@
                     <script>
                         // like
                         var like_b_i = document.getElementById('table-like-{{post.id}}');
-    
+
                         like_b_i.onclick = function()
                         {
                             document.getElementById('table-like-{{post.id}}').classList.toggle('like-on-this-post');
@@ -421,7 +421,7 @@
                                 }
                             }
                         }
-            
+
                         // dislike
                         var dislike_b_i = document.getElementById('table-dislike-{{post.id}}');
                         dislike_b_i.onclick = function()
@@ -446,7 +446,7 @@
                         }
                     </script>
                 </div>
-            </div>    
+            </div>
         </div>
         {% endif %}
         {% endfor %}
@@ -488,7 +488,7 @@
                     <input type="password" placeholder="Confirm Password" name="email">
                 </div>
                 <div class="submit-changes">
-                    <input type="submit" value="Save"> 
+                    <input type="submit" value="Save">
                 </div>
                 {% endfor %}
             </div>
@@ -551,7 +551,7 @@
                                     li[i].style.display='none';
                                 }
                             }
-                        }                                                                                              
+                        }
                     </script>
                     {% endfor %}
                 </ul>

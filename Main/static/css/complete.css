@@ -114,7 +114,7 @@ button.next-complete2, #submit-complete
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    text-align: center;  
+    text-align: center;
 }
 .bg-pp .pp-chg .camera
 {
@@ -216,7 +216,7 @@ button.next-complete2, #submit-complete
     position: relative;
     left: 45%;
     top: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
     -webkit-animation: appear_image;
     -webkit-animation-duration: 1.5s;
 }
@@ -263,7 +263,7 @@ footer
     text-align: center;
 }
 
-@media only screen and (max-width: 800px) 
+@media only screen and (max-width: 800px)
 {
 	.image-container, .image-content
 	{

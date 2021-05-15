@@ -9,14 +9,14 @@ light.onclick = function()
     document.getElementById('light_theme').style.display='block';
     document.getElementById('dark_theme').style.display='none';
     document.getElementById('main_body').style.background='rgb(209, 209, 209)';
-    document.getElementById('lc').style.color='black';
-    document.getElementById('sc').style.color='black';
-    document.getElementById('copyright').style.color='black';
+    document.getElementById('lc').style.color='rgb(20, 20, 20)';
+    document.getElementById('sc').style.color='rgb(20, 20, 20)';
+    document.getElementById('copyright').style.color='rgb(20, 20, 20)';
     dark.style.display='block';
     light.style.display='none';
     for(var i=0; i<x.length; i++)
     {
-        document.getElementsByTagName('a')[i].style.color='black';
+        document.getElementsByTagName('a')[i].style.color='rgb(20, 20, 20)';
     }
     localStorage.setItem('theme','light');
 }
@@ -25,7 +25,7 @@ dark.onclick = function()
 {
     document.getElementById('light_theme').style.display='none';
     document.getElementById('dark_theme').style.display='block';
-    document.getElementById('main_body').style.background='black';
+    document.getElementById('main_body').style.background='rgb(20, 20, 20)';
     document.getElementById('lc').style.color='rgb(209, 209, 209)';
     document.getElementById('sc').style.color='rgb(209, 209, 209)';
     document.getElementById('copyright').style.color='rgb(209, 209, 209)';
@@ -62,7 +62,7 @@ if(theme=='dark')
 {
     document.getElementById('light_theme').style.display='none';
     document.getElementById('dark_theme').style.display='block';
-    document.getElementById('main_body').style.background='black';
+    document.getElementById('main_body').style.background='rgb(20, 20, 20)';
     document.getElementById('lc').style.color='rgb(209, 209, 209)';
     document.getElementById('sc').style.color='rgb(209, 209, 209)';
     document.getElementById('copyright').style.color='rgb(209, 209, 209)';
@@ -79,14 +79,14 @@ else if(theme=='light')
     document.getElementById('light_theme').style.display='block';
     document.getElementById('dark_theme').style.display='none';
     document.getElementById('main_body').style.background='rgb(209, 209, 209)';
-    document.getElementById('lc').style.color='black';
-    document.getElementById('sc').style.color='black';
-    document.getElementById('copyright').style.color='black';
+    document.getElementById('lc').style.color='rgb(20, 20, 20)';
+    document.getElementById('sc').style.color='rgb(20, 20, 20)';
+    document.getElementById('copyright').style.color='rgb(20, 20, 20)';
     dark.style.display='block';
     light.style.display='none';
     for(var i=0; i<x.length; i++)
     {
-        document.getElementsByTagName('a')[i].style.color='black';
+        document.getElementsByTagName('a')[i].style.color='rgb(20, 20, 20)';
     }
     localStorage.setItem('theme','light');
 }
@@ -94,7 +94,7 @@ else
 {
     document.getElementById('light_theme').style.display='none';
     document.getElementById('dark_theme').style.display='block';
-    document.getElementById('main_body').style.background='black';
+    document.getElementById('main_body').style.background='rgb(20, 20, 20)';
     document.getElementById('lc').style.color='rgb(209, 209, 209)';
     document.getElementById('sc').style.color='rgb(209, 209, 209)';
     document.getElementById('copyright').style.color='rgb(209, 209, 209)';
