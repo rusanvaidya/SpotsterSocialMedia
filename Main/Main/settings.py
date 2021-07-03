@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'spotsterapi',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Main.wsgi.application'
 
+ASGI_APPLICATION = 'Main.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
