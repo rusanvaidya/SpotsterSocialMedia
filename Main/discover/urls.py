@@ -21,7 +21,7 @@ urlpatterns = [
     path('discover', views.discover),
     path('newsfeed', views.newsfeed,name = 'newsfeed'),
     path('Follower', views.follower,name = 'follower'),
-    path('Following', views.follower,name = 'following'),
+    path('Following', views.following,name = 'following'),
     path('discover_more', views.discover_more, name='discover_more'),
 
 ]
