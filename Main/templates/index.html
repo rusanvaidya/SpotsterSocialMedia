@@ -9,6 +9,13 @@
     
     </head>
     <body>
+    {% if messages %}
+        <div class="messages" style="background-color:#FF8040">
+            {% for message in messages %}
+            <div class="container message" style="text-align:center;"> <font size="4px">{{ message }}</font></div>
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="main_body" id="main_body">
 
             <!-- theme image container -->

@@ -1,9 +1,16 @@
 {% extends 'home.html' %}
 {% block bodyloader %}
-    <body>
+
 {% endblock %}
 {% block leftfeed %}
 {% load static %}
+    {% if messages %}
+        <div class="messages" style="background-color:#FF8040; width:660px;">
+            {% for message in messages %}
+            <div class="container message" style="text-align:center;"> <font size="4px">{{ message }}</font></div>
+            {% endfor %}
+        </div>
+        {% endif %}
 <div class="left-feed">
     <div class="profile-main">
         <div class="myProfile">
@@ -37,7 +44,7 @@
             </div>
             <div class="my-info">
                 <div class="my-post">
-                    <button id="posts_show_top">Post<br>0</button>
+                    <button id="posts_show_top">Post<br>{{my_post_count}}</button>
                 </div>
                 <div class="f-f">
                     <div class="my-followers">
@@ -51,12 +58,25 @@
         </div>
     </div>
     <div class="myName">
+        {% for i in user %}
         <div class="my-name">
-            Rusan Vaidya
+            {{i.first_name}} {{i.last_name}}
+
+            {% if mydetials.user_interest != '' %}
+                {{mydetials.user_interest}}
+            {% endif %}
+
         </div>
+        {% endfor %}
+
         <div class="my-info my-bio">
-            <p>I love football. My favorite team is Real Madrid. I have interest in Music too.</p>
+            {% if mydetials.user_bio != '' %}
+            <p>{{mydetials.user_bio}}</p>
+            {% else %}
+            <p>No Bio is added, please set from Setting.</p>
+            {% endif %}
         </div>
+
     </div>
     <div class="my-p-timeline">
         <ul>
@@ -200,12 +220,16 @@
                         <img src="{% static 'icon/dropdown.png' %}" id="ab-img-{{post.id}}" class="post-drop">
                         <div class="about-post" id="ap-{{post.id}}">
                             <ul>
-                                <li>Edit this post</li>
-                                <li>Delete this post</li>
-                                <li>Save this post</li>
-                                <li>Flag inappropriate</li>
-                                <li>Block {{p.first_name}} {{p.last_name}}</li>
-                                <li class="last-ap">Unfollow {{p.first_name}} {{p.last_name}}</li>
+                                {% if post.author_id == mydetials.owner_id %}
+                            <li>Edit this post</li>
+                            <li>Delete this post</li>
+                            {% endif %}
+                            <li>Save this post</li>
+                            {% if post.author_id != mydetials.owner_id %}
+                            <li>Flag inappropriate</li>
+                            <li>Block {{p.first_name}} {{p.last_name}}</li>
+                            <li class="last-ap">Unfollow {{p.first_name}} {{p.last_name}}</li>
+                            {% endif %}
                             </ul>
                         </div>
                     </div>
@@ -245,19 +269,48 @@
                 <div class="post-react">
                     <ul>
                         <li>
-                            <table id="table-like-{{post.id}}" class="tab-like">
-                                <td class="react-act" id="like-i-{{post.id}}"><img src="{% static 'icon/like-i.png' %}"></td>
-                                <td class="none-react-post react-act active-btn" id="like-a-{{post.id}}"><img src="{% static 'icon/like.png' %}"></td>
-                                <td>2k</td>
-                            </table>
+                            <form action="like_unlike" method="POST" class='like-form' id='{{post.id}}'>{% csrf_token %}
+                            <input type="hidden" name="postid" value="{{post.id}}">
+                                <table>
+                            {% if like_unlike is None %}
+                                <td class="react-act imageClass"><img src="{% static 'icon/like-i.png' %}"></td>
+                                {% endif %}
+                               <td>
+                                   <button type="submit" value="clicklike" name="like" style="border: none; background: none;">
+                            <span class="react-act" id="like-i-{{post.id}}"><img src="{% static 'icon/like-i.png' %}"></span>
+                            <span class="none-react-post react-act active-btn" id="like-a-{{post.id}}"><img src="{% static 'icon/like.png' %}"></span>
+
+                            {% for lk in like_unlike %}
+
+                                {% if lk.post_id == post.id and lk.user_id == mydetials.owner_id %}
+                                       {% if lk.value == 'Like' %}
+                                    <script>
+                                    var status_like = "Like";
+                                    var inactive_like = document.getElementById("like-i-{{post.id}}");
+                                    if(status_like=="Like")
+                                    {
+                                        document.getElementById("like-i-{{post.id}}").style.display="none";
+                                        document.getElementById("like-a-{{post.id}}").style.display="block";
+                                        document.getElementById("number-{{post.id}}").style.color="#0082c1";
+                                        document.getElementById("number-{{post.id}}").style.fontWeight="bold";
+                                    }
+                                     </script>
+
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                   </button></td>
+                             <td id="number-{{post.id}}">{{post.num_likes}}</td>
+                        </table>
+                        </form>
                         </li>
-                        <li>
-                            <table class="tab-dislike" id="table-dislike-{{post.id}}">
-                                <td class="react-act" id="dislike-i-{{post.id}}"><img src="{% static 'icon/dislike-i.png' %}"></td>
-                                <td class="none-react-post react-act active-btn" id="dislike-a-{{post.id}}"><img src="{% static 'icon/dislike.png' %}"></td>
-                                <td>1k</td>
-                            </table>
-                        </li>
+<!--                        <li>-->
+<!--                            <table class="tab-dislike" id="table-dislike-{{post.id}}">-->
+<!--                                <td class="react-act" id="dislike-i-{{post.id}}"><img src="{% static 'icon/dislike-i.png' %}"></td>-->
+<!--                                <td class="none-react-post react-act active-btn" id="dislike-a-{{post.id}}"><img src="{% static 'icon/dislike.png' %}"></td>-->
+<!--                                <td>1k</td>-->
+<!--                            </table>-->
+<!--                        </li>-->
                         <li>
                             <table class="tab-comment" onclick="document.getElementById('give-comment-{{post.id}}').style.display='block';">
                                 <td><img src="{% static 'icon/comment.png' %}"></td>
@@ -453,39 +506,39 @@
         {% endfor %}
     </div>
     <div id="my-settings">
-        <form method="POST">
+        <form action="profile_update" method="POST">
             {% csrf_token %}
             <div class="profile-info">
                 {% for i in user %}
                 <div class="fullname">
                     <div class="first_name">
                         <label>First Name : </label>
-                        <input type="text" placeholder="First Name" name="first_name" value="{{i.first_name}}">
+                        <input type="text" placeholder="First Name" name="first_name" value="{{i.first_name}}" required>
                     </div>
                     <div class="last_name">
                         <label>Last Name : </label>
-                        <input type="text" placeholder="Last Name" name="last_name" value="{{i.last_name}}">
+                        <input type="text" placeholder="Last Name" name="last_name" value="{{i.last_name}}" required>
                     </div>
                 </div>
                 <div class="emailpassword">
                     <label>Email : </label>
-                    <input type="text" placeholder="Email or Phone Number" name="email" value="{{i.email}}">
+                    <input type="text" placeholder="Email or Phone Number" name="email" value="{{i.email}}" required>
                 </div>
                 <div class="bio-area">
                     <label>Bio : </label>
-                    <textarea placeholder="Bio" name="bio">I love football. My favorite team is Real Madrid. I have interest in Music too.</textarea>
+                    <textarea placeholder="Bio" name="bio">{{mydetials.user_bio}}</textarea>
                 </div>
                 <div class="emailpassword">
                     <label>Current Password : </label>
-                    <input type="password" placeholder="Current Password" name="email">
+                    <input type="password" placeholder="Current Password (Required password in order to save changes)" name="current_pass" required minlength="6">
                 </div>
                 <div class="emailpassword">
                     <label>New Password : </label>
-                    <input type="password" placeholder="New Password" name="email">
+                    <input type="password" placeholder="New Password (If you want to change your password)" name="new_pass" minlength="6">
                 </div>
                 <div class="emailpassword">
                     <label>Confirm Password : </label>
-                    <input type="password" placeholder="Confirm Password" name="email">
+                    <input type="password" placeholder="Confirm Password (Leave Blank doesn't change password)" name="re_new_pass" minlength="6">
                 </div>
                 <div class="submit-changes">
                     <input type="submit" value="Save">
@@ -498,6 +551,7 @@
         <div class="search-bar">
             <input type="search" placeholder="Search interest" id="searching">
         </div>
+        <form action="interest_update" method="post">{% csrf_token %}
         <div class="interest-list">
             <div class="interest-listing">
                 <ul id="thisUL">
@@ -560,7 +614,9 @@
         <div class="submit-changes">
             <input type="submit" value="SAVE">
         </div>
+            </form>
     </div>
 </div>
+
 <script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

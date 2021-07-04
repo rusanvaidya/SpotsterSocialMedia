@@ -28,7 +28,7 @@
                         <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
                         <td class="sp-button">
                             {% if i in others%} 
-                            <button type="sumbit" id="un_show{{i.pk}}" class="side-after follow{{i.pk}}">Following</button>
+                            <button type="submit" id="un_show{{i.pk}}" class="side-after follow{{i.pk}}">Following</button>
                             {% else %}
                             <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
                             {% endif %}
@@ -50,45 +50,45 @@
         </ul>
     </div>
 </div>
-{% endblock %}
-{% endblock %}
-
  <script>
-$('.un-follow').submit(function(e){
-    e.preventDefault()
+    $('.un-follow').submit(function(e){
+        e.preventDefault()
 
-    const follow_id = $(this).attr('id')
-    const followText = $(`.follow${follow_id}`).text()
-    const trim = $.trim(followText)
-    const url =$(this).attr('action')
-
-
-
-    $.ajax({
-        type:'POST',
-        url : url,
-        data:{
-        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
-        'follow_pk':follow_id
-        },
-        success:function(response){
-        if (trim === 'UnFollow'){
-            $(`.follow${follow_id}`).css("background-color", "#00AF00")
-            $(`.follow${follow_id}`).text('Follow')
+        const follow_id = $(this).attr('id')
+        const followText = $(`.follow${follow_id}`).text()
+        const trim = $.trim(followText)
+        console.log(trim)
+        const url =$(this).attr('action')
 
 
-        } else {
-            $(`.follow${follow_id}`).css("background-color", "#FF0000")
-            $(`.follow${follow_id}`).text('UnFollow')
 
-        }
-        },
-        error:function(response){
-        console.log('error',response)
-        }
-        })
+        $.ajax({
+            type:'POST',
+            url : url,
+            data:{
+            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+            'follow_pk':follow_id
+            },
+            success:function(response){
+            if (trim === 'UnFollow'){
+                $(`.follow${follow_id}`).css("background-color", "#00AF00")
+                $(`.follow${follow_id}`).text('Follow')
 
 
-})
+            } else {
+                $(`.follow${follow_id}`).css("background-color", "#FF0000")
+                $(`.follow${follow_id}`).text('UnFollow')
+
+            }
+            },
+            error:function(response){
+            console.log('error',response)
+            }
+            });
+
+
+    });
 </script>
 <script src="{% static 'js/header.js' %}"></script>
+{% endblock %}
+{% endblock %}

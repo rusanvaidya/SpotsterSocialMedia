@@ -3,11 +3,11 @@
 {% block follow %}
 <div class="left-feed">
 <div class="topic">
-    Following({{{{count_following}}}})
+    Following({{count_following}})
 </div>
 <div class="people-list">
     <ul>
-        {% for i in followers%}
+        {% for i in others%}
         <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
         <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
         <li>
