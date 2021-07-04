@@ -19,4 +19,6 @@ from . import views
 
 urlpatterns = [
     path('profile', views.profile,name='profile'),
+    path('interest_update', views.interest_update,name='interest_update'),
+    path('profile_update', views.profile_update,name='profile_update'),
 ]
