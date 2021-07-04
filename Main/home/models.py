@@ -1,4 +1,4 @@
-from datetime import timezone
+import datetime
 
 from django.db import models
 
@@ -20,14 +20,34 @@ class userpost(models.Model):
     emoji = models.FilePathField(blank=True)
     usercontent = models.TextField(max_length=1000,blank=True)
     userfile= models.FileField(upload_to='user_post',blank=True)
-    created =models.DateTimeField(auto_now_add=True)
-
+    created = models.DateTimeField(default=datetime.datetime.now)
+    liked = models.ManyToManyField(registration, related_name='likes')
     # def __str__(self):
     #     return str(self.usercontent)[:50]
     class Meta:
         ordering = ('-created',)
 
+    @property
+    def num_likes(self):
+        return self.liked.all().count()
 
+
+
+LIKE_CHOICES = (
+    ('Like', 'Like'),
+    ('Unlike', 'Unlike'),
+)
+
+
+class Like(models.Model):
+    user = models.ForeignKey(registration, on_delete=models.CASCADE)
+    post = models.ForeignKey(userpost, on_delete=models.CASCADE)
+    value = models.CharField(choices=LIKE_CHOICES, max_length=8)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user}-{self.post}-{self.value}"
 
 class support(models.Model):
     name=models.CharField(max_length=30)
