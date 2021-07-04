@@ -4,14 +4,13 @@ from django.shortcuts import render
 from home.models import registration
 from discover.models import followers
 
-from home.models import userpost
+from home.models import userpost,Like
 
 from complete.models import userdetails
 from discover.models import interest
 
 
 def trending(request):
-
     try:
         if request.session['email']:
             email = request.session['email']
@@ -65,6 +64,25 @@ def trending(request):
                 mydetials = userdetails.objects.get(owner_id=usrs_id)
             except:
                 pass
+
+            my_post = userpost.objects.all()
+            trendingpost = []
+            for ids in my_post:
+                if ids.liked.all().count() > 1:
+                    nu = ids.id
+                    dat = userpost.objects.filter(id=nu)
+                    trendingpost.append(dat)
+
+            trend = sorted(chain(*trendingpost), reverse=True, key=lambda obj: obj.created)
+
+            like_unlike = None
+            try:
+                like_unlike = Like.objects.all()
+
+
+            except:
+                pass
+
             dict1 = {
                 'email': email,
                 'user': user,
@@ -76,7 +94,9 @@ def trending(request):
                 'posts':qs,
                 'pu':pu,
                 'mydetials':mydetials,
-                'userdata':user_data}
+                'userdata':user_data,
+                'trend':trend,
+                'like_unlike':like_unlike}
 
 
             return render(request, 'trending.html', dict1)
