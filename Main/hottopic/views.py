@@ -1,7 +1,7 @@
 from itertools import chain
-
+import pathlib
 from django.shortcuts import render
-from home.models import registration
+from home.models import registration,Like
 from discover.models import followers
 
 from home.models import userpost
@@ -65,6 +65,29 @@ def video(request):
                 mydetials = userdetails.objects.get(owner_id=usrs_id)
             except:
                 pass
+
+            like_unlike = None
+            try:
+                like_unlike = Like.objects.all()
+
+
+            except:
+                pass
+
+            allpost = userpost.objects.all()
+            vid_collection = []
+
+            for all in allpost:
+                if all.userfile != '':
+                    txt = str(all.userfile)
+                    extension = pathlib.Path(txt).suffix
+                    if extension == '.mp4' or extension == '.wav':
+                        ides = all.id
+                        ides1 = userpost.objects.filter(id=ides)
+                        vid_collection.append(ides1)
+
+            collect_video = sorted(chain(*vid_collection), reverse=True, key=lambda obj: obj.created)
+
             dict1 = {
                 'email': email,
                 'user': user,
@@ -76,7 +99,10 @@ def video(request):
                 'posts':qs,
                 'pu':pu,
                 'mydetials':mydetials,
-                'userdata':user_data}
+                'userdata':user_data,
+                'allpost':allpost,
+                'collect_video':collect_video,
+                'like_unlike': like_unlike}
 
 
             return render(request, 'video.html', dict1)
