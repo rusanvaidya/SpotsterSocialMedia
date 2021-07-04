@@ -18,5 +18,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('saved', views.saved),
+    path('saved', views.saved,name='saved'),
+    path('saved_post', views.saved_post,name= 'saved_post'),
 ]
