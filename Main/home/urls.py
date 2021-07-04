@@ -29,4 +29,5 @@ urlpatterns = [
     path('get_location', views.get_location, name='get_location'),
     path('notification', views.notification),
     path('post', views.post),
+    path('like_unlike',views.like_post),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
