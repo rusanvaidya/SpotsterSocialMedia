@@ -5,7 +5,7 @@ from discover.models import followers
 from discover.models import interest
 
 from complete.models import userdetails
-from .models import registration, support, userpost
+from .models import registration, support, userpost,Like
 from django.contrib import messages
 from itertools import chain
 from math import sin, cos, sqrt, atan2, radians
@@ -20,6 +20,7 @@ def home(request):
             other = None
             my_id = None
             counts = 0
+            my_post_count = 0
             count_following =0
             pu = registration.objects.all()
             qs = None
@@ -52,6 +53,7 @@ def home(request):
                         pass
 
                 my_post = userpost.objects.filter(author_id=profile1.id)
+                my_post_count = my_post.count()
                 posts.append(my_post)
                 if len(posts) > 0:
                     qs = sorted(chain(*posts), reverse=True, key=lambda obj: obj.created)
@@ -64,18 +66,28 @@ def home(request):
                 mydetials = userdetails.objects.get(owner_id=usrs_id)
             except:
                 pass
+
+            like_unlike = None
+            try:
+                like_unlike = Like.objects.all()
+
+            except:
+                pass
+
             dict1 = {
                 'email': email,
                 'user': user,
                 'others': other,
                 'followers': my_id,
                 'count':counts,
+                'my_post_count':my_post_count,
                 'count_following':count_following,
                 'interest':interest_list,
                 'posts':qs,
                 'pu':pu,
                 'mydetials':mydetials,
-                'userdata':user_data}
+                'userdata':user_data,
+                'like_unlike':like_unlike}
                 # 'country': country,
                 # 'city': city}
 
@@ -149,6 +161,13 @@ def login(request):
             except:
                 pass
 
+            like_unlike = None
+            try:
+                like_unlike = Like.objects.all()
+
+            except:
+                pass
+
             dict1 = {
             'email': email,
             'user': user,
@@ -159,7 +178,8 @@ def login(request):
             'pu':pu,
             'posts':qs,
             'mydetials':mydetials,
-            'userdata':user_data}
+            'userdata':user_data,
+            'like_unlike':like_unlike}
             return render(request, 'newsfeed.html', dict1)
         else:
             messages.info(request, 'Incorrect Email or Password!!!')
@@ -202,7 +222,7 @@ def register(request):
                 request.session['email'] = email
                 usr_id = registration.objects.get(email=email)
                 usrs_id = usr_id.id
-                interest_list = interest.objects.all()
+                interest_list = interest.objects.all().order_by('my_interest')
                 other = None
                 try:
                     em = followers.objects.get(user_id=usrs_id)
@@ -224,6 +244,7 @@ def register(request):
                 messages.info(request, 'User not exits!!!')
                 return render(request, 'index.html')
     else:
+
         messages.info(request, 'Page not found!!!')
         return render(request, 'index.html', {'email': None, 'user': None})
 
@@ -265,12 +286,13 @@ def user_post(request):
     email = request.session['email']
     user_feeling = request.POST['feeling']
     user_emoji = request.POST['emoji']
-    print(user_emoji)
     user_content = request.POST['content']
     try:
         user_files = request.FILES['ufiles']
     except:
         user_files =None
+    if user_feeling == '' and user_emoji == '' and user_files == None:
+        return redirect('home')
     usr_id = registration.objects.get(email=email)
     usrs_id = usr_id.id
 
@@ -292,8 +314,127 @@ def post(request):
     if request.session['email']:
         email = request.session['email']
         user = registration.objects.filter(email=email)
-    dict1 = {
-        'email': email,
-        'user': user,
-    }
-    return render(request, 'post.html', dict1)
+        usr_id = registration.objects.get(email=email)
+        usrs_id = usr_id.id
+        other = None
+        my_id = None
+        counts = 0
+        my_post_count = 0
+        count_following = 0
+        pu = registration.objects.all()
+        qs = None
+
+        try:
+            em = followers.objects.get(user_id=usrs_id)
+            other = [user_id for user_id in em.following.all()]
+            count_following = len(other)
+            my_id = [user_id for user_id in em.follow_me.all()]
+            counts = len(my_id)
+
+
+
+        except:
+
+            pass
+
+        try:
+            profile1 = registration.objects.get(email=email)
+            profile = followers.objects.get(user_id=profile1.pk)
+            users1 = [i for i in profile.following.all()]
+            posts = []
+            for u in users1:
+                p = registration.objects.get(id=u.id)
+                try:
+                    p_post = userpost.objects.filter(author_id=p.id)
+                    posts.append(p_post)
+                except:
+                    pass
+
+            my_post = userpost.objects.filter(author_id=profile1.id)
+            my_post_count = my_post.count()
+            posts.append(my_post)
+            if len(posts) > 0:
+                qs = sorted(chain(*posts), reverse=True, key=lambda obj: obj.created)
+        except:
+            pass
+        interest_list = interest.objects.all()
+        user_data = userdetails.objects.all()
+        mydetials = 0
+        try:
+            mydetials = userdetails.objects.get(owner_id=usrs_id)
+        except:
+            pass
+
+        like_unlike = None
+        try:
+            like_unlike = Like.objects.all()
+
+        except:
+            pass
+
+        dict1 = {
+            'email': email,
+            'user': user,
+            'others': other,
+            'followers': my_id,
+            'count': counts,
+            'my_post_count': my_post_count,
+            'count_following': count_following,
+            'interest': interest_list,
+            'posts': qs,
+            'pu': pu,
+            'mydetials': mydetials,
+            'userdata': user_data,
+            'like_unlike': like_unlike}
+        # 'country': country,
+        # 'city': city}
+
+        if 'term' in request.GET:
+
+            qs = interest.objects.filter(my_interest__startswith=request.GET.get('term'))
+            titles = list()
+            for product in qs:
+                titles.append(product.my_interest)
+            return JsonResponse(titles, safe=False)
+        return render(request, 'post.html', dict1)
+    else:
+        return render(request, 'index.html')
+
+
+def like_post(request):
+    if request.method == 'POST':
+        email = request.session['email']
+        post_id = request.POST.get('postid')
+        post_obj = userpost.objects.get(pk = post_id)
+        author_id = post_obj.author_id
+
+
+        profile = registration.objects.get(email=email)
+
+
+
+
+        if profile in post_obj.liked.all():
+            post_obj.liked.remove(profile)
+        else:
+            post_obj.liked.add(profile)
+
+        like, created = Like.objects.get_or_create(user_id=profile.pk, post_id=post_id)
+        like.save()
+
+        if not created:
+            if like.value =='Like':
+                like.value='Unlike'
+                # pri = Like.objects.get(user_id=profile.pk, post_id=post_id)
+                # Like.objects.filter(id=pri.id).delete()
+
+            else:
+
+                like.value ='Like'
+        else:
+
+            like.value='Like'
+
+        post_obj.save()
+        like.save()
+    return redirect(request.META.get('HTTP_REFERER'))
