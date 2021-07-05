@@ -158,14 +158,14 @@
                     <div class="about-post" id="ap-{{post.id}}">
                         <ul>
                             {% if post.author_id == mydetials.owner_id %}
-                            <li>Edit this post</li>
-                            <li>Delete this post</li>
+                            <li><button>Edit this post</button></li>
+                            <li><button>Delete this post</button></li>
                             {% endif %}
-                            <li class="save-post">Save this post</li>
+                            <li class="save-post"><button>Save this post</button></li>
                             {% if post.author_id != mydetials.owner_id %}
-                            <li>Flag inappropriate</li>
-                            <li>Block {{p.first_name}} {{p.last_name}}</li>
-                            <li class="last-ap">Unfollow {{p.first_name}} {{p.last_name}}</li>
+                            <li><button>Flag inappropriate</button></li>
+                            <li><button>Block {{p.first_name}} {{p.last_name}}</button></li>
+                            <li class="last-ap"><button>Unfollow {{p.first_name}} {{p.last_name}}</li>
                             {% endif %}
                         </ul>
                     </div>
@@ -212,7 +212,7 @@
                                 <td class="react-act imageClass"><img src="{% static 'icon/like-i.png' %}"></td>
                                 {% endif %}
                                <td>
-                                   <button type="submit" value="clicklike" name="like" style="border: none; background: none;">
+                                   <button type="submit" value="Like-on-{{post.id}}" id="l10-{{post.id}}" name="like" style="border: none; background: none;">
 
                                 <span class="react-act imageClass" id="like-i-{{post.id}}"><img src="{% static 'icon/like-i.png' %}"></span>
                                 <span class="none-react-post react-act active-btn" id="like-a-{{post.id}}"><img src="{% static 'icon/like.png' %}"></span>
@@ -226,28 +226,31 @@
                                     var inactive_like = document.getElementById("like-i-{{post.id}}");
                                     if(status_like=="Like")
                                     {
-                                        document.getElementById("like-i-{{post.id}}").style.display="none";
-                                        document.getElementById("like-a-{{post.id}}").style.display="block";
-                                        document.getElementById("number-{{post.id}}").style.color="#0082c1";
-                                        document.getElementById("number-{{post.id}}").style.fontWeight="bold";
+                                        document.getElementById('table-like-{{post.id}}').classList.toggle('like-on-this-post');
+                                        document.getElementById('like-a-{{post.id}}').classList.remove('none-react-post');
+                                        document.getElementById('like-i-{{post.id}}').classList.toggle('none-react-post');
                                     }
                                      </script>
 
                                 {% endif %}
                                 {% endif %}
                                 {% endfor %}
-                                </button></td>
+                                </button>
+                                <!-- <script>
+                                    var li = document.getElementById('l10-{{post.id}}').value
+                                    document.getElementById('l10-{{post.id}}').onclick = function()
+                                    {
+                                        if(li=="Like-on-{{post.id}}")
+                                        {
+                                            console.log(li);
+                                        }
+                                    }
+                                </script> -->
+                            </td>
                             <td id="number-{{post.id}}">{{post.num_likes}}</td>
                         </table>
                         </form>
                     </li>
-<!--                    <li>-->
-<!--                        <table class="tab-dislike" id="table-dislike-{{post.id}}">-->
-<!--                            <td class="react-act" id="dislike-i-{{post.id}}"><img src="{% static 'icon/dislike-i.png' %}"></td>-->
-<!--                            <td class="none-react-post react-act active-btn" id="dislike-a-{{post.id}}"><img src="{% static 'icon/dislike.png' %}"></td>-->
-<!--                            <td>1k</td>-->
-<!--                        </table>-->
-<!--                    </li>-->
                     <li>
                         <table class="tab-comment" onclick="document.getElementById('give-comment-{{post.id}}').style.display='block';">
                             <td><img src="{% static 'icon/comment.png' %}"></td>
@@ -394,7 +397,6 @@
                     like_b_i.onclick = function()
                     {
                         document.getElementById('table-like-{{post.id}}').classList.toggle('like-on-this-post');
-                        document.getElementById('table-dislike-{{post.id}}').classList.remove('dislike-on-this-post');
                         if(document.getElementById('like-i-{{post.id}}').classList.contains('none-react-post'))
                         {
                             document.getElementById('like-i-{{post.id}}').classList.remove('none-react-post');
@@ -404,34 +406,6 @@
                         {
                             document.getElementById('like-i-{{post.id}}').classList.toggle('none-react-post');
                             document.getElementById('like-a-{{post.id}}').classList.remove('none-react-post');
-                            if(document.getElementById('dislike-i-{{post.id}}').classList.contains('none-react-post'))
-                            {
-                                document.getElementById('dislike-i-{{post.id}}').classList.remove('none-react-post');
-                                document.getElementById('dislike-a-{{post.id}}').classList.toggle('none-react-post');
-                            }
-                        }
-                    }
-
-                    // dislike
-                    var dislike_b_i = document.getElementById('table-dislike-{{post.id}}');
-                    dislike_b_i.onclick = function()
-                    {
-                        document.getElementById('table-dislike-{{post.id}}').classList.toggle('dislike-on-this-post');
-                        document.getElementById('table-like-{{post.id}}').classList.remove('like-on-this-post');
-                        if(document.getElementById('dislike-i-{{post.id}}').classList.contains('none-react-post'))
-                        {
-                            document.getElementById('dislike-i-{{post.id}}').classList.remove('none-react-post');
-                            document.getElementById('dislike-a-{{post.id}}').classList.toggle('none-react-post');
-                        }
-                        else if(document.getElementById('dislike-a-{{post.id}}').classList.contains('none-react-post'))
-                        {
-                            document.getElementById('dislike-i-{{post.id}}').classList.toggle('none-react-post');
-                            document.getElementById('dislike-a-{{post.id}}').classList.remove('none-react-post');
-                            if(document.getElementById('like-i-{{post.id}}').classList.contains('none-react-post'))
-                            {
-                                document.getElementById('like-i-{{post.id}}').classList.remove('none-react-post');
-                                document.getElementById('like-a-{{post.id}}').classList.toggle('none-react-post');
-                            }
                         }
                     }
                 </script>

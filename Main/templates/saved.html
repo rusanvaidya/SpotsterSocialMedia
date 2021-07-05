@@ -39,14 +39,19 @@
                     <img src="{% static 'icon/dropdown.png' %}" id="ab-img-{{post.id}}" class="post-drop">
                     <div class="about-post" id="ap-{{post.id}}">
                         <ul>
-                            <li>Edit this post</li>
-                            <li>Delete this post</li>
-                            <li>Save this post</li>
-                            <li>Flag inappropriate</li>
-                            <li>Block {{p.first_name}} {{p.last_name}}</li>
-                            <li class="last-ap">Unfollow {{p.first_name}} {{p.last_name}}</li>
+                            {% if post.author_id == mydetials.owner_id %}
+                            <li><button>Edit this post</button></li>
+                            <li><button>Delete this post</button></li>
+                            {% endif %}
+                            <li class="save-post"><button>Save this post</button></li>
+                            {% if post.author_id != mydetials.owner_id %}
+                            <li><button>Flag inappropriate</button></li>
+                            <li><button>Block {{p.first_name}} {{p.last_name}}</button></li>
+                            <li class="last-ap"><button>Unfollow {{p.first_name}} {{p.last_name}}</li>
+                            {% endif %}
                         </ul>
                     </div>
+                    
                 </div>
                 <script>
                     var post_about = document.getElementById('ab-img-{{post.id}}')

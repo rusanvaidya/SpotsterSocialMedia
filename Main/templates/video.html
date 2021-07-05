@@ -3,32 +3,7 @@
 {% block bodyloader %}
     <body onload="loader_video()">
 {% endblock %}
-{% block sidemenudiv %}
-<div class="video-list">
-    <ul>
-        <li>
-            <div class="video-search">
-                <input type="search" placeholder="Search Videos">
-            </div>
-        </li>
 
-        {% for post in collect_video %}
-        <li>
-            <div class="video-id">
-                <table>
-                        <td><img src="{% static 'img/thumbnail.jpg' %}"></td>
-                        <td>{{post.usercontent}}<br><span class="light-trend">{{post.created}}</span><td>
-                </table>
-            </div>
-        </li>
-        {% endfor %}
-
-
-
-    </ul>
-    <div class="gapping_div"></div>
-</div>
-{% endblock %}
 {% block leftfeed %}
 {% load static %}
 <div class="left-feed">
@@ -39,7 +14,6 @@
             {% endfor %}
         </figure>
     </div>
-
     {%for post in collect_video %}
     {% for p in pu %}
     {% if p.id == post.author_id %}
