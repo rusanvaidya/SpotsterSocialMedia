@@ -300,5 +300,4 @@ def interest_update(request):
             'mydetials': mydetials,
             'like_unlike': like_unlike,
             'userdata': user_data}
-
         return render(request, "profile.html",dict1)

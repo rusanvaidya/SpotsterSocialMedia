@@ -61,11 +61,6 @@
         {% for i in user %}
         <div class="my-name">
             {{i.first_name}} {{i.last_name}}
-
-            {% if mydetials.user_interest != '' %}
-                {{mydetials.user_interest}}
-            {% endif %}
-
         </div>
         {% endfor %}
 
@@ -221,17 +216,17 @@
                         <div class="about-post" id="ap-{{post.id}}">
                             <ul>
                                 {% if post.author_id == mydetials.owner_id %}
-                            <li>Edit this post</li>
-                            <li>Delete this post</li>
-                            {% endif %}
-                            <li>Save this post</li>
-                            {% if post.author_id != mydetials.owner_id %}
-                            <li>Flag inappropriate</li>
-                            <li>Block {{p.first_name}} {{p.last_name}}</li>
-                            <li class="last-ap">Unfollow {{p.first_name}} {{p.last_name}}</li>
-                            {% endif %}
+                                <li><button>Edit this post</button></li>
+                                <li><button>Delete this post</button></li>
+                                {% endif %}
+                                <li class="save-post"><button>Save this post</button></li>
+                                {% if post.author_id != mydetials.owner_id %}
+                                <li><button>Flag inappropriate</button></li>
+                                <li><button>Block {{p.first_name}} {{p.last_name}}</button></li>
+                                <li class="last-ap"><button>Unfollow {{p.first_name}} {{p.last_name}}</li>
+                                {% endif %}
                             </ul>
-                        </div>
+                        </div>    
                     </div>
                     <script>
                         var post_about = document.getElementById('ab-img-{{post.id}}')
@@ -560,11 +555,12 @@
                         <label for="this_{{i.my_interest}}" id="div{{i.my_interest}}">
                             <table>
                                 <td><img src="../media/Interest_icon/{{i.my_interest}}.png" class="id-img" id="id-img-{{i.my_interest}}"></td>
-                                <td><h4>{{i.my_interest}}</h4></td>
+                                <td><h4 id="name_interest{{i.my_interest}}">{{i.my_interest}}</h4></td>
                                 <td><input id="this_{{i.my_interest}}" type="checkbox" name="interest" value="{{i.my_interest}}"></td>
                             </table>
                         </label>
                     </li>
+                    
                     <script>
                         var theme = localStorage.getItem('theme');
                         if(theme=='light')
@@ -607,6 +603,36 @@
                             }
                         }
                     </script>
+                    {% if mydetials.user_interest != '' %}
+                    <!-- {{mydetials.user_interest}} -->
+                    <!-- {{i.my_interest}} -->
+                    <script>
+                    
+                    var my_i = '{{mydetials.user_interest}}';
+                    var list_i = my_i.split(',');
+                    for(var i = 0;i<list_i.length;i++)
+                    {
+                        list_i[i] = list_i[i].replace('[','');
+                        list_i[i] = list_i[i].replace(']','');
+                        list_i[i] = list_i[i].replace('&#x27','');
+                        list_i[i] = list_i[i].replace('&#x27;','');
+                        list_i[i] = list_i[i].replace(';','');
+                        list_i[i] = list_i[i].replace(' ','');
+
+                        // console.log(i)
+                        if(document.getElementById('name_interest{{i.my_interest}}').innerText==list_i[i])
+                        {
+                            document.getElementById('this_{{i.my_interest}}').setAttribute("checked","checked");
+                            document.getElementById('div{{i.my_interest}}').style.background = "#2D7B20";
+                        }
+                    
+                        // console.log(document.getElementById('name_interest{{i.my_interest}}').innerText);
+                    }
+                    // console.log(list_i);
+                            
+                    </script>
+                    {% endif %}
+                    
                     {% endfor %}
                 </ul>
             </div>

@@ -409,7 +409,7 @@
 .feedsocket .feedpost .post-react ul li
 {
     display: inline-block;
-    width: 24%;
+    width: 32%;
     text-align: center;
 }
 .feedsocket .feedpost .post-react ul li table
@@ -669,6 +669,16 @@
     -webkit-animation-duration: 2s;
 }
 
+.about-post ul li button
+{
+    padding: 8px 12px;
+    width: 100%;
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
 @keyframes show_option {
     from{opacity: 0;}
     to{opacity: 1;}
@@ -676,7 +686,6 @@
 
 .about-post ul li
 {
-    padding: 8px 12px;
     border-bottom: 1px solid black;
 }
 .about-post ul li.last-ap
