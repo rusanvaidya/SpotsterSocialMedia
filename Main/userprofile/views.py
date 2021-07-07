@@ -301,3 +301,99 @@ def interest_update(request):
             'like_unlike': like_unlike,
             'userdata': user_data}
         return render(request, "profile.html",dict1)
+
+def view_profile(request):
+    if request.session['email']:
+        email = request.session['email']
+        usrid = request.GET.get('id')
+
+        usr_id = registration.objects.get(email=email)
+        usrs_id = usr_id.id
+
+
+        user = registration.objects.filter(email=email)
+        userview = registration.objects.filter(id=usrid)
+
+        other = None
+        my_id = None
+        counts = 0
+        count_following = 0
+        try:
+            em = followers.objects.get(user_id=usrs_id)
+            other = [user_id for user_id in em.following.all()]
+            count_following = len(other)
+            my_id = [user_id for user_id in em.follow_me.all()]
+            counts = len(my_id)
+
+
+
+        except:
+
+            pass
+
+        # try:
+        #     mydetials = userdetails.objects.get(owner_id= usrs_id)
+        #
+        # except:
+        #     pass
+        posts = []
+        qs = None
+        pu = registration.objects.all()
+        my_post = userpost.objects.filter(author_id=usrid)
+        posts.append(my_post)
+        vmy_post_count = my_post.count()
+        if len(posts) > 0:
+            qs = sorted(chain(*posts), reverse=True, key=lambda obj: obj.created)
+
+        interest_list = interest.objects.all().order_by('my_interest')
+        mydetials = userdetails.objects.get(owner_id=usrs_id)
+        udetials = userdetails.objects.get(owner_id=usrid)
+        user_data = userdetails.objects.all()
+
+        like_unlike = None
+        try:
+            like_unlike = Like.objects.all()
+
+
+        except:
+            pass
+
+        vcounts = 0
+        vcount_following = 0
+        try:
+            em = followers.objects.get(user_id=usrid)
+            vother = [user_id for user_id in em.following.all()]
+            vcount_following = len(vother)
+            vmy_id = [user_id for user_id in em.follow_me.all()]
+            vcounts = len(vmy_id)
+
+
+
+        except:
+
+            pass
+
+        dict1 = {
+            'email': email,
+            'user': user,
+            'userview': userview,
+            'others': other,
+            'followers': my_id,
+            'count': counts,
+            'vcount': vcounts,
+            'my_post_count': vmy_post_count,
+            'count_following': count_following,
+            'vcount_following': vcount_following,
+            'interest': interest_list,
+            'posts': qs,
+            'pu': pu,
+            'mydetials': mydetials,
+            'udetials': udetials,
+            'like_unlike': like_unlike,
+            'userdata': user_data}
+        if int(usrid) == usrs_id:
+            return redirect('profile')
+        else:
+            return render(request, 'user_profile_viewer.html', dict1)
+
+    return render(request, 'index.html')

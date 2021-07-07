@@ -10,3 +10,13 @@ class user_saved_post(models.Model):
 
     class Meta:
         ordering = ('-created_date',)
+
+
+class flag_inappropriate(models.Model):
+    id = models.AutoField
+    user_id = models.IntegerField(blank=False)
+    post_id = models.IntegerField(blank=False)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_date',)

@@ -13,7 +13,8 @@
     {%for post in posts%}
     {% for p in pu %}
     {% if p.id == post.author_id %}
-
+    {% for sp in savepost %}
+    {% if sp.user_id == mydetials.owner_id and sp.post_id == post.id %}
     <div class="feedsocket">
         <div class="feedpost">
             <div class="user-who-posted">
@@ -39,16 +40,19 @@
                     <img src="{% static 'icon/dropdown.png' %}" id="ab-img-{{post.id}}" class="post-drop">
                     <div class="about-post" id="ap-{{post.id}}">
                         <ul>
-                            {% if post.author_id == mydetials.owner_id %}
-                            <li><button>Edit this post</button></li>
-                            <li><button>Delete this post</button></li>
-                            {% endif %}
-                            <li class="save-post"><button>Save this post</button></li>
-                            {% if post.author_id != mydetials.owner_id %}
-                            <li><button>Flag inappropriate</button></li>
+
+                            <form class="remove-post" method="post" action="remove_post" id="remove{{post.id}}"> {% csrf_token %}
+                                <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
+                                <input type="hidden" name="postid" value="{{post.id}}">
+                            <li>
+                            <button type="submit">Remove From Save</button></li>
+                            </form>
+                            <form class="flag-post" method="post" action="flag_post" id="flag{{post.id}}"> {% csrf_token %}
+                            <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
+                            <input type="hidden" name="postid" value="{{post.id}}">
+                            <li><button type="submit">Flag inappropriate</button></li>
+                            </form>
                             <li><button>Block {{p.first_name}} {{p.last_name}}</button></li>
-                            <li class="last-ap"><button>Unfollow {{p.first_name}} {{p.last_name}}</li>
-                            {% endif %}
                         </ul>
                     </div>
                     
@@ -89,19 +93,43 @@
             <div class="post-react">
                 <ul>
                     <li>
-                        <table id="table-like-{{post.id}}" class="tab-like">
-                            <td class="react-act" id="like-i-{{post.id}}"><img src="{% static 'icon/like-i.png' %}"></td>
-                            <td class="none-react-post react-act active-btn" id="like-a-{{post.id}}"><img src="{% static 'icon/like.png' %}"></td>
-                            <td>2k</td>
+                        <form action="like_unlike" method="POST" class='like-form' id='i{{post.id}}'>{% csrf_token %}
+                            <input type="hidden" name="postid" value="{{post.id}}">
+                            <table id="table-like-{{post.id}}" class="tab-like">
+                            {% if like_unlike is None %}
+                                <td class="react-act imageClass"><img src="{% static 'icon/like-i.png' %}"></td>
+                                {% endif %}
+                               <td>
+                                   <button type="submit" value="Like-on-{{post.id}}" id="l10-{{post.id}}" name="like" style="border: none; background: none;">
+
+                                    <span class="react-act imageClass" id="like-i-{{post.id}}"><img src="{% static 'icon/like-i.png' %}"></span>
+                                    <span class="none-react-post react-act active-btn" id="like-a-{{post.id}}"><img src="{% static 'icon/like.png' %}"></span>
+
+                                {% for lk in like_unlike %}
+
+                                {% if lk.post_id == post.id and lk.user_id == mydetials.owner_id %}
+                                       {% if lk.value == 'Like' %}
+                                    <script>
+                                    var status_like = "Like";
+                                    var inactive_like = document.getElementById("like-i-{{post.id}}");
+                                    if(status_like=="Like")
+                                    {
+                                        document.getElementById('table-like-{{post.id}}').classList.toggle('like-on-this-post');
+                                        document.getElementById('like-a-{{post.id}}').classList.remove('none-react-post');
+                                        document.getElementById('like-i-{{post.id}}').classList.toggle('none-react-post');
+                                    }
+                                     </script>
+
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                </button>
+                            </td>
+                            <td id="number-{{post.id}}">{{post.num_likes}}</td>
                         </table>
+                        </form>
                     </li>
-                    <li>
-                        <table class="tab-dislike" id="table-dislike-{{post.id}}">
-                            <td class="react-act" id="dislike-i-{{post.id}}"><img src="{% static 'icon/dislike-i.png' %}"></td>
-                            <td class="none-react-post react-act active-btn" id="dislike-a-{{post.id}}"><img src="{% static 'icon/dislike.png' %}"></td>
-                            <td>1k</td>
-                        </table>
-                    </li>
+
                     <li>
                         <table class="tab-comment" onclick="document.getElementById('give-comment-{{post.id}}').style.display='block';">
                             <td><img src="{% static 'icon/comment.png' %}"></td>
@@ -293,6 +321,8 @@
         </div>
     </div>
 
+    {% endif %}
+    {% endfor %}
     {% endif %}
     {% endfor %}
     {% endfor %}

@@ -180,7 +180,7 @@ def login(request):
             'mydetials':mydetials,
             'userdata':user_data,
             'like_unlike':like_unlike}
-            return render(request, 'newsfeed.html', dict1)
+            return redirect('home')
         else:
             messages.info(request, 'Incorrect Email or Password!!!')
             return render(request, 'index.html')

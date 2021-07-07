@@ -42,18 +42,31 @@
                 <div class="u-edit">
                     <img src="{% static 'icon/dropdown.png' %}" id="ab-img-{{post.id}}" class="post-drop">
                     <div class="about-post" id="ap-{{post.id}}">
-                        <ul>
-                            {% if post.author_id == mydetials.owner_id %}
-                            <li>Edit this post</li>
-                            <li>Delete this post</li>
-                            {% endif %}
-                            <li>Save this post</li>
-                            {% if post.author_id != mydetials.owner_id %}
-                            <li>Flag inappropriate</li>
-                            <li>Block {{p.first_name}} {{p.last_name}}</li>
-                            <li class="last-ap">Unfollow {{p.first_name}} {{p.last_name}}</li>
-                            {% endif %}
-                        </ul>
+                         <ul>
+                                {% if post.author_id == mydetials.owner_id %}
+                                <li><button>Edit this post</button></li>
+                                <form class="delete-post" method="post" action="delete_post" id="delete{{post.id}}"> {% csrf_token %}
+                                <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
+                                <input type="hidden" name="postid" value="{{post.id}}">
+                                <li><button type="submit">Delete this post</button></li>
+                                </form>
+                                {% endif %}
+
+                                {% if post.author_id != mydetials.owner_id %}
+                                <form class="save-post" method="post" action="saved_post" id="save{{post.id}}"> {% csrf_token %}
+                                <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
+                                <input type="hidden" name="postid" value="{{post.id}}">
+                                <li>
+                                <button type="submit">Save this post</button></li>
+                                </form>
+                                <form class="flag-post" method="post" action="flag_post" id="flag{{post.id}}"> {% csrf_token %}
+                                <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
+                                <input type="hidden" name="postid" value="{{post.id}}">
+                                <li><button type="submit">Flag inappropriate</button></li>
+                                </form>
+                                <li><button>Block {{p.first_name}} {{p.last_name}}</button></li>
+                                {% endif %}
+                            </ul>
                     </div>
                     <div class="view-posted-content" id="del-warn">
                         <div>
@@ -163,7 +176,7 @@
                                     {% endif %}
                                     {% endif %}
                                     {% endfor %}
-                                    <td class="u-fullname"><a href="profile">{{p.first_name}} {{p.last_name}}</a></td>
+                                    <td class="u-fullname"><a href="view_profile?id={{p.id}}">{{p.first_name}} {{p.last_name}}</a></td>
                                 </table>
                             </div>
                             <div class="feeling-cmnt-section">
@@ -207,7 +220,7 @@
                                     {% else %}
                                     <td class="new-poster"><img src="{% static 'img/defaultpp.jpg' %}"></td>
                                     {% endif %}
-                                    <td class="u-fullname"><a href="profile">{{i.first_name}} {{i.last_name}}</a></td>
+                                    <td class="u-fullname"><a href="view_profile?id={{p.id}}">{{i.first_name}} {{i.last_name}}</a></td>
                                     {% endfor %}
                                 </table>
                             </div>
@@ -226,7 +239,7 @@
                                 {% endif %}
                                 {% endif %}
                                 {% endfor %}
-                                <td class="u-fullname"><a href="profile">{{p.first_name}} {{p.last_name}}</a></td>
+                                <td class="u-fullname"><a href="view_profile?id={{p.id}}">{{p.first_name}} {{p.last_name}}</a></td>
                             </table>
                             <table>
                             {% if post.emoji != '' %}
