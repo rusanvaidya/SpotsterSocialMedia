@@ -11,6 +11,7 @@
     </div>
     <div class="locate_filter">
         <form>
+            {% csrf_token %}
             <label for="find_users_interested">Interests:</label>
             <select id="find_users_interested">
                 
@@ -22,11 +23,31 @@
             <input type="range" max="100" min="0" id="loc_km_ip" value="0" class="slider">
             <div><span id="loc_km"></span> km.</div>
             <script>
+                
+                var e= document.getElementById('find_users_interested')
+                e.onchange=function(){
+                    console.log(e.value)
+                    
+                }
+                var dist=document.getElementById('loc_km_ip')
+            
                 document.getElementById('loc_km').innerHTML = document.getElementById('loc_km_ip').value
                 document.getElementById('loc_km_ip').onchange = function()
                 {
                     document.getElementById('loc_km').innerHTML = document.getElementById('loc_km_ip').value
+                    console.log(dist.value)
                 }
+                $.ajax({
+                                            type: "POST",
+                                            url: 'get_search',
+                                            data: {
+                                            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+
+                                                "interest": e.value,
+                                                "distance": dist.value,
+                                            },
+                                            dataType: "json",});
+                
             </script>
             <div>
                 <input type="submit" value="Search" class="new_f_search">

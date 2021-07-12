@@ -23,5 +23,6 @@ urlpatterns = [
     path('Follower', views.follower,name = 'follower'),
     path('Following', views.following,name = 'following'),
     path('discover_more', views.discover_more, name='discover_more'),
+    path('get_search', views.get_search, name='get_search'),
 
 ]

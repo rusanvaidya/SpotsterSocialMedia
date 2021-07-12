@@ -200,3 +200,9 @@ def following(request):
             'userdata': user_data }
 
         return render(request, 'following.html', dict1)
+
+def get_search(request):
+    interest=request.POST.get('interest')
+    distance=request.POST.get('distance')
+    print(interest)
+    print(distance)
