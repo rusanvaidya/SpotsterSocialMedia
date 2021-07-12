@@ -13,16 +13,9 @@
         <form>
             <label for="find_users_interested">Interests:</label>
             <select id="find_users_interested">
-                <option>Art</option>
-                <option>Art</option>
-                <option>Art</option>
-                <option>Art</option>
-                <option>Art</option>
-                <option>Art</option>
-                <option>Art</option>
-                <option>Art</option>
-                {% for i in interest %}
-                <option>{{i.my_interest}}</option>
+                
+                {% for i in interests %}
+                <option>{{i}}</option>
                 {% endfor %}
             </select>
             <label for="distance">Distance:</label>

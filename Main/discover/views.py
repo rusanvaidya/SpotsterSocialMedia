@@ -3,7 +3,7 @@ from itertools import chain
 from django.shortcuts import render, redirect
 from home.models import registration
 # Create your views here.
-from discover.models import followers
+from discover.models import followers,interest
 from complete.models import userdetails
 
 from home.models import userpost
@@ -14,6 +14,10 @@ def discover(request):
         email = request.session['email']
         user = registration.objects.filter(email=email)
         id = registration.objects.get(email=email)
+        interests_all=interest.objects.all()
+        interests=[]
+        for i in interests_all:
+            interests.append(i)
         userid = id.pk
         other = None
         my_id = None
@@ -45,7 +49,8 @@ def discover(request):
             'count':counts,
             'count_following':count_following,
             'mydetials': mydetials,
-            'userdata': user_data }
+            'userdata': user_data,
+            'interests': interests }
 
         return render(request, 'discover.html', dict1)
 
