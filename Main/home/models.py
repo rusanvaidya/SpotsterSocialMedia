@@ -44,10 +44,21 @@ class Like(models.Model):
     post = models.ForeignKey(userpost, on_delete=models.CASCADE)
     value = models.CharField(choices=LIKE_CHOICES, max_length=8)
     updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
         return f"{self.user}-{self.post}-{self.value}"
+
+
+class comment(models.Model):
+    id = models.AutoField
+    comments = models.TextField(blank=False,max_length=1000)
+    user_id = models.IntegerField(blank=False)
+    post_id = models.IntegerField(blank=False)
+    created_date = models.DateTimeField(default=datetime.datetime.now)
+
+    class Meta:
+        ordering = ('-created_date',)
 
 class support(models.Model):
     name=models.CharField(max_length=30)

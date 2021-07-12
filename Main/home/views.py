@@ -5,7 +5,7 @@ from discover.models import followers
 from discover.models import interest
 
 from complete.models import userdetails, user_coordinates
-from .models import registration, support, userpost,Like
+from .models import registration, support, userpost, Like, comment
 from django.contrib import messages
 from itertools import chain
 from math import sin, cos, sqrt, atan2, radians
@@ -73,7 +73,11 @@ def home(request):
 
             except:
                 pass
-
+            comments = None
+            try:
+                comments = comment.objects.all()
+            except:
+                pass
             dict1 = {
                 'email': email,
                 'user': user,
@@ -87,7 +91,8 @@ def home(request):
                 'pu':pu,
                 'mydetials':mydetials,
                 'userdata':user_data,
-                'like_unlike':like_unlike}
+                'like_unlike':like_unlike,
+                'comments':comments}
                 # 'country': country,
                 # 'city': city}
 
@@ -114,72 +119,6 @@ def login(request):
         user = registration.objects.filter(email=email, password=password)
         if user.exists():
             request.session['email'] = email
-            usr_id = registration.objects.get(email=email)
-            usrs_id = usr_id.id
-            other = None
-            my_id = None
-            counts=0
-            count_following =0
-            pu = registration.objects.all()
-            qs = None
-            try:
-                em = followers.objects.get(user_id = usrs_id)
-                other = [user_id for user_id in em.following.all()]
-                count_following=len(other)
-                my_id = [user_id for user_id in em.follow_me.all()]
-                counts=len(my_id)
-
-
-
-            except:
-                pass
-
-            try:
-                profile1 = registration.objects.get(email=email)
-                profile = followers.objects.get(user_id=profile1.pk)
-                users1 = [i for i in profile.following.all()]
-                posts = []
-                for u in users1:
-                    p = registration.objects.get(id=u.id)
-                    try:
-                        p_post = userpost.objects.filter(author_id=p.id)
-                        posts.append(p_post)
-                    except:
-                        pass
-
-                my_post = userpost.objects.filter(author_id=profile1.id)
-                posts.append(my_post)
-                if len(posts) > 0:
-                    qs = sorted(chain(*posts), reverse=True, key=lambda obj: obj.created)
-            except:
-                pass
-
-            user_data = userdetails.objects.all()
-            mydetials = 0
-            try:
-                mydetials = userdetails.objects.get(owner_id=usrs_id)
-            except:
-                pass
-
-            like_unlike = None
-            try:
-                like_unlike = Like.objects.all()
-
-            except:
-                pass
-
-            dict1 = {
-            'email': email,
-            'user': user,
-            'others': other,
-            'followers':my_id,
-            'count':counts,
-            'count_following':count_following,
-            'pu':pu,
-            'posts':qs,
-            'mydetials':mydetials,
-            'userdata':user_data,
-            'like_unlike':like_unlike}
             return redirect('home')
         else:
             messages.info(request, 'Incorrect Email or Password!!!')
@@ -306,7 +245,7 @@ def user_post(request):
         user_files = request.FILES['ufiles']
     except:
         user_files =None
-    if user_feeling == '' and user_emoji == '' and user_content == '' and user_files == None:
+    if user_feeling == '' and user_emoji == '' and user_files == None and user_content == '':
         return redirect('home')
     usr_id = registration.objects.get(email=email)
     usrs_id = usr_id.id
@@ -325,7 +264,7 @@ def notification(request):
     }
     return render(request, 'notification.html', dict1)
 
-def post(request):
+def post_comment(request):
     if request.session['email']:
         email = request.session['email']
         user = registration.objects.filter(email=email)
@@ -387,6 +326,13 @@ def post(request):
         except:
             pass
 
+
+        postid = int(request.GET['pid'])
+
+
+        comm = comment.objects.filter(post_id = postid).order_by('created_date')
+        comm_count = comment.objects.filter(post_id = postid).count()
+
         dict1 = {
             'email': email,
             'user': user,
@@ -400,7 +346,10 @@ def post(request):
             'pu': pu,
             'mydetials': mydetials,
             'userdata': user_data,
-            'like_unlike': like_unlike}
+            'like_unlike': like_unlike,
+            'postid':postid,
+            'comment':comm,
+            'comment_count':comm_count}
         # 'country': country,
         # 'city': city}
 
@@ -453,3 +402,105 @@ def like_post(request):
         post_obj.save()
         like.save()
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+def comment_post(request):
+    if request.session['email']:
+        email = request.session['email']
+        user = registration.objects.filter(email=email)
+        usr_id = registration.objects.get(email=email)
+        usrs_id = usr_id.id
+        other = None
+        my_id = None
+        counts = 0
+        my_post_count = 0
+        count_following = 0
+        pu = registration.objects.all()
+        qs = None
+
+        try:
+            em = followers.objects.get(user_id=usrs_id)
+            other = [user_id for user_id in em.following.all()]
+            count_following = len(other)
+            my_id = [user_id for user_id in em.follow_me.all()]
+            counts = len(my_id)
+
+
+
+        except:
+
+            pass
+
+        try:
+            profile1 = registration.objects.get(email=email)
+            profile = followers.objects.get(user_id=profile1.pk)
+            users1 = [i for i in profile.following.all()]
+            posts = []
+            for u in users1:
+                p = registration.objects.get(id=u.id)
+                try:
+                    p_post = userpost.objects.filter(author_id=p.id)
+                    posts.append(p_post)
+                except:
+                    pass
+
+            my_post = userpost.objects.filter(author_id=profile1.id)
+            my_post_count = my_post.count()
+            posts.append(my_post)
+            if len(posts) > 0:
+                qs = sorted(chain(*posts), reverse=True, key=lambda obj: obj.created)
+        except:
+            pass
+        interest_list = interest.objects.all()
+        user_data = userdetails.objects.all()
+        mydetials = 0
+        try:
+            mydetials = userdetails.objects.get(owner_id=usrs_id)
+        except:
+            pass
+
+        like_unlike = None
+        try:
+            like_unlike = Like.objects.all()
+
+        except:
+            pass
+
+        userid = request.POST['userid']
+        postid = request.POST['postid']
+        comment_message = request.POST['comment']
+
+        if comment_message == '':
+            pass
+
+        else:
+            comm, created = comment.objects.get_or_create(user_id=userid, post_id=postid, comments=comment_message)
+            comm.save()
+
+
+        comm = comment.objects.filter(post_id=postid).order_by('created_date')
+        comm_count = comment.objects.filter(post_id=postid).count()
+
+        dict1 = {
+            'email': email,
+            'user': user,
+            'others': other,
+            'followers': my_id,
+            'count': counts,
+            'my_post_count': my_post_count,
+            'count_following': count_following,
+            'interest': interest_list,
+            'posts': qs,
+            'pu': pu,
+            'mydetials': mydetials,
+            'userdata': user_data,
+            'like_unlike': like_unlike,
+            'postid': int(postid),
+            'comment': comm,
+            'comment_count': comm_count}
+        # 'country': country,
+        # 'city': city}
+
+        return render(request, 'post.html', dict1)
+    else:
+        return render(request, 'index.html')
