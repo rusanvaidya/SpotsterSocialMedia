@@ -94,7 +94,7 @@ function loader_feed()
             document.getElementById('feedb').style.display='block';
             document.getElementById('fullloader').style.display='none';
         }
-        , 1100);
+        , 900);
 }
 function loader_video()
 {
@@ -106,7 +106,7 @@ function loader_video()
             document.getElementById('feedb').style.display='block';
             document.getElementById('fullloader').style.display='none';
         }
-        , 1100);
+        , 900);
 
 }
 function loader_trending()
@@ -119,7 +119,7 @@ function loader_trending()
             document.getElementById('feedb').style.display='block';
             document.getElementById('fullloader').style.display='none';
         }
-        , 1100);
+        , 900);
 
 }
 function loader_discover()
@@ -132,7 +132,7 @@ function loader_discover()
             document.getElementById('feedb').style.display='block';
             document.getElementById('fullloader').style.display='none';
         }
-        , 1100);
+        , 900);
 }
 function other_loader()
 {
@@ -142,7 +142,7 @@ function other_loader()
         document.getElementById('feedb').style.display='block';
         document.getElementById('fullloader').style.display='none';
     }
-    , 1100);
+    , 900);
 }
 function show_side_nav()
 {

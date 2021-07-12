@@ -248,11 +248,30 @@
                     <li>
                         <table class="tab-comment" onclick="document.getElementById('give-comment-{{post.id}}').style.display='block';">
                             <td><img src="{% static 'icon/comment.png' %}"></td>
-                            {% with comments.count as total_comments %}
+                            <td id='count_comment{{post.id}}'></td>
+                            <script>
+                                var count=0
+                                document.getElementById('count_comment{{post.id}}').innerText=count
+                                
+                            </script>
+                            {% for item in comments %}
+                            
+                            {% if item.post_id == post.id %}
+                            
+                            <script>
+                                count+=1
+                                
 
-                            <td>{{total_comments}}</td>
+                                document.getElementById('count_comment{{post.id}}').innerText=count
+                            </script>
+                           {% endif %}
+                        
 
-                            {% endwith %}
+                            
+
+        
+                            {%endfor%}
+
                         </table>
 
                     </li>
