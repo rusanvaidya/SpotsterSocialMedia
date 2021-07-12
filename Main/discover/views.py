@@ -206,3 +206,4 @@ def get_search(request):
     distance=request.POST.get('distance')
     print(interest)
     print(distance)
+    return render(request, 'index.html')
