@@ -64,18 +64,8 @@ def newsfeed(request):
     bio=request.POST['bio']
     inte = request.POST.getlist('interest')
 
-    user = registration.objects.filter(email=email)
     usr_id = registration.objects.get(email=email)
     usrs_id = usr_id.id
-    pu = registration.objects.all()
-    qs = None
-    other = None
-    try:
-        em = followers.objects.get(user_id=usrs_id)
-        other = [user_id for user_id in em.following.all()]
-
-    except:
-        pass
 
     try:
         posts = []
@@ -89,16 +79,6 @@ def newsfeed(request):
             qs = sorted(chain(*posts), reverse=True, key=lambda obj: obj.created)
     except:
         pass
-    counts = 0
-    count_following =0
-    dict1 = {
-        'email': email,
-        'user': user,
-        'others': other,
-        'count': counts,
-        'count_following': count_following,
-        'posts': qs,
-        'pu': pu}
 
     userdata = userdetails(profile_pic= profile, user_bio= bio, user_interest= inte , owner_id=usrs_id)
     userdata.save()
