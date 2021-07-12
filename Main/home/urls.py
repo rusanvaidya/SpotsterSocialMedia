@@ -28,6 +28,7 @@ urlpatterns = [
     path('support',views.support_view,name='supportpage'),
     path('get_location', views.get_location, name='get_location'),
     path('notification', views.notification),
-    path('post', views.post),
+    path('post_comment', views.post_comment,name='post_comment'),
+    path('comment_post', views.comment_post,name='comment_post'),
     path('like_unlike',views.like_post),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
