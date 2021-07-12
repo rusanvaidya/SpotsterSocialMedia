@@ -291,7 +291,7 @@ def user_post(request):
         user_files = request.FILES['ufiles']
     except:
         user_files =None
-    if user_feeling == '' and user_emoji == '' and user_files == None:
+    if user_feeling == '' and user_emoji == '' and user_content == '' and user_files == None:
         return redirect('home')
     usr_id = registration.objects.get(email=email)
     usrs_id = usr_id.id

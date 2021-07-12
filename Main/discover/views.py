@@ -98,7 +98,7 @@ def newsfeed(request):
     userdata = userdetails(profile_pic= profile, user_bio= bio, user_interest= inte , owner_id=usrs_id)
     userdata.save()
 
-    return render(request, 'home.html', dict1)
+    return redirect('home')
 
 
 def discover_more(request):
