@@ -68,6 +68,18 @@
 {
     width: 100%;
 }
+.locate_filter label, .locate_filter select
+{
+    width: 100%;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.locate_filter select
+{
+    outline: none;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+}
 .locate_filter form
 {
     margin: 10px;

@@ -110,6 +110,55 @@
     -webkit-animation: slidein_modal;
     -webkit-animation-duration: 1s;
 }
+.warning
+{
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 0 0 5px 5px black;
+    background: black;
+    width: 400px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    -webkit-animation: slidein_modal;
+    -webkit-animation-duration: 1s;
+}
+.warning form
+{
+    display: inline-block;
+}
+.warning button
+{
+    padding: 8px 12px;
+    width: 80px;
+    font-size: 16px;
+    background-color: transparent;
+    color: #2D7B20;
+    border: 2px solid #2D7B20;
+    display: inline-block;
+}
+.warning button:hover
+{
+    background-color: #2e7b203f;
+    cursor: pointer;
+}
+.warning button.delbtn
+{
+    padding: 8px 12px;
+    width: 80px;
+    font-size: 16px;
+    background-color: transparent;
+    color: red;
+    border: 2px solid red;
+    display: inline-block;
+}
+.warning button.delbtn:hover
+{
+    background-color: rgba(255, 0, 0, 0.185);
+    cursor: pointer;
+}
 @keyframes slidein_modal
 {
     from {opacity: 0}
@@ -652,7 +701,7 @@
 
 @keyframes height_animation {
     from{height: 0;}
-    to{height: 100px;}
+    to{height: 70px;}
 }
 
 .about-post ul

@@ -163,21 +163,26 @@
     margin: 0 auto;
     box-sizing: border-box;
 }
+.user-p-timeline
+{
+    margin: 0 auto;
+    box-sizing: border-box;
+}
 
-.my-p-timeline ul
+.my-p-timeline ul, .user-p-timeline ul
 {
     list-style: none;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.my-p-timeline ul li
+.my-p-timeline ul li, .user-p-timeline ul li
 {
     margin: 0;
     display: inline-block;
     box-sizing: border-box;
 }
-.my-p-timeline ul li button.active, .my-p-timeline ul li button.inactive
+.my-p-timeline ul li button.active, .my-p-timeline ul li button.inactive, .user-p-timeline ul li button.active, .user-p-timeline ul li button.inactive
 {
     width: 90px;
     padding: 5px;
@@ -186,12 +191,12 @@
     font-size: 20px;
     color: black;
 }
-.my-p-timeline ul li button.active:hover, .my-p-timeline ul li button.inactive:hover
+.my-p-timeline ul li button.active:hover, .my-p-timeline ul li button.inactive:hover, .user-p-timeline ul li button.active:hover, .user-p-timeline ul li button.inactive:hover
 {
     font-weight: bold;
     cursor: pointer;
 }
-.my-p-timeline ul li button.active
+.my-p-timeline ul li button.active, .user-p-timeline ul li button.active
 {
     border-bottom: 2px solid #2d7b20;
     color: #2d7b20;

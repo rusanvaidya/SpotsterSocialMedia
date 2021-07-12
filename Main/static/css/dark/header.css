@@ -259,28 +259,6 @@ img.d1btn
 {
     border-top: 1px solid grey;
 }
-
-/* preloader */
-.preloader
-{
-    top: 50%;
-    left: 50%;
-    transform: (-50%,-50%);
-    position: absolute;
-}
-.animate-start
-{
-    animation: 2s loading infinite;
-}
-@keyframes loading
-{
-    0%{}
-    100%{transform: rotate(720deg);}
-}
-.preloader img
-{
-    width: 80px;
-}
 .not-loaded
 {
     display: none;

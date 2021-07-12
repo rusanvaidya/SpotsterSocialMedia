@@ -88,21 +88,61 @@ function loader_feed()
 {
     document.getElementById('h-i').style.display='none';
     document.getElementById('h-a').style.display='inline-block';
+    setTimeout(function()
+        {
+            document.getElementById('headert').style.display='block';
+            document.getElementById('feedb').style.display='block';
+            document.getElementById('fullloader').style.display='none';
+        }
+        , 1100);
 }
 function loader_video()
 {
     document.getElementById('v-i').style.display='none';
     document.getElementById('v-a').style.display='inline-block';
+    setTimeout(function()
+        {
+            document.getElementById('headert').style.display='block';
+            document.getElementById('feedb').style.display='block';
+            document.getElementById('fullloader').style.display='none';
+        }
+        , 1100);
+
 }
 function loader_trending()
 {
     document.getElementById('t-i').style.display='none';
     document.getElementById('t-a').style.display='inline-block';
+    setTimeout(function()
+        {
+            document.getElementById('headert').style.display='block';
+            document.getElementById('feedb').style.display='block';
+            document.getElementById('fullloader').style.display='none';
+        }
+        , 1100);
+
 }
 function loader_discover()
 {
     document.getElementById('d-i').style.display='none';
     document.getElementById('d-a').style.display='inline-block';
+    setTimeout(function()
+        {
+            document.getElementById('headert').style.display='block';
+            document.getElementById('feedb').style.display='block';
+            document.getElementById('fullloader').style.display='none';
+        }
+        , 1100);
+}
+function other_loader()
+{
+   setTimeout(function()
+    {
+        document.getElementById('headert').style.display='block';
+        document.getElementById('feedb').style.display='block';
+        document.getElementById('fullloader').style.display='none';
+    }
+    , 1100);
 }
 function show_side_nav()
 {

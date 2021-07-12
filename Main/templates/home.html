@@ -11,6 +11,7 @@
         <link rel="stylesheet" id="profile_css">
         <link rel="stylesheet" id="video_css">
         <link rel="stylesheet" href="{% static 'css/chatbox.css' %}">
+        <link rel="stylesheet" href="{% static 'css/preloader.css' %}">
         <link rel="stylesheet" href="{% static 'css/post.css' %}">
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
@@ -20,7 +21,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block bodyloader %}
     {% endblock %}
-    <div class="header_top">
+    <div class="fullloader" id="fullloader">
+        <div class="preloader">
+            <img class="animate-start" src="{% static 'icon/preloader.png' %}">
+        </div>
+        <script>
+            var theme = localStorage.getItem('theme');
+            if(theme == 'light'){ document.getElementById('fullloader').style.background='white';}
+        </script>
+    </div>
+        <div class="header_top" id="headert">
             <table>
 
                 <!-- logo -->
@@ -291,7 +301,7 @@
 
 
         <!-- feed div -->
-        <div class="feedbody">
+        <div class="feedbody" id="feedb">
             <div class="sidemenudiv">
                 {% block sidemenudiv %}
                 <div class="d1">

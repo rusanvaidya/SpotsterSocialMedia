@@ -45,15 +45,10 @@
                     <img src="{% static 'icon/dropdown.png' %}" id="ab-img-{{post.id}}" class="post-drop">
                     <div class="about-post" id="ap-{{post.id}}">
                          <ul>
-                                {% if post.author_id == mydetials.owner_id %}
+                            {% if post.author_id == mydetials.owner_id %}
                                 <li><button>Edit this post</button></li>
-                                <form class="delete-post" method="post" action="delete_post" id="delete{{post.id}}"> {% csrf_token %}
-                                <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
-                                <input type="hidden" name="postid" value="{{post.id}}">
-                                <li><button type="submit">Delete this post</button></li>
-                                </form>
-                                {% endif %}
-
+                                <li><button onclick="document.getElementById('del-warn{{post.id}}').style.display='block'">Delete this post</button></li>
+                            {% endif %}
                                 {% if post.author_id != mydetials.owner_id %}
                                 <form class="save-post" method="post" action="saved_post" id="save{{post.id}}"> {% csrf_token %}
                                 <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
@@ -69,6 +64,23 @@
                                 <li><button>Block {{p.first_name}} {{p.last_name}}</button></li>
                                 {% endif %}
                             </ul>
+                    </div>
+                    <div class="view-posted-content" id="del-warn{{post.id}}">
+                        <div class="warning">
+                            <div>
+                                <h1>Are you sure you want to delete this post?</h1>
+                            </div>
+                            <div>
+                                {% if post.author_id == mydetials.owner_id %}
+                                <form class="delete-post" method="post" action="delete_post" id="delete{{post.id}}"> {% csrf_token %}
+                                    <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
+                                    <input type="hidden" name="postid" value="{{post.id}}">
+                                <button class="delbtn" type="submit">Yes</button>
+                                </form>
+                                <button onclick="document.getElementById('del-warn{{post.id}}').style.display='none'">No</button>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <script>

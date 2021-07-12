@@ -11,7 +11,21 @@
     </div>
     <div class="locate_filter">
         <form>
-            <label for="distance">Distance</label>
+            <label for="find_users_interested">Interests:</label>
+            <select id="find_users_interested">
+                <option>Art</option>
+                <option>Art</option>
+                <option>Art</option>
+                <option>Art</option>
+                <option>Art</option>
+                <option>Art</option>
+                <option>Art</option>
+                <option>Art</option>
+                {% for i in interest %}
+                <option>{{i.my_interest}}</option>
+                {% endfor %}
+            </select>
+            <label for="distance">Distance:</label>
             <input type="range" max="100" min="0" id="loc_km_ip" value="0" class="slider">
             <div><span id="loc_km"></span> km.</div>
             <script>

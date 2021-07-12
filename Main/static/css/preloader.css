@@ -1,0 +1,38 @@
+
+/* preloader */
+.header_top, .feedbody
+{
+    display: none;
+}
+
+.fullloader
+{
+    background-color: rgb(20, 20, 20);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.preloader
+{
+    text-align: center;
+    padding: 320px 0;
+}
+.animate-start
+{
+    animation: 2s loading infinite;
+}
+@keyframes loading
+{
+    0%{}
+    100%{transform: rotate(720deg);}
+}
+.preloader img
+{
+    width: 80px;
+}
+.not-loaded
+{
+    display: none;
+}

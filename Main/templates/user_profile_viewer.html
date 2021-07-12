@@ -1,6 +1,6 @@
 {% extends 'home.html' %}
 {% block bodyloader %}
-
+    <body onload="other_loader()">
 {% endblock %}
 {% block leftfeed %}
 {% load static %}
@@ -66,16 +66,17 @@
             {% if udetials.user_bio != '' %}
             <p>{{udetials.user_bio}}</p>
             {% else %}
-            <p>No Bio is added, please set from Setting.</p>
             {% endif %}
         </div>
-
+        <div class="my-info my-bio">
+            <button>Following</button>
+            <button>Message</button>
+        </div>
     </div>
-    <div class="my-p-timeline">
+    <div class="user-p-timeline">
         <ul>
-            <li><button class="active" id="posts-btn">Posts</button></li>
-            <li><button class="inactive" id="settings-btn">Settings</button></li>
-            <li><button class="inactive" id="interests-btn">Interests</button></li>
+            <li><button class="active" id="posts-btn-2">Posts</button></li>
+            <li><button class="inactive" id="interests-btn-2">Interests</button></li>
         </ul>
     </div>
     <div id="my-posted-contents">
@@ -500,20 +501,16 @@
 
     </div>
     <div id="my-interests">
-        <div class="search-bar">
-            <input type="search" placeholder="Search interest" id="searching">
-        </div>
 <!--        <form method="post">{% csrf_token %}-->
         <div class="interest-list">
             <div class="interest-listing">
                 <ul id="thisUL">
                     {% for i in interest %}
-                    <li>
-                        <label for="this_{{i.my_interest}}" id="div{{i.my_interest}}">
+                    <li id=>
+                        <label for="this_{{i.my_interest}}" id="div{{i.my_interest}}" style='display:none'>
                             <table>
                                 <td><img src="../media/Interest_icon/{{i.my_interest}}.png" class="id-img" id="id-img-{{i.my_interest}}"></td>
                                 <td><h4 id="name_interest{{i.my_interest}}">{{i.my_interest}}</h4></td>
-                                <td><input id="this_{{i.my_interest}}" type="checkbox" name="interest" value="{{i.my_interest}}"></td>
                             </table>
                         </label>
                     </li>
@@ -523,41 +520,6 @@
                         if(theme=='light')
                         {
                             document.getElementById('id-img-{{i.my_interest}}').style.filter='invert(100%)';
-                        }
-                        document.getElementById('div{{i.my_interest}}').onclick = function()
-                        {
-                            if (document.getElementById('this_{{i.my_interest}}').checked==true)
-                            {
-                                document.getElementById('div{{i.my_interest}}').style.background = "#2D7B20";
-                            }
-                            else if(document.getElementById('this_{{i.my_interest}}').checked==false)
-                            {
-                                document.getElementById('div{{i.my_interest}}').style.background = "none";
-                            }
-                        }
-                        var searchbar = document.getElementById('searching');
-                        searchbar.onkeyup = function()
-                        {
-                            var filter = searchbar.value.toUpperCase();
-
-                            var ul = document.getElementById('thisUL');
-                            var li = ul.getElementsByTagName('li');
-                            for(var i=0; i<li.length;i++)
-                            {
-                                var table = li[i].getElementsByTagName('table');
-                                var td = table[0].getElementsByTagName('td')[1];
-                                var h4 = td.getElementsByTagName('h4')[0];
-                                var tex = h4.innerText;
-                                console.log(tex.toUpperCase().indexOf(filter));
-                                if (tex.toUpperCase().indexOf(filter) > -1)
-                                {
-                                    li[i].style.display="";
-                                }
-                                else
-                                {
-                                    li[i].style.display='none';
-                                }
-                            }
                         }
                     </script>
                     {% if mydetials.user_interest != '' %}
@@ -577,9 +539,9 @@
                         list_i[i] = list_i[i].replace(' ','');
 
                         // console.log(i)
-                        if(document.getElementById('name_interest{{i.my_interest}}').innerText==list_i[i])
+                        if ('{{i.my_interest}}' == list_i[i])
                         {
-                            document.getElementById('this_{{i.my_interest}}').setAttribute("checked","checked");
+                            document.getElementById('div{{i.my_interest}}').style.display = "block";
                             document.getElementById('div{{i.my_interest}}').style.background = "#2D7B20";
                         }
                     
