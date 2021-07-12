@@ -119,15 +119,6 @@
         </div>
     </div>
 
-    <!-- {%for post in posts%}-->
-    <!--                     {% for p in pu %}-->
-    <!--                        {% if p.id == post.author_id %}-->
-    <!--                            {{p.first_name}}{{p.last_name}}-->
-    <!--                            {{post.usercontent}}-->
-    <!--                    {% endif %}-->
-    <!--                    {% endfor %}-->
-    <!--                    {% endfor %}-->
-                        <!-- posted contents -->
     {%for post in posts%}
     {% for p in pu %}
     {% if p.id == post.author_id %}
@@ -158,8 +149,12 @@
                     <div class="about-post" id="ap-{{post.id}}">
                         <ul>
                             {% if post.author_id == mydetials.owner_id %}
-                            <li><button onclick="document.getElementById('edit-this-{{post.id}}').style.display='block'">Edit this post</button></li>
-                            <li><button onclick="document.getElementById('del-warn{{post.id}}').style.display='block'">Delete this post</button></li>
+                            <li><button>Edit this post</button></li>
+                            <form class="delete-post" method="post" action="delete_post" id="delete{{post.id}}"> {% csrf_token %}
+                                <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
+                                <input type="hidden" name="postid" value="{{post.id}}">
+                            <li><button type="submit">Delete this post</button></li>
+                            </form>
                             {% endif %}
 
                             {% if post.author_id != mydetials.owner_id %}
@@ -178,60 +173,10 @@
                             {% endif %}
                         </ul>
                     </div>
-                    <div class="view-posted-content" id="edit-this-{{post.id}}">
-                        <div class="modal comment-content">
-                            <div class="modaltop">
-                                <div class="modalheader">
-                                    <div class="closebutton">
-                                        <span onclick="document.getElementById('edit-this-{{post.id}}').style.display='none';">&times;</span>
-                                    </div>
-                                    <table>
-                                        {% for i in user %}
-                                        {% if mydetials.profile_pic != '' %}
-                                        <td class="new-poster"><img src="media/{{mydetials.profile_pic}}"></td>
-                                        {% else %}
-                                        <td class="new-poster"><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                        {% endif %}
-                                        <td class="u-fullname"><a href="view_profile?id={{p.id}}">{{i.first_name}} {{i.last_name}}</a></td>
-                                        {% endfor %}
-                                        
-                                        {% if post.emoji != '' %}
-                                        <td>{{post.feeling}}</td>
-                                        <td class="femoji"><img src='/static/{{post.emoji}}'></td>
-                                        {% endif %} 
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="caption-share">
-                                <textarea placeholder="Write your thoughts...">{{post.usercontent}}</textarea>
-                            </div>
-                            <div class="feeling-cmnt-section border-share-content">
-                                <div class="cmnt-on-this" id="share-on-this-{{post.id}}">
-                                <img src="media/{{post.userfile}}" id="share-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-share-{{post.id}}').style.display='none'">
-                            </div>
-                            </div>
-                            <form>
-                                <div class="submit-cmnt">
-                                    <input type="submit" value="Share">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="view-posted-content" id="del-warn{{post.id}}">
-                        <div class="warning">
-                            <div>
-                                <h1>Are you sure you want to delete this post?</h1>
-                            </div>
-                            <div>
-                                {% if post.author_id == mydetials.owner_id %}
-                                <form class="delete-post" method="post" action="delete_post" id="delete{{post.id}}"> {% csrf_token %}
-                                    <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
-                                    <input type="hidden" name="postid" value="{{post.id}}">
-                                <button class="delbtn" type="submit">Yes</button>
-                                </form>
-                                <button onclick="document.getElementById('del-warn{{post.id}}').style.display='none'">No</button>
-                                {% endif %}
-                            </div>
+                    <div class="view-posted-content" id="del-warn">
+                        <div>
+                            Are you sure you want to delete this post?
+                            <button>Yes</button>
                         </div>
                     </div>
                 </div>
@@ -303,7 +248,11 @@
                     <li>
                         <table class="tab-comment" onclick="document.getElementById('give-comment-{{post.id}}').style.display='block';">
                             <td><img src="{% static 'icon/comment.png' %}"></td>
-                            <td>2k</td>
+                            {% with comments.count as total_comments %}
+
+                            <td>{{total_comments}}</td>
+
+                            {% endwith %}
                         </table>
 
                     </li>
@@ -347,12 +296,14 @@
                         <div class="cmnt-on-this" id="cmnt-on-this-{{post.id}}">
                             <img src="media/{{post.userfile}}" id="cmnt-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-comment-{{post.id}}').style.display='none'">
                         </div>
-                        <form>
+                        <form method="post" action="comment_post">{% csrf_token %}
+                            <input type="hidden" name="postid" value="{{post.id}}">
+                            <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
                             <div class="view-cmnt">
-                                <a href="post">View all Comments</a>
+                                <a href="post_comment?pid={{post.id}}">View all Comments</a>
                             </div>
                             <div class="give-cmnt">
-                                <textarea placeholder="Write Comment Here..."></textarea>
+                                <textarea placeholder="Write Comment Here..." name="comment" required></textarea>
                             </div>
                             <div class="submit-cmnt">
                                 <input type="submit" value="Comment">
