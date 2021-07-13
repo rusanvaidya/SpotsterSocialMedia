@@ -354,7 +354,7 @@
                             </table>
                         </div>
                         <div class="u-edit">
-                            <button style="background-color: transparent; border: none;" id="del-cmnt-bnt-{{det.id}}"><img src="{% static 'icon/delete.png' %}" class="post-drop" id="del-cmnt-{{det.id}}" style="width: 25px; height: 30px;"></button>
+                            <button style="background-color: transparent; border: none;" id="del-cmnt-bnt-{{comme.id}}"><img src="{% static 'icon/delete.png' %}" class="post-drop" id="del-cmnt-{{comme.id}}" style="width: 25px; height: 30px;"></button>
                         </div>
                     </div>
                     <div class="time-post">{{comme.created_date}}</div>
@@ -362,13 +362,13 @@
                     {{comme.comments}}
                     </div>
                     <script>
-                        document.getElementById('del-cmnt-{{det.id}}').onmouseenter = function()
+                        document.getElementById('del-cmnt-{{comme.id}}').onmouseenter = function()
                         {
-                            document.getElementById('del-cmnt-{{det.id}}').setAttribute("src", "{% static 'icon/delete-open.png' %}")
+                            document.getElementById('del-cmnt-{{comme.id}}').setAttribute("src", "{% static 'icon/delete-open.png' %}")
                         }
-                        document.getElementById('del-cmnt-{{det.id}}').onmouseleave = function()
+                        document.getElementById('del-cmnt-{{comme.id}}').onmouseleave = function()
                         {
-                            document.getElementById('del-cmnt-{{det.id}}').setAttribute("src", "{% static 'icon/delete.png' %}")
+                            document.getElementById('del-cmnt-{{comme.id}}').setAttribute("src", "{% static 'icon/delete.png' %}")
                         }
                     </script>
                 </div>

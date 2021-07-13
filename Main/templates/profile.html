@@ -310,26 +310,57 @@
                         }
                     </script>
                 </div>
-                
                 <div class="post-react">
                     <ul>
                         <li>
                             <form action="like_unlike" method="POST" class='like-form' id='{{post.id}}'>{% csrf_token %}
-                            <input type="hidden" name="postid" value="{{post.id}}">
-                                <table>
-                            {% if like_unlike is None %}
-                                <td class="react-act imageClass"><img src="{% static 'icon/like-i.png' %}"></td>
-                                {% endif %}
-                               <td>
-                                   <button type="submit" value="clicklike" name="like" style="border: none; background: none;">
-                            <span class="react-act" id="like-i-{{post.id}}"><img src="{% static 'icon/like-i.png' %}"></span>
-                            <span class="none-react-post react-act active-btn" id="like-a-{{post.id}}"><img src="{% static 'icon/like.png' %}"></span>
-
-                            {% for lk in like_unlike %}
-
-                                {% if lk.post_id == post.id and lk.user_id == mydetials.owner_id %}
-                                       {% if lk.value == 'Like' %}
-                                       <script>
+                                <input type="hidden" name="postid" value="{{post.id}}">
+    
+                                <table id="table-like-{{post.id}}" class="tab-like">
+                                    {% if like_unlike is None %}
+                                    <td class="react-act imageClass"><img src="{% static 'icon/like-i.png' %}"></td>
+                                    <td>Like</td><div style="width: 100%;">
+                    {% if post.num_likes > 0 %}
+                    <table style="display:inline">
+                        <td class="react-act imageClass"><img style="width: 20px" src="{% static 'icon/like.png' %}"></td>
+                        <td id="number-{{post.id}}" style="font-size: 20px;">{{post.num_likes}}</td>
+                    </table>
+                    {% endif %}
+                    <script>
+                        var count=0
+                    </script>
+                    <table style="display: inline;" id="cmnt-count-show{{post.id}}">
+                        <td><img src="{% static 'icon/comment.png' %}" style="width: 20px"></td>
+                        <td id='count_comment{{post.id}}' style="font-size: 20px;"></td>
+                    </table>
+                    {% for item in comments %}
+                    {% if item.post_id == post.id %}
+                    <script>
+                        count+=1;
+                        document.getElementById('count_comment{{post.id}}').innerText=count;
+                    </script>
+                    {% endif %}
+                    {%endfor%}
+                    
+                    <script>
+                        if(document.getElementById('count_comment{{post.id}}').innerText==0)
+                        {
+                            document.getElementById('cmnt-count-show{{post.id}}').style.display='none';
+                        }
+                    </script>
+                </div>
+                                    {% endif %}
+                                   <td>
+                                       <button type="submit" value="Like-on-{{post.id}}" id="l10-{{post.id}}" name="like" style="border: none; background: none;">
+    
+                                    <span class="react-act imageClass" id="like-i-{{post.id}}"><img src="{% static 'icon/like-i.png' %}"></span>
+                                    <span class="none-react-post react-act active-btn" id="like-a-{{post.id}}"><img src="{% static 'icon/like.png' %}"></span>
+    
+                                    {% for lk in like_unlike %}
+    
+                                    {% if lk.post_id == post.id and lk.user_id == mydetials.owner_id %}
+                                           {% if lk.value == 'Like' %}
+                                        <script>
                                         var status_like = "Like";
                                         var inactive_like = document.getElementById("like-i-{{post.id}}");
                                         if(status_like=="Like")
@@ -340,23 +371,13 @@
                                         }
                                          </script>
     
-                                {% endif %}
-                                {% endif %}
-                                {% endfor %}
-                                   </button></td>
-                            <td>Like</td>
-                        </table><script>
-                            var status_like = "Like";
-                            var inactive_like = document.getElementById("like-i-{{post.id}}");
-                            if(status_like=="Like")
-                            {
-                                document.getElementById("like-i-{{post.id}}").style.display="none";
-                                document.getElementById("like-a-{{post.id}}").style.display="block";
-                                document.getElementById("number-{{post.id}}").style.color="#0082c1";
-                                document.getElementById("number-{{post.id}}").style.fontWeight="bold";
-                            }
-                             </script>
-
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    </button>
+                                </td>
+                                <td>Like</td>
+                            </table>
                         </form>
                         </li>
                         <li>
