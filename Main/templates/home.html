@@ -364,6 +364,7 @@
                                     {
                                         var lng = position.coords.longitude;
                                         var lat = position.coords.latitude;
+                                    
                                         console.log(lng);
                                         console.log(lat);
 
@@ -371,19 +372,27 @@
                                         var map = new mapboxgl.Map({
                                             container: 'map', // container id
                                             style: 'mapbox://styles/mapbox/streets-v11',
-                                            center: [position.coords.longitude, position.coords.longitude], // starting position
-                                            zoom: 3 // starting zoom
+                                            center: [lng,lat], // starting position
+                                            zoom: 15 // starting zoom
                                         });
 
-                                        // Add geolocate control to the map.
-                                        map.addControl(
-                                            new mapboxgl.GeolocateControl({
-                                                positionOptions: {
-                                                    enableHighAccuracy: true
-                                                },
-                                                trackUserLocation: true
-                                            })
-                                        );
+                                        // Initialize the geolocate control.
+                                        var geolocate = new mapboxgl.GeolocateControl({
+                                        positionOptions: {
+                                            enableHighAccuracy: false
+                                        },
+                                        trackUserLocation: true
+                                        });
+                                        // console.log(geolocate)
+                                        // // Add the control to the map.
+                                        map.addControl(geolocate);
+                                        console.log(geolocate)
+                                        // // Set an event listener that fires
+                                        // // when a geolocate event occurs.
+                                        // geolocate.on('geolocate', function() {
+                                        // console.log('A geolocate event has occurred.')
+                                        // });
+                                        
                                         $.ajax({
                                             type: "POST",
                                             url: 'get_location',
@@ -392,6 +401,7 @@
 
                                                 "lng": lng,
                                                 "lat": lat,
+                                                
                                             },
                                             dataType: "json",});
                                     });

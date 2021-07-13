@@ -2,7 +2,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from discover.models import followers
 
-from discover.models import interest,user_coordinate
+from discover.models import interest
 
 from complete.models import userdetails
 from .models import registration, support, userpost, Like, comment

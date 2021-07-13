@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 from home.models import registration
@@ -19,7 +20,8 @@ class interest(models.Model):
     def __str__(self):
         return self.my_interest
 
-class user_coordinate(models.Model):
+class user_location_data(models.Model):
     user=models.ForeignKey(registration,on_delete=models.CASCADE)
     latitude=models.FloatField(max_length=50,blank=True)
     longitude=models.FloatField(max_length=50,blank=True)
+    address=models.CharField(max_length=500,blank=True)
