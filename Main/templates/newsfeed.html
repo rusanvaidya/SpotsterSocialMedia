@@ -391,15 +391,18 @@
                                 </table>
                             </div>
                         </div>
+                        <form method="post" action="edit_post">{% csrf_token %}
+                            <input type="hidden" name="postid" value="{{post.id}}">
+                            <input type="hidden" name="authorid" value="{{mydetials.owner_id}}">
                         <div class="caption-share">
-                            <textarea placeholder="Write your thoughts...">{{post.usercontent}}</textarea>
+                            <textarea placeholder="Write your thoughts..." name="edit_caption" required>{{post.usercontent}}</textarea>
                         </div>
                         <div class="feeling-cmnt-section border-share-content">
                             <div class="cmnt-on-this" id="share-on-this-{{post.id}}">
                                 <img src="media/{{post.userfile}}" id="share-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-share-{{post.id}}').style.display='none'">
                             </div>
                         </div>
-                        <form>
+
                             <div class="submit-cmnt">
                                 <input type="submit" value="Save">
                             </div>
