@@ -198,12 +198,14 @@
                         <div class="cmnt-on-this" id="cmnt-on-this-{{post.id}}">
                             <img src="media/{{post.userfile}}" id="cmnt-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-comment-{{post.id}}').style.display='none'">
                         </div>
-                        <form>
+                        <form method="post" action="comment_post">{% csrf_token %}
+                            <input type="hidden" name="postid" value="{{post.id}}">
+                            <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
                             <div class="view-cmnt">
-                                <a href="post">View all Comments</a>
+                                <a href="post_comment?pid={{post.id}}">View all Comments</a>
                             </div>
                             <div class="give-cmnt">
-                                <textarea placeholder="Write Comment Here..."></textarea>
+                                <textarea placeholder="Write Comment Here..." name="comment" required></textarea>
                             </div>
                             <div class="submit-cmnt">
                                 <input type="submit" value="Comment">
