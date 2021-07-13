@@ -32,6 +32,7 @@
                     <button id="light" title="Light"><img src="{% static 'icon/light.png' %}"></button>
                     <button id="dark" title="Dark" style="display: none;"><img src="{% static 'icon/dark.png' %}"></button>
                 </div>
+                {% block form_container %}
                 <div class="login_container" id="lc">
                     <div class="logo">Spotster</div>
                     <div class="signin-form">
@@ -44,7 +45,7 @@
                             <label for="password">Password : </label>
                             <input type="password" placeholder="Password" name="password" minlength="6" maxlength="15">
                             <div class="forgot">
-                                <a href="">Forgot Password?</a>
+                                <a href="forgot">Forgot Password?</a>
                             </div>
                             <div>
                                 <input type="submit" value="Login">
@@ -190,6 +191,7 @@
                         <button id="login-btn">Login</button>
                     </div>  
                 </div>
+                {% endblock %}
                 <footer>
                     <div>
                     <ul>
