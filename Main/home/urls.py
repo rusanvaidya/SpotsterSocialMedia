@@ -26,7 +26,6 @@ urlpatterns = [
     path('content_post', views.user_post,name='user_post'),
     path('logout', views.logout),
     path('support',views.support_view,name='supportpage'),
-    path('get_location', views.get_location, name='get_location'),
     path('notification', views.notification),
     path('post_comment', views.post_comment,name='post_comment'),
     path('comment_post', views.comment_post,name='comment_post'),
