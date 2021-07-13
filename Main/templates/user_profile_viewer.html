@@ -265,6 +265,36 @@
                     document.getElementById('new{{post.id}}').style.display='none';
                     }
                 </script>
+                <div style="width: 100%;">
+                    {% if post.num_likes > 0 %}
+                    <table style="display:inline">
+                        <td class="react-act imageClass"><img style="width: 20px" src="{% static 'icon/like.png' %}"></td>
+                        <td id="number-{{post.id}}" style="font-size: 20px;">{{post.num_likes}}</td>
+                    </table>
+                    {% endif %}
+                    <script>
+                        var count=0
+                    </script>
+                    <table style="display: inline;" id="cmnt-count-show{{post.id}}">
+                        <td><img src="{% static 'icon/comment.png' %}" style="width: 20px"></td>
+                        <td id='count_comment{{post.id}}' style="font-size: 20px;"></td>
+                    </table>
+                    {% for item in comments %}
+                    {% if item.post_id == post.id %}
+                    <script>
+                        count+=1;
+                        document.getElementById('count_comment{{post.id}}').innerText=count;
+                    </script>
+                    {% endif %}
+                    {%endfor%}
+                    
+                    <script>
+                        if(document.getElementById('count_comment{{post.id}}').innerText==0)
+                        {
+                            document.getElementById('cmnt-count-show{{post.id}}').style.display='none';
+                        }
+                    </script>
+                </div>
                 <div class="post-react">
                     <ul>
                         <li>
@@ -306,12 +336,6 @@
                         <li>
                             <table class="tab-comment" onclick="document.getElementById('give-comment-{{post.id}}').style.display='block';">
                                 <td><img src="{% static 'icon/comment.png' %}"></td>
-                                <td>2k</td>
-                            </table>
-                        </li>
-                        <li>
-                            <table class="tab-share" onclick="document.getElementById('give-share-{{post.id}}').style.display='block';">
-                                <td><img src="{% static 'icon/share.png' %}"></td>
                                 <td>2k</td>
                             </table>
                         </li>
@@ -500,7 +524,7 @@
     <div id="my-settings">
 
     </div>
-    <div id="other-interests">
+    <div id="other-interests" style="display: none;">
 <!--        <form method="post">{% csrf_token %}-->
         <div class="interest-list">
             <div class="interest-listing">

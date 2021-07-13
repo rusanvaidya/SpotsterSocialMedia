@@ -149,7 +149,7 @@
                     <div class="about-post" id="ap-{{post.id}}">
                         <ul>
                             {% if post.author_id == mydetials.owner_id %}
-                                <li><button>Edit this post</button></li>
+                                <li><button onclick="document.getElementById('edit-this-{{post.id}}').style.display='block'">Edit this post</button></li>
                                 <li><button onclick="document.getElementById('del-warn{{post.id}}').style.display='block'">Delete this post</button></li>
                             {% endif %}
                                 
@@ -212,6 +212,36 @@
                     </div>
                 </div>
             </div>
+            <div style="width: 100%;">
+                {% if post.num_likes > 0 %}
+                <table style="display:inline">
+                    <td class="react-act imageClass"><img style="width: 20px" src="{% static 'icon/like.png' %}"></td>
+                    <td id="number-{{post.id}}" style="font-size: 20px;">{{post.num_likes}}</td>
+                </table>
+                {% endif %}
+                <script>
+                    var count=0
+                </script>
+                <table style="display: inline;" id="cmnt-count-show{{post.id}}">
+                    <td><img src="{% static 'icon/comment.png' %}" style="width: 20px"></td>
+                    <td id='count_comment{{post.id}}' style="font-size: 20px;"></td>
+                </table>
+                {% for item in comments %}
+                {% if item.post_id == post.id %}
+                <script>
+                    count+=1;
+                    document.getElementById('count_comment{{post.id}}').innerText=count;
+                </script>
+                {% endif %}
+                {%endfor%}
+                
+                <script>
+                    if(document.getElementById('count_comment{{post.id}}').innerText==0)
+                    {
+                        document.getElementById('cmnt-count-show{{post.id}}').style.display='none';
+                    }
+                </script>
+            </div>
             <div class="post-react">
                 <ul>
                     <li>
@@ -221,6 +251,36 @@
                             <table id="table-like-{{post.id}}" class="tab-like">
                                 {% if like_unlike is None %}
                                 <td class="react-act imageClass"><img src="{% static 'icon/like-i.png' %}"></td>
+                                <td>Like</td><div style="width: 100%;">
+                {% if post.num_likes > 0 %}
+                <table style="display:inline">
+                    <td class="react-act imageClass"><img style="width: 20px" src="{% static 'icon/like.png' %}"></td>
+                    <td id="number-{{post.id}}" style="font-size: 20px;">{{post.num_likes}}</td>
+                </table>
+                {% endif %}
+                <script>
+                    var count=0
+                </script>
+                <table style="display: inline;" id="cmnt-count-show{{post.id}}">
+                    <td><img src="{% static 'icon/comment.png' %}" style="width: 20px"></td>
+                    <td id='count_comment{{post.id}}' style="font-size: 20px;"></td>
+                </table>
+                {% for item in comments %}
+                {% if item.post_id == post.id %}
+                <script>
+                    count+=1;
+                    document.getElementById('count_comment{{post.id}}').innerText=count;
+                </script>
+                {% endif %}
+                {%endfor%}
+                
+                <script>
+                    if(document.getElementById('count_comment{{post.id}}').innerText==0)
+                    {
+                        document.getElementById('cmnt-count-show{{post.id}}').style.display='none';
+                    }
+                </script>
+            </div>
                                 {% endif %}
                                <td>
                                    <button type="submit" value="Like-on-{{post.id}}" id="l10-{{post.id}}" name="like" style="border: none; background: none;">
@@ -248,44 +308,14 @@
                                 {% endfor %}
                                 </button>
                             </td>
-                            <td id="number-{{post.id}}">{{post.num_likes}}</td>
+                            <td>Like</td>
                         </table>
                     </form>
                     </li>
                     <li>
                         <table class="tab-comment" onclick="document.getElementById('give-comment-{{post.id}}').style.display='block';">
                             <td><img src="{% static 'icon/comment.png' %}"></td>
-                            <td id='count_comment{{post.id}}'></td>
-                            <script>
-                                var count=0
-                                document.getElementById('count_comment{{post.id}}').innerText=count
-                                
-                            </script>
-                            {% for item in comments %}
-                            
-                            {% if item.post_id == post.id %}
-                            
-                            <script>
-                                count+=1
-                                
-
-                                document.getElementById('count_comment{{post.id}}').innerText=count
-                            </script>
-                           {% endif %}
-                        
-
-                            
-
-        
-                            {%endfor%}
-
-                        </table>
-
-                    </li>
-                    <li>
-                        <table class="tab-share" onclick="document.getElementById('give-share-{{post.id}}').style.display='block';">
-                            <td><img src="{% static 'icon/share.png' %}"></td>
-                            <td>2k</td>
+                            <td>Comment</td>
                         </table>
                     </li>
                 </ul>
@@ -338,12 +368,12 @@
                     </div>
                 </div>
 
-                <div class="view-posted-content" id="give-share-{{post.id}}">
+                <div class="view-posted-content" id="edit-this-{{post.id}}">
                     <div class="modal comment-content">
                         <div class="modaltop">
                             <div class="modalheader">
                                 <div class="closebutton">
-                                    <span onclick="document.getElementById('give-share-{{post.id}}').style.display='none';">&times;</span>
+                                    <span onclick="document.getElementById('edit-this-{{post.id}}').style.display='none';">&times;</span>
                                 </div>
                                 <table>
                                     {% for i in user %}
@@ -353,40 +383,25 @@
                                     <td class="new-poster"><img src="{% static 'img/defaultpp.jpg' %}"></td>
                                     {% endif %}
                                     <td class="u-fullname"><a href="view_profile?id={{p.id}}">{{i.first_name}} {{i.last_name}}</a></td>
+                                    {% if post.emoji != '' %}
+                                    <td>{{post.feeling}}</td>
+                                    <td class="femoji"><img src='/static/{{post.emoji}}'></td>    
+                                    {% endif %}
                                     {% endfor %}
                                 </table>
                             </div>
                         </div>
                         <div class="caption-share">
-                            <textarea placeholder="Write your thoughts..."></textarea>
+                            <textarea placeholder="Write your thoughts...">{{post.usercontent}}</textarea>
                         </div>
                         <div class="feeling-cmnt-section border-share-content">
-                            <table class="other-user-content">
-                                {% for bio in userdata %}
-                                {% if bio.owner_id == post.author_id %}
-                                {% if bio.profile_pic != '' %}
-                                <td><img src="media/{{bio.profile_pic}}"></td>
-                                {% else %}
-                                <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                {% endif %}
-                                {% endif %}
-                                {% endfor %}
-                                <td class="u-fullname"><a href="view_profile?id={{p.id}}">{{p.first_name}} {{p.last_name}}</a></td>
-                            </table>
-                            <table>
-                            {% if post.emoji != '' %}
-                                <td>~ {{post.feeling}}</td>
-                                <td class="femoji"><img src='/static/{{post.emoji}}'></td>
-                            {% endif %}
-                            </table>
-                            <div class="caption" id="share-{{post.id}}">{{post.usercontent}}</div>
                             <div class="cmnt-on-this" id="share-on-this-{{post.id}}">
-                            <img src="media/{{post.userfile}}" id="share-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-share-{{post.id}}').style.display='none'">
-                        </div>
+                                <img src="media/{{post.userfile}}" id="share-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-share-{{post.id}}').style.display='none'">
+                            </div>
                         </div>
                         <form>
                             <div class="submit-cmnt">
-                                <input type="submit" value="Share">
+                                <input type="submit" value="Save">
                             </div>
                         </form>
                     </div>

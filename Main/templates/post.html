@@ -91,6 +91,21 @@
                   </div>
               </div>
           </div>
+          <div style="width: 100%;">
+            {% if post.num_likes > 0 %}
+            <table style="display:inline">
+                <td class="react-act imageClass"><img style="width: 20px" src="{% static 'icon/like.png' %}"></td>
+                <td id="number-{{post.id}}" style="font-size: 20px;">{{post.num_likes}}</td>
+            </table>
+            {% endif %}
+            {% if comment_count > 0 %}
+            <table style="display: inline;" id="cmnt-count-show{{post.id}}">
+                <td><img src="{% static 'icon/comment.png' %}" style="width: 20px"></td>
+                <td id='count_comment{{post.id}}' style="font-size: 20px;">{{comment_count}}</td>
+            </table>
+            {% endif %}
+        </div>
+        
           <div class="post-react">
               <ul>
                   <li>
@@ -126,20 +141,14 @@
                                 {% endfor %}
                                 </button>
                             </td>
-                            <td id="number-{{post.id}}">{{post.num_likes}}</td>
+                            <td id="number-{{post.id}}">Like</td>
                       </table>
                       </form>
                   </li>
                   <li>
                       <table class="tab-comment" onclick="document.getElementById('give-comment-{{post.id}}').style.display='block';">
                           <td><img src="{% static 'icon/comment.png' %}"></td>
-                          <td>{{comment_count}}</td>
-                      </table>
-                  </li>
-                  <li>
-                      <table class="tab-share" onclick="document.getElementById('give-share-{{post.id}}').style.display='block';">
-                          <td><img src="{% static 'icon/share.png' %}"></td>
-                          <td>2k</td>
+                          <td>Comment</td>
                       </table>
                   </li>
               </ul>
@@ -330,20 +339,40 @@
         {% for det in pu %}
         {% for bio in userdata %}
         {% if bio.owner_id == comme.user_id and comme.user_id == det.id %}
-          <li>
-            <table>
-              {% if bio.profile_pic != '' %}
-              <td><img src="media/{{bio.profile_pic}}"></td>
-              {% else %}
-              <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-              {% endif %}
-              <td class="u-fullname"><a href="view_profile?id={{det.id}}">{{det.first_name}} {{det.last_name}}</a></td>
-            </table>
-             <div class="time-post">{{comme.created_date}}</div>
-            <div class="commented-section">
-              {{comme.comments}}
+            <div class="feedsocket">
+                <div class="feedpost">
+      
+                    <div class="user-who-posted">
+                        <div class="u-name">
+                            <table>
+                                {% if bio.profile_pic != '' %}
+                                <td><img src="media/{{bio.profile_pic}}"></td>
+                                {% else %}
+                                <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                                {% endif %}
+                                <td class="u-fullname"><a href="view_profile?id={{det.id}}" id=>{{det.first_name}} {{det.last_name}}</a></td>
+                            </table>
+                        </div>
+                        <div class="u-edit">
+                            <button style="background-color: transparent; border: none;" id="del-cmnt-bnt-{{det.id}}"><img src="{% static 'icon/delete.png' %}" class="post-drop" id="del-cmnt-{{det.id}}" style="width: 25px; height: 30px;"></button>
+                        </div>
+                    </div>
+                    <div class="time-post">{{comme.created_date}}</div>
+                    <div class="commented-section">
+                    {{comme.comments}}
+                    </div>
+                    <script>
+                        document.getElementById('del-cmnt-{{det.id}}').onmouseenter = function()
+                        {
+                            document.getElementById('del-cmnt-{{det.id}}').setAttribute("src", "{% static 'icon/delete-open.png' %}")
+                        }
+                        document.getElementById('del-cmnt-{{det.id}}').onmouseleave = function()
+                        {
+                            document.getElementById('del-cmnt-{{det.id}}').setAttribute("src", "{% static 'icon/delete.png' %}")
+                        }
+                    </script>
+                </div>
             </div>
-          </li>
         {% endif %}
         {% endfor %}
         {% endfor %}

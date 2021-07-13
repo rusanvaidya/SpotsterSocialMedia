@@ -458,7 +458,7 @@
 .feedsocket .feedpost .post-react ul li
 {
     display: inline-block;
-    width: 32%;
+    width: 49%;
     text-align: center;
 }
 .feedsocket .feedpost .post-react ul li table
@@ -489,7 +489,7 @@
 }
 .like-on-this-post
 {
-    color: #0082c1;
+    color: #2db415;
     font-weight: bold;
 }
 .dislike-on-this-post
@@ -499,7 +499,7 @@
 }
 .post-react ul li table.tab-like:hover
 {
-    background-color: rgba(0, 128, 128, 0.30);
+    background-color: rgba(55, 134, 9, 0.37);
     cursor: pointer;
 }
 .post-react ul li table.tab-dislike:hover
@@ -509,7 +509,7 @@
 }
 .post-react ul li table.tab-comment:hover
 {
-    background-color: rgba(47, 128, 0, 0.240);
+    background-color: rgba(18, 87, 165, 0.384);
     cursor: pointer;
 }
 .post-react ul li table.tab-share:hover
