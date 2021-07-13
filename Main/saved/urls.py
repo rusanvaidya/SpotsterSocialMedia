@@ -22,5 +22,6 @@ urlpatterns = [
     path('saved_post', views.saved_post,name= 'saved_post'),
     path('remove_post', views.remove_post,name= 'remove_post'),
     path('delete_post', views.delete_post,name= 'delete_post'),
+    path('edit_post', views.edit_post,name= 'edit_post'),
     path('flag_post', views.flag_post,name= 'flag_post'),
 ]

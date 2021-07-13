@@ -115,6 +115,20 @@ def delete_post(request):
     messages.info(request,"Your Post is Deleted!!!")
     return redirect('profile')
 
+
+def edit_post(request):
+    postid = request.POST['postid']
+    authorid = request.POST['authorid']
+    editcaption = request.POST['edit_caption']
+    edit = userpost.objects.get(author_id=int(authorid), id=int(postid))
+    edit.usercontent = editcaption
+    edit.save()
+    messages.info(request, "Your Post is edited!!!")
+    return redirect('profile')
+
+
+
+
 def flag_post(request):
     userid = request.POST['userid']
     postid = request.POST['postid']
