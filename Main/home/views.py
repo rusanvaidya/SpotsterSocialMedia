@@ -2,9 +2,9 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from discover.models import followers
 
-from discover.models import interest
+from discover.models import interest,user_coordinate
 
-from complete.models import userdetails, user_coordinates
+from complete.models import userdetails
 from .models import registration, support, userpost, Like, comment
 from django.contrib import messages
 from itertools import chain

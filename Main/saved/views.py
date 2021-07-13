@@ -10,7 +10,7 @@ from complete.models import userdetails
 
 from saved.models import user_saved_post,flag_inappropriate
 
-from home.models import userpost
+from home.models import userpost,comment
 
 from home.models import Like
 
@@ -67,9 +67,14 @@ def saved(request):
         savepost = user_saved_post.objects.filter(user_id = userid).order_by('created_date')
         other_user = registration.objects.all().exclude(email=email)
         like_unlike = None
+        comments=None
         try:
             like_unlike = Like.objects.all()
 
+        except:
+            pass
+        try:
+            comments=comment.objects.all()
         except:
             pass
         dict1 = {
@@ -85,7 +90,8 @@ def saved(request):
             'mydetials': mydetials,
             'userdata': user_data,
             'savepost':savepost,
-            'like_unlike':like_unlike}
+            'like_unlike':like_unlike,
+            'comments':comments}
 
         return render(request, 'saved.html', dict1)
 

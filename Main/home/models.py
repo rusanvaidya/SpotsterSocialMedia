@@ -59,6 +59,10 @@ class comment(models.Model):
 
     class Meta:
         ordering = ('-created_date',)
+    
+    @property
+    def num_comments(self):
+        return self.comment.all().count()
 
 class support(models.Model):
     name=models.CharField(max_length=30)
