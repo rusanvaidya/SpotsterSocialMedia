@@ -272,8 +272,11 @@ def get_search(request):
 
         if float(friend_distance)<=float(distance):
             matched_user_id.append(i)
-            # detail=registration.objects.get(id=i)
-            # print(detail.first_name+' '+detail.last_name)
+            
+    u_data=[]
+    for i in matched_user_id:
+        userdata=registration.objects.filter(id=i)
+        u_data.append(userdata)
     
     return render(request, 'index.html')
 
