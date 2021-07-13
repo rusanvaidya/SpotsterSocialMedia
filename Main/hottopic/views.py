@@ -1,7 +1,7 @@
 from itertools import chain
 import pathlib
 from django.shortcuts import render
-from home.models import registration,Like
+from home.models import registration,Like,comment
 from discover.models import followers
 
 from home.models import userpost
@@ -74,6 +74,12 @@ def video(request):
             except:
                 pass
 
+            comments = None
+            try:
+                comments = comment.objects.all()
+            except:
+                pass
+
             allpost = userpost.objects.all()
             vid_collection = []
 
@@ -102,7 +108,8 @@ def video(request):
                 'userdata':user_data,
                 'allpost':allpost,
                 'collect_video':collect_video,
-                'like_unlike': like_unlike}
+                'like_unlike': like_unlike,
+                'comments':comments}
 
 
             return render(request, 'video.html', dict1)
