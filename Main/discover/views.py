@@ -1,9 +1,9 @@
 from itertools import chain
-
+import requests
 from django.shortcuts import render, redirect
 from home.models import registration
 # Create your views here.
-from discover.models import followers,interest,user_coordinate
+from discover.models import followers,interest,user_location_data
 from complete.models import userdetails
 
 from home.models import userpost
@@ -206,18 +206,31 @@ def get_location(request):
 
     lng=float(request.POST.get('lng'))
     lat=float(request.POST.get('lat'))
-    
+    # print(lng)
+    # print(lat)
+    url='https://api.mapbox.com/geocoding/v5/mapbox.places/'+str(lng)+','+str(lat)+'.json?sypes=address&access_token=pk.eyJ1Ijoic2FtaXI4NDc1MyIsImEiOiJja29mbTFiMGMwbm10MnVyMGs2MGJwM2FyIn0.AVzoRvG6EmclKtdIsSeRkw'
+    address=requests.get(url).json()
+
+    locality=address['features'][0]['context'][0]['text']
+    place=address['features'][0]['context'][1]['text']
+    district=address['features'][0]['context'][2]['text']
+    region=address['features'][0]['context'][3]['text']
+    country=address['features'][0]['context'][4]['text']
+   
+    address=locality+','+district+','+country
+
     user=registration.objects.get(email=email)
     user_id=user.id
 
-    if user_coordinate.objects.filter(user_id=user_id).exists()==False:
-        user_location=user_coordinate(user_id=user_id,latitude=lat,longitude=lng)
+    if user_location_data.objects.filter(user_id=user_id).exists()==False:
+        user_location=user_location_data(user_id=user_id,latitude=lat,longitude=lng,address=address)
         user_location.save()
     else:
-        user_location=user_coordinate.objects.get(user_id=user.id)
+        user_location=user_location_data.objects.get(user_id=user.id)
         user_location.latitude=lat
         user_location.longitude=lng
-        user_location.save(update_fields=['latitude','longitude'])
+        user_location.address=address
+        user_location.save(update_fields=['latitude','longitude','address'])
         
     
        
