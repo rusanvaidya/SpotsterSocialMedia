@@ -371,7 +371,18 @@
                                     {
                                         var lng = position.coords.longitude;
                                         var lat = position.coords.latitude;
-                                    
+                                        
+                                        $.ajax({
+                                            type: "POST",
+                                            url: 'get_location',
+                                            data: {
+                                            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+
+                                                "lng": lng,
+                                                "lat": lat,
+                                                
+                                            },
+                                            dataType: "json",});
                                         // console.log(lng);
                                         // console.log(lat);
 
@@ -390,14 +401,14 @@
                                         },
                                         trackUserLocation: true
                                         });
+                                        
                                         // console.log(geolocate)
                                         // // Add the control to the map.
                                         map.addControl(geolocate);
                                         map.addControl(new mapboxgl.FullscreenControl());
+                                         // Create a default Marker and add it to the map.
                                         
-                                        // Create a default Marker and add it to the map.
-                                        
-                                        var d = JSON.parse("{{json_coor|escapejs}}");
+                                         var d = JSON.parse("{{json_coor|escapejs}}");
                                         var len_d=d.length;
                                         for (var i=0; i<len_d; i++){
                                             new mapboxgl.Marker({ color: 'black', rotation: 45 })
@@ -405,14 +416,6 @@
                                             .addTo(map);
                                             
                                         }
-                                        
-
-                                        // // Set an event listener that fires
-                                        // // when a geolocate event occurs.
-                                        // geolocate.on('geolocate', function() {
-                                        // console.log('A geolocate event has occurred.')
-                                        // });
-                                        
                                         $.ajax({
                                             type: "POST",
                                             url: 'get_location',
@@ -425,6 +428,7 @@
                                             },
                                             dataType: "json",});
                                     });
+                                    
                                 }
 
                             </script>

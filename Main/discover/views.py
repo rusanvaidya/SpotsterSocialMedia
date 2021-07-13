@@ -267,7 +267,7 @@ def get_search(request):
     matched_user_id=[]
     matched_user_coordinate=[]
     for i in user_match:
-        friend=user_location_data.objects.filter(user_id=i)
+        friend=user_location_data.objects.get(user_id=i)
         coordinate=(friend.latitude,friend.longitude)
        
         friend_distance=calc_distance(user_cord,coordinate)
