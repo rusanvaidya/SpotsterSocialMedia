@@ -5,7 +5,8 @@ from home.models import registration
 # Create your views here.
 from discover.models import followers,interest,user_location_data
 from complete.models import userdetails
-
+from json import dumps
+import json
 from home.models import userpost
 
 
@@ -274,9 +275,10 @@ def get_search(request):
         if float(friend_distance)<=float(distance):
             matched_user_coordinate.append(coordinate)
             matched_user_id.append(i)  
-       
+
+    json_coor=json.dumps(matched_user_coordinate)
+
     u_data=[]
-   
     for i in matched_user_id:
         userdata=registration.objects.filter(id=i)
         u_data.append(userdata)
@@ -322,6 +324,7 @@ def get_search(request):
         'userdata': user_data,
         'interests': interests,
         'u_data':u_data,
-        'matched_user_coordinate':matched_user_coordinate }
+        'json_coor':json_coor }
+   
 
     return render(request, 'discover.html', dict1)
