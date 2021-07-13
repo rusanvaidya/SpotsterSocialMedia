@@ -83,6 +83,11 @@ def profile(request):
 
         except:
             pass
+        comments = None
+        try:
+            comments = comment.objects.all()
+        except:
+            pass
 
         dict1 = {
             'email': email,
@@ -97,7 +102,8 @@ def profile(request):
             'pu':pu,
             'mydetials':mydetials,
             'like_unlike': like_unlike,
-            'userdata':user_data}
+            'userdata':user_data,
+            'comments':comments}
         return render(request, 'profile.html',dict1)
 
     return render(request,'index.html')
@@ -149,6 +155,12 @@ def profile_update(request):
 
         except:
             pass
+
+        comments = None
+        try:
+            comments = comment.objects.all()
+        except:
+            pass
         dict1 = {
             'email': email,
             'user': user,
@@ -162,7 +174,8 @@ def profile_update(request):
             'pu': pu,
             'mydetials': mydetials,
             'like_unlike': like_unlike,
-            'userdata': user_data}
+            'userdata': user_data,
+            'comments':comments}
 
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -274,6 +287,12 @@ def interest_update(request):
         except:
             pass
 
+        comments = None
+        try:
+            comments = comment.objects.all()
+        except:
+            pass
+
         inte = request.POST.getlist('interest')
         if inte:
             interestupdate = userdetails.objects.get(owner_id = usr_id)
@@ -299,7 +318,8 @@ def interest_update(request):
             'pu': pu,
             'mydetials': mydetials,
             'like_unlike': like_unlike,
-            'userdata': user_data}
+            'userdata': user_data,
+            'comments':comments}
         return render(request, "profile.html",dict1)
 
 def view_profile(request):
