@@ -2,17 +2,13 @@ from itertools import chain
 
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from home.models import registration
+from home.models import registration,comment,userpost,Like
 # Create your views here.
 from discover.models import followers
 
 from complete.models import userdetails
 
 from saved.models import user_saved_post,flag_inappropriate
-
-from home.models import userpost,comment
-
-from home.models import Like
 
 
 def saved(request):
@@ -67,14 +63,15 @@ def saved(request):
         savepost = user_saved_post.objects.filter(user_id = userid).order_by('created_date')
         other_user = registration.objects.all().exclude(email=email)
         like_unlike = None
-        comments=None
         try:
             like_unlike = Like.objects.all()
 
         except:
             pass
+
+        comments = None
         try:
-            comments=comment.objects.all()
+            comments = comment.objects.all()
         except:
             pass
         dict1 = {

@@ -1,5 +1,5 @@
 .env
-spotster_venv
+svenv
 __pycache__
 migrations
 media

@@ -77,17 +77,18 @@ def profile(request):
         user_data = userdetails.objects.all()
 
         like_unlike = None
-        comments=None
         try:
             like_unlike = Like.objects.all()
 
 
         except:
             pass
+        comments = None
         try:
-            comments=comment.objects.all()
+            comments = comment.objects.all()
         except:
             pass
+
         dict1 = {
             'email': email,
             'user': user,
@@ -148,15 +149,16 @@ def profile_update(request):
         user_data = userdetails.objects.all()
 
         like_unlike = None
-        comments=None
         try:
             like_unlike = Like.objects.all()
 
 
         except:
             pass
+
+        comments = None
         try:
-            comments=comment.objects.all()
+            comments = comment.objects.all()
         except:
             pass
         dict1 = {
@@ -278,7 +280,6 @@ def interest_update(request):
         user_data = userdetails.objects.all()
 
         like_unlike = None
-        comments=None
         try:
             like_unlike = Like.objects.all()
 
@@ -286,10 +287,12 @@ def interest_update(request):
         except:
             pass
 
+        comments = None
         try:
-            comments=comment.objects.all()
+            comments = comment.objects.all()
         except:
             pass
+
         inte = request.POST.getlist('interest')
         if inte:
             interestupdate = userdetails.objects.get(owner_id = usr_id)
@@ -373,6 +376,12 @@ def view_profile(request):
             like_unlike = Like.objects.all()
 
 
+        except:
+            pass
+
+        comments = None
+        try:
+            comments = comment.objects.all()
         except:
             pass
 

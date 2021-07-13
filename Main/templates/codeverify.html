@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% block form_container %}
+<style>
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button 
+{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] 
+{
+    -moz-appearance: textfield;
+}
+</style>
+<div class="forgot_container">
+    <div class="logo">Spotster</div>
+    <div class="signin-form">
+        
+        <!-- login form -->
+        <h3></h3>
+        <form method="POST" action="reset">
+            {% csrf_token %}
+            <label for="code">Code : </label>
+            <input type="number" placeholder="Code" name="code" required>
+            
+            <div class="policy">
+                Enter the code recieved in your email.    
+            </div>
+            <div>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <!-- sign up button -->
+    <div class="signup-btn">
+        <button onclick="window.open('/','_self')">Login</button>
+    </div>                    
+</div>
+{% endblock %}

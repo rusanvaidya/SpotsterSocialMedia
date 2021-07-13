@@ -60,6 +60,9 @@
         <div class="my-name">
             {{i.first_name}} {{i.last_name}}
         </div>
+        <div class="my-info">
+            <button style="width: 100%; padding: 8px 12px; background: transparent; color: #2d7b20; border: 2px solid #2d7b20; cursor: pointer;">Following</button>
+        </div>
         {% endfor %}
 
         <div class="my-info my-bio">
@@ -68,18 +71,15 @@
             {% else %}
             {% endif %}
         </div>
-        <div class="my-info my-bio">
-            <button>Following</button>
-            <button>Message</button>
-        </div>
     </div>
+    
     <div class="user-p-timeline">
         <ul>
-            <li><button class="active" id="posts-btn-2">Posts</button></li>
-            <li><button class="inactive" id="interests-btn-2">Interests</button></li>
+            <li><button class="active" id="posts-btn-other">Posts</button></li>
+            <li><button class="inactive" id="interests-btn-other">Interests</button></li>
         </ul>
     </div>
-    <div id="my-posted-contents">
+    <div id="other-posted-contents">
         <div class="new-posting-div">
             <div class="new-pd">
                 <div class="pd-text">
@@ -500,7 +500,7 @@
     <div id="my-settings">
 
     </div>
-    <div id="my-interests">
+    <div id="other-interests">
 <!--        <form method="post">{% csrf_token %}-->
         <div class="interest-list">
             <div class="interest-listing">
@@ -562,6 +562,45 @@
 <!--            </form>-->
     </div>
 </div>
+<script>
+
+var posts2_show_btn = document.getElementById('posts-btn-other');
+var interests_show_btn = document.getElementById('interests-btn-other');
+var posts2_show = document.getElementById('other-posted-contents');
+var interests_show = document.getElementById('other-interests');
+
+posts2_show_btn.onclick = function()
+{
+    posts2_show.style.display = 'block';
+    if(posts2_show_btn.classList == 'inactive')
+    {
+        posts2_show_btn.classList.remove('inactive');
+        posts2_show_btn.classList.toggle('active');
+    }
+    interests_show.style.display = 'none';
+    if(interests_show_btn.classList=='active')
+    {
+        interests_show_btn.classList.remove('active');
+        interests_show_btn.classList.toggle('inactive');
+    }
+}
+interests_show_btn.onclick = function()
+{
+    posts2_show.style.display = 'none';
+    if(posts2_show_btn.classList == 'active')
+    {
+        posts2_show_btn.classList.remove('active');
+        posts2_show_btn.classList.toggle('inactive');
+    }
+    interests_show.style.display = 'block';
+    if(interests_show_btn.classList=='inactive')
+    {
+        interests_show_btn.classList.remove('inactive');
+        interests_show_btn.classList.toggle('active');
+    }
+}
+
+</script>
 
 <script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

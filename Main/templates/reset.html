@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% block form_container %}
+<div class="forgot_container">
+    <div class="logo">Spotster</div>
+    <div class="signin-form">
+        
+        <!-- login form -->
+        <h3></h3>
+        <form method="POST" action="reset">
+            {% csrf_token %}
+            <label for="password">Password : </label>
+            <input type="password" placeholder="Password" name="password" required>
+            
+            <label for="password">Confitm Password : </label>
+            <input type="password" placeholder="Confirm Password" name="re_password" required>
+            
+            <div class="policy">
+                Change your password    
+            </div>
+            <div>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <!-- sign up button -->
+    <div class="signup-btn">
+        <button onclick="window.open('/','_self')">Login</button>
+    </div>                    
+</div>
+{% endblock %}

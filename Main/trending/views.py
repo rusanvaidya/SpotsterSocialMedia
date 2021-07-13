@@ -76,17 +76,19 @@ def trending(request):
             trend = sorted(chain(*trendingpost), reverse=True, key=lambda obj: obj.created)
 
             like_unlike = None
-            comments=None
             try:
                 like_unlike = Like.objects.all()
 
 
             except:
                 pass
+
+            comments = None
             try:
-                comments=comment.objects.all()
+                comments = comment.objects.all()
             except:
                 pass
+
             dict1 = {
                 'email': email,
                 'user': user,

@@ -75,6 +75,12 @@ def video(request):
             except:
                 pass
 
+            comments = None
+            try:
+                comments = comment.objects.all()
+            except:
+                pass
+
             allpost = userpost.objects.all()
             vid_collection = []
 
