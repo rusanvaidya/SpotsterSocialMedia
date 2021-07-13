@@ -2,9 +2,9 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from discover.models import followers
 
-from discover.models import interest
+from discover.models import interest,user_coordinate
 
-from complete.models import userdetails, user_coordinates
+from complete.models import userdetails
 from .models import registration, support, userpost, Like, comment
 from django.contrib import messages
 from itertools import chain
@@ -210,27 +210,6 @@ def support_action(request):
     support_save.save()
     return redirect('supportpage')
 
-def get_location(request):
-    email = request.session['email']
-
-    lng=float(request.POST.get('lng'))
-    lat=float(request.POST.get('lat'))
-    
-    user=registration.objects.get(email=email)
-    user_id=user.id
-
-    if user_coordinates.objects.filter(user_id=user_id).exists()==False:
-        user_location=user_coordinates(user_id=user_id,latitude=lat,longitude=lng)
-        user_location.save()
-    else:
-        user_location=user_coordinates.objects.get(user_id=user.id)
-        user_location.latitude=lat
-        user_location.longitude=lng
-        user_location.save(update_fields=['latitude','longitude'])
-        
-    
-       
-    return render(request, 'index.html')
 
 # import geopy.distance as geodist
 # def calc_distance(cor1,cor2):

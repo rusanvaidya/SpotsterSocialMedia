@@ -18,3 +18,8 @@ class interest(models.Model):
 
     def __str__(self):
         return self.my_interest
+
+class user_coordinate(models.Model):
+    user=models.ForeignKey(registration,on_delete=models.CASCADE)
+    latitude=models.FloatField(max_length=50,blank=True)
+    longitude=models.FloatField(max_length=50,blank=True)

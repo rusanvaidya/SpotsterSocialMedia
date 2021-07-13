@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from home.models import registration,userpost,Like
+from home.models import registration,userpost,Like,comment
 from complete.models import userdetails
 from discover.models import followers,interest
 from itertools import chain
@@ -83,6 +83,11 @@ def profile(request):
 
         except:
             pass
+        comments = None
+        try:
+            comments = comment.objects.all()
+        except:
+            pass
 
         dict1 = {
             'email': email,
@@ -97,7 +102,8 @@ def profile(request):
             'pu':pu,
             'mydetials':mydetials,
             'like_unlike': like_unlike,
-            'userdata':user_data}
+            'userdata':user_data,
+            'comments':comments}
         return render(request, 'profile.html',dict1)
 
     return render(request,'index.html')
@@ -149,6 +155,12 @@ def profile_update(request):
 
         except:
             pass
+
+        comments = None
+        try:
+            comments = comment.objects.all()
+        except:
+            pass
         dict1 = {
             'email': email,
             'user': user,
@@ -162,7 +174,8 @@ def profile_update(request):
             'pu': pu,
             'mydetials': mydetials,
             'like_unlike': like_unlike,
-            'userdata': user_data}
+            'userdata': user_data,
+            'comments':comments}
 
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -274,6 +287,12 @@ def interest_update(request):
         except:
             pass
 
+        comments = None
+        try:
+            comments = comment.objects.all()
+        except:
+            pass
+
         inte = request.POST.getlist('interest')
         if inte:
             interestupdate = userdetails.objects.get(owner_id = usr_id)
@@ -299,7 +318,8 @@ def interest_update(request):
             'pu': pu,
             'mydetials': mydetials,
             'like_unlike': like_unlike,
-            'userdata': user_data}
+            'userdata': user_data,
+            'comments':comments}
         return render(request, "profile.html",dict1)
 
 def view_profile(request):
@@ -351,10 +371,17 @@ def view_profile(request):
         user_data = userdetails.objects.all()
 
         like_unlike = None
+        comments=None
         try:
             like_unlike = Like.objects.all()
 
 
+        except:
+            pass
+
+        comments = None
+        try:
+            comments = comment.objects.all()
         except:
             pass
 
@@ -372,7 +399,10 @@ def view_profile(request):
         except:
 
             pass
-
+        try:
+            comments=comment.objects.all()
+        except:
+            pass
         dict1 = {
             'email': email,
             'user': user,
@@ -390,7 +420,8 @@ def view_profile(request):
             'mydetials': mydetials,
             'udetials': udetials,
             'like_unlike': like_unlike,
-            'userdata': user_data}
+            'userdata': user_data,
+            'comments':comments}
         if int(usrid) == usrs_id:
             return redirect('profile')
         else:

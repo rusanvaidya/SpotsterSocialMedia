@@ -3,7 +3,7 @@ from itertools import chain
 from django.shortcuts import render, redirect
 from home.models import registration
 # Create your views here.
-from discover.models import followers,interest
+from discover.models import followers,interest,user_coordinate
 from complete.models import userdetails
 
 from home.models import userpost
@@ -201,6 +201,28 @@ def following(request):
 
         return render(request, 'following.html', dict1)
 
+def get_location(request):
+    email = request.session['email']
+
+    lng=float(request.POST.get('lng'))
+    lat=float(request.POST.get('lat'))
+    
+    user=registration.objects.get(email=email)
+    user_id=user.id
+
+    if user_coordinate.objects.filter(user_id=user_id).exists()==False:
+        user_location=user_coordinate(user_id=user_id,latitude=lat,longitude=lng)
+        user_location.save()
+    else:
+        user_location=user_coordinate.objects.get(user_id=user.id)
+        user_location.latitude=lat
+        user_location.longitude=lng
+        user_location.save(update_fields=['latitude','longitude'])
+        
+    
+       
+    return render(request, 'index.html')
+    
 def get_search(request):
     interest=request.POST.get('interest')
     distance=request.POST.get('distance')

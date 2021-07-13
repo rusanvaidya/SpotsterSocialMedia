@@ -4,7 +4,7 @@ from django.shortcuts import render
 from home.models import registration
 from discover.models import followers
 
-from home.models import userpost,Like
+from home.models import userpost,Like,comment
 
 from complete.models import userdetails
 from discover.models import interest
@@ -83,6 +83,12 @@ def trending(request):
             except:
                 pass
 
+            comments = None
+            try:
+                comments = comment.objects.all()
+            except:
+                pass
+
             dict1 = {
                 'email': email,
                 'user': user,
@@ -96,7 +102,8 @@ def trending(request):
                 'mydetials':mydetials,
                 'userdata':user_data,
                 'trend':trend,
-                'like_unlike':like_unlike}
+                'like_unlike':like_unlike,
+                'comments':comments}
 
 
             return render(request, 'trending.html', dict1)
