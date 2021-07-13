@@ -480,3 +480,10 @@ def comment_post(request):
         return render(request, 'post.html', dict1)
     else:
         return render(request, 'index.html')
+
+def delete_comment(request):
+    userid = request.POST['userid']
+    commentid = request.POST['commentid']
+    print(userid,commentid)
+    del_comme = comment.objects.filter(user_id = userid , id = commentid ).delete()
+    return redirect(request.META.get('HTTP_REFERER'))

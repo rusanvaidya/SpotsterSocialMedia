@@ -353,9 +353,33 @@
                                 <td class="u-fullname"><a href="view_profile?id={{det.id}}" id=>{{det.first_name}} {{det.last_name}}</a></td>
                             </table>
                         </div>
+                        {% if mydetials.owner_id == comme.user_id %}
                         <div class="u-edit">
-                            <button style="background-color: transparent; border: none;" id="del-cmnt-bnt-{{comme.id}}"><img src="{% static 'icon/delete.png' %}" class="post-drop" id="del-cmnt-{{comme.id}}" style="width: 25px; height: 30px;"></button>
+                            <button style="background-color: transparent; border: none;" id="del-cmnt-bnt-{{comme.id}}" onclick="document.getElementById('del-warn{{comme.id}}').style.display='block'"><img src="{% static 'icon/delete.png' %}" class="post-drop" id="del-cmnt-{{comme.id}}" style="width: 25px; height: 30px;"></button>
                         </div>
+                        {% else %}
+                        <div class="u-edit">
+
+                        </div>
+                        {% endif %}
+                        <div class="view-posted-content" id="del-warn{{comme.id}}">
+                        <div class="warning">
+                            <div>
+                                <h1>Are you sure you want to delete this comment?</h1>
+                            </div>
+                            <div>
+                                <form class="delete-post" method="post" action="delete_comment" id="delete{{comme.id}}"> {% csrf_token %}
+                                    <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
+                                    <input type="hidden" name="commentid" value="{{comme.id}}">
+                                <button class="delbtn" type="submit">Yes</button>
+                                </form>
+                                <button onclick="document.getElementById('del-warn{{comme.id}}').style.display='none'">No</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                     </div>
                     <div class="time-post">{{comme.created_date}}</div>
                     <div class="commented-section">
