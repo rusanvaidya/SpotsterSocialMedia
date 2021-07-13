@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from home.models import registration,userpost,Like
+from home.models import registration,userpost,Like,comment
 from complete.models import userdetails
 from discover.models import followers,interest
 from itertools import chain
@@ -358,6 +358,12 @@ def view_profile(request):
         except:
             pass
 
+        comments = None
+        try:
+            comments = comment.objects.all()
+        except:
+            pass
+
         vcounts = 0
         vcount_following = 0
         try:
@@ -390,7 +396,8 @@ def view_profile(request):
             'mydetials': mydetials,
             'udetials': udetials,
             'like_unlike': like_unlike,
-            'userdata': user_data}
+            'userdata': user_data,
+            'comments':comments}
         if int(usrid) == usrs_id:
             return redirect('profile')
         else:
