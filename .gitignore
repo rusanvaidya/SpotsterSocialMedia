@@ -3,3 +3,5 @@ svenv
 __pycache__
 migrations
 media
+.idea
+.vscode

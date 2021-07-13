@@ -45,3 +45,8 @@
   outline: none;
   color: white;
 }
+.comments-hist ul li table td.u-fullname a
+{
+  color: white;
+  text-decoration: none;
+}
