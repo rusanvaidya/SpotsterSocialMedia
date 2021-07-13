@@ -235,10 +235,45 @@ def get_location(request):
     
        
     return render(request, 'index.html')
-    
+
+import geopy.distance as geodist
+def calc_distance(cor1,cor2):
+    distance=geodist.geodesic(cor1, cor2).km
+    return distance
+
 def get_search(request):
+    email = request.session['email']
+    uid = registration.objects.get(email=email)
+    user_id=uid.id
+    
+
     interest=request.POST.get('interest')
     distance=request.POST.get('distance')
-    print(interest)
-    print(distance)
+    
+    #get user lon,lat
+    user_location=user_location_data.objects.get(user_id=uid.id)
+    user_cord=(user_location.latitude,user_location.longitude)
+    
+    users=userdetails.objects.all().exclude(owner_id=user_id)
+    user_match=[]
+    for i in users:
+        lis=i.user_interest
+        if lis.find(interest) != -1:
+            user_match.append(i.owner.id)
+        else:
+            pass
+            
+    matched_user_id=[]
+    for i in user_match:
+        friend=user_location_data.objects.get(user_id=i)
+        coordinate=(friend.latitude,friend.longitude)
+
+        friend_distance=calc_distance(user_cord,coordinate)
+
+        if float(friend_distance)<=float(distance):
+            matched_user_id.append(i)
+            # detail=registration.objects.get(id=i)
+            # print(detail.first_name+' '+detail.last_name)
+    
     return render(request, 'index.html')
+

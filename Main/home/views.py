@@ -211,10 +211,7 @@ def support_action(request):
     return redirect('supportpage')
 
 
-# import geopy.distance as geodist
-# def calc_distance(cor1,cor2):
-#     distance=geodist.geodesic(cor1, cor2).km
-#     print(distance)
+
 def user_post(request):
     email = request.session['email']
     user_feeling = request.POST['feeling']
