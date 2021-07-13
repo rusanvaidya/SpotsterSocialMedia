@@ -93,6 +93,7 @@
                                     </div>
                                 </li>
                                 <li class="sidemenu" onclick="window.open('profile','_self')">
+                                    
                                     {% for i in user %}
                                     <table>
                                         {% if mydetials.profile_pic != '' %}
@@ -106,6 +107,7 @@
                                         {% endif %}
                                         <td class="c1-label">
                                             &emsp;{{i.first_name}} {{i.last_name}}
+                                            
                                         </td>
                                     </table>
                                 </li>
@@ -157,9 +159,13 @@
                                         </td>
                                         <td class="c1-label">
                                             &emsp;Chatbox
+                                       
+                           
+                        
                                         </td>
                                     </table>
                                 </li>
+
                                 <li class="sidemenu" id="dark_sidemenu">
                                     <table>
                                         <td class="c1-img">
@@ -357,6 +363,7 @@
                             <div class="mapping">
                                 <div id="map"></div>
                             </div>
+                            
                             <script>
                                 if ( navigator.geolocation )
                                 {
@@ -365,15 +372,15 @@
                                         var lng = position.coords.longitude;
                                         var lat = position.coords.latitude;
                                     
-                                        console.log(lng);
-                                        console.log(lat);
+                                        // console.log(lng);
+                                        // console.log(lat);
 
                                         mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtaXI4NDc1MyIsImEiOiJja29mbTFiMGMwbm10MnVyMGs2MGJwM2FyIn0.AVzoRvG6EmclKtdIsSeRkw';
                                         var map = new mapboxgl.Map({
                                             container: 'map', // container id
                                             style: 'mapbox://styles/mapbox/streets-v11',
                                             center: [lng,lat], // starting position
-                                            zoom: 15 // starting zoom
+                                            zoom: 20 // starting zoom
                                         });
 
                                         // Initialize the geolocate control.
@@ -386,7 +393,14 @@
                                         // console.log(geolocate)
                                         // // Add the control to the map.
                                         map.addControl(geolocate);
-                                        console.log(geolocate)
+                                        map.addControl(new mapboxgl.FullscreenControl());
+                                        
+                                        // Create a default Marker and add it to the map.
+                                        var marker1 = new mapboxgl.Marker({ color: 'black', rotation: 45 })
+                                        .setLngLat([85.351589, 27.705084])
+                                        .addTo(map);
+
+                                        
                                         // // Set an event listener that fires
                                         // // when a geolocate event occurs.
                                         // geolocate.on('geolocate', function() {
@@ -408,6 +422,7 @@
                                 }
 
                             </script>
+                           
                         </li>
                     </ul>
                 </div>

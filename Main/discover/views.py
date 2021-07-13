@@ -247,36 +247,81 @@ def get_search(request):
     user_id=uid.id
     
 
-    interest=request.POST.get('interest')
+    u_interest=request.POST.get('interest')
     distance=request.POST.get('distance')
-    
+
     #get user lon,lat
     user_location=user_location_data.objects.get(user_id=uid.id)
     user_cord=(user_location.latitude,user_location.longitude)
-    
+   
     users=userdetails.objects.all().exclude(owner_id=user_id)
     user_match=[]
     for i in users:
         lis=i.user_interest
-        if lis.find(interest) != -1:
+        if lis.find(u_interest) != -1:
             user_match.append(i.owner.id)
         else:
             pass
-            
+ 
     matched_user_id=[]
+    matched_user_coordinate=[]
     for i in user_match:
         friend=user_location_data.objects.get(user_id=i)
         coordinate=(friend.latitude,friend.longitude)
-
+       
         friend_distance=calc_distance(user_cord,coordinate)
-
+        
         if float(friend_distance)<=float(distance):
-            matched_user_id.append(i)
-            
+            matched_user_coordinate.append(coordinate)
+            matched_user_id.append(i)  
+       
     u_data=[]
+   
     for i in matched_user_id:
         userdata=registration.objects.filter(id=i)
         u_data.append(userdata)
     
-    return render(request, 'index.html')
 
+    user = registration.objects.filter(email=email)
+    id = registration.objects.get(email=email)
+    interests_all=interest.objects.all()
+    interests=[]
+    for i in interests_all:
+        interests.append(i)
+    userid = id.pk
+    other = None
+    my_id = None
+    counts = 0
+    count_following=0
+    try:
+        em = followers.objects.get(user_id=userid)
+        other = [user_id for user_id in em.following.all()]
+        count_following =len(other)
+        my_id = [user_id for user_id in em.follow_me.all()]
+        counts = len(my_id)
+
+
+    except:
+        pass
+    user_data = userdetails.objects.all()
+    mydetials = 0
+    try:
+        mydetials = userdetails.objects.get(owner_id=userid)
+    except:
+        pass
+    other_user = registration.objects.all().exclude(email=email)
+    dict1 = {
+        'email': email,
+        'user': user,
+        'others': other,
+        'other': other_user,
+        'followers': my_id,
+        'count':counts,
+        'count_following':count_following,
+        'mydetials': mydetials,
+        'userdata': user_data,
+        'interests': interests,
+        'u_data':u_data,
+        'matched_user_coordinate':matched_user_coordinate }
+
+    return render(request, 'discover.html', dict1)

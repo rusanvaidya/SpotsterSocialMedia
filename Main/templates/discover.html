@@ -10,54 +10,35 @@
         Find Friends Near You :
     </div>
     <div class="locate_filter">
-        <form>
+        <form method ='POST' action='get_search'>
             {% csrf_token %}
             <label for="find_users_interested">Interests:</label>
-            <select id="find_users_interested">
-                
+            <select id="find_users_interested" name='interest'>
+                <option disabled selected>Choose Interest</option>
                 {% for i in interests %}
                 <option>{{i}}</option>
                 {% endfor %}
             </select>
             <label for="distance">Distance:</label>
-            <input type="range" max="100" min="0" id="loc_km_ip" value="0" class="slider">
+            <input type="range" max="100" min="0" id="loc_km_ip" value="0" class="slider" name='distance'>
             <div><span id="loc_km"></span> km.</div>
             <script>
                 
                 var e= document.getElementById('find_users_interested')
                 e.onchange=function(){
-                    console.log(e.value)
-                    var dist=document.getElementById('loc_km_ip')
+                    
+                    var dist=document.getElementById('loc_km_ip')}
             
                 document.getElementById('loc_km').innerHTML = document.getElementById('loc_km_ip').value
                 document.getElementById('loc_km_ip').onchange = function()
                 {
                     document.getElementById('loc_km').innerHTML = document.getElementById('loc_km_ip').value
-                    console.log(dist.value)
-                    $.ajax({
-                                            type: "POST",
-                                            url: 'get_search',
-                                            data: {
-                                            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
-
-                                                "interest": e.value,
-                                                "distance":dist.value,
-                                            },
-                                            dataType: "json",});
+                    
+                
                     
                 }
-                $.ajax({
-                                            type: "POST",
-                                            url: 'get_search',
-                                            data: {
-                                            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
-
-                                                "interest": e.value,
-                                                "distance":dist.value,
-                                            },
-                                            dataType: "json",});
-                    
-                }
+                
+                
 
                 
                 
@@ -73,7 +54,8 @@
     </div>
     <div class="people-list">
         <ul>
-            {% for i in other%}
+            {% for data in u_data %}
+            {% for i in data %}
             <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
                 <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
                 <li>
@@ -108,6 +90,7 @@
                     </table>
                 </li>
             </form>
+            {% endfor %}
             {% endfor %}
         </ul>
     </div>
