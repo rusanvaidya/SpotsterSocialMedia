@@ -72,3 +72,18 @@ class support(models.Model):
     class Meta:
         verbose_name = 'Support'
         verbose_name_plural = 'Support'
+
+class pinvalid(models.Model):
+    id = models.AutoField
+    email = models.EmailField(max_length=30,blank=False)
+    instantpin = models.IntegerField(default=False,blank=False)
+    created_time = models.DateTimeField(default=datetime.datetime.now)
+
+    @property
+    def delete_after_five_minutes(self):
+        if self.created_time < datetime.datetime.now()-datetime.timedelta(minutes=2):
+            e = pinvalid.objects.get(pk=self.pk)
+            e.delete()
+            return True
+        else:
+            return False

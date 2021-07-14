@@ -5,7 +5,7 @@ from discover.models import followers
 from discover.models import interest
 
 from complete.models import userdetails
-from .models import registration, support, userpost, Like, comment
+from .models import registration, support, userpost, Like, comment,pinvalid
 from django.contrib import messages
 from itertools import chain
 from math import sin, cos, sqrt, atan2, radians
@@ -199,13 +199,28 @@ def checkmail(request):
             from django.core.mail import send_mail
             import random
             pins = str(random.randint(25734,99999))
+            pin, created = pinvalid.objects.get_or_create(email=email)
+            pin.save()
+            if not created:
+                pin.instantpin = pins
+                pin.save()
+                send_mail('Your Pin To Reset Password','Hey there,'
+                                                       '\n We have received a request that you are trying to reset your account password.'
+                                                       '\n Please use this PIN:'+ pins+''
+                                                        '\n If you did not initiate this request,You can safely ignore this Email.'
+                                                                                       '\n Greetings,\n Team Spotster' ,'spotsterinc@gmail.com', [email],
+                          fail_silently=False)
+            else:
+                pin.instantpin = pins
+                pin.save()
+                send_mail('Your Pin To Reset Password', 'Hey there,'
+                                                        '\n We have received a request that you are trying to reset your account password.'
+                                                        '\n Please use this PIN:' + pins + ''
+                                                                                           '\n If you did not initiate this request,You can safely ignore this Email.'
+                                                                                           '\n Greetings,\n Team Spotster',
+                          'spotsterinc@gmail.com', [email],
+                          fail_silently=False)
 
-            send_mail('Your Pin To Reset Password','Hey there,'
-                                                   '\n We have received a request that you are trying to reset your account password.'
-                                                   '\n Please use this PIN:'+ pins+''
-                                                    '\n If you did not initiate this request,You can safely ignore this Email.'
-                                                                                   '\n Greetings,\n Team Spotster' ,'spotsterinc@gmail.com', [email],
-                      fail_silently=False)
 
 
             return render(request,'codeverify.html',{'pin':pins,'email':email})
@@ -217,17 +232,18 @@ def checkmail(request):
         return render(request,'index.html')
 
 
-def pinvalid(request):
+def pinvalid_pass(request):
     if request.method == 'POST':
-        enterpin = request.POST.get('code')
-        reqdpin = request.POST.get('submit')
+        enterpin = int(request.POST.get('code'))
         useremail = request.POST.get('email')
+        reqdpin1 = pinvalid.objects.get(email=useremail)
+        reqdpin = reqdpin1.instantpin
         if enterpin == reqdpin:
             return render(request,'reset.html',{'email':useremail})
 
         else:
             messages.add_message(request, messages.INFO, 'Incorrect PIN please Enter Corretctly')
-            return render(request,'index.html')
+            return render(request,'codeverify.html',{'email':useremail})
 
     else:
         return render(request,'index.html')
