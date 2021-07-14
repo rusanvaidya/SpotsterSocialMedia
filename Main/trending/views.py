@@ -1,7 +1,7 @@
 from itertools import chain
 
 from django.shortcuts import render
-from home.models import registration
+from home.models import registration,userpost
 from discover.models import followers
 
 from home.models import userpost,Like,comment
@@ -9,6 +9,7 @@ from home.models import userpost,Like,comment
 from complete.models import userdetails
 from discover.models import interest
 
+import re
 
 def trending(request):
     try:
@@ -64,7 +65,8 @@ def trending(request):
                 mydetials = userdetails.objects.get(owner_id=usrs_id)
             except:
                 pass
-
+            posts=userpost.objects.all()
+            
             my_post = userpost.objects.all()
             trendingpost = []
             for ids in my_post:
@@ -88,7 +90,8 @@ def trending(request):
                 comments = comment.objects.all()
             except:
                 pass
-
+            a=get_hash_tags()
+            
             dict1 = {
                 'email': email,
                 'user': user,
@@ -113,3 +116,19 @@ def trending(request):
 
     except:
         return render(request, 'index.html')
+
+def get_hash_tags():
+    posts=userpost.objects.all()
+    usertext=[]
+    for i in posts:
+        usertext.append(i.usercontent)
+    pattern='#\w+'
+    hashtags=[re.findall(pattern,i) for i in usertext]
+
+    hashtags=sum(hashtags,[])
+    count={i:hashtags.count(i) for i in hashtags}
+    return count
+
+
+
+
