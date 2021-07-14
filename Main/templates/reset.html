@@ -10,7 +10,7 @@
             {% csrf_token %}
             <input type="hidden" name="email" value="{{email}}">
             <label for="password">Password : </label>
-            <input type="password" placeholder="New Password" name="password" required>
+            <input type="password" placeholder="New Password" name="password" required minlength="6" maxlength="15">
             
             <label for="password">Confitm Password : </label>
             <input type="password" placeholder="Confirm Password" name="re_password" required>
