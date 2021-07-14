@@ -18,16 +18,18 @@ input[type=number]
         
         <!-- login form -->
         <h3></h3>
-        <form method="POST" action="reset">
+        <form method="POST" action="reset_password">
             {% csrf_token %}
             <label for="code">Code : </label>
+            <input type="hidden" name="email" value="{{email}}">
             <input type="number" placeholder="Code" name="code" required>
-            
+
             <div class="policy">
                 Enter the code recieved in your email.    
             </div>
             <div>
-                <input type="submit" value="Submit">
+<!--                <input type="submit" value="{{pin}}" name="submit">-->
+                <button type="submit" value="{{ pin }}" name="submit">SEND</button>
             </div>
         </form>
     </div>

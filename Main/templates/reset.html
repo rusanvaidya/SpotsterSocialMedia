@@ -6,10 +6,11 @@
         
         <!-- login form -->
         <h3></h3>
-        <form method="POST" action="reset">
+        <form method="POST" action="change_password">
             {% csrf_token %}
+            <input type="hidden" name="email" value="{{email}}">
             <label for="password">Password : </label>
-            <input type="password" placeholder="Password" name="password" required>
+            <input type="password" placeholder="New Password" name="password" required>
             
             <label for="password">Confitm Password : </label>
             <input type="password" placeholder="Confirm Password" name="re_password" required>

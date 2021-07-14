@@ -188,6 +188,78 @@ def register(request):
         return render(request, 'index.html', {'email': None, 'user': None})
 
 
+def forgotpass(request):
+    return render(request, 'forgot.html')
+
+
+def checkmail(request):
+    if request.method == 'POST':
+        email=request.POST.get('email')
+        if registration.objects.filter(email=email).exists():
+            from django.core.mail import send_mail
+            import random
+            pins = str(random.randint(25734,99999))
+
+            send_mail('Your Pin To Reset Password','Hey there,'
+                                                   '\n We have received a request that you are trying to reset your account password.'
+                                                   '\n Please use this PIN:'+ pins+''
+                                                    '\n If you did not initiate this request,You can safely ignore this Email.'
+                                                                                   '\n Greetings,\n Team Spotster' ,'spotsterinc@gmail.com', [email],
+                      fail_silently=False)
+
+
+            return render(request,'codeverify.html',{'pin':pins,'email':email})
+
+        else:
+            messages.add_message(request, messages.INFO, 'Incorrect Email please Enter Correctly')
+            return render(request, 'index.html')
+    else:
+        return render(request,'index.html')
+
+
+def pinvalid(request):
+    if request.method == 'POST':
+        enterpin = request.POST.get('code')
+        reqdpin = request.POST.get('submit')
+        useremail = request.POST.get('email')
+        if enterpin == reqdpin:
+            return render(request,'reset.html',{'email':useremail})
+
+        else:
+            messages.add_message(request, messages.INFO, 'Incorrect PIN please Enter Corretctly')
+            return render(request,'index.html')
+
+    else:
+        return render(request,'index.html')
+
+
+def changepassword(request):
+    if request.method == 'POST':
+        email=request.POST.get('email')
+        pas1=request.POST.get('password')
+        pas2=request.POST.get('re_password')
+        if pas1 == pas2:
+            if registration.objects.filter(email=email).exists():
+                pmail=registration.objects.get(email=email)
+                pmail.password = pas1
+                pmail.save()
+                messages.add_message(request, messages.INFO, 'Password Changed please Login.')
+                return render(request, 'index.html')
+            else:
+                messages.add_message(request, messages.INFO, 'Error in E-mail Please try again !!!')
+                return render(request, 'index.html')
+
+
+
+        else:
+            messages.add_message(request, messages.INFO, 'Password do not Match')
+            return render(request,'reset.html',{'email':email})
+
+    else:
+        return render(request,'index.html')
+
+
+
 def logout(request):
 
     try:
