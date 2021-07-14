@@ -46,7 +46,8 @@
                     <div class="about-post" id="ap-{{post.id}}">
                          <ul>
                             {% if post.author_id == mydetials.owner_id %}
-                                <li><button>Edit this post</button></li>
+                                <li><button onclick="document.getElementById('edit-this-{{post.id}}').style.display='block'">Edit this post</button></li>
+
                                 <li><button onclick="document.getElementById('del-warn{{post.id}}').style.display='block'">Delete this post</button></li>
                             {% endif %}
                                 {% if post.author_id != mydetials.owner_id %}
@@ -272,12 +273,12 @@
                     </div>
                 </div>
 
-                <div class="view-posted-content" id="give-share-{{post.id}}">
+                <div class="view-posted-content" id="edit-this-{{post.id}}">
                     <div class="modal comment-content">
                         <div class="modaltop">
                             <div class="modalheader">
                                 <div class="closebutton">
-                                    <span onclick="document.getElementById('give-share-{{post.id}}').style.display='none';">&times;</span>
+                                    <span onclick="document.getElementById('edit-this-{{post.id}}').style.display='none';">&times;</span>
                                 </div>
                                 <table>
                                     {% for i in user %}
@@ -287,42 +288,32 @@
                                     <td class="new-poster"><img src="{% static 'img/defaultpp.jpg' %}"></td>
                                     {% endif %}
                                     <td class="u-fullname"><a href="view_profile?id={{p.id}}">{{i.first_name}} {{i.last_name}}</a></td>
+                                    {% if post.emoji != '' %}
+                                    <td>{{post.feeling}}</td>
+                                    <td class="femoji"><img src='/static/{{post.emoji}}'></td>
+                                    {% endif %}
                                     {% endfor %}
                                 </table>
                             </div>
                         </div>
+
+                        <form method="post" action="edit_post">{% csrf_token %}
+                            <input type="hidden" name="postid" value="{{post.id}}">
+                            <input type="hidden" name="authorid" value="{{mydetials.owner_id}}">
                         <div class="caption-share">
-                            <textarea placeholder="Write your thoughts..."></textarea>
+                            <textarea placeholder="Write your thoughts..." name="edit_caption" required>{{post.usercontent}}</textarea>
                         </div>
                         <div class="feeling-cmnt-section border-share-content">
-                            <table class="other-user-content">
-                                {% for bio in userdata %}
-                                {% if bio.owner_id == post.author_id %}
-                                {% if bio.profile_pic != '' %}
-                                <td><img src="media/{{bio.profile_pic}}"></td>
-                                {% else %}
-                                <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
-                                {% endif %}
-                                {% endif %}
-                                {% endfor %}
-                                <td class="u-fullname"><a href="view_profile?id={{p.id}}">{{p.first_name}} {{p.last_name}}</a></td>
-                            </table>
-                            <table>
-                            {% if post.emoji != '' %}
-                                <td>~ {{post.feeling}}</td>
-                                <td class="femoji"><img src='/static/{{post.emoji}}'></td>
-                            {% endif %}
-                            </table>
-                            <div class="caption" id="share-{{post.id}}">{{post.usercontent}}</div>
                             <div class="cmnt-on-this" id="share-on-this-{{post.id}}">
-                            <img src="media/{{post.userfile}}" id="share-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-share-{{post.id}}').style.display='none'">
+                                <img src="media/{{post.userfile}}" id="share-on-img-{{post.id}}" onclick="document.getElementById('view-posted-photo{{post.id}}').style.display='block'; document.getElementById('give-share-{{post.id}}').style.display='none'">
+                            </div>
                         </div>
-                        </div>
-                        <form>
+
                             <div class="submit-cmnt">
-                                <input type="submit" value="Share">
+                                <input type="submit" value="Save">
                             </div>
                         </form>
+
                     </div>
                 </div>
 

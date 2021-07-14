@@ -391,6 +391,7 @@
                                 </table>
                             </div>
                         </div>
+
                         <form method="post" action="edit_post">{% csrf_token %}
                             <input type="hidden" name="postid" value="{{post.id}}">
                             <input type="hidden" name="authorid" value="{{mydetials.owner_id}}">
@@ -407,6 +408,7 @@
                                 <input type="submit" value="Save">
                             </div>
                         </form>
+
                     </div>
                 </div>
 
