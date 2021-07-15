@@ -260,10 +260,10 @@ def get_search(request):
     for i in users:
         lis=i.user_interest
         if lis.find(u_interest) != -1:
-            user_match.append(i.owner.id)
+            user_match.append(i.owner_id)
         else:
             pass
- 
+
     matched_user_id=[]
     matched_user_coordinate=[]
     for i in user_match:
@@ -274,7 +274,7 @@ def get_search(request):
         
         if float(friend_distance)<=float(distance):
             matched_user_coordinate.append(coordinate)
-            matched_user_id.append(i)  
+            matched_user_id.append(i)
 
     json_coor=json.dumps(matched_user_coordinate)
 

@@ -163,3 +163,5 @@ EMAIL_HOST_USER='spotsterinc@gmail.com'
 EMAIL_HOST_PASSWORD='ulghnucrmhtgnnph'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Spotster Team <noreply@spotster.com>'
+
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = 'True'

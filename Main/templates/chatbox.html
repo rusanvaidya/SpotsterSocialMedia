@@ -1,6 +1,6 @@
 {% extends 'home.html' %}
 {% block bodyloader %}
-    <body onload="other_loader()">
+<body onload="other_loader()">
 {% endblock %}
 {% block sidemenudiv %}
 {% load static %}
@@ -10,112 +10,73 @@
   </div>
   <div class="name_for_chat">
     <ul>
-      <li>
-        <table>
-          <td>
-            <img src="{% static 'img/defaultpp.jpg' %}"
-          </td>
-          <td>
-            Harry Maguire<br>
-            <p class="msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
-          </td>
-        </table>
-      </li>
-
+      {% for i in others%}
+        <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
         <li>
-          <table>
-            <td>
-              <img src="{% static 'img/defaultpp.jpg' %}"
-            </td>
-            <td>
-              Harry Maguire<br>
-              <p class="msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
-            </td>
-          </table>
-        </li>
-
-          <li>
             <table>
-              <td>
-                <img src="{% static 'img/defaultpp.jpg' %}"
-              </td>
-              <td>
-                Harry Maguire<br>
-                <p class="msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
-              </td>
+            {% for bio in userdata %}
+            {% if bio.owner_id == i.pk %}
+            {% if bio.profile_pic != '' %}
+            <td class="sp-pp"><img src="media/{{bio.profile_pic}}" width="50" height="50"></td>
+            {% else %}
+            <td class="sp-pp"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+              <td class="sp-name"><a href="chatbox/?query={{i.id}}">{{i.first_name}} {{i.last_name}}</a></td>
             </table>
-          </li>
-
-            <li>
-              <table>
-                <td>
-                  <img src="{% static 'img/defaultpp.jpg' %}"
-                </td>
-                <td>
-                  Harry Maguire<br>
-                  <p class="msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
-                </td>
-              </table>
-            </li>
-
-              <li>
-                <table>
-                  <td>
-                    <img src="{% static 'img/defaultpp.jpg' %}"
-                  </td>
-                  <td>
-                    Harry Maguire<br>
-                    <p class="msg_preview">Hello there how are you? Hope you're doing good. When are we meeting</p>
-                  </td>
-                </table>
-              </li>
+        </li>
+        {% endfor %}
     </ul>
   </div>
 </div>
 {% endblock %}
 {% block leftfeed %}
-<textarea id="chat-log" cols="100" rows="20"></textarea><br>
-<input id="chat-message-input" type="text" size="100"><br>
-<input id="chat-message-submit" type="button" value="Send">
-{{ room_name|json_script:"room-name" }}
-<script>
-    const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
-    const chatSocket = new WebSocket(
-        'ws://'
-        + window.location.host
-        + '/ws/chatbox/'
-        + roomName
-        + '/'
-    );
-
-    chatSocket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-        document.querySelector('#chat-log').value += (data.message + '\n');
-    };
-
-    chatSocket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
-    };
-
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function(e) {
-        if (e.keyCode === 13) {  // enter, return
-            document.querySelector('#chat-message-submit').click();
-        }
-    };
-
-    document.querySelector('#chat-message-submit').onclick = function(e) {
-        const messageInputDom = document.querySelector('#chat-message-input');
-        const message = messageInputDom.value;
-        chatSocket.send(JSON.stringify({
-            'message': message
-        }));
-        messageInputDom.value = '';
-    };
-</script>
+<div class="left-feed">
+  <div class="chatbox_container">
+    <div class="chat-with">
+      <table>
+        <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+        <td>Harry Maguire</td>
+      </table>
+    </div>
+    <div class="chat_here">
+        <div class="sender">
+          <div class="sender-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="sender-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
+        </div>
+        <div class="you-sent">
+            <div class="you-sent-img">
+              <img src="{% static 'img/defaultpp.jpg' %}">
+            </div>
+            <div class="you-sent-msg">
+              Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+              Hello there how are you? Hope you're doing good. When are we meeting
+              Hello there how are you? Hope you're doing good. When are we meeting
+              Hello there how are you? Hope you're doing good. When are we meeting
+            </div>
+        </div>
+      </div>
+    <div class="write-msg">
+        <div class="msg-put">
+            <textarea placeholder="Write message" id="msg-here-text"></textarea>
+        </div>
+        <div class="emoji-put">
+            <img src="{% static 'icon/smiley.png' %}" class="emdisp" onclick="smileyshow()">
+            <div id="emobox" class="emo-box"></div>
+            <script src="{% static 'js/chatbox.js' %}"></script>
+        </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
-
 <script src="{% static 'js/header.js' %}"></script>
 <script src="{% static 'js/newsfeed.js' %}"></script>
