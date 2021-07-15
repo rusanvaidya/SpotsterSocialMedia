@@ -155,8 +155,8 @@
                                 
                             {% if post.author_id != mydetials.owner_id %}
                             <form class="save-post" method="post" action="saved_post" id="save{{post.id}}"> {% csrf_token %}
-                                <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
-                                <input type="hidden" name="postid" value="{{post.id}}">
+                                <input type="hidden" name="userid" class="userid" value="{{mydetials.owner_id}}">
+                                <input type="hidden" name="postid" class="postid" value="{{post.id}}">
                             <li>
                             <button type="submit">Save this post</button></li>
                             </form>
@@ -463,64 +463,5 @@
     {% endif %}
     {% endfor %}
     {% endfor %}
-    <!-- <script>
-    $('.save-post').click(function(e){
-    e.preventDefault();
-    $.ajax({
-        type: "POST",
-        url: "{% url 'saved_post' %}",
-        data: {
-            "post_id": 21 ,
-            "user_id": 48,
-            csrfmiddlewaretoken: "{{ csrf_token }}",
-        },
-        success: function(data) {
-            alert('done')
-        },
-        error: function (rs, e) {
-            alert('Sorry, there was an error.');
-        }
-    });
-});
-</script> -->
 </div>
 {% endblock %}
-<script>
-    $('.un-follow').submit(function(e){
-        e.preventDefault()
-
-        const follow_id = $(this).attr('id')
-        const followText = $(`.follow${follow_id}`).text()
-        const trim = $.trim(followText)
-        console.log(trim)
-        const url =$(this).attr('action')
-
-
-
-        $.ajax({
-            type:'POST',
-            url : url,
-            data:{
-            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
-            'follow_pk':follow_id
-            },
-            success:function(response){
-            if (trim === 'UnFollow'){
-                $(`.follow${follow_id}`).css("background-color", "#00AF00")
-                $(`.follow${follow_id}`).text('Follow')
-
-
-            } else {
-                $(`.follow${follow_id}`).css("background-color", "#FF0000")
-                $(`.follow${follow_id}`).text('UnFollow')
-
-            }
-            },
-            error:function(response){
-            console.log('error',response)
-            }
-            });
-
-
-    });
-</script>

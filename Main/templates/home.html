@@ -260,7 +260,7 @@
                                 {% for i in user %}
                                 <li>
                                     <table>
-                                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a</td>
+                                        <td><a href=""><img src="{% static 'img/defaultpp.jpg' %}"></a></td>
                                         <td><a href="">{{i.first_name}} {{i.last_name}} just posted a event you may like.</a>
                                     </table>
                                 </li>
@@ -482,16 +482,6 @@
                                             <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
                                             {% endif %}
                                         </div>
-                                        <script>
-                                            document.getElementById('un_show{{i.pk}}').onmouseenter = function()
-                                            {
-                                                document.getElementById('un_show{{i.pk}}').innerText='Unfollow';
-                                            }
-                                            document.getElementById('un_show{{i.pk}}').onmouseout = function()
-                                            {
-                                                document.getElementById('un_show{{i.pk}}').innerText='Following';
-                                            }
-                                        </script>
                                     </div>
                                 </li>
                             </form>
@@ -630,5 +620,71 @@
                 profile.setAttribute("href", "{% static 'css/dark/profile.css' %}");
             }
         </script>
+    <script>
+    $('.un-follow').submit(function(e){
+        e.preventDefault()
+
+        const follow_id = $(this).attr('id')
+        const followText = $(`.follow${follow_id}`).text()
+        const trim = $.trim(followText)
+        const url =$(this).attr('action')
+
+        $.ajax({
+            type:'POST',
+            url : url,
+            data:{
+            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+            'follow_pk':follow_id
+            },
+            success:function(response){
+            if (trim === 'Follow'){
+
+                $(`.follow${follow_id}`).text('Following')
+
+
+            } else {
+
+                $(`.follow${follow_id}`).text('Follow')
+
+            }
+            },
+            error:function(response){
+            console.log('error',response)
+            }
+            });
+
+
+    });
+    </script>
+    <script>
+    $('.save-post').submit(function(e){
+        e.preventDefault()
+
+        const save_id = $(`.userid`).attr('value')
+        console.log(save_id)
+        const post_id = $(`.postid`).attr('value')
+        console.log(post_id)
+        const url =$(this).attr('action')
+        console.log(url)
+
+        $.ajax({
+            type:'POST',
+            url : url,
+            data:{
+            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+            'userid' : save_id,
+            'postid' : post_id
+            },
+            success:function(response){
+                alert('Post is Saved');
+            },
+            error:function(response){
+            console.log('error',response)
+            }
+            });
+
+
+    });
+    </script>
     </body>
 </html>

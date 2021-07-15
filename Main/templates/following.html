@@ -28,16 +28,6 @@
                 {% else %}
                 <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
                 {% endif %}
-                <script>
-                    document.getElementById('un_show{{i.pk}}').onmouseenter = function()
-                    {
-                        document.getElementById('un_show{{i.pk}}').innerText='Unfollow';
-                    }
-                    document.getElementById('un_show{{i.pk}}').onmouseout = function()
-                    {
-                        document.getElementById('un_show{{i.pk}}').innerText='Following';
-                    }
-                </script>
             </table>
         </li>
         </form>

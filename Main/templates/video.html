@@ -49,8 +49,8 @@
                             {% endif %}
                                 {% if post.author_id != mydetials.owner_id %}
                                 <form class="save-post" method="post" action="saved_post" id="save{{post.id}}"> {% csrf_token %}
-                                <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
-                                <input type="hidden" name="postid" value="{{post.id}}">
+                                <input type="hidden" name="userid" class="userid" value="{{mydetials.owner_id}}">
+                                <input type="hidden" name="postid" class="postid" value="{{post.id}}">
                                 <li>
                                 <button type="submit">Save this post</button></li>
                                 </form>

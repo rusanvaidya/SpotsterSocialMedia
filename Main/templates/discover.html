@@ -77,16 +77,7 @@
                             <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
                             {% endif %}
                         </td>
-                        <script>
-                            document.getElementById('un_show{{i.pk}}').onmouseenter = function()
-                            {
-                                document.getElementById('un_show{{i.pk}}').innerText='Unfollow';
-                            }
-                            document.getElementById('un_show{{i.pk}}').onmouseout = function()
-                            {
-                                document.getElementById('un_show{{i.pk}}').innerText='Following';
-                            }
-                        </script>
+
                     </table>
                 </li>
             </form>
@@ -95,45 +86,7 @@
         </ul>
     </div>
 </div>
- <script>
-    $('.un-follow').submit(function(e){
-        e.preventDefault()
 
-        const follow_id = $(this).attr('id')
-        const followText = $(`.follow${follow_id}`).text()
-        const trim = $.trim(followText)
-        console.log(trim)
-        const url =$(this).attr('action')
-
-
-
-        $.ajax({
-            type:'POST',
-            url : url,
-            data:{
-            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
-            'follow_pk':follow_id
-            },
-            success:function(response){
-            if (trim === 'UnFollow'){
-                $(`.follow${follow_id}`).css("background-color", "#00AF00")
-                $(`.follow${follow_id}`).text('Follow')
-
-
-            } else {
-                $(`.follow${follow_id}`).css("background-color", "#FF0000")
-                $(`.follow${follow_id}`).text('UnFollow')
-
-            }
-            },
-            error:function(response){
-            console.log('error',response)
-            }
-            });
-
-
-    });
-</script>
 <script src="{% static 'js/header.js' %}"></script>
 {% endblock %}
 {% endblock %}
