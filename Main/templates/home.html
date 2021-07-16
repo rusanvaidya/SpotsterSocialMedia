@@ -451,7 +451,7 @@
                         <ul class="trending">
                             <li class="r-t"><b>Trending Interests.</b></li>
                             {% for key,value in trending_hashtags.items %}
-                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>{{key}}<br><span class="light-trend">{{value}} posts.</span></button></li>
+                            <li><button class="side-l" onclick="window.open('trending','_self')"><span class="light-trend">1.2k people near you are interested.</span><br>{{key}}<br><span class="light-trend">{{value}} posts.</span></button></li>
                             
                             {% endfor %}
                             <li><button class="show-m" id="show_trending">Show more</button></li>

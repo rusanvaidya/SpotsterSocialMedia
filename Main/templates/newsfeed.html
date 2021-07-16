@@ -199,7 +199,7 @@
             <div class="caption" id='capt-{{post.id}}'>{{post.usercontent}}</div>
             <script>
                 var linking = document.getElementById("capt-{{post.id}}").innerHTML; 
-                var repl=linking.replace(/#(\w+)/g, "<a href='#' style='color: wheat; font-size:20px;'>#$1</a>");
+                var repl=linking.replace(/#(\w+)/g, "<a href='trending' style='color: wheat; font-size:20px;'>#$1</a>");
                 document.getElementById('capt-{{post.id}}').innerHTML=repl
             </script>
             <div id="{{post.id}}" style="display:none">{{post.userfile}}</div>
