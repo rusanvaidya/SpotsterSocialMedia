@@ -4,7 +4,7 @@ from complete.models import userdetails
 from discover.models import followers,interest
 from itertools import chain
 from django.contrib import messages
-
+from trending.views import get_hash_tags
 # Create your views here.
 
 def profile(request):
@@ -88,7 +88,7 @@ def profile(request):
             comments = comment.objects.all()
         except:
             pass
-
+        trending_hashtags=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -103,7 +103,8 @@ def profile(request):
             'mydetials':mydetials,
             'like_unlike': like_unlike,
             'userdata':user_data,
-            'comments':comments}
+            'comments':comments,
+            'trending_hashtags':trending_hashtags}
         return render(request, 'profile.html',dict1)
 
     return render(request,'index.html')
