@@ -91,7 +91,6 @@ def trending(request):
             except:
                 pass
             trending_hashtags=get_hash_tags()
-            
             dict1 = {
                 'email': email,
                 'user': user,
@@ -119,7 +118,8 @@ def trending(request):
         return render(request, 'index.html')
 
 def get_hash_tags():
-    posts=userpost.objects.all()
+    from datetime import datetime, timedelta
+    posts=userpost.objects.filter(created__gte=datetime.now()-timedelta(days=7))
     usertext=[]
     for i in posts:
         usertext.append(i.usercontent)
@@ -128,7 +128,9 @@ def get_hash_tags():
 
     hashtags=sum(hashtags,[])
     count={i:hashtags.count(i) for i in hashtags}
-    return count
+    hash_dict =sorted(count.items(), key=lambda x: x[1],reverse=True)[:5]
+
+    return dict(hash_dict)
 
 
 

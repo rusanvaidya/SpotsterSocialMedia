@@ -10,10 +10,9 @@
             Trending
         </div>
         <ul>
-            <li><button>#COVID-19</button></li>
-            <li><button>#CR7</button></li>
-            <li><button>#Messi</button></li>
-            <li><button>#Memes</button></li>
+            {% for key,value in trending_hashtags.items %}
+            <li><button>{{key}}</button></li>
+            {% endfor %}
         </ul>
     </div>
     {%for post in trend%}
