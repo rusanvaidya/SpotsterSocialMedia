@@ -4,7 +4,7 @@ from home.models import registration
 from discover.models import interest,followers
 
 from complete.models import userdetails
-
+from trending.views import get_hash_tags
 
 def chatbox(request):
     if request.session['email']:
@@ -37,6 +37,7 @@ def chatbox(request):
         except:
             pass
         other_user = registration.objects.all().exclude(email=email)
+        trending_hashtags=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -47,7 +48,8 @@ def chatbox(request):
             'count_following': count_following,
             'mydetials': mydetials,
             'userdata': user_data,
-            'interests': interests}
+            'interests': interests,
+            'trending_hashtags':trending_hashtags}
 
         return render(request, 'chatbox.html', dict1)
 

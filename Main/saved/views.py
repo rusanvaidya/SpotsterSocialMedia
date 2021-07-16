@@ -9,7 +9,7 @@ from discover.models import followers
 from complete.models import userdetails
 
 from saved.models import user_saved_post,flag_inappropriate
-
+from trending.views import get_hash_tags
 
 def saved(request):
     if request.session['email']:
@@ -74,6 +74,7 @@ def saved(request):
             comments = comment.objects.all()
         except:
             pass
+        trending_hashtags=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -88,7 +89,8 @@ def saved(request):
             'userdata': user_data,
             'savepost':savepost,
             'like_unlike':like_unlike,
-            'comments':comments}
+            'comments':comments,
+            'trending_hashtags':trending_hashtags}
 
         return render(request, 'saved.html', dict1)
 

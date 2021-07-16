@@ -8,7 +8,7 @@ from complete.models import userdetails
 from json import dumps
 import json
 from home.models import userpost
-
+from trending.views import get_hash_tags
 
 def discover(request):
     if request.session['email']:
@@ -41,6 +41,7 @@ def discover(request):
         except:
             pass
         other_user = registration.objects.all().exclude(email=email)
+        trending_hashtags=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -51,7 +52,8 @@ def discover(request):
             'count_following':count_following,
             'mydetials': mydetials,
             'userdata': user_data,
-            'interests': interests }
+            'interests': interests,
+            'trending_hashtags':trending_hashtags }
 
         return render(request, 'discover.html', dict1)
 
@@ -148,6 +150,7 @@ def follower(request):
         except:
             pass
         other_user = registration.objects.all().exclude(email=email)
+        trending_hashtags=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -157,7 +160,8 @@ def follower(request):
             'count':counts,
             'count_following':count_following,
             'mydetials': mydetials,
-            'userdata': user_data }
+            'userdata': user_data,
+            'trending_hashtags':trending_hashtags }
 
         return render(request, 'follower.html', dict1)
 
@@ -189,6 +193,7 @@ def following(request):
         except:
             pass
         other_user = registration.objects.all().exclude(email=email)
+        trending_hashtags=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -198,7 +203,8 @@ def following(request):
             'count':counts,
             'count_following':count_following,
             'mydetials': mydetials,
-            'userdata': user_data }
+            'userdata': user_data,
+            'trending_hashtags':trending_hashtags }
 
         return render(request, 'following.html', dict1)
 
@@ -312,6 +318,7 @@ def get_search(request):
     except:
         pass
     other_user = registration.objects.all().exclude(email=email)
+    trending_hashtags=get_hash_tags()
     dict1 = {
         'email': email,
         'user': user,
@@ -324,7 +331,8 @@ def get_search(request):
         'userdata': user_data,
         'interests': interests,
         'u_data':u_data,
-        'json_coor':json_coor }
+        'json_coor':json_coor,
+        'trending_hashtags':trending_hashtags }
    
 
     return render(request, 'discover.html', dict1)
