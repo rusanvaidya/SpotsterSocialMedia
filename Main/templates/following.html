@@ -8,8 +8,8 @@
 <div class="people-list">
     <ul>
         {% for i in others%}
-        <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
-        <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
+        <form class="n-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
+        <input type="hidden" class="fllow_pk" name="follow_pk" value="{{i.pk}}">
         <li>
             <table>
             {% for bio in userdata %}
@@ -24,9 +24,9 @@
             <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
             <td class="sp-button">
                 {% if i in others%}
-                <button type="sumbit" id="un_show{{i.pk}}" class="side-after follow{{i.pk}}">Following</button>
+                <button type="sumbit" id="un_show{{i.pk}}" class="side-after fllow{{i.pk}}">Following</button>
                 {% else %}
-                <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
+                <button type="submit" class="side-r fllow{{i.pk}}">Follow</button>
                 {% endif %}
             </table>
         </li>
@@ -36,4 +36,40 @@
     </div>
     </div>
 </div>
+    <script>
+        $('.n-follow').submit(function(e){
+            e.preventDefault()
+
+            const follow_id = $(this).attr('id')
+            const followText = $(`.fllow${follow_id}`).text()
+            const trim = $.trim(followText)
+            const url =$(this).attr('action')
+
+            $.ajax({
+                type:'POST',
+                url : url,
+                data:{
+                'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                'follow_pk':follow_id
+                },
+                success:function(response){
+                if (trim === 'Follow'){
+
+                    $(`.fllow${follow_id}`).text('Following')
+
+
+                } else {
+
+                    $(`.fllow${follow_id}`).text('Follow')
+
+                }
+                },
+                error:function(response){
+                console.log('error',response)
+                }
+                });
+
+
+        });
+    </script>
 {% endblock %}

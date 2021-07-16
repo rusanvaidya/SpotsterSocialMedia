@@ -250,8 +250,8 @@
             <div class="post-react">
                 <ul>
                     <li>
-                        <form action="like_unlike" method="POST" class='like-form' id='{{post.id}}'>{% csrf_token %}
-                            <input type="hidden" name="postid" value="{{post.id}}">
+                        <form action="like_unlike" method="POST" class='like-form' id='l{{post.id}}'>{% csrf_token %}
+                            <input type="hidden" name="postid" class="postid" value="{{post.id}}">
 
                             <table id="table-like-{{post.id}}" class="tab-like">
                                 {% if like_unlike is None %}
@@ -471,4 +471,34 @@
     {% endfor %}
     {% endfor %}
 </div>
+<script>
+    $('.like-form').submit(function(e){
+        e.preventDefault()
+
+        var post_id = $(`.postid`).attr('value');
+        console.log(post_id)
+        const url =$(this).attr('action');
+        console.log(url)
+
+
+        $.ajax({
+            type:'POST',
+            url : url,
+            data:{
+            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+            'postid' : post_id
+            },
+            success:function(response){
+                alert('Post is liked');
+            },
+            error:function(response){
+            console.log('error',response)
+            }
+            });
+
+    });
+
+
+
+    </script>
 {% endblock %}

@@ -652,11 +652,9 @@
         e.preventDefault()
 
         const save_id = $(`.userid`).attr('value')
-        console.log(save_id)
         const post_id = $(`.postid`).attr('value')
-        console.log(post_id)
         const url =$(this).attr('action')
-        console.log(url)
+
 
         $.ajax({
             type:'POST',
