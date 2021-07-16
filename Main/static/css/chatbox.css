@@ -57,16 +57,16 @@ p.msg_preview
 
 /* --------------------------------------------------------------------------------------------- */
 /* chat */
-.chatbox_container
+.newsfeed .chatbox_container
 {
   margin: 10px;
-  width: 100%;
+  width: 97%;
+  box-sizing: border-box;
   height: 500px;
-  background-color: rgba(68, 68, 68, 0.34);
+  /* background-color: rgba(68, 68, 68, 0.34); */
 }
 .chatbox_container .chat-with
 {
-  width: 100%;
   background-color: #2d7b20;
 }
 .chatbox_container .chat-with table td img
@@ -113,7 +113,7 @@ p.msg_preview
 {
   float:left;
 }
-.chatbox_container .write-msg .msg-put textarea
+.chatbox_container .write-msg .msg-put input[type='text']
 {
   width: 100%;
   box-sizing: border-box;
@@ -139,6 +139,7 @@ p.msg_preview
 {
   background-color: transparent;
   border: none;
+  width: 100%;
   }
 .chatbox_container .write-msg .emoji-put img
 {
@@ -187,23 +188,36 @@ p.msg_preview
 .chat_here
 {
   width: 100%;
-  height: 90%;
+  height: 100%;
+  box-sizing: border-box;
   background-color: rgba(68, 68, 68, 0.34);
   overflow-y: auto;
 }
-.chat_here .sender
+.chat_here .sender, .chat_here .you-sent
 {
   width: 100%;
-  padding: 5px;
   box-sizing: border-box;
+  padding: 5px;
+  display: block;
 }
+.chat_here .you-sent .msg-div-you-sent
+{
+  width: 100%;
+  float: right;
+} 
+.chat_here .sender .msg-div-sender
+{
+  width: 100%;
+  float: left;
+} 
+
 .chat_here .sender .sender-img
 {
   width: 50px;
   text-align: center;
   display: inline-block;
-  float: left;
 }
+
 .chat_here .sender .sender-img img
 {
   width: 40px;
@@ -211,23 +225,19 @@ p.msg_preview
   border-radius: 50%;
   object-fit: cover;
   object-position: 50%, 50%;
+  float: left;
 }
 .chat_here .sender .sender-msg
 {
-  max-width: 250px;
+
+  margin: 5px;
+  max-width: 50%;
   background-color: green;
   display: inline-block;
   padding: 5px;
   border-radius: 5px;
 }
 
-
-.chat_here .you-sent
-{
-  width: 100%;
-  padding: 5px;
-  box-sizing: border-box;
-}
 .chat_here .you-sent .you-sent-img
 {
   text-align: center;
@@ -245,7 +255,8 @@ p.msg_preview
 }
 .chat_here .you-sent .you-sent-msg
 {
-  width: 250px;
+  margin: 5px;
+  width: 50%;
   background-color: rgba(62, 139, 63, 0.44);
   display: inline-block;
   padding: 5px;

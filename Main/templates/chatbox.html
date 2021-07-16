@@ -4,15 +4,15 @@
 {% endblock %}
 {% block sidemenudiv %}
 {% load static %}
-<div class="chating">
+<div class="chating" style="overflow-y: scroll;">
   <div class="search_names">
-    <input type="search" placeholder="Search...">
+    <input type="search" placeholder="Search..." id="search-message-user">
   </div>
   <div class="name_for_chat">
-    <ul>
+    <ul id="this--UL">
       {% for i in others%}
         <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
-        <li>
+        <li onclick="window.open('chatbox/{{i.first_name}}{{i.last_name}}?query={{i.id}}', '_self')"  id="names-msg-{{i.pk}}">
             <table>
             {% for bio in userdata %}
             {% if bio.owner_id == i.pk %}
@@ -23,25 +23,51 @@
             {% endif %}
             {% endif %}
             {% endfor %}
-              <td class="sp-name"><a href="chatbox/?query={{i.id}}">{{i.first_name}} {{i.last_name}}</a></td>
+              <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
             </table>
         </li>
         {% endfor %}
     </ul>
   </div>
 </div>
+<script>
+  document.getElementById('search-message-user').onkeyup = function()
+  {
+    var filter = document.getElementById('search-message-user').value.toUpperCase();
+
+    var ul = document.getElementById('this--UL');
+    var li = ul.getElementsByTagName('li');
+    for(var i=0; i<li.length;i++)
+    {
+        var table = li[i].getElementsByTagName('table');
+        var td = table[0].getElementsByTagName('td')[1];
+        var tex = td.innerText;
+        console.log(tex.toUpperCase().indexOf(filter));
+        if (tex.toUpperCase().indexOf(filter) > -1)
+        {
+            li[i].style.display="";
+        }
+        else
+        {
+            li[i].style.display='none';
+        }
+    }
+  }
+</script>
 {% endblock %}
-{% block leftfeed %}
-<div class="left-feed">
-  <div class="chatbox_container">
+
+{% block searrrrr %}
+
+   <div class="chatbox_container">
     <div class="chat-with">
       <table>
         <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
         <td>Harry Maguire</td>
       </table>
     </div>
-    <div class="chat_here">
-        <div class="sender">
+    <div class="chat_here" id="chat_here_div">
+      <div class="sender">
+        <div class="msg-div-sender">
           <div class="sender-img">
             <img src="{% static 'img/defaultpp.jpg' %}">
           </div>
@@ -52,21 +78,133 @@
             Hello there how are you? Hope you're doing good. When are we meeting
           </div>
         </div>
-        <div class="you-sent">
-            <div class="you-sent-img">
-              <img src="{% static 'img/defaultpp.jpg' %}">
-            </div>
-            <div class="you-sent-msg">
-              Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
-              Hello there how are you? Hope you're doing good. When are we meeting
-              Hello there how are you? Hope you're doing good. When are we meeting
-              Hello there how are you? Hope you're doing good. When are we meeting
-            </div>
+      </div>
+      <div class="you-sent">
+        <div class="msg-div-you-sent">
+          <div class="you-sent-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="you-sent-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
         </div>
       </div>
+      <div class="sender">
+        <div class="msg-div-sender">
+          <div class="sender-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="sender-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
+        </div>
+      </div>
+      <div class="you-sent">
+        <div class="msg-div-you-sent">
+          <div class="you-sent-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="you-sent-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
+        </div>
+      </div>
+      <div class="sender">
+        <div class="msg-div-sender">
+          <div class="sender-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="sender-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
+        </div>
+      </div>
+      <div class="you-sent">
+        <div class="msg-div-you-sent">
+          <div class="you-sent-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="you-sent-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
+        </div>
+      </div>
+      <div class="sender">
+        <div class="msg-div-sender">
+          <div class="sender-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="sender-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
+        </div>
+      </div>
+      <div class="you-sent">
+        <div class="msg-div-you-sent">
+          <div class="you-sent-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="you-sent-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
+        </div>
+      </div>
+      <div class="sender">
+        <div class="msg-div-sender">
+          <div class="sender-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="sender-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
+        </div>
+      </div>
+      <div class="you-sent">
+        <div class="msg-div-you-sent">
+          <div class="you-sent-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="you-sent-msg">
+            Hello there how are you? Hope you're doing good. When are we meeting.Hello there how are you? Hope you're doing good. When are we meeting
+            Hello there how are you? Hope you're doing good. When are we meeting
+          </div>
+        </div>
+      </div>
+      
+    </div>
     <div class="write-msg">
         <div class="msg-put">
-            <textarea placeholder="Write message" id="msg-here-text"></textarea>
+          <form class="form-message-deliver">
+            <input type="text" placeholder="Write message" id="msg-here-text" autocomplete="off">
+            <input type="submit" class="message-to-deliver" style="display: none;">
+          </form>
+          <script>
+            $('.chat_here_div').scrollTop($('#chat_here_div')[0].scrollHeight);
+            $('.message-to-deliver').keypress(function(e)
+            {
+              if(e.which==13)
+              {
+                $('.form-message-deliver').submit();
+                return false;
+              }
+            });
+          </script>
         </div>
         <div class="emoji-put">
             <img src="{% static 'icon/smiley.png' %}" class="emdisp" onclick="smileyshow()">
@@ -76,7 +214,4 @@
     </div>
   </div>
 </div>
-
 {% endblock %}
-<script src="{% static 'js/header.js' %}"></script>
-<script src="{% static 'js/newsfeed.js' %}"></script>

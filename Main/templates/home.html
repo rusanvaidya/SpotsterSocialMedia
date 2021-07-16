@@ -411,7 +411,7 @@
                                          var d = JSON.parse("{{json_coor|escapejs}}");
                                         var len_d=d.length;
                                         for (var i=0; i<len_d; i++){
-                                            new mapboxgl.Marker({ color: 'black', rotation: 45 })
+                                            new mapboxgl.Marker({ color: '#2d7b20' })
                                             .setLngLat([d[i][1],d[i][0]])
                                             .addTo(map);
                                             
@@ -438,10 +438,11 @@
                 </div>
                 {% endblock %}
             </div>
-
-            <div class="newsfeed">
+                  
+            <div class="newsfeed">                
+            {% block searrrrr %}  
                 {% block leftfeed %}
-                {% endblock %}
+                {% endblock %}          
                 <div class="right-feed">
                     <div class="search-feed">
                         <input type="search" placeholder="Search...">
@@ -454,26 +455,27 @@
                             <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#CR7<br><span class="light-trend">1.4k posts.</span></button></li>
                             <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Messi<br><span class="light-trend">1k posts`.</span></button></li>
                             <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Memes<br><span class="light-trend">1.2k posts.</span></button></li>
-                            <li><button class="show-m" id="show_trending">Show more</button></li>
+                            <li><button class="show-m" onclick="window.open('trending','_self');">Show more</button></li>
                         </ul>
                     </div>
                     <div class="right-div-content">
                         <ul class="suggestions">
                             <li class="r-t"><b>Suggestions.</b></li>
+
                             {% for i in followers%}
-                            <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
-                                <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
-                                {% for bio in userdata %}
-                                {% if bio.owner_id == i.pk %}
-                                <li>
+                            <li>
+                                <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
+                                    <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
+                                    {% for bio in userdata %}
+                                    {% if bio.owner_id == i.pk %}
                                     <div class="side-l">
                                         {% if bio.profile_pic != '' %}
                                         <div class="img-li"><img class="suggest-pp" src="media/{{bio.profile_pic}}"></div>
                                         {% else %}
                                         <div class="img-li"><img class="suggest-pp" src="{% static 'img/defaultpp.jpg' %}"></div>
                                         {% endif %}
-                                        {% endif %}
-                                        {% endfor %}
+                                    {% endif %}
+                                    {% endfor %}
                                         <div class="name-li">{{i.first_name}} {{i.last_name}}<br><span class="light-trend">~Football</span></div>
                                         <div class="follow-li">
                                             {% if i in others%}
@@ -493,29 +495,19 @@
                                             }
                                         </script>
                                     </div>
-                                </li>
-                            </form>
+                                </form>
+                            </li>
                             {% endfor %}
-                            <li><button class="show-m" id="show_suggestions">Show more</button></li>
+                            <li><button class="show-m" onclick="window.open('discover','_self')">Show more</button></li>            
                         </ul>
                     </div>
                 </div>
-            </div>
+            {% endblock %}
+            </div>      
         </div>
         <script src="{% static 'js/newsfeed.js' %}"></script>
         <script src="{% static 'js/header.js' %}"></script>
         <script>
-            var show_more_trending = document.getElementById('show_trending');
-            show_more_trending.onclick = function()
-            {
-                window.open('trending','_self');
-            }
-
-            var show_more_suggestions = document.getElementById('show_suggestions');
-            show_more_suggestions.onclick = function()
-            {
-                window.open('discover','_self');
-            }
             var light = document.getElementById('light');
             var dark = document.getElementById('dark');
 
