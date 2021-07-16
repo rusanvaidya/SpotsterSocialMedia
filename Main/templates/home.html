@@ -449,11 +449,10 @@
                     <div class="right-div-content">
                         <ul class="trending">
                             <li class="r-t"><b>Trending Interests.</b></li>
-                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#COVID-19<br><span class="light-trend">200 posts.</span></button></li>
-                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Football<br><span class="light-trend">1.2k posts.</span></button></li>
-                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#CR7<br><span class="light-trend">1.4k posts.</span></button></li>
-                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Messi<br><span class="light-trend">1k posts`.</span></button></li>
-                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>#Memes<br><span class="light-trend">1.2k posts.</span></button></li>
+                            {% for key,value in trending_hashtags.items %}
+                            <li><button class="side-l"><span class="light-trend">1.2k people near you are interested.</span><br>{{key}}<br><span class="light-trend">{{value}} posts.</span></button></li>
+                            
+                            {% endfor %}
                             <li><button class="show-m" id="show_trending">Show more</button></li>
                         </ul>
                     </div>

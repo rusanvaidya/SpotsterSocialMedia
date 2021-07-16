@@ -9,6 +9,8 @@ from .models import registration, support, userpost, Like, comment,pinvalid
 from django.contrib import messages
 from itertools import chain
 from math import sin, cos, sqrt, atan2, radians
+
+from trending.views import get_hash_tags
 # Create your views here.
 def home(request):
     try:
@@ -78,6 +80,8 @@ def home(request):
                 comments = comment.objects.all()
             except:
                 pass
+            trending_hashtags=get_hash_tags()
+            
             dict1 = {
                 'email': email,
                 'user': user,
@@ -92,7 +96,8 @@ def home(request):
                 'mydetials':mydetials,
                 'userdata':user_data,
                 'like_unlike':like_unlike,
-                'comments':comments}
+                'comments':comments,
+                'trending_hashtags':trending_hashtags}
                 # 'country': country,
                 # 'city': city}
 

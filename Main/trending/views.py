@@ -90,7 +90,7 @@ def trending(request):
                 comments = comment.objects.all()
             except:
                 pass
-            a=get_hash_tags()
+            trending_hashtags=get_hash_tags()
             
             dict1 = {
                 'email': email,
@@ -106,7 +106,8 @@ def trending(request):
                 'userdata':user_data,
                 'trend':trend,
                 'like_unlike':like_unlike,
-                'comments':comments}
+                'comments':comments,
+                'trending_hashtags':trending_hashtags}
 
 
             return render(request, 'trending.html', dict1)
