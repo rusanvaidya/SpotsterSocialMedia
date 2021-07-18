@@ -118,7 +118,7 @@
                                             <img src="{% static 'icon/follower.png' %}">
                                         </td>
                                         <td class="c1-label">
-                                            &emsp;Followers({{count}})
+                                            &emsp;Followers(<span id="follower-count">{{count}}</span>)
                                         </td>
                                     </table>
                                 </li>
@@ -128,7 +128,7 @@
                                             <img src="{% static 'icon/following.png' %}">
                                         </td>
                                         <td class="c1-label">
-                                            &emsp;Following({{count_following}})
+                                            &emsp;Following(<span id="following-count">{{count_following}}</span>)
                                         </td>
                                     </table>
                                 </li>
@@ -619,6 +619,7 @@
         const followText = $(`.follow${follow_id}`).text()
         const trim = $.trim(followText)
         const url =$(this).attr('action')
+        var count_following = parseInt($(`#following-count`).text())
 
         $.ajax({
             type:'POST',
@@ -629,43 +630,10 @@
             },
             success:function(response){
             if (trim === 'Follow'){
-
                 $(`.follow${follow_id}`).text('Following')
-
-
             } else {
-
                 $(`.follow${follow_id}`).text('Follow')
-
             }
-            },
-            error:function(response){
-            console.log('error',response)
-            }
-            });
-
-
-    });
-    </script>
-    <script>
-    $('.save-post').submit(function(e){
-        e.preventDefault()
-
-        const save_id = $(`.userid`).attr('value')
-        const post_id = $(`.postid`).attr('value')
-        const url =$(this).attr('action')
-
-
-        $.ajax({
-            type:'POST',
-            url : url,
-            data:{
-            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
-            'userid' : save_id,
-            'postid' : post_id
-            },
-            success:function(response){
-                alert('Post is Saved');
             },
             error:function(response){
             console.log('error',response)

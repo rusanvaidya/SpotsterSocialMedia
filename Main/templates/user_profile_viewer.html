@@ -216,9 +216,9 @@
                             <ul>
 
                                 {% if post.author_id != mydetials.owner_id %}
-                                <form class="save-post" method="post" action="saved_post" id="save{{post.id}}"> {% csrf_token %}
-                                <input type="hidden" name="userid" class="userid" value="{{mydetials.owner_id}}">
-                                <input type="hidden" name="postid" class="postid" value="{{post.id}}">
+                                <form class="save-post{{post.id}}" method="post" action="saved_post" id="save{{post.id}}"> {% csrf_token %}
+                                <input type="hidden" name="userid" class="userid{{post.id}}" value="{{mydetials.owner_id}}">
+                                <input type="hidden" name="postid" class="postid{{post.id}}" value="{{post.id}}">
                                 <li>
                                 <button type="submit">Save this post</button></li>
                                 </form>
@@ -298,8 +298,8 @@
                 <div class="post-react">
                     <ul>
                         <li>
-                            <form action="like_unlike" method="POST" class='like-form' id='{{post.id}}'>{% csrf_token %}
-                                <input type="hidden" name="postid" value="{{post.id}}">
+                            <form action="like_unlike" method="POST" class='like-form' id='l{{post.id}}'>{% csrf_token %}
+                                <input type="hidden" name="postid" class="postid{{post.id}}" value="{{post.id}}">
     
                                 <table id="table-like-{{post.id}}" class="tab-like">
                                     {% if like_unlike is None %}
@@ -452,23 +452,7 @@
 
                         like_b_i.onclick = function()
                         {
-                            document.getElementById('table-like-{{post.id}}').classList.toggle('like-on-this-post');
-                            document.getElementById('table-dislike-{{post.id}}').classList.remove('dislike-on-this-post');
-                            if(document.getElementById('like-i-{{post.id}}').classList.contains('none-react-post'))
-                            {
-                                document.getElementById('like-i-{{post.id}}').classList.remove('none-react-post');
-                                document.getElementById('like-a-{{post.id}}').classList.toggle('none-react-post');
-                            }
-                            else if(document.getElementById('like-a-{{post.id}}').classList.contains('none-react-post'))
-                            {
-                                document.getElementById('like-i-{{post.id}}').classList.toggle('none-react-post');
-                                document.getElementById('like-a-{{post.id}}').classList.remove('none-react-post');
-                                if(document.getElementById('dislike-i-{{post.id}}').classList.contains('none-react-post'))
-                                {
-                                    document.getElementById('dislike-i-{{post.id}}').classList.remove('none-react-post');
-                                    document.getElementById('dislike-a-{{post.id}}').classList.toggle('none-react-post');
-                                }
-                            }
+                            
                         }
 
                         // dislike
@@ -499,6 +483,78 @@
         </div>
         {% endif %}
         {% endfor %}
+        <script>
+            $('#l{{post.id}}').submit(function(e){
+            e.preventDefault()
+    
+            var post_id = $(`.postid{{post.id}}`).attr('value');
+            // console.log(post_id)
+            const url =$(this).attr('action');
+            // console.log(url)
+            var count_likes = parseInt($(`#number-{{post.id}}`).text());
+            // console.log(count_likes);
+    
+        
+                $.ajax({
+                    type:'POST',
+                    url : url,
+                    data:{
+                    'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                    'postid' : post_id
+                    },
+                    success:function(response){
+                        document.getElementById('table-like-{{post.id}}').classList.toggle('like-on-this-post');
+                    if(document.getElementById('like-i-{{post.id}}').classList.contains('none-react-post'))
+                    {
+                        document.getElementById('like-i-{{post.id}}').classList.remove('none-react-post' );
+                        document.getElementById('like-a-{{post.id}}').classList.toggle('none-react-post');
+                        count_likes = count_likes - 1;
+                        document.getElementById('number-{{post.id}}').innerText = count_likes;
+                    }
+                    else if(document.getElementById('like-a-{{post.id}}').classList.contains('none-react-post'))
+                    {
+                        document.getElementById('like-i-{{post.id}}').classList.toggle('none-react-post');
+                        document.getElementById('like-a-{{post.id}}').classList.remove('none-react-post');
+                        count_likes = count_likes + 1;
+                        document.getElementById('number-{{post.id}}').innerText = count_likes;
+                    }
+                    },
+                    error:function(response){
+                    console.log('error',response)
+                    }
+                    });
+        
+            });
+            $('.save-post{{post.id}}').submit(function(e){
+            e.preventDefault()
+    
+            const save_id = $(`.userid{{post.id}}`).attr('value')
+            const post_id = $(`.postid{{post.id}}`).attr('value')
+            const url =$(this).attr('action')
+    
+    
+            $.ajax({
+                type:'POST',
+                url : url,
+                data:{
+                'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                'userid' : save_id,
+                'postid' : post_id
+                },
+                success:function(response){
+                    alert('Post is Saved');
+                },
+                error:function(response){
+                console.log('error',response)
+                }
+                });
+    
+    
+        });
+        </script>
+    
+    </script>
+    
         {% endfor %}
     </div>
     <div id="my-settings">
@@ -603,8 +659,6 @@ interests_show_btn.onclick = function()
         interests_show_btn.classList.toggle('active');
     }
 }
-
 </script>
-
 <script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}
