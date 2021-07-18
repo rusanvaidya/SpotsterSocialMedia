@@ -134,6 +134,17 @@ function loader_discover()
         }
         , 900);
 }
+function chat_loader()
+{
+   setTimeout(function()
+    {
+        document.getElementById('headert').style.display='block';
+        document.getElementById('feedb').style.display='block';
+        document.getElementById('fullloader').style.display='none';
+        document.getElementById('chat_here_div').scrollTop = document.getElementById('chat_here_div').scrollHeight;
+    }
+    , 900);
+}
 function other_loader()
 {
    setTimeout(function()
