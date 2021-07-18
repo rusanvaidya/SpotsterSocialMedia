@@ -1,6 +1,6 @@
 {% extends 'home.html' %}
 {% block bodyloader %}
-<body onload="other_loader()">
+<body onload="chat_loader()">
 {% endblock %}
 {% block sidemenudiv %}
 {% load static %}
@@ -198,7 +198,6 @@
             <input type="submit" class="message-to-deliver" style="display: none;">
           </form>
           <script>
-            $('.chat_here_div').scrollTop($('#chat_here_div')[0].scrollHeight);
             $('.message-to-deliver').keypress(function(e)
             {
               if(e.which==13)
