@@ -451,9 +451,13 @@
                         <ul class="trending">
                             <li class="r-t"><b>Trending Interests.</b></li>
                             {% for key,value in trending_hashtags.items %}
-                            <li><button class="side-l" onclick="window.open('trending?topic={{key}}','_self')"><span class="light-trend">{{post.num_likes}}</span><br><span id='hashtag-key'>#{{key}}</span><br><span class="light-trend">{{value}} posts.</span></button></li>
-                            
+                            {% for k,v in res_dct.items %}
+                            {% if key == k %}
+                            <li><button class="side-l" onclick="window.open('trending?topic={{key}}','_self')"><span class="light-trend">{{value}} posts.</span><br><span id='hashtag-key'>#{{key}}</span><br><span class="light-trend">{{v}} people likes this tag.</span></button></li>
+                            {% endif %}
                             {% endfor %}
+                            {% endfor %}
+                         
                            
                             
                             <li><button class="show-m" id="show_trending">Show more</button></li>

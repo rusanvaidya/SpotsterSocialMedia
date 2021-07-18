@@ -90,7 +90,7 @@ def trending(request):
                 comments = comment.objects.all()
             except:
                 pass
-            trending_hashtags=get_hash_tags()
+            trending_hashtags,res_dct=get_hash_tags()
             hashtag=request.GET.get('topic')
             if hashtag!=None:
                 hashtag='#'+hashtag
@@ -112,6 +112,7 @@ def trending(request):
                 'like_unlike':like_unlike,
                 'comments':comments,
                 'trending_hashtags':trending_hashtags,
+                'res_dct':res_dct
                 }
 
 
@@ -134,18 +135,26 @@ def get_hash_tags():
     hashtags=[re.findall(pattern,i) for i in usertext]
     hashtags=sum(hashtags,[])
 
-    for i in hashtags:
+    delta = []
+    for x in hashtags:
+        if x not in delta:
+            delta.append(x)
+
+    for i in delta:
         h=[]
         post_withhash=userpost.objects.filter(usercontent__iregex=i)
+        post_likes.append(i[1:])
         for a in post_withhash:
             h.append(a.num_likes)
 
+        post_likes.append(sum(h))
+    res_dct = {post_likes[i]: post_likes[i + 1] for i in range(0, len(post_likes), 2)}
 
     hashtags = [e[1:] for e in hashtags]
     count={i:hashtags.count(i) for i in hashtags}
     hash_dict =sorted(count.items(), key=lambda x: x[1],reverse=True)[:5]
 
-    return dict(hash_dict)
+    return dict(hash_dict),res_dct
 
 
     

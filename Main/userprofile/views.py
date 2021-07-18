@@ -88,7 +88,7 @@ def profile(request):
             comments = comment.objects.all()
         except:
             pass
-        trending_hashtags=get_hash_tags()
+        trending_hashtags,res_dct=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -104,7 +104,8 @@ def profile(request):
             'like_unlike': like_unlike,
             'userdata':user_data,
             'comments':comments,
-            'trending_hashtags':trending_hashtags}
+            'trending_hashtags':trending_hashtags,
+            'res_dct':res_dct}
         return render(request, 'profile.html',dict1)
 
     return render(request,'index.html')

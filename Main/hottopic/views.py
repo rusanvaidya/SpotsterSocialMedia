@@ -99,7 +99,7 @@ def video(request):
                 comments=comment.objects.all()
             except:
                 pass
-            trending_hashtags=get_hash_tags()
+            trending_hashtags,res_dct=get_hash_tags()
             dict1 = {
                 'email': email,
                 'user': user,
@@ -116,7 +116,8 @@ def video(request):
                 'collect_video':collect_video,
                 'like_unlike': like_unlike,
                 'comments':comments,
-                'trending_hashtags':trending_hashtags}
+                'trending_hashtags':trending_hashtags,
+                'res_dct':res_dct}
 
 
             return render(request, 'video.html', dict1)

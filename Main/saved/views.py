@@ -74,7 +74,7 @@ def saved(request):
             comments = comment.objects.all()
         except:
             pass
-        trending_hashtags=get_hash_tags()
+        trending_hashtags,res_dct=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -90,7 +90,8 @@ def saved(request):
             'savepost':savepost,
             'like_unlike':like_unlike,
             'comments':comments,
-            'trending_hashtags':trending_hashtags}
+            'trending_hashtags':trending_hashtags,
+            'res_dct':res_dct}
 
         return render(request, 'saved.html', dict1)
 
