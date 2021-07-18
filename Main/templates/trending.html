@@ -11,7 +11,7 @@
         </div>
         <ul>
             {% for key,value in trending_hashtags.items %}
-            <li><button>{{key}}</button></li>
+            <li><button onclick="window.open('trending?topic={{key}}','_self')">#{{key}}</button></li>
             {% endfor %}
         </ul>
     </div>
