@@ -166,6 +166,8 @@ def profile_update(request):
             comments = comment.objects.all()
         except:
             pass
+        list_of_id = suggest_people(request)
+        trending_hashtags,res_dct=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -180,7 +182,10 @@ def profile_update(request):
             'mydetials': mydetials,
             'like_unlike': like_unlike,
             'userdata': user_data,
-            'comments':comments}
+            'comments':comments,
+            'res_dct':res_dct,
+            'trending_hashtags':trending_hashtags,
+            'list_of_id':list_of_id}
 
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -309,7 +314,8 @@ def interest_update(request):
 
         else:
             messages.info(request, 'Nothing Selected!!!')
-
+        list_of_id = suggest_people(request)
+        trending_hashtags,res_dct=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -324,7 +330,10 @@ def interest_update(request):
             'mydetials': mydetials,
             'like_unlike': like_unlike,
             'userdata': user_data,
-            'comments':comments}
+            'comments':comments,
+            'trending_hashtags':trending_hashtags,
+            'res_dct':res_dct,
+            'list_of_id':list_of_id}
         return render(request, "profile.html",dict1)
 
 def view_profile(request):
@@ -409,6 +418,8 @@ def view_profile(request):
         except:
             pass
         list_of_id = suggest_people(request)
+        trending_hashtags,res_dct=get_hash_tags()
+
         dict1 = {
             'email': email,
             'user': user,
@@ -428,7 +439,9 @@ def view_profile(request):
             'like_unlike': like_unlike,
             'userdata': user_data,
             'comments':comments,
-            }
+            'res_dct':res_dct,
+            'trending_hashtags':trending_hashtags,
+            'list_of_id':list_of_id}
         if int(usrid) == usrs_id:
             return redirect('profile')
         else:
