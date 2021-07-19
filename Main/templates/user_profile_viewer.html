@@ -266,7 +266,7 @@
                     }
                 </script>
                 <div style="width: 100%;">
-==                    <table style="display:inline">
+                   <table style="display:inline">
                         <td class="react-act imageClass"><img style="width: 20px" src="{% static 'icon/like.png' %}"></td>
                         <td id="number-{{post.id}}" style="font-size: 20px;">{{post.num_likes}}</td>
                     </table>
@@ -623,7 +623,7 @@ posts2_show_btn.onclick = function()
         posts2_show_btn.classList.toggle('active');
     }
     interests_show.style.display = 'none';
-    if(interests_show_btn.classList=='active')
+    if(interests_show_btn.classList == 'active')
     {
         interests_show_btn.classList.remove('active');
         interests_show_btn.classList.toggle('inactive');
@@ -638,7 +638,7 @@ interests_show_btn.onclick = function()
         posts2_show_btn.classList.toggle('inactive');
     }
     interests_show.style.display = 'block';
-    if(interests_show_btn.classList=='inactive')
+    if(interests_show_btn.classList == 'inactive')
     {
         interests_show_btn.classList.remove('inactive');
         interests_show_btn.classList.toggle('active');

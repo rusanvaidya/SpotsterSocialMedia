@@ -91,12 +91,12 @@
                 }
             </script>
             <div style="width: 100%;">
-                {% if post.num_likes > 0 %}
+
                 <table style="display:inline">
                     <td class="react-act imageClass"><img style="width: 20px" src="{% static 'icon/like.png' %}"></td>
                     <td id="number-{{post.id}}" style="font-size: 20px;">{{post.num_likes}}</td>
                 </table>
-                {% endif %}
+
                 <script>
                     var count=0
                 </script>
