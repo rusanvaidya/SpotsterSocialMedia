@@ -10,7 +10,7 @@ from complete.models import userdetails
 
 from saved.models import user_saved_post,flag_inappropriate
 from trending.views import get_hash_tags
-
+from discover.views import suggest_people
 def saved(request):
     if request.session['email']:
         email = request.session['email']
@@ -75,6 +75,8 @@ def saved(request):
         except:
             pass
         trending_hashtags,res_dct=get_hash_tags()
+        list_of_id = suggest_people(request)
+
         dict1 = {
             'email': email,
             'user': user,
@@ -91,7 +93,8 @@ def saved(request):
             'like_unlike':like_unlike,
             'comments':comments,
             'trending_hashtags':trending_hashtags,
-            'res_dct':res_dct}
+            'res_dct':res_dct,
+            'list_of_id':list_of_id}
 
         return render(request, 'saved.html', dict1)
 

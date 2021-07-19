@@ -467,12 +467,12 @@
                         <ul class="suggestions">
                             <li class="r-t"><b>Suggestions.</b></li>
 
-                            {% for i in followers%}
+                            {% for i in list_of_id%}
                             <li>
                                 <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
                                     <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
                                     {% for bio in userdata %}
-                                    {% if bio.owner_id == i.pk %}
+                                    {% if bio.owner_id == i.id %}
                                     <div class="side-l">
                                         {% if bio.profile_pic != '' %}
                                         <div class="img-li"><img class="suggest-pp" src="media/{{bio.profile_pic}}"></div>
@@ -481,7 +481,7 @@
                                         {% endif %}
                                     {% endif %}
                                     {% endfor %}
-                                        <div class="name-li">{{i.first_name}} {{i.last_name}}<br><span class="light-trend">~Football</span></div>
+                                        <div class="name-li">{{i.first_name}} {{i.last_name}}<br><span class="light-trend">Recommended</span></div>
                                         <div class="follow-li">
                                             {% if i in others%}
                                             <button type="sumbit" id="un_show{{i.pk}}" class="side-after follow{{i.pk}}">Following</button>

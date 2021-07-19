@@ -11,7 +11,10 @@ from discover.models import interest
 
 import re
 
+
 def trending(request):
+    from discover.views import suggest_people
+
     try:
         if request.session['email']:
             email = request.session['email']
@@ -24,6 +27,8 @@ def trending(request):
             count_following =0
             pu = registration.objects.all()
             qs = None
+            list_of_id = suggest_people(request)
+
 
             try:
                 em = followers.objects.get(user_id=usrs_id)
@@ -95,7 +100,6 @@ def trending(request):
             if hashtag!=None:
                 hashtag='#'+hashtag
                 trend=userpost.objects.filter(usercontent__iregex=hashtag)
-
             dict1 = {
                 'email': email,
                 'user': user,
@@ -112,7 +116,8 @@ def trending(request):
                 'like_unlike':like_unlike,
                 'comments':comments,
                 'trending_hashtags':trending_hashtags,
-                'res_dct':res_dct
+                'res_dct':res_dct,
+                'list_of_id' : list_of_id
                 }
 
 

@@ -11,6 +11,7 @@ from itertools import chain
 from math import sin, cos, sqrt, atan2, radians
 
 from trending.views import get_hash_tags
+from discover.views import suggest_people
 # Create your views here.
 def home(request):
     try:
@@ -81,7 +82,8 @@ def home(request):
             except:
                 pass
             trending_hashtags,res_dct=get_hash_tags()
-            
+            list_of_id = suggest_people(request)
+
             dict1 = {
                 'email': email,
                 'user': user,
@@ -98,7 +100,8 @@ def home(request):
                 'like_unlike':like_unlike,
                 'comments':comments,
                 'trending_hashtags':trending_hashtags,
-                'res_dct':res_dct}
+                'res_dct':res_dct, 
+                'list_of_id': list_of_id }
                 # 'country': country,
                 # 'city': city}
 
@@ -402,6 +405,7 @@ def post_comment(request):
 
         comm = comment.objects.filter(post_id = postid).order_by('created_date')
         comm_count = comment.objects.filter(post_id = postid).count()
+        list_of_id = suggest_people(request)
 
         dict1 = {
             'email': email,
@@ -419,7 +423,8 @@ def post_comment(request):
             'like_unlike': like_unlike,
             'postid':postid,
             'comment':comm,
-            'comment_count':comm_count}
+            'comment_count':comm_count,
+            'list_of_id' : list_of_id}
         # 'country': country,
         # 'city': city}
 
@@ -550,6 +555,7 @@ def comment_post(request):
 
         comm = comment.objects.filter(post_id=postid).order_by('created_date')
         comm_count = comment.objects.filter(post_id=postid).count()
+        list_of_id = suggest_people(request)
 
         dict1 = {
             'email': email,
@@ -567,7 +573,8 @@ def comment_post(request):
             'like_unlike': like_unlike,
             'postid': int(postid),
             'comment': comm,
-            'comment_count': comm_count}
+            'comment_count': comm_count,
+            'list_of_id' : list_of_id}
         # 'country': country,
         # 'city': city}
 

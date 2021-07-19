@@ -5,6 +5,7 @@ from discover.models import followers,interest
 from itertools import chain
 from django.contrib import messages
 from trending.views import get_hash_tags
+from discover.views import suggest_people
 # Create your views here.
 
 def profile(request):
@@ -89,6 +90,7 @@ def profile(request):
         except:
             pass
         trending_hashtags,res_dct=get_hash_tags()
+        list_of_id = suggest_people(request)
         dict1 = {
             'email': email,
             'user': user,
@@ -105,7 +107,8 @@ def profile(request):
             'userdata':user_data,
             'comments':comments,
             'trending_hashtags':trending_hashtags,
-            'res_dct':res_dct}
+            'res_dct':res_dct,
+            'list_of_id': list_of_id}
         return render(request, 'profile.html',dict1)
 
     return render(request,'index.html')
@@ -405,6 +408,7 @@ def view_profile(request):
             comments=comment.objects.all()
         except:
             pass
+        list_of_id = suggest_people(request)
         dict1 = {
             'email': email,
             'user': user,
@@ -423,7 +427,8 @@ def view_profile(request):
             'udetials': udetials,
             'like_unlike': like_unlike,
             'userdata': user_data,
-            'comments':comments}
+            'comments':comments,
+            }
         if int(usrid) == usrs_id:
             return redirect('profile')
         else:

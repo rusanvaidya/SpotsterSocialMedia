@@ -10,6 +10,14 @@ import json
 from home.models import userpost
 from trending.views import get_hash_tags
 
+
+import psycopg2
+from psycopg2 import sql
+import pandas as pd
+import pandas.io.sql as sqlio
+import pickle
+import numpy as np
+
 def discover(request):
     if request.session['email']:
         email = request.session['email']
@@ -24,6 +32,7 @@ def discover(request):
         my_id = None
         counts = 0
         count_following=0
+        list_of_id = suggest_people(request)
         try:
             em = followers.objects.get(user_id=userid)
             other = [user_id for user_id in em.following.all()]
@@ -54,7 +63,8 @@ def discover(request):
             'userdata': user_data,
             'interests': interests,
             'trending_hashtags':trending_hashtags,
-            'res_dct':res_dct }
+            'res_dct':res_dct,
+            'list_of_id': list_of_id }
 
         return render(request, 'discover.html', dict1)
 
@@ -152,6 +162,7 @@ def follower(request):
             pass
         other_user = registration.objects.all().exclude(email=email)
         trending_hashtags,res_dct=get_hash_tags()
+        list_of_id = suggest_people(request)
         dict1 = {
             'email': email,
             'user': user,
@@ -163,7 +174,8 @@ def follower(request):
             'mydetials': mydetials,
             'userdata': user_data,
             'trending_hashtags':trending_hashtags,
-            'res_dct':res_dct }
+            'res_dct':res_dct,
+            'list_of_id': list_of_id  }
 
         return render(request, 'follower.html', dict1)
 
@@ -196,6 +208,7 @@ def following(request):
             pass
         other_user = registration.objects.all().exclude(email=email)
         trending_hashtags,res_dct=get_hash_tags()
+        list_of_id = suggest_people(request)
         dict1 = {
             'email': email,
             'user': user,
@@ -207,7 +220,8 @@ def following(request):
             'mydetials': mydetials,
             'userdata': user_data,
             'trending_hashtags':trending_hashtags,
-            'res_dct':res_dct }
+            'res_dct':res_dct, 
+            'list_of_id': list_of_id }
 
         return render(request, 'following.html', dict1)
 
@@ -322,6 +336,7 @@ def get_search(request):
         pass
     other_user = registration.objects.all().exclude(email=email)
     trending_hashtags,res_dct=get_hash_tags()
+    list_of_id = suggest_people(request)
     dict1 = {
         'email': email,
         'user': user,
@@ -336,7 +351,92 @@ def get_search(request):
         'u_data':u_data,
         'json_coor':json_coor,
         'trending_hashtags':trending_hashtags,
-        'res_dct':res_dct}
+        'res_dct':res_dct, 
+        'list_of_id': list_of_id }
    
 
     return render(request, 'discover.html', dict1)
+
+
+
+# ----------------------------------------------------------------------------------------------
+# AI part
+import random
+def suggest_people(request):
+    if request.session['email']:
+        email = request.session['email']
+        id = registration.objects.get(email=email)
+        userid = id.pk
+
+        conn = psycopg2.connect(host="localhost",database='spotster', user = "postgres", password = "postgres@123")
+        query1 = 'SELECT * FROM "complete_userdetails"'
+        conn.autocommit = True
+        dataset1 = sqlio.read_sql_query(query1,conn)
+
+        conn = psycopg2.connect(host="localhost",database='spotster', user = "postgres", password = "postgres@123")
+        query2 = 'SELECT * FROM "discover_interest"'
+        conn.autocommit = True
+        dataset2 = sqlio.read_sql_query(query2,conn)
+
+        conn = psycopg2.connect(host="localhost",database='spotster', user = "postgres", password = "postgres@123")
+        query3 = 'SELECT * FROM "discover_followers_follow_me"'
+        conn.autocommit = True
+        dataset3 = sqlio.read_sql_query(query3,conn)
+
+        dataset = pd.DataFrame(columns=['owner_id', 'Interests_id', 'following_to'])
+        features = ['Interests_id', 'following_to']
+        # label = ['owner_id']
+
+        values = []
+        key = []
+        follow = []
+        for i in range(0,len(dataset1)):
+            list_interest = []
+            x = dataset1['user_interest'][i]
+            x = x.replace("'","")
+            x = x.strip('][').split(', ')
+            # print(x)
+            for j in x:
+                d2 = dataset2.loc[dataset2['my_interest']==j]
+                for k in d2['id']:
+                    unique_id = dataset3['registration_id'].unique()
+                    for ident in unique_id:
+                        d3 = dataset3.loc[dataset3['registration_id']==ident]
+                        d1 = []
+                        for d in d3['followers_id']:
+                            d1.append(d)
+                            if ident==dataset1['owner_id'][i]:
+                                for dz in d1:
+                                    values.append(k)
+                                    key.append(dataset1['owner_id'][i])
+                                    follow.append(dz)
+        dataset['owner_id'] = key
+        dataset['Interests_id'] = values
+        dataset['following_to'] =follow
+        try:
+            test = dataset.loc[dataset['owner_id']==userid]
+            test = test[features]
+
+            loaded_model = pickle.load(open('discover/RandomForest', 'rb'))
+            predicted_id_rfc = loaded_model.predict(test)
+            bbb = list(np.unique(predicted_id_rfc))
+            b0 = list(np.unique(test['following_to']))
+            suggest_list = []
+            for num_id in bbb:
+                if num_id in b0:
+                    pass
+                else:
+                    suggest_list.append(num_id)
+            if userid in suggest_list:
+                suggest_list.remove(userid)
+            if len(suggest_list)>5:
+                list_of_names = random.sample(suggest_list,5)
+            else:
+                list_of_names = suggest_list  
+            tar = []
+            for items in list_of_names:
+                var = registration.objects.get(id=items)
+                tar.append(var)
+            return tar
+        except:
+            return None    
