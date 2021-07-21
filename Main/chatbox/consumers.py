@@ -2,7 +2,7 @@ import json
 
 from django.core.checks import messages
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from chatbox.models import Messages
+from chatbox.models import usermessages
 
 class chatConsumer(AsyncJsonWebsocketConsumer):
     
@@ -34,13 +34,13 @@ class chatConsumer(AsyncJsonWebsocketConsumer):
                 "event": "listen"
             })
             if message != None:
-                if message['room_code'] != 'asd123123': 
-                    # chat_id = int(message['cid'])
+                if message['room_code'] != 'asd123123':
+                    chat_id = int(message['cid'])
                     msg_text = message['text']
                     active_id = int(message['user_id'])
-                    room_code = message['room_code']
-                    
-                    stor_msg = Messages(msgd = msg_text, active_user = active_id, common_user = room_code)
+                    room_codes = message['room_code']
+
+                    stor_msg = usermessages(messgd = msg_text, activeuser = active_id, roomcode = room_codes,chatid = chat_id)
                     stor_msg.save()
 
         if event == 'wait':

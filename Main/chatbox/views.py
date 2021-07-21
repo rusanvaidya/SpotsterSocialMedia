@@ -4,7 +4,7 @@ from home.models import registration
 # Create your views here.
 from itertools import chain
 from discover.models import interest,followers
-from chatbox.models import chatroom, Messages
+from chatbox.models import chatrooms, usermessages
 from complete.models import userdetails
 from trending.views import get_hash_tags
 
@@ -78,19 +78,19 @@ def room(request, room_code):
         vs_photo = userdetails.objects.get(owner_id=int(rc))
         opp_name = vs_id.first_name + ' ' + vs_id.last_name
         opp_photo = vs_photo.profile_pic
-        print(opp_photo)
+        # print(opp_photo)
         room_code = room_id_encoder(str(userid), rc)
         # print(room_code)
         messages_for = []
-        if chatroom.objects.filter(room_code=room_code).exists():
-            ii = chatroom.objects.get(room_code = room_code)
+        if chatrooms.objects.filter(userroomcode=room_code).exists():
+            ii = chatrooms.objects.get(userroomcode = room_code)
             car = ii.id
-            print(car)
-            msg_for = Messages.objects.filter(chat_id = car)
+            # print(car)
+            msg_for = usermessages.objects.filter(id = car)
             messages_for.append(msg_for)
         qs = None
         if len(messages_for) > 1:
-            qs = sorted(chain(*messages_for), key=lambda obj: obj.message_date)
+            qs = sorted(chain(*messages_for), key=lambda obj: obj.messagecreated)
         try:
             em = followers.objects.get(user_id=userid)
             other = [user_id for user_id in em.following.all()]
@@ -133,15 +133,15 @@ def room(request, room_code):
 def room_id_encoder(user1, user2):
     room_name = [user1 , user2]
     room_code = user1 + user2
-    f = chatroom.objects.all()
+    f = chatrooms.objects.all()
     # print(f)
     for item in f:
-        rav = item.room_name
+        rav = item.commuserlist
         if user1 in rav:
             if user2 in rav:
-                tav = chatroom.objects.get(room_code = item.room_code)
-                return tav.room_code
+                tav = chatrooms.objects.get(userroomcode = item.userroomcode)
+                return tav.userroomcode
     
-    room,created = chatroom.objects.get_or_create(room_name= room_name, room_code = room_code)
+    room,created = chatrooms.objects.get_or_create(commuserlist= room_name, userroomcode = room_code)
     room.save()
     return room_code
