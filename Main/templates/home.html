@@ -50,22 +50,22 @@
                         <a href="/"><img src="{% static 'icon/home-inactive.png' %}" class="header_m_img"></a>
                     </div>
                     <div class="header_btns_active" id="v-a">
-                        <a href="video"><img src="{% static 'icon/video.png' %}" class="header_m_img"></a>
+                        <a href="/video"><img src="{% static 'icon/video.png' %}" class="header_m_img"></a>
                     </div>
                     <div class="header_btns" id="v-i">
-                        <a href="video"><img src="{% static 'icon/video-inactive.png' %}" class="header_m_img"></a>
+                        <a href="/video"><img src="{% static 'icon/video-inactive.png' %}" class="header_m_img"></a>
                     </div>
                     <div class="header_btns_active" id="t-a">
-                        <a href="trending"><img src="{% static 'icon/trending.png' %}" class="header_m_img"></a>
+                        <a href="/trending"><img src="{% static 'icon/trending.png' %}" class="header_m_img"></a>
                     </div>
                     <div class="header_btns" id="t-i">
-                        <a href="trending"><img src="{% static 'icon/trending-inactive.png' %}" class="header_m_img"></a>
+                        <a href="/trending"><img src="{% static 'icon/trending-inactive.png' %}" class="header_m_img"></a>
                     </div>
                     <div class="header_btns_active" id="d-a">
-                        <a href="discover"><img src="{% static 'icon/discover.png' %}" class="header_m_img"></a>
+                        <a href="/discover"><img src="{% static 'icon/discover.png' %}" class="header_m_img"></a>
                     </div>
                     <div class="header_btns" id="d-i">
-                        <a href="discover"><img src="{% static 'icon/discover-inactive.png' %}" class="header_m_img"></a>
+                        <a href="/discover"><img src="{% static 'icon/discover-inactive.png' %}" class="header_m_img"></a>
                     </div>
                     <div class="header_btns_active mobile-nav-active" id="m-n-a">
                         <a href=""><img src="{% static 'icon/menu.png' %}" class="header_menu_img"></a>
@@ -92,7 +92,7 @@
                                         <div class="new-idea">Search</div>
                                     </div>
                                 </li>
-                                <li class="sidemenu" onclick="window.open('profile','_self')">
+                                <li class="sidemenu" onclick="window.open('/profile','_self')">
                                     
                                     {% for i in user %}
                                     <table>
@@ -186,7 +186,7 @@
                                         </td>
                                     </table>
                                 </li>
-                                <li class="sidemenu" onclick="window.open('logout', '_self')">
+                                <li class="sidemenu" onclick="window.open('/logout', '_self')">
                                     <table>
                                         <td class="c1-img">
                                             <img class="header_propic" src="{% static 'icon/logout.png' %}">
@@ -293,14 +293,14 @@
                                 <!-- <span class="badge-verified"><img src="{% static 'img/not-verified.png' %}" title="Not-Verified" class="nv"></span> -->
                                 <span class="badge-verified"><img src="{% static 'img/verified.png' %}" title="Verified" class="nv"></span>
 
-                                <a href="profile">
+                                <a href="/profile">
                                     {{i.first_name}} {{i.last_name}}<br>
                                     <p class="light">{{email}}</p>
                                 </a>
                             </div>
                             {% endfor %}
                             <!-- <img src="{% static 'icon/logout.png' %}"> -->
-                            <a href="logout">Logout</a>
+                            <a href="/logout">Logout</a>
                             <div class="light bd">
                                 &copy 2021 Spotster
                             </div>

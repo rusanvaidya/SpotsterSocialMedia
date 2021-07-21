@@ -3,10 +3,10 @@
 <body onload="chat_loader()">
 {% endblock %}
 {% block profileheader1 %}
-<img onclick="myProfile()" class="d1btn" src="../media/{{mydetials.profile_pic}}">
+<img onclick="myProfile()" class="d1btn" src="/media/{{mydetials.profile_pic}}">
 {% endblock %}
 {% block profileheader2 %}
-<img class="pp-show" src="../media/{{mydetials.profile_pic}}">
+<img class="pp-show" src="/media/{{mydetials.profile_pic}}">
 {% endblock %}
 
 {% block sidemenudiv %}
@@ -71,11 +71,48 @@
    <div class="chatbox_container" id="chatc">
     <div class="chat-with">
       <table>
+        {% if opp_photo != '' %}
         <td><img src="../media/{{opp_photo}}"></td>
+        {% else %}
+        <td><img src="{% static 'img/defaultpp.jpg' %}"></td>
+        {% endif %}
         <td>{{opp_name}}</td>
       </table>
     </div>
     <div class="chat_here" id="chat_here_div">
+      {% for ms in stored_msg %}
+      {% if mydetials.owner_id == ms.activeuser %}
+      <div class="you-sent">
+        <div class="msg-div-you-sent">
+          <div class="you-sent-img">
+            {% if mydetials.profile_pic != '' %}
+            <img src="../media/{{mydetials.profile_pic}}">
+            {% else %}
+            <img src="{% static 'img/defaultpp.jpg' %}">
+            {% endif %}
+          </div>
+          <div class="you-sent-msg">
+             {{ms.messgd}}
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="sender">
+        <div class="msg-div-sender">
+          <div class="sender-img">
+            {% if opp_photo != '' %}
+            <img src="../media/{{opp_photo}}">
+            {% else %}
+            <img src="{% static 'img/defaultpp.jpg' %}">
+            {% endif %}
+            </div>
+            <div class="sender-msg">
+             {{ms.messgd}}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
     </div>
     <div class="write-msg">
         <div class="msg-put">
@@ -106,6 +143,8 @@
             }
             function messages(texts)
             {
+              if(texts.length>0)
+              {
                 chatSocket.send(JSON.stringify({
                     'event' : 'listen',
                     'message': {
@@ -117,6 +156,7 @@
                     'room_code': roomCode,
                     }
                 }));
+              }
             }
             function setMsg(texts, pic, my_n)
             {
@@ -129,7 +169,7 @@
             <img src="{% static 'img/defaultpp.jpg' %}">
           </div>
           <div class="you-sent-msg">
-             <b style="color: #ffd657">${my_n}</b><br> ${texts}
+             ${texts}
           </div>
         </div>
       </div>` ;
@@ -143,7 +183,7 @@
             <img src="../media/${pic}">
           </div>
           <div class="you-sent-msg">
-             <b style="color: #ffd657">${my_n}</b><br> ${texts}
+            ${texts}
           </div>
         </div>
       </div>` ;
@@ -160,7 +200,7 @@
             <img src="{% static 'img/defaultpp.jpg' %}">
             </div>
             <div class="sender-msg">
-             <b style="color: #ffd657">${my_n}</b><br> ${texts}
+             ${texts}
           </div>
         </div>
       </div>`;
@@ -174,7 +214,7 @@
             <img src="../media/${pic}">
             </div>
             <div class="sender-msg">
-             <b style="color: #ffd657">${my_n}</b><br> ${texts}
+             ${texts}
           </div>
         </div>
       </div>`;
@@ -234,7 +274,7 @@
             <div id="emobox" class="emo-box"></div>
             <script src="{% static 'js/chatbox.js' %}"></script>
         </div>
-    </div>
+    </div><b style="color: #ffd657">${my_n}</b><br> 
   </div>
 </div>
 {% endblock %}

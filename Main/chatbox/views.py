@@ -79,18 +79,14 @@ def room(request, room_code):
         opp_name = vs_id.first_name + ' ' + vs_id.last_name
         opp_photo = vs_photo.profile_pic
         # print(opp_photo)
+        msg_for = None
         room_code = room_id_encoder(str(userid), rc)
-        # print(room_code)
-        messages_for = []
+        print(room_code)
         if chatrooms.objects.filter(userroomcode=room_code).exists():
             ii = chatrooms.objects.get(userroomcode = room_code)
             car = ii.id
             # print(car)
-            msg_for = usermessages.objects.filter(id = car)
-            messages_for.append(msg_for)
-        qs = None
-        if len(messages_for) > 1:
-            qs = sorted(chain(*messages_for), key=lambda obj: obj.messagecreated)
+            msg_for = usermessages.objects.filter(roomcode = room_code).order_by('messagecreated')
         try:
             em = followers.objects.get(user_id=userid)
             other = [user_id for user_id in em.following.all()]
@@ -123,7 +119,7 @@ def room(request, room_code):
             'interests': interests,
             'trending_hashtags':trending_hashtags,
             'rie' : room_code,
-            'stored_msg' : qs,
+            'stored_msg' : msg_for,
             'chat_id' : car,
             'opp_name' : opp_name,
             'opp_photo' : opp_photo,
