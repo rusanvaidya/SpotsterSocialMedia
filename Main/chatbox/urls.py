@@ -19,5 +19,5 @@ from . import views
 
 urlpatterns = [
     path('chatbox', views.chatbox),
-    path('chatbox/<str:room_name>', views.room, name='room'),
+    path('chatbox/<room_code>', views.room),
 ]

@@ -273,7 +273,9 @@
                     </div>
                     <div class="dd">
                         {% if mydetials.profile_pic != '' %}
+                        {% block profileheader1 %}
                         <img onclick="myProfile()" class="d1btn" src="media/{{mydetials.profile_pic}}">
+                        {% endblock %}
                         {% else %}
                         <img onclick="myProfile()" class="d1btn" src="{% static 'img/defaultpp.jpg' %}">
                         {% endif %}
@@ -281,7 +283,9 @@
                             {% for i in user %}
                             <div class="user_option">
                                 {% if mydetials.profile_pic != '' %}
+                                {% block profileheader2 %}
                                 <img class="pp-show" src="media/{{mydetials.profile_pic}}">
+                                {% endblock %}
                                 {% else %}
                                 <img class="pp-show" src="{% static 'img/defaultpp.jpg' %}">
                                 {% endif %}

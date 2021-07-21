@@ -139,8 +139,7 @@ p.msg_preview
 {
   background-color: transparent;
   border: none;
-  width: 100%;
-  }
+}
 .chatbox_container .write-msg .emoji-put img
 {
   width: 20px;
@@ -256,7 +255,8 @@ p.msg_preview
 .chat_here .you-sent .you-sent-msg
 {
   margin: 5px;
-  width: 50%;
+  width: auto;
+  max-width: 50%;
   background-color: rgba(62, 139, 63, 0.44);
   display: inline-block;
   padding: 5px;

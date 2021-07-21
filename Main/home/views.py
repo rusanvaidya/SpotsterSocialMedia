@@ -1,3 +1,5 @@
+import base64
+
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from discover.models import followers
@@ -83,7 +85,6 @@ def home(request):
                 pass
             trending_hashtags,res_dct=get_hash_tags()
             list_of_id = suggest_people(request)
-
             dict1 = {
                 'email': email,
                 'user': user,
@@ -100,7 +101,7 @@ def home(request):
                 'like_unlike':like_unlike,
                 'comments':comments,
                 'trending_hashtags':trending_hashtags,
-                'res_dct':res_dct, 
+                'res_dct':res_dct,
                 'list_of_id': list_of_id }
                 # 'country': country,
                 # 'city': city}
@@ -125,10 +126,22 @@ def login(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
-        user = registration.objects.filter(email=email, password=password)
-        if user.exists():
-            request.session['email'] = email
-            return redirect('home')
+        try:
+            hashed = registration.objects.get(email=email)
+            hashed_password = hashed.password
+        except:
+            messages.info(request, 'Incorrect Email!!!')
+            return render(request, 'index.html')
+
+        if check_password(hashed_password, password):
+            user = registration.objects.filter(email=email)
+            if user.exists():
+                request.session['email'] = email
+                return redirect('home')
+            else:
+                messages.info(request, 'Incorrect Email or Password!!!')
+                return render(request, 'index.html')
+
         else:
             messages.info(request, 'Incorrect Email or Password!!!')
             return render(request, 'index.html')
@@ -162,35 +175,42 @@ def register(request):
             return render(request,'index.html')
 
         else:
-            user = registration(first_name=first_name, last_name=last_name, email=email, password=password,
+
+            passd = hash_password(password)
+
+            user = registration(first_name=first_name, last_name=last_name, email=email, password=passd,
                                 birthday=birthday, gender=gender)
             user.save()
-            user = registration.objects.filter(email=email, password=password)
-            if user.exists():
-                request.session['email'] = email
-                usr_id = registration.objects.get(email=email)
-                usrs_id = usr_id.id
-                interest_list = interest.objects.all().order_by('my_interest')
-                other = None
-                try:
-                    em = followers.objects.get(user_id=usrs_id)
-                    other = [user_id for user_id in em.following.all()]
+            hashed = registration.objects.get(email = email)
+            hashed_password = hashed.password
+            if check_password(hashed_password, password):
 
-                except:
-                    pass
-                # other_user = registration.objects.all().exclude(email=email)
+                user = registration.objects.filter(email=email)
+                if user.exists():
+                    request.session['email'] = email
+                    usr_id = registration.objects.get(email=email)
+                    usrs_id = usr_id.id
+                    interest_list = interest.objects.all().order_by('my_interest')
+                    other = None
+                    try:
+                        em = followers.objects.get(user_id=usrs_id)
+                        other = [user_id for user_id in em.following.all()]
 
-                f = registration.objects.get(email=email)
-                try:
-                    followers.objects.get(user_id=f.id)
+                    except:
+                        pass
+                    # other_user = registration.objects.all().exclude(email=email)
 
-                except:
-                    my_profile = followers(user_id=f.id)
-                    my_profile.save()
-                return render(request, 'complete.html', {'email': email, 'user': user, 'others': other,'interest':interest_list})
-            else:
-                messages.info(request, 'User not exits!!!')
-                return render(request, 'index.html')
+                    f = registration.objects.get(email=email)
+                    try:
+                        followers.objects.get(user_id=f.id)
+
+                    except:
+                        my_profile = followers(user_id=f.id)
+                        my_profile.save()
+                    return render(request, 'complete.html', {'email': email, 'user': user, 'others': other,'interest':interest_list})
+                else:
+                    messages.info(request, 'User not exits!!!')
+                    return render(request, 'index.html')
     else:
 
         messages.info(request, 'Page not found!!!')
@@ -406,7 +426,6 @@ def post_comment(request):
         comm = comment.objects.filter(post_id = postid).order_by('created_date')
         comm_count = comment.objects.filter(post_id = postid).count()
         list_of_id = suggest_people(request)
-
         dict1 = {
             'email': email,
             'user': user,
@@ -424,7 +443,7 @@ def post_comment(request):
             'postid':postid,
             'comment':comm,
             'comment_count':comm_count,
-            'list_of_id' : list_of_id}
+            'list_of_id': list_of_id }
         # 'country': country,
         # 'city': city}
 
@@ -556,7 +575,6 @@ def comment_post(request):
         comm = comment.objects.filter(post_id=postid).order_by('created_date')
         comm_count = comment.objects.filter(post_id=postid).count()
         list_of_id = suggest_people(request)
-
         dict1 = {
             'email': email,
             'user': user,
@@ -574,7 +592,7 @@ def comment_post(request):
             'postid': int(postid),
             'comment': comm,
             'comment_count': comm_count,
-            'list_of_id' : list_of_id}
+            'list_of_id': list_of_id }
         # 'country': country,
         # 'city': city}
 
@@ -588,3 +606,17 @@ def delete_comment(request):
     print(userid,commentid)
     del_comme = comment.objects.filter(user_id = userid , id = commentid ).delete()
     return redirect(request.META.get('HTTP_REFERER'))
+
+import uuid
+import hashlib
+
+
+def hash_password(password):
+    salt = uuid.uuid4().hex
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' + salt
+
+
+def check_password(hashed_password, user_password):
+    password, salt = hashed_password.split(':')
+    return password == hashlib.sha256(salt.encode() + user_password.encode()).hexdigest()
+

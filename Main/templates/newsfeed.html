@@ -118,12 +118,14 @@
             </div>
         </div>
     </div>
-
+    <script>
+        count_post = 0;
+    </script>
     {%for post in posts%}
     {% for p in pu %}
     {% if p.id == post.author_id %}
 
-    <div class="feedsocket">
+    <div class="feedsocket" id="feedsocket{{post.id}}">
         <div class="feedpost">
             <div class="user-who-posted">
                 <div class="u-name">
@@ -429,13 +431,28 @@
                     document.getElementById('share-{{post.id}}').style.height='100px';
                     }
                 </script>
-                <script>
-                    // like
-                    }
-                </script>
             </div>
         </div>
     </div>
+    <!-- <script>
+        count_post++;
+        function loadPost()
+        {
+            if(count_post < 4)
+            {
+            }
+            else
+            {
+                document.getElementById('feedsocket{{post.id}}').style.display='none';
+            }
+        }
+        window.addEventListener('scroll', () =>{
+            if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight)
+            {
+                loadPost();
+            }
+        })
+    </script> -->
 
     {% endif %}
     {% endfor %}

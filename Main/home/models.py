@@ -8,7 +8,7 @@ class registration(models.Model):
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)
     email = models.EmailField(max_length=100)
-    password = models.CharField(max_length=15)
+    password = models.CharField(max_length=100)
     birthday = models.CharField(max_length=100)
     gender = models.CharField(max_length=100)
 

@@ -1,0 +1,240 @@
+{% extends 'home.html' %}
+{% block bodyloader %}
+<body onload="chat_loader()">
+{% endblock %}
+{% block profileheader1 %}
+<img onclick="myProfile()" class="d1btn" src="../media/{{mydetials.profile_pic}}">
+{% endblock %}
+{% block profileheader2 %}
+<img class="pp-show" src="../media/{{mydetials.profile_pic}}">
+{% endblock %}
+
+{% block sidemenudiv %}
+{% load static %}
+<div class="chating" style="overflow-y: scroll;">
+  <div class="search_names">
+    <input type="search" placeholder="Search..." id="search-message-user">
+  </div>
+  <div class="name_for_chat">
+    <ul id="this--UL">
+      {% for i in others%}
+        <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
+        <li onclick="window.open('/chatbox/{{i.first_name}}?query={{i.id}}', '_self'); document.getElementById('')"  id="names-msg-{{i.pk}}">
+            <table>
+            {% for bio in userdata %}
+            {% if bio.owner_id == i.pk %}
+            {% if bio.profile_pic != '' %}
+            <td class="sp-pp"><img src="../media/{{bio.profile_pic}}" width="50" height="50"></td>
+            {% else %}
+            <td class="sp-pp"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+              <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
+            </table>
+        </li>
+        {% endfor %}
+    </ul>
+  </div>
+</div>
+<script>
+
+  document.getElementById('search-message-user').onkeyup = function()
+  {
+    var filter = document.getElementById('search-message-user').value.toUpperCase();
+    var ul = document.getElementById('this--UL');
+    var li = ul.getElementsByTagName('li');
+    for(var i=0; i<li.length;i++)
+    {
+        var table = li[i].getElementsByTagName('table');
+        var td = table[0].getElementsByTagName('td')[1];
+        var tex = td.innerText;
+        console.log(tex.toUpperCase().indexOf(filter));
+        if (tex.toUpperCase().indexOf(filter) > -1)
+        {
+            li[i].style.display="";
+        }
+        else
+        {
+            li[i].style.display='none';
+        }
+    }
+  }
+</script>
+{% endblock %}
+
+{% block searrrrr %}
+  
+<script>
+  console.log(window.location.pathname);
+</script>
+   <div class="chatbox_container" id="chatc">
+    <div class="chat-with">
+      <table>
+        <td><img src="../media/{{opp_photo}}"></td>
+        <td>{{opp_name}}</td>
+      </table>
+    </div>
+    <div class="chat_here" id="chat_here_div">
+    </div>
+    <div class="write-msg">
+        <div class="msg-put">
+          <!-- <form class="form-message-deliver"> -->
+            <input type="text" placeholder="Write message" id="msg-here-text" autocomplete="off">
+            <button id="sendmsg" class="message-to-deliver" style="display: none;">Send</button>
+          <!-- </form> -->
+          <script>
+            var my_id = '{{mydetials.owner_id}}';
+            var my_pic = '{{mydetials.profile_pic}}'
+            var my_name = '{{my_id.first_name}}'+' '+'{{my_id.last_name}}'
+            var chat_id = '{{chat_id}}'
+            var roomCode = '{{rie}}'
+            console.log(chat_id)
+            
+
+            let chat_container = document.getElementById('chat_here_div')
+
+            var conn = 'ws://'+window.location.host+'/ws/chatbox/{{rie}}/';
+            console.log(conn);
+            var chatSocket = new WebSocket(conn);
+            
+            document.getElementById('sendmsg').onclick = function()
+            {
+              // console.log(document.getElementById('msg-here-text').value)
+              messages(document.getElementById('msg-here-text').value);
+              document.getElementById('msg-here-text').value='';
+            }
+            function messages(texts)
+            {
+                chatSocket.send(JSON.stringify({
+                    'event' : 'listen',
+                    'message': {
+                    'user_id' : my_id,
+                    'my_name' : my_name,
+                    'profilepicture' : my_pic,
+                    'text' : texts,
+                    'cid' : chat_id,
+                    'room_code': roomCode,
+                    }
+                }));
+            }
+            function setMsg(texts, pic, my_n)
+            {
+              if(pic=='')
+              {
+              document.getElementsByClassName('chat_here')[0].innerHTML += 
+              `<div class="you-sent">
+        <div class="msg-div-you-sent">
+          <div class="you-sent-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+          </div>
+          <div class="you-sent-msg">
+             <b style="color: #ffd657">${my_n}</b><br> ${texts}
+          </div>
+        </div>
+      </div>` ;
+            }
+            else
+            {
+              document.getElementsByClassName('chat_here')[0].innerHTML += 
+              `<div class="you-sent">
+        <div class="msg-div-you-sent">
+          <div class="you-sent-img">
+            <img src="../media/${pic}">
+          </div>
+          <div class="you-sent-msg">
+             <b style="color: #ffd657">${my_n}</b><br> ${texts}
+          </div>
+        </div>
+      </div>` ;
+            }
+          }
+            function getMsg(texts, pic, my_n)
+            {
+              if(pic=='')
+              {
+                document.getElementsByClassName('chat_here')[0].innerHTML += 
+              `<div class="sender">
+        <div class="msg-div-sender">
+          <div class="sender-img">
+            <img src="{% static 'img/defaultpp.jpg' %}">
+            </div>
+            <div class="sender-msg">
+             <b style="color: #ffd657">${my_n}</b><br> ${texts}
+          </div>
+        </div>
+      </div>`;
+              }
+              else
+              {
+              document.getElementsByClassName('chat_here')[0].innerHTML += 
+              `<div class="sender">
+        <div class="msg-div-sender">
+          <div class="sender-img">
+            <img src="../media/${pic}">
+            </div>
+            <div class="sender-msg">
+             <b style="color: #ffd657">${my_n}</b><br> ${texts}
+          </div>
+        </div>
+      </div>`;
+            }
+          }
+            function connect()
+            {
+                chatSocket.onopen = function open()
+                {
+                    console.log('websocket is connected');
+                    chatSocket.send(JSON.stringify({
+                        'event': 'wait'
+                    }))
+                }
+                chatSocket.onclose = function (e) {
+                    console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+                    setTimeout(function () {
+                        connect();
+                    }, 1000);
+                };
+
+                chatSocket.onmessage = function (e)
+                {
+                    let data = JSON.parse(e.data);
+                    data = data['payload'];
+                    let message = data['message'];
+                    console.log(message["profilepicture"])
+                    if(message!=null)
+                    {
+                      if(message['user_id']==my_id)
+                      {// sender
+                        setMsg(message["text"], message["profilepicture"], message["my_name"]);
+                        document.getElementById('chat_here_div').scrollTop = document.getElementById('chat_here_div').scrollHeight;
+                      }
+                      else
+                      {
+                        // send_to
+                        getMsg(message["text"], message["profilepicture"], message["my_name"]);
+                        document.getElementById('chat_here_div').scrollTop = document.getElementById('chat_here_div').scrollHeight;
+                      }
+                    }
+                  }
+                if (chatSocket.readyState == WebSocket.OPEN) {
+                    chatSocket.onopen();
+                }
+            }
+            connect()
+            document.querySelector('#msg-here-text').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+              document.querySelector('#sendmsg').click();
+            }
+            }
+          </script>
+        </div>
+        <div class="emoji-put">
+            <img src="{% static 'icon/smiley.png' %}" class="emdisp" onclick="smileyshow()">
+            <div id="emobox" class="emo-box"></div>
+            <script src="{% static 'js/chatbox.js' %}"></script>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
