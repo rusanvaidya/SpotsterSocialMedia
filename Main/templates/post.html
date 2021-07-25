@@ -50,9 +50,9 @@
                             <li>
                             <button type="submit">Save this post</button></li>
                             </form>
-                            <form class="flag-post" method="post" action="flag_post" id="flag{{post.id}}"> {% csrf_token %}
-                            <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
-                            <input type="hidden" name="postid" value="{{post.id}}">
+                            <form class="flag-post{{post.id}}" method="post" action="flag_post" id="flag{{post.id}}"> {% csrf_token %}
+                            <input type="hidden" name="userid" class="usrid{post.id}}" value="{{mydetials.owner_id}}">
+                            <input type="hidden" name="postid" class="posid{{post.id}}" value="{{post.id}}">
                             <li><button type="submit">Flag inappropriate</button></li>
                             </form>
                             <li><button>Block {{p.first_name}} {{p.last_name}}</button></li>
@@ -277,54 +277,6 @@
                   document.getElementById('share-{{post.id}}').style.height='100px';
                   }
               </script>
-              <script>
-                  // like
-                  var like_b_i = document.getElementById('table-like-{{post.id}}');
-
-                  like_b_i.onclick = function()
-                  {
-                      document.getElementById('table-like-{{post.id}}').classList.toggle('like-on-this-post');
-                      document.getElementById('table-dislike-{{post.id}}').classList.remove('dislike-on-this-post');
-                      if(document.getElementById('like-i-{{post.id}}').classList.contains('none-react-post'))
-                      {
-                          document.getElementById('like-i-{{post.id}}').classList.remove('none-react-post');
-                          document.getElementById('like-a-{{post.id}}').classList.toggle('none-react-post');
-                      }
-                      else if(document.getElementById('like-a-{{post.id}}').classList.contains('none-react-post'))
-                      {
-                          document.getElementById('like-i-{{post.id}}').classList.toggle('none-react-post');
-                          document.getElementById('like-a-{{post.id}}').classList.remove('none-react-post');
-                          if(document.getElementById('dislike-i-{{post.id}}').classList.contains('none-react-post'))
-                          {
-                              document.getElementById('dislike-i-{{post.id}}').classList.remove('none-react-post');
-                              document.getElementById('dislike-a-{{post.id}}').classList.toggle('none-react-post');
-                          }
-                      }
-                  }
-
-                  // dislike
-                  var dislike_b_i = document.getElementById('table-dislike-{{post.id}}');
-                  dislike_b_i.onclick = function()
-                  {
-                      document.getElementById('table-dislike-{{post.id}}').classList.toggle('dislike-on-this-post');
-                      document.getElementById('table-like-{{post.id}}').classList.remove('like-on-this-post');
-                      if(document.getElementById('dislike-i-{{post.id}}').classList.contains('none-react-post'))
-                      {
-                          document.getElementById('dislike-i-{{post.id}}').classList.remove('none-react-post');
-                          document.getElementById('dislike-a-{{post.id}}').classList.toggle('none-react-post');
-                      }
-                      else if(document.getElementById('dislike-a-{{post.id}}').classList.contains('none-react-post'))
-                      {
-                          document.getElementById('dislike-i-{{post.id}}').classList.toggle('none-react-post');
-                          document.getElementById('dislike-a-{{post.id}}').classList.remove('none-react-post');
-                          if(document.getElementById('like-i-{{post.id}}').classList.contains('none-react-post'))
-                          {
-                              document.getElementById('like-i-{{post.id}}').classList.remove('none-react-post');
-                              document.getElementById('like-a-{{post.id}}').classList.toggle('none-react-post');
-                          }
-                      }
-                  }
-              </script>
           </div>
       </div>
   </div>
@@ -460,9 +412,32 @@
                 console.log('error',response)
                 }
                 });
-    
-    
         });
+        $('.flag-post{{post.id}}').submit(function(e){
+        e.preventDefault()
+
+        const user_id = $(`.usrid{{post.id}}`).attr('value')
+        const post_id = $(`.posid{{post.id}}`).attr('value')
+        const url =$(this).attr('action')
+
+
+        $.ajax({
+            type:'POST',
+            url : url,
+            data:{
+            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+            'userid' : user_id,
+            'postid' : post_id
+            },
+            success:function(response){
+                alert('Post is Flag');
+            },
+            error:function(response){
+            console.log('error',response)
+            }
+            });
+    });
+    
         </script>
         
         {% endfor %}

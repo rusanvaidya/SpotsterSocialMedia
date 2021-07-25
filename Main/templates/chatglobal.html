@@ -4,13 +4,15 @@
 {% endblock %}
 {% block sidemenudiv %}
 {% load static %}
-<div class="chating" style="overflow-y: scroll;">
+<div class="chating">
   <div class="search_names">
     <input type="search" placeholder="Search..." id="search-message-user">
   </div>
   <div class="name_for_chat">
-    <ul id="this--UL">
+    <ul id="this--UL" style="overflow-y: auto; height: 500px;">
       {% for i in others%}
+      {% for k in followers %}
+      {% if i == k %}
         <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
         <li onclick="window.open('/chatbox/{{i.first_name}}?query={{i.id}}', '_self'); document.getElementById('')"  id="names-msg-{{i.pk}}">
             <table>
@@ -26,6 +28,8 @@
               <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
             </table>
         </li>
+        {% endif %}
+        {% endfor %}
         {% endfor %}
     </ul>
   </div>

@@ -1,0 +1,82 @@
+{% extends 'home.html' %}
+{% block bodyloader %}
+<body onload="other_loader()">
+{% endblock %}
+{% block leftfeed %}
+{% load static %}
+<div class="left-feed">
+    {% block follow %}
+    <div class="topic">
+        Results : 
+    </div>
+    <div class="people-list">
+        <ul>
+            {% for i in search_names %}
+            <form class="nn_follow{{i.id}}" action="discover_more" method="post" id="discover-{{i.pk}}">{% csrf_token %}
+                <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
+                <li>
+                    <table>
+                        {% for bio in userdata %}
+                        {% if bio.owner_id == i.pk %}
+                        {% if bio.profile_pic != '' %}
+                        <td class="sp-pp"><img src="media/{{bio.profile_pic}}" height="50" width="50"></td>
+                        {% else %}
+                        <td class="sp-pp"><img src="{% static 'img/defaultpp.jpg' %}"></td>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        <td class="sp-name"><a href="view_profile?id={{i.id}}" style="text-decoration: none; color: white;">{{i.first_name}} {{i.last_name}}</a></td>
+                        <td class="sp-button">
+                            {% if i in others%} 
+                            <button type="submit" id="un_show{{i.pk}}" class="side-after follows{{i.id}}">Following</button>
+                            {% else %}
+                            <button type="submit" class="side-r follows{{i.id}}">Follow</button>
+                            {% endif %}
+                        </td>
+                    </table>
+                </li>
+            </form>
+            <script>
+                $('.nn_follow{{i.id}}').submit(function(e){
+                    e.preventDefault()
+            
+                    const followText = $(`.follows{{i.id}}`).text()
+                    const trim = $.trim(followText)
+                    const url =$(this).attr('action')
+                    console.log(trim)
+            
+                    $.ajax({
+                        type:'POST',
+                        url : url,
+                        data:{
+                        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                        'follow_pk':'{{i.id}}'
+                        },
+                        success:function(response){
+                        if (trim === 'Follow'){
+            
+                            $(`.follows{{i.id}}`).text('Following')
+            
+            
+                        } else {
+            
+                            $(`.follows{{i.id}}`).text('Follow')
+            
+                        }
+                        },
+                        error:function(response){
+                        console.log('error',response)
+                        }
+                        });
+            
+            
+                });
+            </script>    
+            
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<script src="{% static 'js/header.js' %}"></script>
+{% endblock %}
+{% endblock %}

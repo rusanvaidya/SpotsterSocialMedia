@@ -21,7 +21,7 @@
             {% endif %}
             {% endif %}
             {% endfor %}
-            <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
+            <td class="sp-name"><a href="view_profile?id={{i.id}}" style="text-decoration: none; color: white;">{{i.first_name}} {{i.last_name}}</a></td>
             <td class="sp-button">
                 {% if i in others%}
                 <button type="sumbit" id="un_show{{i.pk}}" class="side-after fllow{{i.pk}}">Following</button>

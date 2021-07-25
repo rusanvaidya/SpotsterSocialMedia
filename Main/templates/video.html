@@ -32,7 +32,7 @@
                         {% endif %}
                         {% endif %}
                         {% endfor %}
-                        <td class="u-fullname"><a href="profile">{{p.first_name}} {{p.last_name}}</a></td>
+                        <td class="u-fullname"><a href="view_profile?id={{p.id}}">{{p.first_name}} {{p.last_name}}</a></td>
                         {% if post.emoji != '' %}
                         <td>{{post.feeling}}</td>
                         <td class="femoji"><img src='/static/{{post.emoji}}'></td>
@@ -54,9 +54,9 @@
                                 <li>
                                 <button type="submit">Save this post</button></li>
                                 </form>
-                                <form class="flag-post" method="post" action="flag_post" id="flag{{post.id}}"> {% csrf_token %}
-                                <input type="hidden" name="userid" value="{{mydetials.owner_id}}">
-                                <input type="hidden" name="postid" value="{{post.id}}">
+                                <form class="flag-post{{post.id}}" method="post" action="flag_post" id="flag{{post.id}}"> {% csrf_token %}
+                                <input type="hidden" name="userid" class="usrid{{post.id}}" value="{{mydetials.owner_id}}">
+                                <input type="hidden" name="postid" class="posid{{post.id}}" value="{{post.id}}">
                                 <li><button type="submit">Flag inappropriate</button></li>
                                 </form>
                                 <li><button>Block {{p.first_name}} {{p.last_name}}</button></li>
@@ -393,6 +393,31 @@
 
 
     });
+    $('.flag-post{{post.id}}').submit(function(e){
+        e.preventDefault()
+
+        const user_id = $(`.usrid{{post.id}}`).attr('value')
+        const post_id = $(`.posid{{post.id}}`).attr('value')
+        const url =$(this).attr('action')
+
+
+        $.ajax({
+            type:'POST',
+            url : url,
+            data:{
+            'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+            'userid' : user_id,
+            'postid' : post_id
+            },
+            success:function(response){
+                alert('Post is Flag');
+            },
+            error:function(response){
+            console.log('error',response)
+            }
+            });
+    });
+    
     </script>
     {% endfor %}
 </div>

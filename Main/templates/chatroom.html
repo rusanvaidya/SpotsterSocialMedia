@@ -11,13 +11,15 @@
 
 {% block sidemenudiv %}
 {% load static %}
-<div class="chating" style="overflow-y: scroll;">
+<div class="chating">
   <div class="search_names">
     <input type="search" placeholder="Search..." id="search-message-user">
   </div>
   <div class="name_for_chat">
-    <ul id="this--UL">
+    <ul id="this--UL" style="overflow-y: auto; height: 500px;">
       {% for i in others%}
+      {% for k in followers %}
+      {% if i == k %}
         <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
         <li onclick="window.open('/chatbox/{{i.first_name}}?query={{i.id}}', '_self'); document.getElementById('')"  id="names-msg-{{i.pk}}">
             <table>
@@ -33,6 +35,8 @@
               <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
             </table>
         </li>
+        {% endif %}
+        {% endfor %}
         {% endfor %}
     </ul>
   </div>
@@ -92,7 +96,7 @@
             {% endif %}
           </div>
           <div class="you-sent-msg">
-             {{ms.messgd}}
+             {{ms.messgd}}<br><i style="color: palegoldenrod; padding: none;">{{ms.messagecreated|time}}</i>
           </div>
         </div>
       </div>
@@ -107,7 +111,7 @@
             {% endif %}
             </div>
             <div class="sender-msg">
-             {{ms.messgd}}
+             {{ms.messgd}}<br><i style="color: palegoldenrod; padding: none;">{{ms.messagecreated|time}}</i>
           </div>
         </div>
       </div>
@@ -126,8 +130,19 @@
             var my_name = '{{my_id.first_name}}'+' '+'{{my_id.last_name}}'
             var chat_id = '{{chat_id}}'
             var roomCode = '{{rie}}'
-            console.log(chat_id)
-            
+            var today = new Date();
+            var time = formatAMPM(today)
+
+            function formatAMPM(date) {
+              var hours = date.getHours();
+              var minutes = date.getMinutes();
+              var ampm = hours >= 12 ? 'p.m.' : 'a.m.';
+              hours = hours % 12;
+              hours = hours ? hours : 12; // the hour '0' should be '12'
+              minutes = minutes < 10 ? '0'+minutes : minutes;
+              var strTime = hours + ':' + minutes + ' ' + ampm;
+              return strTime;
+            }
 
             let chat_container = document.getElementById('chat_here_div')
 
@@ -153,7 +168,7 @@
                     'profilepicture' : my_pic,
                     'text' : texts,
                     'cid' : chat_id,
-                    'room_code': roomCode,
+                    'room_code': roomCode
                     }
                 }));
               }
@@ -169,7 +184,7 @@
             <img src="{% static 'img/defaultpp.jpg' %}">
           </div>
           <div class="you-sent-msg">
-             ${texts}
+             ${texts}<br><i style="color: palegoldenrod; padding: none;">${time}</i>
           </div>
         </div>
       </div>` ;
@@ -183,7 +198,7 @@
             <img src="../media/${pic}">
           </div>
           <div class="you-sent-msg">
-            ${texts}
+            ${texts}<br><i style="color: palegoldenrod; padding: none;">${time}</i>
           </div>
         </div>
       </div>` ;
@@ -200,7 +215,7 @@
             <img src="{% static 'img/defaultpp.jpg' %}">
             </div>
             <div class="sender-msg">
-             ${texts}
+             ${texts}<br><i style="color: palegoldenrod; padding: none;">${time}</i>
           </div>
         </div>
       </div>`;
@@ -214,7 +229,7 @@
             <img src="../media/${pic}">
             </div>
             <div class="sender-msg">
-             ${texts}
+             ${texts}<br><i style="color: palegoldenrod; padding: none;">${time}</i>
           </div>
         </div>
       </div>`;
@@ -274,7 +289,7 @@
             <div id="emobox" class="emo-box"></div>
             <script src="{% static 'js/chatbox.js' %}"></script>
         </div>
-    </div><b style="color: #ffd657">${my_n}</b><br> 
+    </div>
   </div>
 </div>
 {% endblock %}

@@ -357,7 +357,74 @@ def get_search(request):
 
     return render(request, 'discover.html', dict1)
 
+def search(request):
+    if request.session['email']:
+        email = request.session['email']
+        search_name = request.GET.get('req_name')
+        user = registration.objects.filter(email=email)
+        id = registration.objects.get(email=email)
+        interests_all=interest.objects.all()
+        interests=[]
+        for i in interests_all:
+            interests.append(i)
+        userid = id.pk
+        other = None
+        my_id = None
+        counts = 0
+        count_following=0
+        list_of_id = suggest_people(request)
+        try:
+            em = followers.objects.get(user_id=userid)
+            other = [user_id for user_id in em.following.all()]
+            count_following =len(other)
+            my_id = [user_id for user_id in em.follow_me.all()]
+            counts = len(my_id)
 
+
+        except:
+            pass
+        user_data = userdetails.objects.all()
+        mydetials = 0
+        try:
+            mydetials = userdetails.objects.get(owner_id=userid)
+        except:
+            pass
+        other_user = registration.objects.all().exclude(email=email)
+        au = registration.objects.all()
+        trending_hashtags,res_dct=get_hash_tags()
+        
+        search_name = search_name.lower().split(' ')
+        print(search_name)
+        searched_names = []
+        for item in search_name:
+            for m in au:
+                if item == m.first_name.lower() or item == m.last_name.lower():
+                    searched_names.append(m)
+        print(searched_names)
+        searched_names = set(searched_names)
+        # fn = au.first_name 
+        # fn = fn.lower()
+        # ln = au.last_name
+        # ln = ln.lower()
+        # if search_name == :
+
+        dict1 = {
+            'email': email,
+            'user': user,
+            'others': other,
+            'other': other_user,
+            'followers': my_id,
+            'count':counts,
+            'count_following':count_following,
+            'mydetials': mydetials,
+            'userdata': user_data,
+            'interests': interests,
+            'trending_hashtags':trending_hashtags,
+            'res_dct':res_dct,
+            'list_of_id': list_of_id ,
+            'search_names' : searched_names
+            }
+        return render(request, 'search.html', dict1)
 
 # ----------------------------------------------------------------------------------------------
 # AI part

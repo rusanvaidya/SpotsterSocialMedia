@@ -32,31 +32,22 @@
                 document.getElementById('loc_km').innerHTML = document.getElementById('loc_km_ip').value
                 document.getElementById('loc_km_ip').onchange = function()
                 {
-                    document.getElementById('loc_km').innerHTML = document.getElementById('loc_km_ip').value
-                    
-                
-                    
+                    document.getElementById('loc_km').innerHTML = document.getElementById('loc_km_ip').value;   
                 }
-                
-                
-
-                
-                
-                
             </script>
             <div>
-                <input type="submit" value="Search" class="new_f_search">
+                <input type="submit" value="Search" class="new_f_search" style="background-color: #2d7b20;">
             </div>
         </form>
     </div>
     <div class="topic">
-        Suggested People
+     People Near You :
     </div>
     <div class="people-list">
         <ul>
             {% for data in u_data %}
             {% for i in data %}
-            <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
+            <form class="un_follow{{i.id}}" action="discover_more" method="post" id="discover-{{i.pk}}">{% csrf_token %}
                 <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
                 <li>
                     <table>
@@ -72,21 +63,52 @@
                         <td class="sp-name">{{i.first_name}} {{i.last_name}}</td>
                         <td class="sp-button">
                             {% if i in others%} 
-                            <button type="submit" id="un_show{{i.pk}}" class="side-after follow{{i.pk}}">Following</button>
+                            <button type="submit" id="un_show{{i.pk}}" class="side-after follow-{{i.id}}">Following</button>
                             {% else %}
-                            <button type="submit" class="side-r follow{{i.pk}}">Follow</button>
+                            <button type="submit" class="side-r follow-{{i.id}}">Follow</button>
                             {% endif %}
                         </td>
-
                     </table>
                 </li>
             </form>
+            <script>
+                $('.un_follow{{i.id}}').submit(function(e){
+                    e.preventDefault()
+            
+                    const followText = $(`.follow-{{i.id}}`).text()
+                    const trim = $.trim(followText)
+                    const url =$(this).attr('action')
+                    console.log(trim + url)
+                    // var count_following = parseInt($(`#following-count`).text())
+            
+                    $.ajax({
+                        type:'POST',
+                        url : url,
+                        data:{
+                        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                        'follow_pk': `{{i.id}}`
+                        },
+                        success:function(response){
+                        if (trim === 'Follow'){
+                            $(`.follow-{{i.id}}`).text('Following')
+                        } else {
+                            $(`.follow-{{i.id}}`).text('Follow')
+                        }
+                        },
+                        error:function(response){
+                        console.log('error',response)
+                        }
+                        });
+            
+            
+                });
+                </script>
+                
             {% endfor %}
             {% endfor %}
         </ul>
     </div>
 </div>
-
 <script src="{% static 'js/header.js' %}"></script>
 {% endblock %}
 {% endblock %}

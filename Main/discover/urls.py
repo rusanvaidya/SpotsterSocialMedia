@@ -25,5 +25,5 @@ urlpatterns = [
     path('discover_more', views.discover_more, name='discover_more'),
     path('get_search', views.get_search, name='get_search'),
     path('get_location', views.get_location, name='get_location'),
-
+    path('search', views.search)
 ]

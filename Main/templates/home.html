@@ -449,8 +449,18 @@
                 {% endblock %}          
                 <div class="right-feed">
                     <div class="search-feed">
-                        <input type="search" placeholder="Search...">
+                        <form method="GET" action="search">
+                            <input type="search" id="searching_names" placeholder="Search..." name="req_name" autocomplete="off" required minlength="1">
+                            <input type="button" id="searching_result" style="display: none;">
+                        </form>
                     </div>
+                    <script>
+                        document.querySelector('#searching_names').onkeyup = function(e) {
+                        if (e.keyCode === 13) {
+                            document.querySelector('#searching_result').click();
+                            }
+                        }
+                    </script>
                     <div class="right-div-content">
                         <ul class="trending">
                             <li class="r-t"><b>Trending Interests.</b></li>
@@ -467,11 +477,12 @@
                             <li><button class="show-m" id="show_trending">Show more</button></li>
                         </ul>
                     </div>
+                    {% if list_of_id  != None %}
                     <div class="right-div-content">
                         <ul class="suggestions">
                             <li class="r-t"><b>Suggestions.</b></li>
 
-                            {% for i in list_of_id%}
+                            {% for i in list_of_id %}
                             <li>
                                 <form class="un-follow" action="{% url 'discover_more' %}" method="post" id="{{i.pk}}">{% csrf_token %}
                                     <input type="hidden" class="follow_pk" name="follow_pk" value="{{i.pk}}">
@@ -500,6 +511,7 @@
                             <li><button class="show-m" onclick="window.open('discover','_self')">Show more</button></li>            
                         </ul>
                     </div>
+                    {% endif %}
                 </div>
             {% endblock %}
             </div>      
@@ -519,6 +531,15 @@
             var video = document.getElementById('video_css');
             var profile = document.getElementById('profile_css');
 
+            var cmnt_icon = document.getElementsByClassName('cmnt-icon');
+            var cmnt_icon_count = cmnt_icon.length
+            var cmnt_icon_show = document.getElementsByClassName('cc-icon');
+            var cmnt_icon_show_count = cmnt_icon_show.length
+            var like_icon = document.getElementsByClassName('unlike-icon');
+            var like_icon_count = like_icon.length
+            
+            console.log(cmnt_icon_count, cmnt_icon_show_count, like_icon_count)
+
             document.getElementById('light_sidemenu').onclick = function()
             {
                 localStorage.setItem('theme', 'light');
@@ -532,8 +553,20 @@
                 trending.setAttribute("href", "{% static 'css/light/trending.css' %}")
                 discover.setAttribute("href","{% static 'css/light/discover.css' %}");
                 profile.setAttribute("href", "{% static 'css/light/profile.css' %}");
-                document.getElementById('msg-here-text').style.color='black';
-                document.getElementById('emobox').style.backgroundColor='white';
+                // document.getElementById('msg-here-text').style.color='black';
+                // document.getElementById('emobox').style.backgroundColor='white';
+                for(var i = 0; i<cmnt_icon_count; i++)
+                {
+                    cmnt_icon[i].style.filter = 'invert(100%)';
+                }
+                for(var i = 0; i<cmnt_icon_show_count; i++)
+                {
+                    cmnt_icon_show[i].style.filter = 'invert(100%)';
+                }
+                for(var i = 0; i<like_icon_count; i++)
+                {
+                    like_icon[i].style.filter = 'invert(100%)';
+                }
             }
             document.getElementById('dark_sidemenu').onclick = function()
             {
@@ -548,8 +581,20 @@
                 trending.setAttribute("href", "{% static 'css/dark/trending.css' %}");
                 discover.setAttribute("href","{% static 'css/dark/discover.css' %}");
                 profile.setAttribute("href", "{% static 'css/dark/profile.css' %}");
-                document.getElementById('msg-here-text').style.color='white';
-                document.getElementById('emobox').style.backgroundColor='black';
+                // document.getElementById('msg-here-text').style.color='white';
+                // document.getElementById('emobox').style.backgroundColor='black';
+                for(var i = 0; i<cmnt_icon_count; i++)
+                {
+                    cmnt_icon[i].style.filter = 'none';
+                }
+                for(var i = 0; i<cmnt_icon_show_count; i++)
+                {
+                        cmnt_icon_show[i].style.filter = 'none';
+                }
+                for(var i = 0; i<like_icon_count; i++)
+                {
+                    like_icon[i].style.filter = 'none';
+                }
             }
 
             light.onclick = function()
@@ -565,8 +610,20 @@
                 trending.setAttribute("href", "{% static 'css/light/trending.css' %}")
                 discover.setAttribute("href","{% static 'css/light/discover.css' %}");
                 profile.setAttribute("href", "{% static 'css/light/profile.css' %}");
-                document.getElementById('msg-here-text').style.color='black';
-                document.getElementById('emobox').style.backgroundColor='white';
+                // document.getElementById('msg-here-text').style.color='black';
+                // document.getElementById('emobox').style.backgroundColor='white';
+                for(var i = 0; i<cmnt_icon_count; i++)
+                {
+                    cmnt_icon[i].style.filter = 'invert(100%)';
+                }
+                for(var i = 0; i<cmnt_icon_show_count; i++)
+                {
+                    cmnt_icon_show[i].style.filter = 'invert(100%)';
+                }
+                for(var i = 0; i<like_icon_count; i++)
+                {
+                    like_icon[i].style.filter = 'invert(100%)';
+                }
             }
 
             dark.onclick = function()
@@ -582,8 +639,18 @@
                 trending.setAttribute("href", "{% static 'css/dark/trending.css' %}");
                 discover.setAttribute("href","{% static 'css/dark/discover.css' %}");
                 profile.setAttribute("href", "{% static 'css/dark/profile.css' %}");
-                document.getElementById('msg-here-text').style.color='white';
-                document.getElementById('emobox').style.backgroundColor='black';
+                for(var i = 0; i<cmnt_icon_count; i++)
+                {
+                    cmnt_icon[i].style.filter = 'none';
+                }
+                for(var i = 0; i<cmnt_icon_show_count; i++)
+                {
+                        cmnt_icon_show[i].style.filter = 'none';
+                }
+                for(var i = 0; i<like_icon_count; i++)
+                {
+                    like_icon[i].style.filter = 'none';
+                }
             }
             if(theme=='light')
             {
@@ -595,6 +662,18 @@
                 trending.setAttribute("href", "{% static 'css/light/trending.css' %}")
                 discover.setAttribute("href","{% static 'css/light/discover.css' %}");
                 profile.setAttribute("href", "{% static 'css/light/profile.css' %}");
+                for(var i = 0; i<cmnt_icon_count; i++)
+                {
+                    cmnt_icon[i].style.filter = 'invert(100%)';
+                }
+                for(var i = 0; i<cmnt_icon_show_count; i++)
+                {
+                    cmnt_icon_show[i].style.filter = 'invert(100%)';
+                }
+                for(var i = 0; i<like_icon_count; i++)
+                {
+                    like_icon[i].style.filter = 'invert(100%)';
+                }
             }
             else if(theme=='dark')
             {
@@ -606,6 +685,18 @@
                 trending.setAttribute("href", "{% static 'css/dark/trending.css' %}");
                 discover.setAttribute("href","{% static 'css/dark/discover.css' %}");
                 profile.setAttribute("href", "{% static 'css/dark/profile.css' %}");
+                for(var i = 0; i<cmnt_icon_count; i++)
+                {
+                    cmnt_icon[i].style.filter = 'none';
+                }
+                for(var i = 0; i<cmnt_icon_show_count; i++)
+                {
+                        cmnt_icon_show[i].style.filter = 'none';
+                }
+                for(var i = 0; i<like_icon_count; i++)
+                {
+                    like_icon[i].style.filter = 'none';
+                }
             }
             else
             {

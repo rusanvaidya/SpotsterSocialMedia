@@ -203,7 +203,7 @@
                             {% endif %}
                             {% endif %}
                             {% endfor %}
-                            <td class="u-fullname">{{p.first_name}} {{p.last_name}}</td>
+                            <td class="u-fullname"><a href="view_profile?id={{p.id}}">{{p.first_name}} {{p.last_name}}</a></td>
                             {% if post.emoji != '' %}
                             <td>{{post.feeling}}</td>
                             <td class="femoji"><img src='/static/{{post.emoji}}'></td>

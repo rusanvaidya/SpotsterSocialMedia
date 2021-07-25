@@ -59,7 +59,7 @@ body
 {
     width: 40%;
     float: right;
-}block
+}
 @media only screen and (max-width:1000px)
 {
     .sidemenudiv, .right-feed
@@ -143,7 +143,7 @@ body
     margin: 0;
     left: 0;
     animation: 40s slider infinite;
-    -webkit-animation: 40s slider infinite;
+    -webkit-animation: 10s slider infinite;
 }
 .interests-bar figure:hover
 {
@@ -153,25 +153,11 @@ body
 @keyframes slider
 {
     0%{left:0}
-    5%{left:0}
-    10%{left:-50}
-    15%{left: -50%}
-    20%{left:-100%}
-    25%{left: -100%}
-    30%{left: -150%;}
-    35%{left: -150%}
-    40%{left: -200%}
-    45%{left: -200%}
-    50%{left: -250%}
-    55%{left: -250%}
-    60%{left: -300%;}
-    65%{left: -300%}
-    70%{left: -350%}
-    75%{left: -350%}
-    80%{left: -400%}
-    85%{left: -400%}
-    90%{left: -450%}
-    95%{left: -500%}
+    10%{left:0}
+    40%{left:-50}
+    50%{left: -50%}
+    80%{left:-100%}
+    90%{left: -100%}
     100%{left: 0}
 }
 .interests-bar img

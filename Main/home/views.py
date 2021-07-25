@@ -67,6 +67,7 @@ def home(request):
             interest_list = interest.objects.all()
             user_data = userdetails.objects.all()
             mydetials = 0
+            print(qs)
             try:
                 mydetials = userdetails.objects.get(owner_id=usrs_id)
             except:
@@ -425,6 +426,7 @@ def post_comment(request):
 
         comm = comment.objects.filter(post_id = postid).order_by('created_date')
         comm_count = comment.objects.filter(post_id = postid).count()
+        trending_hashtags,res_dct=get_hash_tags()
         list_of_id = suggest_people(request)
         dict1 = {
             'email': email,
@@ -443,6 +445,8 @@ def post_comment(request):
             'postid':postid,
             'comment':comm,
             'comment_count':comm_count,
+            'trending_hashtags':trending_hashtags,
+            'res_dct':res_dct,
             'list_of_id': list_of_id }
         # 'country': country,
         # 'city': city}
@@ -575,6 +579,7 @@ def comment_post(request):
         comm = comment.objects.filter(post_id=postid).order_by('created_date')
         comm_count = comment.objects.filter(post_id=postid).count()
         list_of_id = suggest_people(request)
+        trending_hashtags,res_dct=get_hash_tags()
         dict1 = {
             'email': email,
             'user': user,
@@ -592,6 +597,8 @@ def comment_post(request):
             'postid': int(postid),
             'comment': comm,
             'comment_count': comm_count,
+            'trending_hashtags':trending_hashtags,
+            'res_dct':res_dct,
             'list_of_id': list_of_id }
         # 'country': country,
         # 'city': city}
@@ -619,4 +626,3 @@ def hash_password(password):
 def check_password(hashed_password, user_password):
     password, salt = hashed_password.split(':')
     return password == hashlib.sha256(salt.encode() + user_password.encode()).hexdigest()
-
