@@ -106,10 +106,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
          'NAME': os.getenv('name'),
-        'USER': os.getenv('user'),
+        'USER': 'nckyltnafosoor',
         'PASSWORD': os.getenv("dbpass"),
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': 'ec2-54-211-77-238.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
