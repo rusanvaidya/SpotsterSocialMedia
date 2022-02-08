@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('key');
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    os.getenv('ip_address'),
+    "spostir.herokuapp.com",
     '127.0.0.1',
 ]    
 
